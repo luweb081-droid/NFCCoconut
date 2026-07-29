@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Produit — NFC COCONUT</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <div class="search-overlay" id="searchOverlay">
+    <input type="search" class="search-input" placeholder="Rechercher un produit" id="searchInput" autocomplete="off">
+    <button class="close-search" id="closeSearchBtn" aria-label="Fermer la recherche"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="cartDrawer">
+    <div><div class="drawer-header"><h3>Menu & panier</h3><button class="drawer-close" id="closeDrawerBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div><nav class="mobile-nav"></nav><div class="drawer-divider"></div><div class="drawer-empty-msg">Votre panier est actuellement vide.</div><div class="cart-items-container"></div></div>
+    <button class="btn-checkout" type="button">Commander (0,00 €)</button>
+  </aside>
+  <header class="top-header"></header>
+  <main class="page-container product-page" id="productPage"></main>
+  <footer>&copy; 2026 NFC COCONUT — TOUS DROITS RÉSERVÉS</footer>
+  <script src="static/js/main.js"></script>
+</body>
+</html>
