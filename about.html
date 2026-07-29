@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notre Histoire — NFC COCONUT</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS Externe -->
+    <link rel="stylesheet" href="static/css/style.css">
+    
+
+    <meta name="google-site-verification" content="rKkbPzodXqOW7LSHHJMUUtWF72KRy9HtCNNoYdHn_Cg" />
+</head>
+<body>
+
+    <!-- SEARCH OVERLAY -->
+    <div class="search-overlay" id="searchOverlay">
+        <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Rechercher un produit (Google, Instagram, Black...)" 
+            id="searchInput"
+            oninput="filterProducts()"
+        >
+        <button class="close-search" id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- DRAWER PANIER / MENU MOBILE -->
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="drawer" id="cartDrawer">
+        <div>
+            <div class="drawer-header">
+                <h3>Menu & Panier</h3>
+                <button class="drawer-close" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="/">Accueil</a></li>
+                    <li><a href="/catalogue.html">Catalogue</a></li>
+                    <li><a href="/about.html">Notre Histoire</a></li>
+                    <li><a href="/faq.html">FAQ</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </nav>
+
+            <div class="drawer-divider"></div>
+
+            <div class="drawer-empty-msg">
+                Votre panier est actuellement vide.
+            </div>
+        </div>
+        <div>
+            <button class="btn-checkout" onclick="alert('Redirection Shopify à venir')">
+                Commander (0,00 €)
+            </button>
+        </div>
+    </div>
+
+    <!-- EN-TÊTE -->
+    <header class="top-header">
+        <div class="header-left">
+            <button id="menuBtn" class="mobile-only-btn"><i class="fa-solid fa-bars"></i> <span>Menu</span></button>
+            
+            <nav class="desktop-nav">
+                <a href="/">Accueil</a>
+                <a href="/catalogue.html">Catalogue</a>
+                <a href="/faq.html">FAQ</a>
+            </nav>
+
+            <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i> <span class="desktop-only">Rechercher</span></button>
+        </div>
+
+        <a href="/" class="brand-logo">-NFC COCONUT-</a>
+
+        <div class="header-right">
+            <a href="/contact" class="desktop-only"><span>Contact</span></a>
+            <button id="cartBtn"><i class="fa-solid fa-bag-shopping"></i> <span>(0)</span></button>
+        </div>
+    </header>
+
+    <!-- CONTENU SPÉCIFIQUE DE CHAQUE PAGE -->
+    
+    <main class="page-container">
+        <!-- HEADER DE LA PAGE -->
+        <div class="page-title">
+            <h1>La Maison Coconut</h1>
+            <p>Quand le design d'exception rencontre l'instantanéité</p>
+        </div>
+
+        <!-- SECTION D'INTRODUCTION / MANIFESTE -->
+        <section class="about-hero">
+            <div class="about-hero-img">
+                <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1000&q=80" alt="Maison Coconut - Artisanat & Technologie">
+            </div>
+            <div class="about-hero-text">
+                <h2>L'Union de l'Objet et du Numérique</h2>
+                <p>
+                    Fondée avec l'ambition de redéfinir les interactions physiques du quotidien, la **Maison Coconut** conçoit des objets connectés d'exception. Nous croyons fermement qu'une technologie moderne ne doit pas compromettre l'esthétique d'un lieu ou d'une marque.
+                </p>
+                <p>
+                    En intégrant des puces NFC invisibles au cœur de matériaux nobles et de rendus 3D minimalistes, nous transformons un simple geste en une passerelle instantanée vers votre univers.
+                </p>
+            </div>
+        </section>
+
+        <!-- SECTION VALEURS / PILIERS -->
+        <section class="about-values">
+            <div class="section-headline">
+                <h2>Nos Engagements</h2>
+                <p>Les trois piliers de la Maison</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-number">01</span>
+                    <h3>Savoir-Faire</h3>
+                    <p>Chaque pièce est dessinée, façonnée et contrôlée avec une exigence de finition irréprochable, pensée pour sublimer vos comptoirs et espaces d'accueil.</p>
+                </div>
+
+                <div class="value-card">
+                    <span class="value-number">02</span>
+                    <h3>Sobriété Énergétique</h3>
+                    <p>Nos puces NFC fonctionnent sans batterie, sans recharge et sans composant chimique nocif. Une technologie passive durable par essence.</p>
+                </div>
+
+                <div class="value-card">
+                    <span class="value-number">03</span>
+                    <h3>Simplicité Native</h3>
+                    <p>Aucune application intermédiaire. Nous privilégions une expérience fluide et intuitive qui fonctionne nativement sur tous les smartphones.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- BANNIÈRE DE CONTACT / CTA -->
+        <section class="about-cta">
+            <h2>Vous avez un projet sur-mesure ?</h2>
+            <p>Nous accompagnons les hôtels, restaurants et marques de luxe dans la création de supports personnalisés.</p>
+            <a href="/contact" class="btn-catalog">Contacter notre studio</a>
+        </section>
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        &copy; 2026 NFC COCONUT — TOUS DROITS RÉSERVÉS
+    </footer>
+
+    <!-- Script JavaScript pour le filtrage direct -->
+    <script>
+        function filterProducts() {
+            const input = document.getElementById('searchInput');
+            if (!input) return;
+            
+            const filter = input.value.toLowerCase().trim();
+            const products = document.querySelectorAll('.product-item');
+            
+            // Si la personne ferme l'overlay ou efface la recherche, on réaffiche tout
+            products.forEach(product => {
+                const titleElement = product.querySelector('.product-title');
+                if (titleElement) {
+                    const titleText = titleElement.textContent || titleElement.innerText;
+                    if (titleText.toLowerCase().includes(filter)) {
+                        product.style.display = "";
+                    } else {
+                        product.style.display = "none";
+                    }
+                }
+            });
+        }
+    </script>
+
+    <!-- JavaScript Externe -->
+    <script src="static/js/main.js"></script>
+    
+</body>
+</html>
