@@ -521,7 +521,7 @@ h1, h2, h3, .brand-logo {
 .product-img-wrapper {
     position: relative;
     width: 100%;
-    height: 220px;
+    height: 320px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1171,4 +1171,12 @@ footer {
         flex: 0 0 270px;
         flex-shrink: 0;
     }
+}
+
+@media (max-width: 900px) {
+    .product-img-wrapper { height: 280px; }
+}
+
+@media (max-width: 560px) {
+    .product-img-wrapper { height: 340px; }
 }
