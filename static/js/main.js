@@ -24,7 +24,7 @@ const productUrl = product => `produit.html?id=${encodeURIComponent(product.id)}
 
 function productCard(product) {
   const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null;
-  return `<article class="product-item" data-product-id="${product.id}">
+  return `<article class="product-item product-item--${product.category}" data-product-id="${product.id}">
     <a class="product-link" href="${productUrl(product)}" aria-label="Voir ${escapeHtml(product.name)}">
       <div class="product-img-wrapper"><img src="${product.images[0]}" alt="${escapeHtml(product.name)}"></div>
       <h3 class="product-title">${escapeHtml(product.name)}</h3>
