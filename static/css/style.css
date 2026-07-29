@@ -30,10 +30,10 @@ h1, h2, h3, .brand-logo {
     width: 100%;
     height: 75px;
     background: #ffffff;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
     align-items: center;
-    padding: 0 4%;
+    padding: 0 clamp(20px, 4vw, 64px);
     border-bottom: 1px solid #f0f0f0;
     position: fixed;
     top: 0;
@@ -49,6 +49,9 @@ h1, h2, h3, .brand-logo {
     text-transform: uppercase;
     font-weight: 500;
 }
+
+.header-left { justify-self: start; }
+.header-right { justify-self: end; }
 
 .header-left button, .header-right button, .header-left a, .header-right a {
     background: none;
@@ -74,15 +77,19 @@ h1, h2, h3, .brand-logo {
     font-weight: 600;
     color: #111111;
     text-decoration: none;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    position: static;
+    transform: none;
+    justify-self: center;
+    display: flex;
+    align-items: center;
 }
+
+.brand-logo img { width: 46px; height: 46px; object-fit: contain; display: block; }
 
 .desktop-nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: clamp(10px, 1.4vw, 22px);
     margin-right: 15px;
 }
 
