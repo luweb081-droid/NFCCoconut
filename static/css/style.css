@@ -125,7 +125,8 @@ h1, h2, h3, .brand-logo {
     align-items: center;
     justify-content: center;
     padding: 0 5%;
-    transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+    transition: top 0.4s cubic-bezier(0.16, 1, 0.3, 1), height 0.3s ease;
     border-bottom: 1px solid #e5e5e5;
 }
 
