@@ -55,7 +55,13 @@ function renderProductGrids() {
   if (!grids.length || file === 'produit.html') return;
   const target = grids[0];
   const products = file === 'index.html' ? PRODUCTS.filter(p => p.category === 'business').slice(0, 6) : PRODUCTS.filter(p => p.category === pageCategory);
-  target.innerHTML = products.map(productCard).join('');
+  const catalogLinkCard = file === 'index.html' ? `<article class="product-item view-catalog-card" aria-label="Voir le catalogue complet">
+    <div class="catalog-link-icon"><i class="fa-solid fa-grid-2"></i></div>
+    <h3>Toute la collection</h3>
+    <p>Découvrez l'intégralité de nos solutions et supports connectés.</p>
+    <a href="catalogue.html" class="btn-add-cart">Voir le catalogue complet <i class="fa-solid fa-arrow-right"></i></a>
+  </article>` : '';
+  target.innerHTML = products.map(productCard).join('') + catalogLinkCard;
   target.dataset.catalogGrid = 'true';
 }
 
