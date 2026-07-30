@@ -4,14 +4,96 @@
  * automatiquement à jour.
  */
 const PRODUCTS = [
-  { id: 'plaque-google-black', category: 'business', name: 'Plaque NFC avis Google BLACK', price: 39.90, oldPrice: 55.90, images: ['static/images/Article1.png', 'static/images/Article2.png'], description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', tags: ['google', 'avis', 'plaque', 'nfc', 'business'] },
-  { id: 'presentoir-google-black', category: 'business', name: 'Présentoir Avis Google BLACK', price: 37.90, oldPrice: 47.90, images: ['static/images/Article3bis.png', 'static/images/Article3.png'], description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', tags: ['google', 'avis', 'présentoir', 'nfc'] },
-  { id: 'plaque-instagram', category: 'business', name: 'Plaque de Comptoir INSTAGRAM', price: 39.90, oldPrice: 54.90, images: ['static/images/Article4.png', 'static/images/Article5.png'], description: 'Développez votre communauté Instagram : un contact suffit pour accéder à votre profil.', tags: ['instagram', 'plaque', 'comptoir', 'nfc'] },
-  { id: 'plaque-ronde-white', category: 'business', name: 'Plaque NFC Avis Google Ronde WHITE', price: 39.90, oldPrice: 47.90, images: ['static/images/Article5bis.png', 'static/images/Article5.png'], description: 'Une plaque ronde blanche, sobre et prête à être configurée pour vos avis Google.', tags: ['google', 'avis', 'plaque', 'ronde', 'blanche'] },
-  { id: 'plaque-ronde-black', category: 'business', name: 'Plaque NFC Avis Google Ronde BLACK', price: 39.90, oldPrice: 47.90, images: ['static/images/Article7bis.png', 'static/images/Article7.png'], description: 'Une finition noire premium pour inviter vos clients à laisser un avis en quelques secondes.', tags: ['google', 'avis', 'plaque', 'ronde', 'noire'] },
-  { id: 'carte-visite', category: 'business', name: 'Carte de Visite NFC Personnalisée', price: 29.90, oldPrice: 39.90, images: ['static/images/Article9.png', 'static/images/Article8.png'], description: 'Partagez vos coordonnées, réseaux et liens essentiels avec une carte NFC personnalisée.', tags: ['carte', 'visite', 'personnalisée', 'nfc'] },
-  { id: 'tshirt-streetwear', category: 'streetwear', name: 'T-shirt style Streetwear', price: 39.90, oldPrice: 59.90, images: ['static/images/tshirt2.png', 'static/images/t-shirt3.png'], description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] },
-  { id: 'tshirt-oversized', category: 'streetwear', name: 'T-Shirt Oversized NFC COCONUT', price: 39.90, oldPrice: 59.90, images: ['static/images/coming_soon_1.png', 'static/images/t-shirt3.png'], description: 'Coupe boxy streetwear avec un patch NFC discret intégré au bas du vêtement.', tags: ['t-shirt', 'oversized', 'streetwear', 'nfc', 'vêtement'] }
+  { 
+    id: 'plaque-google-black', 
+    category: 'business', 
+    name: 'Plaque NFC avis Google BLACK', 
+    price: 39.90, 
+    oldPrice: 55.90, 
+    images: ['static/images/Article1.png', 'static/images/Article2.png'], 
+    description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
+    tags: ['google', 'avis', 'plaque', 'nfc', 'business'] 
+  },
+  { 
+    id: 'presentoir-google-black', 
+    category: 'business', 
+    name: 'Présentoir Avis Google BLACK', 
+    price: 39.90, 
+    oldPrice: 47.90, 
+    images: ['static/images/Article3bis.png', 'static/images/Article3.png'], 
+    description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
+    tags: ['google', 'avis', 'présentoir', 'nfc'] 
+  },
+  { 
+    id: 'plaque-instagram', 
+    category: 'business', 
+    name: 'Plaque de Comptoir INSTAGRAM', 
+    price: 39.90, 
+    oldPrice: 54.90, 
+    images: ['static/images/Article4.png', 'static/images/Article5.png'], 
+    description: 'Développez votre communauté Instagram : un contact suffit pour accéder à votre profil.', 
+    tags: ['instagram', 'plaque', 'comptoir', 'nfc'] 
+  },
+  { 
+    id: 'plaque-ronde-white', 
+    category: 'business', 
+    name: 'Plaque NFC Avis Google Ronde WHITE', 
+    price: 39.90, 
+    oldPrice: 47.90, 
+    images: ['static/images/Article5bis.png', 'static/images/Article5.png'], 
+    description: 'Une plaque ronde blanche, sobre et prête à être configurée pour vos avis Google.', 
+    tags: ['google', 'avis', 'plaque', 'ronde', 'blanche'] 
+  },
+  { 
+    id: 'plaque-ronde-black', 
+    category: 'business', 
+    name: 'Plaque NFC Avis Google Ronde BLACK', 
+    price: 39.90, 
+    oldPrice: 47.90, 
+    images: ['static/images/Article7bis.png', 'static/images/Article7.png'], 
+    description: 'Une finition noire premium pour inviter vos clients à laisser un avis en quelques secondes.', 
+    tags: ['google', 'avis', 'plaque', 'ronde', 'noire'] 
+  },
+  { 
+    id: 'carte-visite', 
+    category: 'business', 
+    name: 'Carte de Visite NFC Personnalisée', 
+    price: 29.90, 
+    oldPrice: 39.90, 
+    images: ['static/images/Article9.png', 'static/images/Article8.png'], 
+    description: 'Partagez vos coordonnées, réseaux et liens essentiels avec une carte NFC personnalisée.', 
+    tags: ['carte', 'visite', 'personnalisée', 'nfc'] 
+  },
+  { 
+    id: 'tshirt-streetwear', 
+    category: 'streetwear', 
+    name: 'T-shirt style Streetwear', 
+    price: 39.90, 
+    oldPrice: 59.90, 
+    images: ['static/images/tshirt2.png', 'static/images/t-shirt3.png'], 
+    description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
+    tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
+  },
+  { 
+    id: 'tshirt-oversized', 
+    category: 'streetwear', 
+    name: 'T-Shirt Oversized NFC COCONUT', 
+    price: 39.90, 
+    oldPrice: 59.90, 
+    images: ['static/images/coming_soon_1.png', 'static/images/t-shirt3.png'], 
+    description: 'Coupe boxy streetwear avec un patch NFC discret intégré au bas du vêtement.', 
+    tags: ['t-shirt', 'oversized', 'streetwear', 'nfc', 'vêtement'] 
+  }, 
+  { 
+    id: 'tshirt-streetwear-2', 
+    category: 'streetwear', 
+    name: 'T-shirt style Streetwear 2', 
+    price: 39.90, 
+    oldPrice: 59.90, 
+    images: ['static/images/t-shirt3.png', 'static/images/t-shirt3.png'], 
+    description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
+    tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
+  }
 ];
 
 const NAV_LINKS = [
