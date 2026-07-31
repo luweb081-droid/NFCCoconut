@@ -107,7 +107,7 @@ const PRODUCTS = [
 ];
 
 const NAV_LINKS = [
-  ['Accueil', 'index.html'], ['Catalogue', 'catalogue.html'], ['Streetwear', 'streetwear.html'], ['Notre histoire', 'about.html'], ['FAQ', 'faq.html'], ['Contact', 'contact.html']
+  ['Accueil', 'index.html'], ['Catalogue', 'catalogue.html'], ['Streetwear', 'streetwear.html'],  ['FAQ', 'faq.html'], ['Contact', 'contact.html']
 ];
 
 const euro = value => `${value.toFixed(2).replace('.', ',')} €`;
