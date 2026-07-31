@@ -95,7 +95,7 @@ const PRODUCTS = [
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
   },
   { 
-    id: 'tshirt-streetwear-3', 
+    id: 'tshirt-streetwear-4', 
     category: 'streetwear', 
     name: 'T-shirt style Streetwear N°4', 
     price: 39.90, 
