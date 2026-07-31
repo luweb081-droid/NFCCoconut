@@ -65,9 +65,9 @@ const PRODUCTS = [
     tags: ['carte', 'visite', 'personnalisée', 'nfc'] 
   },
   { 
-    id: 'tshirt-streetwear', 
+    id: 'tshirt-streetwear-1', 
     category: 'streetwear', 
-    name: 'T-shirt style Streetwear', 
+    name: 'T-shirt style Streetwear N°1', 
     price: 39.90, 
     oldPrice: 59.90, 
     images: ['static/images/tshirt2.png', 'static/images/tshirt2bis.png'], 
@@ -75,9 +75,9 @@ const PRODUCTS = [
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
   },
   { 
-    id: 'tshirt-oversized', 
+    id: 'tshirt-streetwear-2', 
     category: 'streetwear', 
-    name: 'T-Shirt Oversized NFC COCONUT', 
+    name: 'T-Shirt style Streetwear N°2', 
     price: 39.90, 
     oldPrice: 59.90, 
     images: ['static/images/tshirt1.png', 'static/images/tshirt1bis.png'], 
@@ -87,7 +87,7 @@ const PRODUCTS = [
   { 
     id: 'tshirt-streetwear-2', 
     category: 'streetwear', 
-    name: 'T-shirt style Streetwear 2', 
+    name: 'T-shirt style Streetwear N°3', 
     price: 39.90, 
     oldPrice: 59.90, 
     images: ['static/images/t-shirt3.png', 'static/images/tshirt3bis.png'], 
@@ -95,9 +95,9 @@ const PRODUCTS = [
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
   },
   { 
-    id: 'tshirt-streetwear-2', 
+    id: 'tshirt-streetwear-3', 
     category: 'streetwear', 
-    name: 'T-shirt style Streetwear 2', 
+    name: 'T-shirt style Streetwear N°4', 
     price: 39.90, 
     oldPrice: 59.90, 
     images: ['static/images/tshirt4.png', 'static/images/t-shirt3.png'], 
