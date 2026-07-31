@@ -70,7 +70,7 @@ const PRODUCTS = [
     name: 'T-shirt style Streetwear', 
     price: 39.90, 
     oldPrice: 59.90, 
-    images: ['static/images/tshirt2.png', 'static/images/t-shirt3.png'], 
+    images: ['static/images/tshirt2.png', 'static/images/tshirt2bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
   },
@@ -80,7 +80,7 @@ const PRODUCTS = [
     name: 'T-Shirt Oversized NFC COCONUT', 
     price: 39.90, 
     oldPrice: 59.90, 
-    images: ['static/images/coming_soon_1.png', 'static/images/t-shirt3.png'], 
+    images: ['static/images/tshirt1.png', 'static/images/tshirt1bis.png'], 
     description: 'Coupe boxy streetwear avec un patch NFC discret intégré au bas du vêtement.', 
     tags: ['t-shirt', 'oversized', 'streetwear', 'nfc', 'vêtement'] 
   }, 
@@ -90,7 +90,7 @@ const PRODUCTS = [
     name: 'T-shirt style Streetwear 2', 
     price: 39.90, 
     oldPrice: 59.90, 
-    images: ['static/images/t-shirt3.png', 'static/images/t-shirt3.png'], 
+    images: ['static/images/t-shirt3.png', 'static/images/tshirt3bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
   },
