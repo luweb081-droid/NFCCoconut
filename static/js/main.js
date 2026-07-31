@@ -85,7 +85,7 @@ const PRODUCTS = [
     tags: ['t-shirt', 'oversized', 'streetwear', 'nfc', 'vêtement'] 
   }, 
   { 
-    id: 'tshirt-streetwear-2', 
+    id: 'tshirt-streetwear-3', 
     category: 'streetwear', 
     name: 'T-shirt style Streetwear N°3', 
     price: 39.90, 
@@ -100,7 +100,7 @@ const PRODUCTS = [
     name: 'T-shirt style Streetwear N°4', 
     price: 39.90, 
     oldPrice: 59.90, 
-    images: ['static/images/tshirt4.png', 'static/images/t-shirt3.png'], 
+    images: ['static/images/tshirt4.png', 'static/images/tshirt4bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
   }
