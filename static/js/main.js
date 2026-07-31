@@ -80,7 +80,7 @@ const PRODUCTS = [
     name: 'T-Shirt style Streetwear N°2', 
     price: 39.90, 
     oldPrice: 59.90, 
-    images: ['static/images/tshirt1.png', 'static/images/tshirt1bis.png'], 
+    images: ['static/images/tshirt1.png', 'static/images/tshirt1bis.png','static/images/tshirt2bis2.png','static/images/tshirt2bis3.png'], 
     description: 'Coupe boxy streetwear avec un patch NFC discret intégré au bas du vêtement.', 
     tags: ['t-shirt', 'oversized', 'streetwear', 'nfc', 'vêtement'] 
   }, 
