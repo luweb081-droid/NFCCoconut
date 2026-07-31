@@ -93,6 +93,16 @@ const PRODUCTS = [
     images: ['static/images/t-shirt3.png', 'static/images/t-shirt3.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
+  },
+  { 
+    id: 'tshirt-streetwear-2', 
+    category: 'streetwear', 
+    name: 'T-shirt style Streetwear 2', 
+    price: 39.90, 
+    oldPrice: 59.90, 
+    images: ['static/images/tshirt4.png', 'static/images/t-shirt3.png'], 
+    description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
+    tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'] 
   }
 ];
 
