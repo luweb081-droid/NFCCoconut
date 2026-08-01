@@ -84,7 +84,20 @@ h1, h2, h3, .brand-logo {
     align-items: center;
 }
 
-.brand-logo img { width: 46px; height: 46px; object-fit: contain; display: block; }
+/* 1. Cibler le conteneur du logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 2. Augmenter la taille de l'image du logo */
+.brand-logo img {
+  height: 80px;       /* Ajustez cette valeur (ex: 50px, 60px, 70px) */
+  max-height: none;   /* Supprime toute restriction de hauteur minimale */
+  width: auto;        /* Conserve les proportions */
+  object-fit: contain;
+}
 
 .desktop-nav {
     display: flex;
