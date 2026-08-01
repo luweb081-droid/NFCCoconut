@@ -1187,8 +1187,11 @@ footer {
     }
 
     .page-container {
-        margin-top: 100px;
-    }
+    max-width: 1500px;
+    width: 95%;
+    margin: 120px auto 80px;
+    padding: 0;
+}
 
     .packs-carousel-wrapper {
         padding: 0;
