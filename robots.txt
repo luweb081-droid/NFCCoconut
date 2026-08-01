@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 Disallow: /private/
 
-Sitemap: http://localhost/sitemap.xml
+Sitemap: https://nfc-coconut.vercel.app/sitemap.xml
