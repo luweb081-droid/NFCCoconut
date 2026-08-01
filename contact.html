@@ -14,84 +14,39 @@
     <!-- CSS Externe -->
     <link rel="stylesheet" href="static/css/style.css">
     
-
-    <meta name="google-site-verification" content="rKkbPzodXqOW7LSHHJMUUtWF72KRy9HtCNNoYdHn_Cg" />
     <link rel="icon" type="image/x-icon" href="static/images/ico.png">
 </head>
 <body>
 
     <!-- SEARCH OVERLAY -->
     <div class="search-overlay" id="searchOverlay">
-        <input 
-            type="text" 
-            class="search-input" 
-            placeholder="Rechercher un produit (Google, Instagram, Black...)" 
-            id="searchInput"
-            oninput="filterProducts()"
-        >
-        <button class="close-search" id="closeSearchBtn"><i class="fa-solid fa-xmark"></i></button>
+        <input type="search" class="search-input" placeholder="Rechercher un produit" id="searchInput" autocomplete="off">
+        <button class="close-search" id="closeSearchBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
     </div>
 
     <!-- DRAWER PANIER / MENU MOBILE -->
     <div class="drawer-overlay" id="drawerOverlay"></div>
-    <div class="drawer" id="cartDrawer">
+    <aside class="drawer" id="cartDrawer">
         <div>
             <div class="drawer-header">
-                <h3>Menu & Panier</h3>
-                <button class="drawer-close" id="closeDrawerBtn"><i class="fa-solid fa-xmark"></i></button>
+                <h3>Menu & panier</h3>
+                <button class="drawer-close" id="closeDrawerBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            
-            <nav class="mobile-nav">
-                <ul>
-                    <li><a href="/">Accueil</a></li>
-                    <li><a href="/catalogue.html">Catalogue</a></li>
-                    <li><a href="/about.html">Notre Histoire</a></li>
-                    <li><a href="/faq.html">FAQ</a></li>
-                    <li><a href="/contact.html">Contact</a></li>
-                </ul>
-            </nav>
-
+            <nav class="mobile-nav"></nav>
             <div class="drawer-divider"></div>
-
-            <div class="drawer-empty-msg">
-                Votre panier est actuellement vide.
-            </div>
+            <div class="drawer-empty-msg">Votre panier est actuellement vide.</div>
+            <div class="cart-items-container"></div>
         </div>
-        <div>
-            <button class="btn-checkout" onclick="alert('Redirection Shopify à venir')">
-                Commander (0,00 €)
-            </button>
-        </div>
-    </div>
+        <button class="btn-checkout" type="button">Commander (0,00 €)</button>
+    </aside>
 
-    <!-- EN-TÊTE -->
-    <header class="top-header">
-        <div class="header-left">
-            <button id="menuBtn" class="mobile-only-btn"><i class="fa-solid fa-bars"></i> <span>Menu</span></button>
-            
-            <nav class="desktop-nav">
-                <a href="/">Accueil</a>
-                <a href="/catalogue.html">Catalogue</a>
-                <a href="/streetwear.html">Streetwear</a>
-                <a href="/faq.html">FAQ</a>
-            </nav>
+    <!-- EN-TÊTE (Géré dynamiquement par main.js comme sur l'index) -->
+    <header class="top-header"></header>
 
-            <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i> <span class="desktop-only">Rechercher</span></button>
-        </div>
-
-        <a href="/" class="brand-logo">-NFC COCONUT-</a>
-
-        <div class="header-right">
-            <a href="/contact.html" class="desktop-only"><span>Contact</span></a>
-            <button id="cartBtn"><i class="fa-solid fa-bag-shopping"></i> <span>(0)</span></button>
-        </div>
-    </header>
-
-    <!-- CONTENU SPÉCIFIQUE DE CHAQUE PAGE -->
-    
+    <!-- CONTENU DE LA PAGE CONTACT -->
     <main class="page-container">
         <div class="page-title">
-            <h1>Contactez la Maison</h1>
+            <h1>Nous Contacter</h1>
             <p>Un conseiller est à votre disposition</p>
         </div>
 
@@ -103,7 +58,7 @@
                 </div>
                 <div class="info-block">
                     <h3>Email</h3>
-                    <p><a href="mailto:contact@nfccoconut.com">contact@nfccoconut.com</a></p>
+                    <p><a href="mailto:nfc.coconut@gmail.com">nfc.coconut@gmail.com</a></p>
                 </div>
                 <div class="info-block">
                     <h3>Commandes Sur-Mesure</h3>
@@ -111,59 +66,45 @@
                 </div>
             </div>
 
-            <form class="contact-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Message envoyé avec succès !');">
-                <div class="form-group">
-                    <label for="name">Nom complet</label>
-                    <input type="text" id="name" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Adresse e-mail</label>
-                    <input type="email" id="email" class="form-control" required>
-                </div>
-                <div class="form-group">
-                    <label for="subject">Sujet</label>
-                    <input type="text" id="subject" class="form-control" placeholder="Demande de renseignements..." required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" class="form-control" required></textarea>
-                </div>
-                <button type="submit" class="btn-submit">Envoyer le message</button>
-            </form>
+            <form class="contact-form" action="https://formspree.io/f/mnjekzez" method="POST">
+    <!-- Redirection personnalisée après succès -->
+    <input type="hidden" name="_next" value="https://nfc-coconut.vercel.app/merci.html">
+
+    <div class="form-group">
+        <label for="firstname">Prénom</label>
+        <input type="text" id="firstname" name="firstname" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="lastname">Nom</label>
+        <input type="text" id="lastname" name="lastname" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="phone">Numéro de téléphone</label>
+        <input type="tel" id="phone" name="phone" class="form-control" placeholder="06 XX XX XX XX">
+    </div>
+    <div class="form-group">
+        <label for="email">Adresse e-mail</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+    </div>
+    <div class="form-group">
+        <label for="subject">Sujet</label>
+        <input type="text" id="subject" name="subject" class="form-control" placeholder="Demande de renseignements..." required>
+    </div>
+    <div class="form-group">
+        <label for="message">Message</label>
+        <textarea id="message" name="message" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn-submit">Envoyer le message</button>
+</form>
         </div>
     </main>
-
 
     <!-- FOOTER -->
     <footer>
         &copy; 2026 NFC COCONUT — TOUS DROITS RÉSERVÉS
     </footer>
 
-    <!-- Script JavaScript pour le filtrage direct -->
-    <script>
-        function filterProducts() {
-            const input = document.getElementById('searchInput');
-            if (!input) return;
-            
-            const filter = input.value.toLowerCase().trim();
-            const products = document.querySelectorAll('.product-item');
-            
-            // Si la personne ferme l'overlay ou efface la recherche, on réaffiche tout
-            products.forEach(product => {
-                const titleElement = product.querySelector('.product-title');
-                if (titleElement) {
-                    const titleText = titleElement.textContent || titleElement.innerText;
-                    if (titleText.toLowerCase().includes(filter)) {
-                        product.style.display = "";
-                    } else {
-                        product.style.display = "none";
-                    }
-                }
-            });
-        }
-    </script>
-
-    <!-- JavaScript Externe -->
+    <!-- JavaScript Externe (gère le header, le panier et la navigation globalement) -->
     <script src="static/js/main.js"></script>
     
 </body>
