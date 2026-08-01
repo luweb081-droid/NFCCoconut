@@ -43,6 +43,7 @@ const PRODUCTS = [
     name: 'Plaque NFC Avis Google Ronde WHITE', 
     price: 39.90, 
     oldPrice: 47.90, 
+    soldOut: true,
     images: ['static/images/Article5bis.png', 'static/images/Article5.png'], 
     description: 'Une plaque ronde blanche, sobre et prête à être configurée pour vos avis Google.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'blanche'],
@@ -54,6 +55,7 @@ const PRODUCTS = [
     name: 'Plaque NFC Avis Google Ronde BLACK', 
     price: 39.90, 
     oldPrice: 47.90, 
+    soldOut: true,
     images: ['static/images/Article7bis.png', 'static/images/Article7.png'], 
     description: 'Une finition noire premium pour inviter vos clients à laisser un avis en quelques secondes.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'noire'],
@@ -65,6 +67,7 @@ const PRODUCTS = [
     name: 'Carte de Visite NFC Personnalisée', 
     price: 29.90, 
     oldPrice: 39.90, 
+    soldOut: true,
     images: ['static/images/Article9.png', 'static/images/Article8.png'], 
     description: 'Partagez vos coordonnées, réseaux et liens essentiels avec une carte NFC personnalisée.', 
     tags: ['carte', 'visite', 'personnalisée', 'nfc'],
@@ -98,7 +101,7 @@ const PRODUCTS = [
     name: 'T-shirt style Streetwear N°3', 
     price: 39.90, 
     oldPrice: 59.90, 
-    soldOut: true, // <-- EXEMPLE : Produit en rupture de stock
+     // <-- EXEMPLE : Produit en rupture de stock
     images: ['static/images/t-shirt3.png', 'static/images/tshirt3bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
