@@ -222,6 +222,16 @@ h1, h2, h3, .brand-logo {
     .launch-countdown-item {
         display: none !important;
     }
+}@media screen and (max-width: 1024px) {
+    .launch-countdown-item, 
+    #launch-countdown, 
+    div[class*="countdown"] {
+        display: none !important;
+        visibility: hidden !important;
+        opacity: 0 !important;
+        height: 0 !important;
+        overflow: hidden !important;
+    }
 }
 .search-input {
     width: 60%;
