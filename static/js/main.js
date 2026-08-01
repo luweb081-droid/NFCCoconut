@@ -135,7 +135,7 @@ const PRODUCTS = [
     name: 'Affiche — Soundwave Edition', 
     price: 29.00, 
     oldPrice: 39.00, 
-    images: ['static/images/poster2-apercu.jpg'], 
+    images: ['static/images/poster2.png'], 
     description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
     features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'] 
