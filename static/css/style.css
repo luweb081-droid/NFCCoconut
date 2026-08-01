@@ -82,21 +82,14 @@ h1, h2, h3, .brand-logo {
     justify-self: center;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
-/* 1. Cibler le conteneur du logo */
-.brand-logo {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* 2. Augmenter la taille de l'image du logo */
 .brand-logo img {
-  height: 80px;       /* Ajustez cette valeur (ex: 50px, 60px, 70px) */
-  max-height: none;   /* Supprime toute restriction de hauteur minimale */
-  width: auto;        /* Conserve les proportions */
-  object-fit: contain;
+    height: 80px;
+    max-height: none;
+    width: auto;
+    object-fit: contain;
 }
 
 .desktop-nav {
@@ -123,6 +116,11 @@ h1, h2, h3, .brand-logo {
     display: none;
 }
 
+/* Style du compte à rebours (par défaut sur PC) */
+.launch-countdown-item {
+    display: inline-block;
+}
+
 /* ==========================================================================
    3. OVERLAYS & DRAWERS (RECHERCHE & PANIER)
    ========================================================================== */
@@ -145,10 +143,6 @@ h1, h2, h3, .brand-logo {
 
 .search-overlay.active {
     top: 0;
-}
-
-/* Recherche globale et fiche produit (alimentées par static/js/main.js) */
-.search-overlay.active {
     height: min(560px, 85vh);
     align-items: flex-start;
     padding-top: 18px;
@@ -214,7 +208,6 @@ h1, h2, h3, .brand-logo {
     .product-page { padding-top: 105px; }
 }
 
-/* Catalogue : quatre articles sur les écrans larges. */
 .catalogue-page .page-container { max-width: 1400px; }
 .catalogue-page .products-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 
@@ -1065,17 +1058,17 @@ footer {
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 10px 5px 25px 5px;
-    -ms-overflow-style: none;  /* IE/Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .packs-carousel-track::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
+    display: none;
 }
 
 .packs-carousel-track .pack-card {
-    flex: 0 0 320px; /* Largeur fixe */
-    flex-shrink: 0;   /* EMPÊCHE L'ÉCRASEMENT DES CARTES */
+    flex: 0 0 320px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -1163,6 +1156,27 @@ footer {
 }
 
 @media (max-width: 768px) {
+    /* Le header passe en colonne pour créer l'extension propre */
+    .top-header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        height: auto;
+        padding-bottom: 10px;
+    }
+
+    /* Le compte à rebours s'étend sur toute la largeur sous la navbar sans fond blanc forcé */
+    .launch-countdown-item {
+        order: 10;
+        flex-basis: 100%;
+        width: 100%;
+        text-align: center;
+        padding: 6px 0;
+        margin-top: 8px;
+        border-top: 1px solid #eaeaea;
+    }
+
     .header-left span, .header-right span {
         display: none;
     }
@@ -1187,11 +1201,11 @@ footer {
     }
 
     .page-container {
-    max-width: 1500px;
-    width: 95%;
-    margin: 120px auto 80px;
-    padding: 0;
-}
+        max-width: 1500px;
+        width: 95%;
+        margin: 120px auto 80px;
+        padding: 0;
+    }
 
     .packs-carousel-wrapper {
         padding: 0;
@@ -1207,7 +1221,6 @@ footer {
     }
 }
 
-/* Les photos Streetwear gagnent un peu de hauteur pour mieux mettre en valeur les vêtements. */
 .product-item--streetwear .product-img-wrapper {
     aspect-ratio: 4 / 5;
 }
@@ -1219,17 +1232,16 @@ footer {
 @media (max-width: 560px) {
     .product-img-wrapper { height: auto; }
 }
-/* Conteneur de l'image pour positionner la banderole */
+
 .product-img-wrapper {
   position: relative;
 }
 
-/* Banderole / Badge Sold Out */
 .badge-sold-out {
   position: absolute;
   top: 10px;
   right: 10px;
-  background-color: #e74c3c; /* Rouge */
+  background-color: #e74c3c;
   color: #ffffff;
   font-size: 0.75rem;
   font-weight: 700;
@@ -1241,7 +1253,6 @@ footer {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-/* Style du bouton lorsqu'il est épuisé */
 .btn-add-cart.disabled,
 .btn-add-cart:disabled {
   background-color: #888888 !important;
