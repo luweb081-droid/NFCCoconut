@@ -524,7 +524,7 @@ h1, h2, h3, .brand-logo {
     grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 30px;
     margin-top: 40px;
-    margin-bottom: 80px;
+    margin-bottom: 20px;
 }
 
 .product-item {
@@ -672,7 +672,7 @@ h1, h2, h3, .brand-logo {
    6. SECTIONS D'ACCUEIL ADDITIONNELLES (PACKS & INFOS)
    ========================================================================== */
 .upcoming-section {
-    margin: 60px 0;
+    margin: 20px 0;
 }
 
 .activity-packs {
@@ -1214,4 +1214,34 @@ footer {
 
 @media (max-width: 560px) {
     .product-img-wrapper { height: auto; }
+}
+/* Conteneur de l'image pour positionner la banderole */
+.product-img-wrapper {
+  position: relative;
+}
+
+/* Banderole / Badge Sold Out */
+.badge-sold-out {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #e74c3c; /* Rouge */
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 4px;
+  z-index: 2;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Style du bouton lorsqu'il est épuisé */
+.btn-add-cart.disabled,
+.btn-add-cart:disabled {
+  background-color: #888888 !important;
+  color: #ffffff !important;
+  cursor: not-allowed !important;
+  opacity: 0.7;
 }

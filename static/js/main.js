@@ -98,6 +98,7 @@ const PRODUCTS = [
     name: 'T-shirt style Streetwear N°3', 
     price: 39.90, 
     oldPrice: 59.90, 
+    soldOut: true, // <-- EXEMPLE : Produit en rupture de stock
     images: ['static/images/t-shirt3.png', 'static/images/tshirt3bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
@@ -130,13 +131,27 @@ const productUrl = product => `produit.html?id=${encodeURIComponent(product.id)}
 
 function productCard(product) {
   const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null;
-  return `<article class="product-item product-item--${product.category}" data-product-id="${product.id}">
+  const isSoldOut = product.soldOut === true;
+
+  return `<article class="product-item product-item--${product.category}${isSoldOut ? ' is-sold-out' : ''}" data-product-id="${product.id}">
     <a class="product-link" href="${productUrl(product)}" aria-label="Voir ${escapeHtml(product.name)}">
-      <div class="product-img-wrapper"><img src="${product.images[0]}" alt="${escapeHtml(product.name)}"></div>
+      <div class="product-img-wrapper">
+        <img src="${product.images[0]}" alt="${escapeHtml(product.name)}">
+        ${isSoldOut ? '<span class="badge-sold-out">Sold Out</span>' : ''}
+      </div>
       <h3 class="product-title">${escapeHtml(product.name)}</h3>
     </a>
-    <div class="product-price-container"><span class="product-price">${euro(product.price)}</span>${product.oldPrice ? `<span class="product-price-old">${euro(product.oldPrice)}</span><span class="badge-discount">-${discount}%</span>` : ''}</div>
-    <div class="product-actions"><a class="btn-details" href="${productUrl(product)}">Voir le produit</a><button class="btn-add-cart" type="button" data-add="${product.id}">Ajouter au panier</button></div>
+    <div class="product-price-container">
+      <span class="product-price">${euro(product.price)}</span>
+      ${product.oldPrice ? `<span class="product-price-old">${euro(product.oldPrice)}</span><span class="badge-discount">-${discount}%</span>` : ''}
+    </div>
+    <div class="product-actions">
+      <a class="btn-details" href="${productUrl(product)}">Voir le produit</a>
+      ${isSoldOut 
+        ? `<button class="btn-add-cart disabled" type="button" disabled>Épuisé</button>` 
+        : `<button class="btn-add-cart" type="button" data-add="${product.id}">Ajouter au panier</button>`
+      }
+    </div>
   </article>`;
 }
 
@@ -158,7 +173,6 @@ function renderNavigation() {
       </div>
       <a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfccoconut.png" alt="NFC Coconut"></a>
       <div class="header-right">
-        <!-- Lien Instagram ajouté ici -->
         <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" aria-label="Notre page Instagram" class="header-icon-link" style="color: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 1.2rem;">
           <i class="fa-brands fa-instagram"></i>
         </a>
@@ -204,14 +218,17 @@ function renderProductPage() {
   
   document.title = `${product.name} — NFC COCONUT`;
 
-  // On récupère les caractéristiques, et on génère de simples balises <li> pour que ton CSS s'applique
   const productFeatures = product.features || ['Prêt à l’emploi', 'Technologie NFC intégrée', 'Livraison suivie'];
   const featuresHtml = productFeatures.map(feature => `<li>${escapeHtml(feature)}</li>`).join('');
+  const isSoldOut = product.soldOut === true;
 
   root.innerHTML = `<a class="back-link" href="${product.category === 'streetwear' ? 'streetwear.html' : 'catalogue.html'}"><i class="fa-solid fa-arrow-left"></i> Retour</a>
   <section class="product-detail">
     <div class="product-gallery">
-      <img id="mainProductImage" src="${product.images[0]}" alt="${escapeHtml(product.name)}">
+      <div class="product-img-wrapper" style="position: relative;">
+        <img id="mainProductImage" src="${product.images[0]}" alt="${escapeHtml(product.name)}">
+        ${isSoldOut ? '<span class="badge-sold-out">Sold Out</span>' : ''}
+      </div>
       <div class="product-thumbnails">
         ${product.images.map((image, index) => `<button type="button" class="product-thumbnail${index === 0 ? ' active' : ''}" data-image="${image}" aria-label="Voir la photo ${index + 1}"><img src="${image}" alt=""></button>`).join('')}
       </div>
@@ -226,7 +243,10 @@ function renderProductPage() {
         ${featuresHtml}
       </ul>
       
-      <button class="btn-add-cart" type="button" data-add="${product.id}">Ajouter au panier</button>
+      ${isSoldOut 
+        ? `<button class="btn-add-cart disabled" type="button" disabled>Épuisé</button>` 
+        : `<button class="btn-add-cart" type="button" data-add="${product.id}">Ajouter au panier</button>`
+      }
     </div>
   </section>`;
 }
@@ -323,6 +343,8 @@ function setupCartAndDrawer() {
     
     if (add) { 
       const product = PRODUCTS.find(p => p.id === add.dataset.add); 
+      if (!product || product.soldOut) return; // Sécurité : impossible d'ajouter si épuisé
+      
       const line = cart.find(item => item.id === product.id); 
       line ? line.quantity++ : cart.push({ id: product.id, name: product.name, price: product.price, image: product.images[0], quantity: 1 }); 
       saveCart(); 
