@@ -233,33 +233,7 @@ h1, h2, h3, .brand-logo {
         overflow: hidden !important;
     }
 }
-@media (max-width: 768px) {
-    .top-header {
-        position: fixed;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 15px;
-    }
 
-    /* On force le logo à se placer exactement au milieu de l'écran, indépendamment du reste */
-    .brand-logo {
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        margin: 0;
-    }
-
-    .header-left {
-        justify-self: start;
-        z-index: 2; /* S'assure qu'on peut cliquer sur les boutons par-dessus si besoin */
-    }
-
-    .header-right {
-        justify-self: end;
-        z-index: 2;
-    }
-}
 .search-input {
     width: 60%;
     border: none;
