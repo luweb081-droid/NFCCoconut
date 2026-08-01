@@ -19,69 +19,7 @@
   <header class="top-header"></header>
   <section class="hero-banner"><img src="static/images/streetwearbis.png" alt="Collection Streetwear NFC Coconut" class="hero-video"><div class="hero-overlay"></div><div class="hero-content"><h1 class="hero-title">NFC COCONUT STREETWEAR</h1><p class="hero-subtitle">Toute la collection Streetwear by NFC COCONUT</p></div><div class="hero-control-bar"><a href="#streetwear-drop" class="hero-link">Découvrir le Drop 00</a></div></section>
   <main class="main-container" id="streetwear-drop"><div class="section-headline"><h2>Collection Drop 00 — The beginning</h2><p>Matières lourdes haute densité</p></div><div class="products-grid" aria-label="Produits Streetwear"></div></main>
-  <!-- DATE DU DROP -->
-<div style="text-align:center; margin:40px 0 15px; font-family:'Montserrat', sans-serif;">
-  <p style="font-size:0.9rem; text-transform:uppercase; letter-spacing:2px; color:#777; margin:0;">
-    Prochain Drop
-  </p>
-  <h2 style="margin:8px 0 0; font-size:2rem; font-weight:700; color:#111;">
-    15 Septembre 2026 • 20h00
-  </h2>
-</div>
-
-<!-- MINUTEUR -->
-<div id="drop-countdown" style="display:flex; justify-content:center; gap:15px; margin:20px 0 50px; text-align:center; font-family:'Montserrat', sans-serif; flex-wrap:wrap;">
-
-  <div style="background:#111; color:#fff; padding:15px 20px; border-radius:8px; min-width:80px;">
-    <span id="cd-days" style="display:block; font-size:2rem; font-weight:600;">00</span>
-    <span style="font-size:.75rem; text-transform:uppercase; letter-spacing:1px; color:#aaa;">Jours</span>
-  </div>
-
-  <div style="background:#111; color:#fff; padding:15px 20px; border-radius:8px; min-width:80px;">
-    <span id="cd-hours" style="display:block; font-size:2rem; font-weight:600;">00</span>
-    <span style="font-size:.75rem; text-transform:uppercase; letter-spacing:1px; color:#aaa;">Heures</span>
-  </div>
-
-  <div style="background:#111; color:#fff; padding:15px 20px; border-radius:8px; min-width:80px;">
-    <span id="cd-minutes" style="display:block; font-size:2rem; font-weight:600;">00</span>
-    <span style="font-size:.75rem; text-transform:uppercase; letter-spacing:1px; color:#aaa;">Minutes</span>
-  </div>
-
-  <div style="background:#111; color:#fff; padding:15px 20px; border-radius:8px; min-width:80px;">
-    <span id="cd-seconds" style="display:block; font-size:2rem; font-weight:600;">00</span>
-    <span style="font-size:.75rem; text-transform:uppercase; letter-spacing:1px; color:#aaa;">Secondes</span>
-  </div>
-
-</div>
-
-<script>
-  // Date du drop
-  const dropDate = new Date("2026-09-15T20:00:00").getTime();
-
-  const timer = setInterval(function () {
-
-    const now = new Date().getTime();
-    const distance = dropDate - now;
-
-    if (distance <= 0) {
-      clearInterval(timer);
-      document.getElementById("drop-countdown").innerHTML =
-        "<h2 style='color:#111;font-family:Montserrat,sans-serif;'>🔥 Le Drop est disponible !</h2>";
-      return;
-    }
-
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-    document.getElementById("cd-days").textContent = String(days).padStart(2, "0");
-    document.getElementById("cd-hours").textContent = String(hours).padStart(2, "0");
-    document.getElementById("cd-minutes").textContent = String(minutes).padStart(2, "0");
-    document.getElementById("cd-seconds").textContent = String(seconds).padStart(2, "0");
-
-  }, 1000);
-</script>
+  
   <!-- SECTION CONCEPT & TECH STREETWEAR -->
 <section class="streetwear-quality-section" style="max-width: 1100px; margin: 60px auto; padding: 50px 30px; background: #1b1b1b; color: #ffffff; border-radius: 12px; text-align: center;">
   <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 0.75rem; color: #888;">Savoir-Faire & Engagement</p>
