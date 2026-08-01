@@ -10,7 +10,7 @@ const PRODUCTS = [
     name: 'Plaque NFC avis Google BLACK', 
     price: 39.90, 
     oldPrice: 55.90, 
-    images: ['static/images/Article1.png', 'static/images/Article2.png'], 
+    images: ['static/images/Article1.png', 'static/images/Article1bisbis.png'], 
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'] 
   },
