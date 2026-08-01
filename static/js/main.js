@@ -135,7 +135,7 @@ function renderNavigation() {
   const file = currentFile();
   const links = NAV_LINKS.map(([label, href]) => `<a href="${href}"${href === file ? ' class="active" aria-current="page"' : ''}>${label}</a>`).join('');
   document.querySelectorAll('.top-header').forEach(header => {
-    header.innerHTML = `<div class="header-left"><button id="menuBtn" class="mobile-only-btn" aria-label="Ouvrir le menu"><i class="fa-solid fa-bars"></i></button><nav class="desktop-nav">${links}</nav><button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i><span class="desktop-only">Rechercher</span></button></div><a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nc.png" alt="NFC Coconut"></a><div class="header-right"><button id="cartBtn"><i class="fa-solid fa-bag-shopping"></i><span>(0)</span></button></div>`;
+    header.innerHTML = `<div class="header-left"><button id="menuBtn" class="mobile-only-btn" aria-label="Ouvrir le menu"><i class="fa-solid fa-bars"></i></button><nav class="desktop-nav">${links}</nav><button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i><span class="desktop-only">Rechercher</span></button></div><a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfccoconut.png" alt="NFC Coconut"></a><div class="header-right"><button id="cartBtn"><i class="fa-solid fa-bag-shopping"></i><span>(0)</span></button></div>`;
   });
   document.querySelectorAll('.mobile-nav').forEach(nav => { nav.innerHTML = `<ul>${NAV_LINKS.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul>`; });
 }
