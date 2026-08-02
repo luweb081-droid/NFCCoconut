@@ -119,23 +119,34 @@ const PRODUCTS = [
     features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Imprimé localement en France']
   },
   { 
-    id: 'poster-drop-00', 
+    id: 'poster-drop-00-N°1', 
     category: 'streetwear', 
     name: 'Affiche — Drop 00 (Art Print)', 
     price: 24.90, 
     oldPrice: 39.00, 
-    images: ['static/images/poster.png'], 
+    images: ['static/images/Vraiposter1.png'], 
     description: 'Affiche exclusive Drop 00 imprimée sur un papier mat haute densité.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'decoration'],
     features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'] 
   },
   { 
-    id: 'poster-soundwave', 
+    id: 'poster-drop-00-N°2', 
     category: 'streetwear', 
-    name: 'Affiche — Soundwave Edition', 
+    name: 'Affiche — Drop 00 (Art Print)', 
     price: 24.90, 
     oldPrice: 39.00, 
     images: ['static/images/poster2.png'], 
+    description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
+    tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
+    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'] 
+  },
+  { 
+    id: 'poster-drop-00-N°3', 
+    category: 'streetwear', 
+    name: 'Affiche — Drop 00 (Art Print)', 
+    price: 24.90, 
+    oldPrice: 39.00, 
+    images: ['static/images/poster3.png'], 
     description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
     features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'] 
