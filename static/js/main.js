@@ -74,6 +74,17 @@ const PRODUCTS = [
     features: ['Remplace vos cartes papier', 'Partage de profil ultra rapide', 'Format carte de crédit pratique'] 
   },
   { 
+    id: 'plaque-google-white', 
+    category: 'business', 
+    name: 'Plaque NFC avis Google WHITE', 
+    price: 39.90, 
+    oldPrice: 55.90, 
+    images: ['static/images/Article8bis.png', 'static/images/Article1bisbis.png'], 
+    description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
+    tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
+    features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'] 
+  },
+  { 
     id: 'tshirt-streetwear-1', 
     category: 'streetwear', 
     name: 'T-shirt style Streetwear N°1', 
