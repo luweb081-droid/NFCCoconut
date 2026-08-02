@@ -123,7 +123,6 @@ const PRODUCTS = [
     name: 'T-shirt style Streetwear N°3', 
     price: 39.90, 
     oldPrice: 59.90, 
-     // <-- EXEMPLE : Produit en rupture de stock
     images: ['static/images/t-shirt3.png', 'static/images/tshirt3bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
@@ -175,12 +174,17 @@ const PRODUCTS = [
   }
 ];
 
+// Ajout de la propriété `showInDesktop` (true par défaut, false pour masquer de la barre principale)
 const NAV_LINKS = [
-  ['Accueil', 'index.html'], 
-  ['Catalogue', 'catalogue.html'], 
-  ['Streetwear', 'streetwear.html'],  
-  ['FAQ', 'faq.html'], 
-  ['Contact', 'contact.html']
+  { label: 'Accueil', href: 'index.html', showInDesktop: true },
+  { label: 'Catalogue', href: 'catalogue.html', showInDesktop: true },
+  { label: 'Streetwear', href: 'streetwear.html', showInDesktop: true },  
+  { label: 'FAQ', href: 'faq.html', showInDesktop: true }, 
+  { label: 'Développement Web', href: 'devweb.html', showInDesktop: false },
+
+  { label: 'Contact', href: 'contact.html', showInDesktop: true },
+  // Exemple de page visible uniquement dans le menu déroulant mobile :
+  { label: 'Mentions Légales', href: 'mentions-legales.html', showInDesktop: false }
 ];
 
 const euro = value => `${value.toFixed(2).replace('.', ',')} €`;
@@ -220,13 +224,18 @@ function currentFile() {
 
 function renderNavigation() {
   const file = currentFile();
-  const links = NAV_LINKS.map(([label, href]) => `<a href="${href}"${href === file ? ' class="active" aria-current="page"' : ''}>${label}</a>`).join('');
+  
+  // Génère les liens de la barre de bureau (uniquement ceux avec showInDesktop: true)
+  const desktopLinks = NAV_LINKS
+    .filter(link => link.showInDesktop)
+    .map(({ label, href }) => `<a href="${href}"${href === file ? ' class="active" aria-current="page"' : ''}>${label}</a>`)
+    .join('');
   
   document.querySelectorAll('.top-header').forEach(header => {
     header.innerHTML = `
       <div class="header-left" style="display: flex; align-items: center; gap: 15px;">
         <button id="menuBtn" class="mobile-only-btn" aria-label="Ouvrir le menu"><i class="fa-solid fa-bars"></i></button>
-        <nav class="desktop-nav">${links}</nav>
+        <nav class="desktop-nav">${desktopLinks}</nav>
         <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i><span class="desktop-only">Rechercher</span></button>
       </div>
       <a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfccoconut.png" alt="NFC Coconut"></a>
@@ -239,11 +248,11 @@ function renderNavigation() {
       </div>`;
   });
   
+  // Génère tous les liens pour le menu déroulant mobile (hamburger)
   document.querySelectorAll('.mobile-nav').forEach(nav => { 
-    nav.innerHTML = `<ul>${NAV_LINKS.map(([label, href]) => `<li><a href="${href}">${label}</a></li>`).join('')}</ul>`; 
+    nav.innerHTML = `<ul>${NAV_LINKS.map(({ label, href }) => `<li><a href="${href}"${href === file ? ' class="active"' : ''}>${label}</a></li>`).join('')}</ul>`; 
   });
 }
-
 
 function renderProductGrids() {
   const file = currentFile();
@@ -403,7 +412,7 @@ function setupCartAndDrawer() {
     
     if (add) { 
       const product = PRODUCTS.find(p => p.id === add.dataset.add); 
-      if (!product || product.soldOut) return; // Sécurité : impossible d'ajouter si épuisé
+      if (!product || product.soldOut) return; 
       
       const line = cart.find(item => item.id === product.id); 
       line ? line.quantity++ : cart.push({ id: product.id, name: product.name, price: product.price, image: product.images[0], quantity: 1 }); 
@@ -432,7 +441,6 @@ function setupGallery() {
 }
 
 function startLaunchCountdown() {
-  // Définissez ici la date cible de l'ouverture de la boutique
   const targetDate = new Date('2026-09-01T00:00:00').getTime();
 
   setInterval(() => {

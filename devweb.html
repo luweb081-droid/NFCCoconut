@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Création de Sites Vitrines — NFC COCONUT</title>
+  <meta name="description" content="Propulsez votre entreprise en ligne avec nos sites vitrines clés en main. Nous concevons, programmons et mettons votre site en ligne. Contactez-nous !">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="icon" type="image/x-icon" href="static/images/ico.png">
+  <meta property="og:site_name" content="NFC COCONUT">
+  <meta name="application-name" content="NFC COCONUT">
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "NFC COCONUT",
+      "url": "https://nfc-coconut.vercel.app/"
+    }
+  </script>
+</head>
+<body>
+  <div class="search-overlay" id="searchOverlay"><input type="search" class="search-input" placeholder="Rechercher un produit" id="searchInput" autocomplete="off"><button class="close-search" id="closeSearchBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div>
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="cartDrawer"><div><div class="drawer-header"><h3>Menu & panier</h3><button class="drawer-close" id="closeDrawerBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div><nav class="mobile-nav"></nav><div class="drawer-divider"></div><div class="drawer-empty-msg">Votre panier est actuellement vide.</div><div class="cart-items-container"></div></div><button class="btn-checkout" type="button">Commander (0,00 €)</button></aside>
+  
+  <header class="top-header"></header>
+
+  <!-- BANNIÈRE DE LA PAGE -->
+  <section class="hero-banner" style="min-height: 40vh;">
+    <img class="hero-video" src="static/images/bg.png" alt="Fond abstrait tech">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Création de Sites Vitrines Clés en Main</h1>
+      <p class="hero-subtitle">Nous concevons votre site web et nous occupons de tout mettre en ligne</p>
+    </div>
+  </section>
+
+  <main class="main-container" id="collection" style="max-width: 1100px; margin: 60px auto; padding: 0 20px;">
+    
+    <!-- INTRODUCTION / VALEUR AJOUTÉE -->
+    <div class="section-headline" style="margin-bottom: 50px; text-align: center;">
+      <h2>Un site web professionnel, sans la complexité technique</h2>
+      <p>Idéal pour valoriser votre commerce, présenter vos services et faire le lien direct avec vos plaques NFC.</p>
+    </div>
+
+    <!-- GRILLE DES PRESTATIONS WEB -->
+    <div class="nfc-explanation" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:30px;text-align:left;margin-bottom:60px;">
+      
+      <div class="info-card" style="padding:30px;background:#f9f9f9;border:1px solid #eee;border-radius:12px;">
+        <div style="font-size: 1.8rem; margin-bottom: 15px; color: #111;"><i class="fa-solid fa-laptop-code"></i></div>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;color:#111;">1. Site Vitrine Sur Mesure</h3>
+        <p style="color:#565656;font-size:0.95rem; line-height: 1.5;">Nous créons un design moderne, épuré et adapté à votre image de marque pour présenter efficacement votre activité à vos futurs clients.</p>
+      </div>
+
+      <div class="info-card" style="padding:30px;background:#f9f9f9;border:1px solid #eee;border-radius:12px;">
+        <div style="font-size: 1.8rem; margin-bottom: 15px; color: #111;"><i class="fa-solid fa-cloud-arrow-up"></i></div>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;color:#111;">2. Mise en Ligne & Hébergement</h3>
+        <p style="color:#565656;font-size:0.95rem; line-height: 1.5;">Vous n’avez rien à configurer. Nous nous occupons de l’intégration, des réglages techniques et de la mise en ligne effective de votre site.</p>
+      </div>
+
+      <div class="info-card" style="padding:30px;background:#f9f9f9;border:1px solid #eee;border-radius:12px;">
+        <div style="font-size: 1.8rem; margin-bottom: 15px; color: #111;"><i class="fa-solid fa-mobile-screen-button"></i></div>
+        <h3 style="font-size:1.2rem;margin-bottom:10px;color:#111;">3. Prêt pour le NFC</h3>
+        <p style="color:#565656;font-size:0.95rem; line-height: 1.5;">Votre nouveau site s'associe parfaitement avec nos plaques et présentoirs connectés pour offrir une expérience fluide à vos visiteurs.</p>
+      </div>
+
+    </div>
+
+    <!-- SECTION APPEL À L'ACTION (CONTACT & INSTAGRAM) -->
+    <section style="background:#181818;color:#fff;padding:50px 30px;border-radius:12px;text-align:center;margin-bottom:60px;">
+      <h2 style="font-size:1.8rem;margin-bottom:15px;color:#fff;">Prêt à lancer votre site web ?</h2>
+      <p style="max-width:600px;margin:0 auto 30px;color:#ddd;font-size:0.95rem;">Contactez-nous pour en discuter et confiez-nous la création de votre vitrine digitale de A à Z.</p>
+      
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px;">
+        <a href="contact.html" class="btn-details" style="background:#fff;color:#111;padding:15px 30px;font-weight:600;text-decoration:none;border-radius:4px;display:inline-flex;align-items:center;gap:8px;">
+          <i class="fa-solid fa-envelope"></i> Contactez-nous
+        </a>
+        <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="btn-details" style="background:transparent;color:#fff;border:1px solid #fff;padding:15px 30px;font-weight:600;text-decoration:none;border-radius:4px;display:inline-flex;align-items:center;gap:8px;">
+          <i class="fa-brands fa-instagram"></i> Échanger sur Instagram
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>&copy; 2026 NFC COCONUT — TOUS DROITS RÉSERVÉS</footer>
+  <script src="static/js/main.js"></script>
+</body>
+</html>
