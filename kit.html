@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<style>
+    @page {
+        size: A4;
+        margin: 20mm;
+        background-color: #f7f9f8;
+        @bottom-right {
+            content: counter(page);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 9pt;
+            color: #889996;
+        }
+        @bottom-left {
+            content: "NFC Coconut — Guide Pratique & Kit Business";
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 9pt;
+            color: #889996;
+        }
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        font-size: 11pt;
+        line-height: 1.6;
+        color: #2c3e3b;
+        background-color: #f7f9f8;
+        margin: 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    /* Cover Page */
+    .cover-page {
+        page-break-after: always;
+        min-height: 250mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        padding: 20mm 0;
+    }
+
+    .cover-badge {
+        display: inline-block;
+        background-color: #e2ede8;
+        color: #1b4d3e;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 10pt;
+        font-weight: bold;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+    }
+
+    .cover-title {
+        font-size: 28pt;
+        font-weight: 800;
+        color: #1b4d3e;
+        line-height: 1.2;
+        margin-bottom: 15px;
+    }
+
+    .cover-subtitle {
+        font-size: 14pt;
+        color: #556b65;
+        margin-bottom: 40px;
+        font-weight: 300;
+    }
+
+    .cover-box {
+        background: #ffffff;
+        border: 1px solid #d0ded7;
+        border-radius: 12px;
+        padding: 30px;
+        max-width: 450px;
+        margin: 0 auto;
+        text-align: left;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .cover-box h3 {
+        margin-top: 0;
+        color: #1b4d3e;
+        font-size: 12pt;
+        border-bottom: 2px solid #e2ede8;
+        padding-bottom: 8px;
+    }
+
+    .cover-box ul {
+        margin: 0;
+        padding-left: 20px;
+        color: #445853;
+        font-size: 10pt;
+    }
+
+    .cover-box li {
+        margin-bottom: 6px;
+    }
+
+    /* General Typography */
+    h1 {
+        font-size: 18pt;
+        color: #1b4d3e;
+        margin-top: 30px;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #1b4d3e;
+        padding-bottom: 8px;
+        page-break-after: avoid;
+    }
+
+    h2 {
+        font-size: 13pt;
+        color: #2d6a54;
+        margin-top: 25px;
+        margin-bottom: 10px;
+        page-break-after: avoid;
+        border-left: 4px solid #2d6a54;
+        padding-left: 8px;
+    }
+
+    h3 {
+        font-size: 11pt;
+        color: #1b4d3e;
+        margin-top: 15px;
+        margin-bottom: 6px;
+        page-break-after: avoid;
+    }
+
+    p {
+        margin-bottom: 12px;
+        margin-top: 0;
+    }
+
+    /* Sections / Cards */
+    .section-block {
+        background: #ffffff;
+        border: 1px solid #e2ede8;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .highlight-box {
+        background: #edf5f1;
+        border-left: 4px solid #1b4d3e;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 0 6px 6px 0;
+        font-size: 10.5pt;
+    }
+
+    .warning-box {
+        background: #fdf3f2;
+        border-left: 4px solid #d9534f;
+        padding: 15px;
+        margin: 15px 0;
+        border-radius: 0 6px 6px 0;
+        font-size: 10.5pt;
+    }
+
+    .quote-block {
+        background: #f4f8f6;
+        border: 1px dashed #2d6a54;
+        padding: 12px 15px;
+        border-radius: 6px;
+        margin: 10px 0;
+        font-style: italic;
+        color: #1b4d3e;
+    }
+
+    /* Tables */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 15px 0;
+        font-size: 10pt;
+    }
+
+    th, td {
+        border: 1px solid #d0ded7;
+        padding: 10px 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #1b4d3e;
+        color: #ffffff;
+        font-weight: 600;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f4f8f6;
+    }
+
+    .step-list {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0;
+    }
+
+    .step-list li {
+        position: relative;
+        padding-left: 30px;
+        margin-bottom: 12px;
+    }
+
+    .step-list li::before {
+        content: attr(data-step);
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 22px;
+        height: 22px;
+        background: #1b4d3e;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 9pt;
+        line-height: 22px;
+        font-weight: bold;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+</style>
+</head>
+<body>
+
+<!-- COVER PAGE -->
+<div class="cover-page">
+    <div class="cover-badge">Kit Business Officiel</div>
+    <div class="cover-title">Le Guide NFC Coconut</div>
+    <div class="cover-subtitle">Transformez vos clients en ambassadeurs et dominez Google</div>
+    
+    <div class="cover-box">
+        <h3>Ce que contient ce guide :</h3>
+        <ul>
+            <li>Installation & prise en main rapide</li>
+            <li>La règle des 3 secondes & meilleurs emplacements</li>
+            <li>Scripts prêts à l'emploi (copier-coller)</li>
+            <li>Gestion experte des avis Google</li>
+            <li>Plan d'action 30 jours & 5 Bonus exclusifs</li>
+        </ul>
+    </div>
+</div>
+
+<!-- INTRODUCTION -->
+<h1>1. Bienvenue chez NFC Coconut</h1>
+<div class="section-block">
+    <p>Bienvenue dans l'univers <strong>NFC Coconut</strong>.</p>
+    <p>Votre plaque a été conçue pour rendre la collecte d'avis simple, rapide et naturelle. Fini les QR codes complexes ou les relances par email ignorées : en un seul geste, vos clients partagent leur satisfaction.</p>
+    <div class="highlight-box">
+        <strong>Notre vision :</strong> Dans ce guide, vous allez découvrir comment installer votre plaque, encourager vos clients à laisser leur avis sans effort, et transformer votre réputation en un véritable avantage concurrentiel pour votre entreprise.
+    </div>
+    <p>Ce guide fait partie intégrante de votre produit. Il a été pensé pour aller droit au but, sans jargon technique.</p>
+</div>
+
+<!-- PARTIE 1 -->
+<h1>PARTIE 1 — Bien utiliser votre plaque</h1>
+
+<h2>2. Comment fonctionne votre plaque NFC ?</h2>
+<div class="section-block">
+    <p>La technologie NFC (Near Field Communication) permet un échange d'informations sans contact à courte distance. Aucun abonnement ni application spécifique n'est requis.</p>
+    
+    <div style="text-align: center; margin: 20px 0; font-weight: bold; color: #1b4d3e;">
+        📱 Le client approche son smartphone<br>
+        ↓<br>
+        🔗 Une page s'ouvre automatiquement<br>
+        ↓<br>
+        ⭐ Il peut laisser son avis Google
+    </div>
+
+    <table>
+        <tr>
+            <th>Fonctionnalité</th>
+            <th>Détails & Compatibilité</th>
+        </tr>
+        <tr>
+            <td><strong>Puce NFC</strong></td>
+            <td>Intégrée dans la plaque, active par simple effleurement (compatible 99% des smartphones récents).</td>
+        </tr>
+        <tr>
+            <td><strong>QR Code de secours</strong></td>
+            <td>Imprimé sur la plaque pour les anciens smartphones ou les téléphones dont le NFC est désactivé.</td>
+        </tr>
+        <tr>
+            <td><strong>iPhone (iOS)</strong></td>
+            <td>Puce active dès que l'écran est allumé (iPhone XS et ultérieurs : lecture directe sans application).</td>
+        </tr>
+        <tr>
+            <td><strong>Android</strong></td>
+            <td>Activer le NFC dans les paramètres rapides (activé par défaut sur la quasi-totalité des appareils).</td>
+        </tr>
+        <tr>
+            <td><strong>En cas de panne NFC</strong></td>
+            <td>Utilisez simplement le QR Code de secours ou proposez d'envoyer le lien par SMS/WhatsApp.</td>
+        </tr>
+    </table>
+</div>
+
+<h2>3. Comment installer votre plaque</h2>
+<div class="section-block">
+    <p>Une installation stratégique multiplie par 3 le taux de scan. Suivez ces 4 étapes :</p>
+    <ul class="step-list">
+        <li data-step="1"><strong>Nettoyez la surface :</strong> Utilisez un chiffon propre et de l'alcool isopropylique pour enlever toute trace de poussière ou de graisse.</li>
+        <li data-step="2"><strong>Choisissez un emplacement visible :</strong> À hauteur des yeux, là où le client s'arrête ou patiente (comptoir, caisse).</li>
+        <li data-step="3"><strong>Placez la plaque :</strong> Retirez l'adhésif protecteur au dos et pressez fermement pendant 10 secondes.</li>
+        <li data-step="4"><strong>Testez avec votre téléphone :</strong> Ouvrez l'appareil photo ou l'écran d'accueil de votre propre smartphone pour valider l'ouverture instantanée de votre fiche Google.</li>
+    </ul>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PARTIE 2 -->
+<h1>PARTIE 2 — Où placer votre plaque ?</h1>
+<div class="section-block">
+    <p>Le placement de votre plaque détermine son succès. Voici les meilleurs emplacements sectoriels et la règle d'or à respecter.</p>
+    
+    <div class="highlight-box">
+        <strong>🔥 La règle des 3 secondes :</strong><br>
+        Votre client doit pouvoir voir votre plaque, comprendre ce qu'elle permet de faire et la scanner en moins de 3 secondes. Si l'emplacement nécessite de chercher, le taux de conversion chute de 80%.
+    </div>
+
+    <h3>Emplacements par secteur d'activité</h3>
+    <table>
+        <tr>
+            <th>Secteur</th>
+            <th>Emplacements Recommandés</th>
+        </tr>
+        <tr>
+            <td><strong>Restaurant 🍽️</strong></td>
+            <td>À l'addition / note, sur le comptoir de sortie, à la caisse, ou posée sur les tables principales.</td>
+        </tr>
+        <tr>
+            <td><strong>Coiffeur / Beauté 💈</strong></td>
+            <td>À la caisse au moment du paiement, sur le miroir de coiffure, ou sur le comptoir d'accueil.</td>
+        </tr>
+        <tr>
+            <td><strong>Hôtel 🏨</strong></td>
+            <td>Sur le comptoir de la réception, dans l'espace petit-déjeuner, ou sur le bureau dans la chambre.</td>
+        </tr>
+        <tr>
+            <td><strong>Commerce de détail 🛍️</strong></td>
+            <td>Près du terminal de paiement (TPE), sur le comptoir d'emballage, ou à la sortie.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PARTIE 3 -->
+<h1>PARTIE 3 — Comment demander un avis naturellement</h1>
+<div class="section-block">
+    <p>C'est la partie la plus importante de votre démarche. Ne subissez plus le syndrome de la page blanche : voici des scripts prêts à l'emploi à partager avec votre équipe.</p>
+
+    <h3>1. Après une expérience positive</h3>
+    <div class="quote-block">« Je suis ravi que votre expérience vous ait plu. Si vous avez une minute, votre avis Google nous aiderait énormément. »</div>
+
+    <h3>2. Au restaurant / café</h3>
+    <div class="quote-block">« Si vous avez apprécié votre repas, n'hésitez pas à nous laisser un petit avis en scannant la plaque juste ici, ça nous aide beaucoup. »</div>
+
+    <h3>3. Chez le coiffeur / prestataire</h3>
+    <div class="quote-block">« Si vous êtes satisfait de votre coupe, vous pouvez nous laisser un avis en approchant votre téléphone de la plaque. »</div>
+
+    <h3>4. Après un compliment spontané du client</h3>
+    <div class="quote-block">« Merci beaucoup ! Ça nous fait vraiment plaisir. Si vous avez une petite minute, vous pouvez partager votre expérience sur Google pour soutenir notre équipe. »</div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PARTIE 4 & 5 -->
+<h1>PARTIE 4 & 5 — Timing & Erreurs à éviter</h1>
+<div class="section-block">
+    <h2>Le Timing Idéal & Contextes Avancés</h2>
+    <table>
+        <tr>
+            <th>Moment</th>
+            <th>Évaluation</th>
+            <th>Conseil</th>
+        </tr>
+        <tr>
+            <td>Juste après un compliment</td>
+            <td>🟢 Excellent</td>
+            <td>Le client est sur un pic de satisfaction. C'est le moment parfait.</td>
+        </tr>
+        <tr>
+            <td>À la fin d'une prestation réussie</td>
+            <td>🟢 Excellent</td>
+            <td>Profitez de l'au revoir chaleureux pour glisser un mot.</td>
+        </tr>
+        <tr>
+            <td>Au moment du paiement</td>
+            <td>🟢 Bon</td>
+            <td>Le client patiente devant la caisse : regard naturellement attiré.</td>
+        </tr>
+        <tr>
+            <td>Pendant l'attente en salon / comptoir</td>
+            <td>🟢 Bon</td>
+            <td>Idéal si la plaque est posée sur une table basse avec un support visuel engageant.</td>
+        </tr>
+        <tr>
+            <td>Envoi d'un SMS post-prestation (via QR Code de secours)</td>
+            <td>🟢 Bon</td>
+            <td>Efficace pour les activités de service à domicile ou les livraisons (ex: 2h après la prestation).</td>
+        </tr>
+        <tr>
+            <td>Immédiatement après un problème</td>
+            <td>🔴 À éviter</td>
+            <td>Réglez d'abord le litige en interne avant toute demande d'avis.</td>
+        </tr>
+        <tr>
+            <td>Demandes répétées (harcèlement)</td>
+            <td>🔴 À éviter</td>
+            <td>Une seule sollicitation bien ciblée suffit.</td>
+        </tr>
+        <tr>
+            <td>Client pressé ou agacé par un retard</td>
+            <td>🔴 À éviter</td>
+            <td>Attendez un contexte plus serein pour solliciter son avis.</td>
+        </tr>
+    </table>
+
+    <h2>Les 6 Erreurs Fatales à Éviter</h2>
+    <div class="warning-box">
+        <p>❌ <strong>Demander de manière insistante :</strong> Ne forcez jamais la main de vos clients.</p>
+        <p>❌ <strong>Filtrer les clients :</strong> Ne demandez pas uniquement aux clients réguliers en ignorant les nouveaux.</p>
+        <p>❌ <strong>Acheter de faux avis :</strong> Google détecte les faux profils et pénalise lourdement votre visibilité.</p>
+        <p>❌ <strong>Offrir de l'argent contre des avis :</strong> Contraire aux conditions générales de Google et illégal.</p>
+        <p>❌ <strong>Ignorer les avis négatifs :</strong> C'est une opportunité en or de montrer votre professionnalisme.</p>
+        <p>❌ <strong>Placer la plaque hors de vue :</strong> Si elle est cachée derrière un écran, elle ne servira à rien.</p>
+    </div>
+</div>
+
+<!-- PARTIE 6 -->
+<h1>PARTIE 6 — Comment gérer les avis négatifs</h1>
+<div class="section-block">
+    <p>Un avis négatif bien géré peut se transformer en force. Appliquez cette méthode en 5 étapes :</p>
+    <ol>
+        <li><strong>Ne répondez jamais sous le coup de l'émotion.</strong> Prenez quelques heures si nécessaire.</li>
+        <li><strong>Remerciez le client</strong> d'avoir pris le temps de s'exprimer.</li>
+        <li><strong>Reconnaissez le problème</strong> objectivement, sans agressivité.</li>
+        <li><strong>Proposez une solution</strong> concrète.</li>
+        <li><strong>Invitez à poursuivre en privé</strong> (email ou téléphone).</li>
+    </ol>
+
+    <h3>Exemple de réponse type :</h3>
+    <div class="quote-block">
+        « Bonjour [Prénom], merci d'avoir pris le temps de partager votre expérience. Nous sommes désolés d'apprendre que votre visite n'a pas répondu à vos attentes. Nous aimerions comprendre ce qui s'est passé et trouver une solution. N'hésitez pas à nous contacter directement à [Email/Téléphone]. »
+    </div>
+</div>
+
+<div class="page-break"></div>
+
+<!-- PARTIE 7 & 8 -->
+<h1>PARTIE 7 & 8 — Présence Google & Plan d'action</h1>
+<div class="section-block">
+    <h2>Améliorer sa présence Google (Google Business Profile)</h2>
+    <p>Votre plaque NFC facilite la collecte, mais votre réputation repose sur la globalité de votre fiche :</p>
+    <ul>
+        <li>Ajoutez régulièrement de belles photos de vos réalisations ou de votre établissement.</li>
+        <li>Mettez vos horaires à jour (notamment les jours fériés).</li>
+        <li>Répondez à 100% de vos avis (positifs et négatifs) sous 48h.</li>
+        <li>Renseignez précisément vos services et prestations.</li>
+    </ul>
+
+    <h2>Votre Plan d'Action sur 30 Jours</h2>
+    <table>
+        <tr>
+            <th>Période</th>
+            <th>Actions Clés</th>
+        </tr>
+        <tr>
+            <td><strong>Semaine 1</strong></td>
+            <td>Installer la plaque • Tester le scan NFC & QR Code • Former l'équipe aux scripts.</td>
+        </tr>
+        <tr>
+            <td><strong>Semaine 2</strong></td>
+            <td>Demander naturellement des avis aux clients • Tester différents emplacements si besoin.</td>
+        </tr>
+        <tr>
+            <td><strong>Semaine 3</strong></td>
+            <td>Répondre aux nouveaux avis reçus • Ajouter de nouvelles photos sur la fiche Google.</td>
+        </tr>
+        <tr>
+            <td><strong>Semaine 4</strong></td>
+            <td>Analyser l'augmentation de la note moyenne • Identifier les meilleures méthodes de votre équipe.</td>
+        </tr>
+    </table>
+
+    <h3>Checklist Finale de Démarrage</h3>
+    <p>
+        ☑ Ma plaque est visible et bien placée<br>
+        ☑ Mon équipe sait l'utiliser et connaît les scripts<br>
+        ☑ J'ai testé le NFC et le QR Code avec succès<br>
+        ☑ Je réponds régulièrement à mes avis<br>
+        ☑ Ma fiche Google Business Profile est à jour
+    </p>
+</div>
+
+<!-- BONUS SECTION -->
+<h1>🎁 BONUS EXCLUSIFS — Kit Business NFC Coconut</h1>
+<div class="section-block">
+    <h2>Bonus 1 & 2 : Micro-Scripts & Modèles de Réponses</h2>
+    <p>Retrouvez l'intégralité de nos 20 phrases prêtes à l'emploi et nos 10 modèles de réponses aux avis (positifs, mitigés, négatifs) directement inclus dans votre espace client en ligne.</p>
+
+    <h2>Bonus 3, 4 & 5 : Affiche de Comptoir & QR Code de Secours</h2>
+    <p>Votre kit comprend également :</p>
+    <ul>
+        <li><strong>L'affiche A4 prête à imprimer :</strong> <em>« ⭐ Votre avis compte pour nos équipes. Scannez ici ! »</em></li>
+        <li><strong>Le QR Code de secours vectoriel :</strong> à intégrer sur vos factures ou supports de table.</li>
+        <li><strong>La checklist imprimable</strong> pour le suivi de votre équipe en interne.</li>
+    </ul>
+    
+    <div class="highlight-box" style="text-align: center; font-weight: bold; margin-top: 20px;">
+        NFC COCONUT — Kit Avis Clients Complet • Sans Abonnement • 39,90 €
+    </div>
+</div>
+
+</body>
+</html>
