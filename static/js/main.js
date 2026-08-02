@@ -85,6 +85,17 @@ const PRODUCTS = [
     features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'] 
   },
   { 
+    id: 'presentoir-google-white', 
+    category: 'business', 
+    name: 'Présentoir Avis Google WHITE', 
+    price: 39.90, 
+    oldPrice: 47.90, 
+    images: ['static/images/Article.png'], 
+    description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
+    tags: ['google', 'avis', 'présentoir', 'nfc'],
+    features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement']
+  },
+  { 
     id: 'tshirt-streetwear-1', 
     category: 'streetwear', 
     name: 'T-shirt style Streetwear N°1', 
