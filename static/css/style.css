@@ -1313,3 +1313,47 @@ footer {
     color: #aaaaaa;
     font-weight: 300;
 }
+
+/* ===== Badge stock faible (carte produit) ===== */
+.badge-low-stock {
+  display: inline-block;
+  background-color: #fff3e0;
+  color: #e65100;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  margin-left: 6px;
+  white-space: nowrap;
+  animation: pulse-stock 2s ease-in-out infinite;
+}
+
+/* Petite pulsation discrète pour attirer l'œil sans être agressif */
+@keyframes pulse-stock {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ===== Info stock sur la fiche produit ===== */
+.stock-info {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 8px 0 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stock-info::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #2e7d32; /* vert = en stock */
+}
+
+/* Quand le texte contient "Plus que" on veut du orange/rouge plutôt que vert */
+.stock-info.low::before {
+  background-color: #e65100;
+}

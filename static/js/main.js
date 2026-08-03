@@ -48,7 +48,7 @@ const PRODUCTS = [
     description: 'Développez votre communauté Instagram : un contact suffit pour accéder à votre profil.', 
     tags: ['instagram', 'plaque', 'comptoir', 'nfc'],
     features: ['Augmentez vos abonnés', 'Lien modifiable à tout moment', 'Design élégant et moderne'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222239498583'
   },
   { 
     id: 'plaque-ronde-white', 
@@ -230,6 +230,8 @@ const productUrl = product => `produit.html?id=${encodeURIComponent(product.id)}
 function productCard(product) {
   const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null;
   const isSoldOut = product.soldOut === true;
+  const hasLowStock = !isSoldOut && Number.isInteger(product.stockQty) && product.stockQty <= 5;
+  const lowStockBadge = hasLowStock ? `<span class="badge-low-stock">Plus que ${product.stockQty} en stock</span>` : '';
 
   return `<article class="product-item product-item--${product.category}${isSoldOut ? ' is-sold-out' : ''}" data-product-id="${product.id}">
     <a class="product-link" href="${productUrl(product)}" aria-label="Voir ${escapeHtml(product.name)}">
@@ -242,6 +244,7 @@ function productCard(product) {
     <div class="product-price-container">
       <span class="product-price">${euro(product.price)}</span>
       ${product.oldPrice ? `<span class="product-price-old">${euro(product.oldPrice)}</span><span class="badge-discount">-${discount}%</span>` : ''}
+      ${lowStockBadge}
     </div>
     <div class="product-actions">
       <a class="btn-details" href="${productUrl(product)}">Voir le produit</a>
@@ -327,6 +330,13 @@ function renderProductPage() {
   const featuresHtml = productFeatures.map(feature => `<li>${escapeHtml(feature)}</li>`).join('');
   const isSoldOut = product.soldOut === true;
 
+  const hasStockInfo = !isSoldOut && Number.isInteger(product.stockQty);
+  const isLowStock = hasStockInfo && product.stockQty <= 5;
+  const stockText = hasStockInfo
+    ? (product.stockQty > 5 ? 'En stock' : (product.stockQty > 0 ? `Plus que ${product.stockQty} en stock` : ''))
+    : '';
+  const stockInfoHtml = (hasStockInfo && stockText) ? `<p class="stock-info${isLowStock ? ' low' : ''}">${stockText}</p>` : '';
+
   root.innerHTML = `<a class="back-link" href="${product.category === 'streetwear' ? 'streetwear.html' : 'catalogue.html'}"><i class="fa-solid fa-arrow-left"></i> Retour</a>
   <section class="product-detail">
     <div class="product-gallery">
@@ -342,6 +352,7 @@ function renderProductPage() {
       <p class="product-category">${product.category === 'streetwear' ? 'Streetwear' : 'NFC Business'}</p>
       <h1>${escapeHtml(product.name)}</h1>
       <div class="detail-price">${euro(product.price)}${product.oldPrice ? `<del>${euro(product.oldPrice)}</del>` : ''}</div>
+      ${stockInfoHtml}
       <p class="product-description">${escapeHtml(product.description)}</p>
       
       <ul class="product-features">
@@ -513,6 +524,7 @@ async function syncStockFromShopify() {
         ... on ProductVariant {
           id
           availableForSale
+          quantityAvailable
         }
       }
     }`;
@@ -521,15 +533,17 @@ async function syncStockFromShopify() {
     const data = await shopifyFetch(query, { ids: idsToCheck });
     const stockMap = {};
     (data?.nodes || []).forEach(node => {
-      if (node) stockMap[node.id] = node.availableForSale;
+      if (node) stockMap[node.id] = node;
     });
 
     let changed = false;
     PRODUCTS.forEach(product => {
       if (product.shopifyVariantId && product.shopifyVariantId in stockMap) {
-        const nowSoldOut = !stockMap[product.shopifyVariantId];
+        const info = stockMap[product.shopifyVariantId];
+        const nowSoldOut = !info.availableForSale;
         if (product.soldOut !== nowSoldOut) changed = true;
         product.soldOut = nowSoldOut;
+        product.stockQty = typeof info.quantityAvailable === 'number' ? info.quantityAvailable : null;
       }
     });
 
