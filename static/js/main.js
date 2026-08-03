@@ -105,7 +105,7 @@ const PRODUCTS = [
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
     features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222343864663'
   },
   { 
     id: 'presentoir-google-white', 
