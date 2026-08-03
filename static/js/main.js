@@ -36,7 +36,7 @@ const PRODUCTS = [
     description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
     tags: ['google', 'avis', 'présentoir', 'nfc'],
     features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222223540567'
   },
   { 
     id: 'plaque-instagram', 
