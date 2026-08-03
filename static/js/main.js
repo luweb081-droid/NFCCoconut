@@ -7,6 +7,11 @@
  * tu l'as créé dans l'admin Shopify (format 'gid://shopify/ProductVariant/XXXXXXXX').
  * Tant que c'est null, le produit peut être ajouté au panier local mais ne
  * sera pas envoyé au checkout Shopify.
+ *
+ * Le champ `soldOut` défini ici sert de valeur de secours (affichage immédiat
+ * au chargement). Pour les produits qui ont un `shopifyVariantId`, ce statut
+ * est ensuite automatiquement écrasé par le vrai stock Shopify via
+ * syncStockFromShopify() une fois la page chargée.
  */
 const PRODUCTS = [
   { 
@@ -485,6 +490,51 @@ async function createShopifyCheckout(cartItems, customerAttributes = {}) {
   }
 }
 
+// Synchronise le statut "Épuisé" des produits avec le vrai stock Shopify.
+// Ne concerne que les produits qui ont un shopifyVariantId renseigné :
+// les autres gardent leur valeur `soldOut` codée en dur dans PRODUCTS.
+async function syncStockFromShopify() {
+  const idsToCheck = [...new Set(PRODUCTS.filter(p => p.shopifyVariantId).map(p => p.shopifyVariantId))];
+  if (!idsToCheck.length) return;
+
+  const query = `
+    query getVariantsStock($ids: [ID!]!) {
+      nodes(ids: $ids) {
+        ... on ProductVariant {
+          id
+          availableForSale
+        }
+      }
+    }`;
+
+  try {
+    const data = await shopifyFetch(query, { ids: idsToCheck });
+    const stockMap = {};
+    (data?.nodes || []).forEach(node => {
+      if (node) stockMap[node.id] = node.availableForSale;
+    });
+
+    let changed = false;
+    PRODUCTS.forEach(product => {
+      if (product.shopifyVariantId && product.shopifyVariantId in stockMap) {
+        const nowSoldOut = !stockMap[product.shopifyVariantId];
+        if (product.soldOut !== nowSoldOut) changed = true;
+        product.soldOut = nowSoldOut;
+      }
+    });
+
+    // Réaffiche uniquement si un statut a changé, pour ne pas perdre inutilement
+    // le focus/scroll de l'utilisateur
+    if (changed) {
+      renderProductGrids();
+      renderProductPage();
+    }
+  } catch (error) {
+    console.error('syncStockFromShopify error:', error);
+    // En cas d'échec réseau/API, on garde les valeurs soldOut définies en dur
+  }
+}
+
 // ==========================================
 
 try { 
@@ -669,4 +719,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCartAndDrawer(); 
   setupGallery(); 
   startLaunchCountdown();
+  syncStockFromShopify(); // Met à jour le statut "Épuisé" avec le vrai stock Shopify
 });
