@@ -12,6 +12,12 @@
  * au chargement). Pour les produits qui ont un `shopifyVariantId`, ce statut
  * est ensuite automatiquement écrasé par le vrai stock Shopify via
  * syncStockFromShopify() une fois la page chargée.
+ *
+ * Tous les produits de catégorie 'streetwear' sont considérés comme faisant
+ * partie du "Drop" à venir : ils affichent un bouton verrouillé avec un
+ * compte à rebours (identique à celui de la barre de navigation) au lieu du
+ * bouton "Ajouter au panier", tant que la date de lancement (voir
+ * startLaunchCountdown) n'est pas atteinte.
  */
 const PRODUCTS = [
   { 
@@ -227,10 +233,28 @@ const euro = value => `${value.toFixed(2).replace('.', ',')} €`;
 const escapeHtml = text => String(text).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
 const productUrl = product => `produit.html?id=${encodeURIComponent(product.id)}`;
 
+// Bouton d'action d'une carte/fiche produit : pour le streetwear (Drop pas
+// encore lancé), un bouton verrouillé avec le compte à rebours remplace
+// systématiquement "Ajouter au panier" / "Épuisé".
+function productActionButton(product) {
+  const isSoldOut = product.soldOut === true;
+
+  if (product.category === 'streetwear') {
+    return `<button class="btn-add-cart btn-locked" type="button" disabled aria-label="Disponible au lancement du Drop">
+      <i class="fa-solid fa-lock"></i>
+      <span class="js-launch-timer">--j --h --m --s</span>
+    </button>`;
+  }
+
+  return isSoldOut
+    ? `<button class="btn-add-cart disabled" type="button" disabled>Épuisé</button>`
+    : `<button class="btn-add-cart" type="button" data-add="${product.id}">Ajouter au panier</button>`;
+}
+
 function productCard(product) {
   const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null;
   const isSoldOut = product.soldOut === true;
-  const hasLowStock = !isSoldOut && Number.isInteger(product.stockQty) && product.stockQty <= 5;
+  const hasLowStock = !isSoldOut && product.category !== 'streetwear' && Number.isInteger(product.stockQty) && product.stockQty <= 5;
   const lowStockBadge = hasLowStock ? `<span class="badge-low-stock">Plus que ${product.stockQty} en stock</span>` : '';
 
   return `<article class="product-item product-item--${product.category}${isSoldOut ? ' is-sold-out' : ''}" data-product-id="${product.id}">
@@ -248,10 +272,7 @@ function productCard(product) {
     </div>
     <div class="product-actions">
       <a class="btn-details" href="${productUrl(product)}">Voir le produit</a>
-      ${isSoldOut 
-        ? `<button class="btn-add-cart disabled" type="button" disabled>Épuisé</button>` 
-        : `<button class="btn-add-cart" type="button" data-add="${product.id}">Ajouter au panier</button>`
-      }
+      ${productActionButton(product)}
     </div>
   </article>`;
 }
@@ -279,7 +300,7 @@ function renderNavigation() {
       </div>
       <a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfccoconut.png" alt="NFC Coconut"></a>
       <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <div id="launchCountdown" class="mobile-countdown-wrapper" style="font-size: 0.85rem; font-weight: 600; white-space: nowrap; color: #555;">Ouverture dans : <span id="timerValue" style="font-weight: 700;">--j --h --m --s</span></div>
+        <div id="launchCountdown" class="mobile-countdown-wrapper" style="font-size: 0.85rem; font-weight: 600; white-space: nowrap; color: #555;">Ouverture dans : <span id="timerValue" class="js-launch-timer" style="font-weight: 700;">--j --h --m --s</span></div>
         <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" aria-label="Notre page Instagram" class="header-icon-link" style="color: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 1.2rem;">
           <i class="fa-brands fa-instagram"></i>
         </a>
@@ -330,7 +351,7 @@ function renderProductPage() {
   const featuresHtml = productFeatures.map(feature => `<li>${escapeHtml(feature)}</li>`).join('');
   const isSoldOut = product.soldOut === true;
 
-  const hasStockInfo = !isSoldOut && Number.isInteger(product.stockQty);
+  const hasStockInfo = !isSoldOut && product.category !== 'streetwear' && Number.isInteger(product.stockQty);
   const isLowStock = hasStockInfo && product.stockQty <= 5;
   const stockText = hasStockInfo
     ? (product.stockQty > 5 ? 'En stock' : (product.stockQty > 0 ? `Plus que ${product.stockQty} en stock` : ''))
@@ -359,10 +380,7 @@ function renderProductPage() {
         ${featuresHtml}
       </ul>
       
-      ${isSoldOut 
-        ? `<button class="btn-add-cart disabled" type="button" disabled>Épuisé</button>` 
-        : `<button class="btn-add-cart" type="button" data-add="${product.id}">Ajouter au panier</button>`
-      }
+      ${productActionButton(product)}
     </div>
   </section>`;
 }
@@ -807,28 +825,35 @@ function setupGallery() {
   }); 
 }
 
+// Compte à rebours du lancement/Drop : met à jour TOUS les éléments portant
+// la classe .js-launch-timer (barre de navigation + boutons "verrouillés"
+// des produits streetwear), en une seule boucle, à chaque seconde.
 function startLaunchCountdown() {
   const targetDate = new Date('2026-09-01T00:00:00').getTime();
 
-  setInterval(() => {
+  const tick = () => {
+    const timerEls = document.querySelectorAll('.js-launch-timer');
+    if (!timerEls.length) return;
+
     const now = new Date().getTime();
     const distance = targetDate - now;
 
-    const timerEl = document.getElementById('timerValue');
-    if (!timerEl) return;
-
+    let text;
     if (distance < 0) {
-      timerEl.textContent = "C'est ouvert !";
-      return;
+      text = "C'est ouvert !";
+    } else {
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      text = `${days}j ${hours}h ${minutes}m ${seconds}s`;
     }
 
-    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    timerEls.forEach(el => { el.textContent = text; });
+  };
 
-    timerEl.textContent = `${days}j ${hours}h ${minutes}m ${seconds}s`;
-  }, 1000);
+  tick();
+  setInterval(tick, 1000);
 }
 
 document.addEventListener('DOMContentLoaded', () => { 
