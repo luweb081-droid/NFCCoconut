@@ -2,6 +2,11 @@
  * Source unique du catalogue. Pour ajouter ou modifier un article, ne changer
  * que ce tableau : les cartes, la recherche et les fiches produit se mettent
  * automatiquement à jour.
+ *
+ * IMPORTANT : renseigne `shopifyVariantId` pour chaque produit une fois que
+ * tu l'as créé dans l'admin Shopify (format 'gid://shopify/ProductVariant/XXXXXXXX').
+ * Tant que c'est null, le produit peut être ajouté au panier local mais ne
+ * sera pas envoyé au checkout Shopify.
  */
 const PRODUCTS = [
   { 
@@ -13,7 +18,8 @@ const PRODUCTS = [
     images: ['static/images/Article1.png', 'static/images/Article1bisbis.png'], 
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
-    features: ['Configuration en 2 minutes', 'Boost vos avis de +40%', 'Plaque en acrylique premium'] 
+    features: ['Configuration en 2 minutes', 'Boost vos avis de +40%', 'Plaque en acrylique premium'],
+    shopifyVariantId: '11016761508183'
   },
   { 
     id: 'presentoir-google-black', 
@@ -24,7 +30,8 @@ const PRODUCTS = [
     images: ['static/images/Article3bis.png', 'static/images/Article3.png'], 
     description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
     tags: ['google', 'avis', 'présentoir', 'nfc'],
-    features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement']
+    features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
+    shopifyVariantId: null
   },
   { 
     id: 'plaque-instagram', 
@@ -35,7 +42,8 @@ const PRODUCTS = [
     images: ['static/images/Article4bis.png'], 
     description: 'Développez votre communauté Instagram : un contact suffit pour accéder à votre profil.', 
     tags: ['instagram', 'plaque', 'comptoir', 'nfc'],
-    features: ['Augmentez vos abonnés', 'Lien modifiable à tout moment', 'Design élégant et moderne'] 
+    features: ['Augmentez vos abonnés', 'Lien modifiable à tout moment', 'Design élégant et moderne'],
+    shopifyVariantId: null
   },
   { 
     id: 'plaque-ronde-white', 
@@ -47,7 +55,8 @@ const PRODUCTS = [
     images: ['static/images/Article5bis.png', 'static/images/Article5.png'], 
     description: 'Une plaque ronde blanche, sobre et prête à être configurée pour vos avis Google.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'blanche'],
-    features: ['S\'intègre à toute décoration', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'] 
+    features: ['S\'intègre à toute décoration', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
+    shopifyVariantId: null
   },
   { 
     id: 'plaque-ronde-black', 
@@ -59,7 +68,8 @@ const PRODUCTS = [
     images: ['static/images/Article7bis.png', 'static/images/Article7.png'], 
     description: 'Une finition noire premium pour inviter vos clients à laisser un avis en quelques secondes.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'noire'],
-    features: ['Finition noire matte premium', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie']
+    features: ['Finition noire matte premium', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
+    shopifyVariantId: null
   },
   { 
     id: 'carte-visite', 
@@ -71,7 +81,8 @@ const PRODUCTS = [
     images: ['static/images/Article9.png', 'static/images/Article8.png'], 
     description: 'Partagez vos coordonnées, réseaux et liens essentiels avec une carte NFC personnalisée.', 
     tags: ['carte', 'visite', 'personnalisée', 'nfc'],
-    features: ['Remplace vos cartes papier', 'Partage de profil ultra rapide', 'Format carte de crédit pratique'] 
+    features: ['Remplace vos cartes papier', 'Partage de profil ultra rapide', 'Format carte de crédit pratique'],
+    shopifyVariantId: null
   },
   { 
     id: 'plaque-google-white', 
@@ -82,7 +93,8 @@ const PRODUCTS = [
     images: ['static/images/Article8bis.png', 'static/images/Article1bisbis.png'], 
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
-    features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'] 
+    features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'],
+    shopifyVariantId: null
   },
   { 
     id: 'presentoir-google-white', 
@@ -93,7 +105,8 @@ const PRODUCTS = [
     images: ['static/images/Article.png'], 
     description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
     tags: ['google', 'avis', 'présentoir', 'nfc'],
-    features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement']
+    features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
+    shopifyVariantId: null
   },
   { 
     id: 'tshirt-streetwear-1', 
@@ -104,7 +117,8 @@ const PRODUCTS = [
     images: ['static/images/tshirt2.png', 'static/images/tshirt2bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
-    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Imprimé localement en France']
+    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Imprimé localement en France'],
+    shopifyVariantId: null
   },
   { 
     id: 'tshirt-streetwear-2', 
@@ -115,7 +129,8 @@ const PRODUCTS = [
     images: ['static/images/tshirt1.png', 'static/images/tshirt1bis.png','static/images/tshirt2bis2.png','static/images/tshirt2bis3.png'], 
     description: 'Coupe boxy streetwear avec un patch NFC discret intégré au bas du vêtement.', 
     tags: ['t-shirt', 'oversized', 'streetwear', 'nfc', 'vêtement'],
-    features: ['Coupe Oversized Boxy', 'Patch NFC lavable intégré', 'Imprimé localement en France']
+    features: ['Coupe Oversized Boxy', 'Patch NFC lavable intégré', 'Imprimé localement en France'],
+    shopifyVariantId: null
   }, 
   { 
     id: 'tshirt-streetwear-3', 
@@ -126,7 +141,8 @@ const PRODUCTS = [
     images: ['static/images/t-shirt3.png', 'static/images/tshirt3bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
-    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Série limitée exclusive']
+    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Série limitée exclusive'],
+    shopifyVariantId: null
   },
   { 
     id: 'tshirt-streetwear-4', 
@@ -137,7 +153,8 @@ const PRODUCTS = [
     images: ['static/images/tshirt4.png', 'static/images/tshirt4bis.png'], 
     description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
     tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
-    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Imprimé localement en France']
+    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Imprimé localement en France'],
+    shopifyVariantId: null
   },
   { 
     id: 'poster-drop-00-N°1', 
@@ -148,7 +165,8 @@ const PRODUCTS = [
     images: ['static/images/Vraiposter1.png'], 
     description: 'Affiche exclusive Drop 00 imprimée sur un papier mat haute densité.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'decoration'],
-    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'] 
+    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
+    shopifyVariantId: null
   },
   { 
     id: 'poster-drop-00-N°2', 
@@ -159,7 +177,8 @@ const PRODUCTS = [
     images: ['static/images/poster2.png'], 
     description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
-    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'] 
+    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
+    shopifyVariantId: null
   },
   { 
     id: 'poster-drop-00-N°3', 
@@ -170,7 +189,8 @@ const PRODUCTS = [
     images: ['static/images/poster3.png'], 
     description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
-    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'] 
+    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
+    shopifyVariantId: null
   }
 ];
 
@@ -357,6 +377,94 @@ function setupSearch() {
 }
 
 let cart = [];
+
+// ================= SHOPIFY =================
+// Une fois tes produits créés dans l'admin Shopify, remplis :
+//   1. SHOPIFY_DOMAIN (déjà fait)
+//   2. SHOPIFY_STOREFRONT_TOKEN (Paramètres > Apps et canaux de vente > Développer
+//      des apps > API Storefront, scopes unauthenticated_read_product_listings +
+//      unauthenticated_write_carts)
+//   3. Le champ shopifyVariantId de chaque produit dans PRODUCTS, tout en haut
+//      de ce fichier (format 'gid://shopify/ProductVariant/XXXXXXXX')
+
+const SHOPIFY_DOMAIN = "nfc-coconut.myshopify.com";
+const SHOPIFY_STOREFRONT_TOKEN = "fdf11aee476ae0be122f4679ebec2b64";
+const SHOPIFY_API_VERSION = "2024-10";
+
+async function shopifyFetch(query, variables = {}) {
+  const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/${SHOPIFY_API_VERSION}/graphql.json`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_STOREFRONT_TOKEN
+    },
+    body: JSON.stringify({ query, variables })
+  });
+
+  if (!response.ok) {
+    throw new Error(`Shopify API a répondu avec le statut ${response.status}`);
+  }
+
+  const json = await response.json();
+  if (json.errors) {
+    console.error('Shopify API error:', json.errors);
+    throw new Error('Erreur retournée par Shopify.');
+  }
+  return json.data;
+}
+
+async function createShopifyCheckout(cartItems) {
+  const lines = cartItems
+    .filter(item => item.shopifyVariantId)
+    .map(item => ({ merchandiseId: item.shopifyVariantId, quantity: item.quantity }));
+
+  const missing = cartItems.filter(item => !item.shopifyVariantId);
+  if (missing.length) {
+    console.warn('Produits sans shopifyVariantId, ignorés du checkout :', missing.map(i => i.name));
+  }
+
+  if (!lines.length) {
+    alert("Ces produits ne sont pas encore configurés pour le paiement en ligne. Contacte-nous directement pour commander.");
+    return;
+  }
+
+  const mutation = `
+    mutation cartCreate($lines: [CartLineInput!]) {
+      cartCreate(input: { lines: $lines }) {
+        cart {
+          id
+          checkoutUrl
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }`;
+
+  try {
+    const data = await shopifyFetch(mutation, { lines });
+    const result = data?.cartCreate;
+
+    if (result?.userErrors?.length) {
+      console.error('Shopify userErrors:', result.userErrors);
+      alert("Impossible de créer le panier Shopify. Vérifie les identifiants de variante.");
+      return;
+    }
+
+    if (result?.cart?.checkoutUrl) {
+      window.location.href = result.cart.checkoutUrl;
+    } else {
+      alert("Erreur lors de la création du panier de paiement.");
+    }
+  } catch (error) {
+    console.error('createShopifyCheckout error:', error);
+    alert("Une erreur est survenue lors de la connexion à Shopify. Réessaie dans quelques instants.");
+  }
+}
+
+// ==========================================
+
 try { 
   cart = JSON.parse(localStorage.getItem('nfcCoconutCart') || '[]'); 
 } catch (_) { 
@@ -410,13 +518,21 @@ function setupCartAndDrawer() {
   document.addEventListener('click', event => { 
     const add = event.target.closest('[data-add]'); 
     const remove = event.target.closest('[data-remove]'); 
+    const checkout = event.target.closest('.btn-checkout');
     
     if (add) { 
       const product = PRODUCTS.find(p => p.id === add.dataset.add); 
       if (!product || product.soldOut) return; 
       
       const line = cart.find(item => item.id === product.id); 
-      line ? line.quantity++ : cart.push({ id: product.id, name: product.name, price: product.price, image: product.images[0], quantity: 1 }); 
+      line ? line.quantity++ : cart.push({ 
+        id: product.id, 
+        name: product.name, 
+        price: product.price, 
+        image: product.images[0], 
+        quantity: 1,
+        shopifyVariantId: product.shopifyVariantId
+      }); 
       saveCart(); 
       updateCart(); 
       open(); 
@@ -426,7 +542,18 @@ function setupCartAndDrawer() {
       cart.splice(Number(remove.dataset.remove), 1); 
       saveCart(); 
       updateCart(); 
-    } 
+    }
+
+    if (checkout) {
+      if (!cart.length) return;
+      checkout.disabled = true;
+      const originalText = checkout.textContent;
+      checkout.textContent = 'Redirection en cours...';
+      createShopifyCheckout(cart).finally(() => {
+        checkout.disabled = false;
+        checkout.textContent = originalText;
+      });
+    }
   });
   
   updateCart();
