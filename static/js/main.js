@@ -209,8 +209,7 @@ const NAV_LINKS = [
 
   { label: 'Contact', href: 'contact.html', showInDesktop: true },
   // Exemple de page visible uniquement dans le menu déroulant mobile :
-  { label: 'Mentions Légales', href: 'mentions-legales.html', showInDesktop: false },
-  { label: 'politique de confidentialité', href: 'poconf.html', showInDesktop: false }
+  
 ];
 
 const euro = value => `${value.toFixed(2).replace('.', ',')} €`;
