@@ -61,7 +61,7 @@ const PRODUCTS = [
     description: 'Une plaque ronde blanche, sobre et prête à être configurée pour vos avis Google.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'blanche'],
     features: ['S\'intègre à toute décoration', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
-    shopifyVariantId: 'gid://shopify/ProductVariant/54222309294423'
+    shopifyVariantId: null
   },
   { 
     id: 'plaque-ronde-black', 
@@ -74,7 +74,7 @@ const PRODUCTS = [
     description: 'Une finition noire premium pour inviter vos clients à laisser un avis en quelques secondes.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'noire'],
     features: ['Finition noire matte premium', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
-    shopifyVariantId: 'gid://shopify/ProductVariant/54222325383511'
+    shopifyVariantId: null
   },
   { 
     id: 'carte-visite', 
@@ -99,7 +99,7 @@ const PRODUCTS = [
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
     features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'],
-    shopifyVariantId: 'gid://shopify/ProductVariant/54222332428631'
+    shopifyVariantId: null
   },
   { 
     id: 'presentoir-google-white', 
@@ -111,7 +111,7 @@ const PRODUCTS = [
     description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
     tags: ['google', 'avis', 'présentoir', 'nfc'],
     features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
-    shopifyVariantId: 'gid://shopify/ProductVariant/54222343864663'
+    shopifyVariantId: null
   },
   { 
     id: 'tshirt-streetwear-1', 
@@ -204,7 +204,7 @@ const PRODUCTS = [
     name: '🎁 Guide Premium NFC Coconut',
     price: 0,
     images: ['static/images/guide.png'], // ou une image de ton choix
-    description: 'Guide offert avec chaque commande.',
+    description: 'Guide offert avec chaque commande de produits NFC.',
     tags: ['guide'],
     features: ['Offert']
 },
@@ -567,6 +567,19 @@ try {
   /* Le site fonctionne aussi ouvert directement depuis un fichier. */ 
 }
 
+// Nettoyage : si un ancien panier contient le guide offert sans aucun produit
+// NFC ("business") associé, on retire le guide (il ne doit accompagner que
+// les commandes de produits NFC, jamais le streetwear seul).
+(function pruneGiftIfIneligible() {
+  const hasBusinessProduct = cart.some(item => {
+    const p = PRODUCTS.find(pr => pr.id === item.id);
+    return p && p.category === 'business';
+  });
+  if (!hasBusinessProduct) {
+    cart = cart.filter(item => item.id !== 'guide-premium');
+  }
+})();
+
 function saveCart() { 
   try { 
     localStorage.setItem('nfcCoconutCart', JSON.stringify(cart)); 
@@ -600,6 +613,7 @@ function updateCart() {
   });
 }
 
+// ===== Tiroir PANIER (séparé du menu mobile) =====
 function setupCartAndDrawer() {
   const overlay = document.getElementById('drawerOverlay'); 
   const drawer = document.getElementById('cartDrawer');
@@ -629,8 +643,8 @@ function setupCartAndDrawer() {
   const close = () => { overlay?.classList.remove('active'); drawer?.classList.remove('active'); };
   const open = () => { overlay?.classList.add('active'); drawer?.classList.add('active'); };
   
+  // Le panier s'ouvre UNIQUEMENT via le bouton panier, plus via le hamburger
   document.getElementById('cartBtn')?.addEventListener('click', open); 
-  document.getElementById('menuBtn')?.addEventListener('click', open); 
   document.getElementById('closeDrawerBtn')?.addEventListener('click', close); 
   overlay?.addEventListener('click', close);
 
@@ -651,37 +665,34 @@ function setupCartAndDrawer() {
       
       const line = cart.find(item => item.id === product.id);
 
-if (line) {
+      if (line) {
+        line.quantity++;
+      } else {
+        cart.push({
+          id: product.id,
+          name: product.name,
+          price: product.price,
+          image: product.images[0],
+          quantity: 1
+        });
+      }
 
-    line.quantity++;
+      // ---------- Cadeau automatique (uniquement pour les produits NFC/business) ----------
+      // Le guide premium n'est offert qu'à l'achat d'un produit NFC. Il ne doit
+      // jamais être ajouté pour un article streetwear.
+      if (product.category === 'business') {
+        const gift = PRODUCTS.find(p => p.id === "guide-premium");
+        if (gift && !cart.find(item => item.id === gift.id)) {
+          cart.push({
+            id: gift.id,
+            name: gift.name,
+            price: 0,
+            image: gift.images[0],
+            quantity: 1
+          });
+        }
+      }
 
-} else {
-
-    cart.push({
-        id: product.id,
-        name: product.name,
-        price: product.price,
-        image: product.images[0],
-        quantity: 1
-    });
-
-}
-
-// ---------- Cadeau automatique ----------
-
-const gift = PRODUCTS.find(p => p.id === "guide-premium");
-
-if (gift && !cart.find(item => item.id === gift.id)) {
-
-    cart.push({
-        id: gift.id,
-        name: gift.name,
-        price: 0,
-        image: gift.images[0],
-        quantity: 1
-    });
-
-}
       saveCart(); 
       updateCart(); 
       open(); 
@@ -691,15 +702,22 @@ if (gift && !cart.find(item => item.id === gift.id)) {
       const index = Number(remove.dataset.remove);
 
       if (cart[index].id === "guide-premium") {
-          return;
+        return;
       }
 
       cart.splice(index, 1);
-      const hasRealProduct = cart.some(item => item.id !== "guide-premium");
 
-if (!hasRealProduct) {
-    cart = [];
-}
+      // Si plus aucun produit NFC ("business") n'est présent dans le panier,
+      // le guide offert n'a plus lieu d'être : on le retire (sans toucher
+      // aux éventuels articles streetwear encore présents).
+      const hasBusinessProduct = cart.some(item => {
+        const p = PRODUCTS.find(pr => pr.id === item.id);
+        return p && p.category === 'business';
+      });
+      if (!hasBusinessProduct) {
+        cart = cart.filter(item => item.id !== 'guide-premium');
+      }
+
       saveCart(); 
       updateCart(); 
     }
@@ -735,6 +753,49 @@ if (!hasRealProduct) {
   });
   
   updateCart();
+}
+
+// ===== Tiroir MENU MOBILE (totalement séparé du panier) =====
+function setupMobileMenu() {
+  let overlay = document.getElementById('mobileMenuOverlay');
+  let drawer = document.getElementById('mobileMenuDrawer');
+
+  // Crée le tiroir dédié au menu s'il n'existe pas déjà. On ne touche pas au
+  // HTML existant : tout est injecté ici, une seule fois.
+  if (!drawer) {
+    overlay = document.createElement('div');
+    overlay.id = 'mobileMenuOverlay';
+    overlay.className = 'drawer-overlay';
+
+    drawer = document.createElement('div');
+    drawer.id = 'mobileMenuDrawer';
+    drawer.className = 'drawer mobile-menu-drawer';
+    drawer.innerHTML = `
+      <div class="drawer-header">
+        <h3>Menu</h3>
+        <button id="closeMobileMenuBtn" class="drawer-close" aria-label="Fermer le menu"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    `;
+
+    document.body.append(overlay, drawer);
+  }
+
+  // Déplace le(s) bloc(s) .mobile-nav (déjà remplis par renderNavigation)
+  // à l'intérieur de ce tiroir dédié, pour qu'ils ne soient plus mélangés
+  // avec le contenu du panier.
+  document.querySelectorAll('.mobile-nav').forEach(nav => {
+    if (!drawer.contains(nav)) drawer.appendChild(nav);
+  });
+
+  const close = () => { overlay.classList.remove('active'); drawer.classList.remove('active'); };
+  const open = () => { overlay.classList.add('active'); drawer.classList.add('active'); };
+
+  // Délégation d'événements : fonctionne même si le header est régénéré
+  document.addEventListener('click', event => {
+    if (event.target.closest('#menuBtn')) { open(); }
+    if (event.target.closest('#closeMobileMenuBtn')) { close(); }
+    if (event.target === overlay) { close(); }
+  });
 }
 
 function setupGallery() { 
@@ -776,6 +837,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderProductPage(); 
   setupSearch(); 
   setupCartAndDrawer(); 
+  setupMobileMenu();
   setupGallery(); 
   startLaunchCountdown();
   syncStockFromShopify(); // Met à jour le statut "Épuisé" avec le vrai stock Shopify

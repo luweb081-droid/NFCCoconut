@@ -1361,3 +1361,13 @@ footer {
 .stock-info.low::before {
   background-color: #c9a063;
 }
+/* ===== Tiroir menu mobile (séparé du panier, ouvre depuis la gauche) ===== */
+.mobile-menu-drawer {
+    left: -450px;
+    right: auto;
+}
+
+.mobile-menu-drawer.active {
+    left: 0;
+    right: auto;
+}
