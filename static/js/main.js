@@ -61,7 +61,7 @@ const PRODUCTS = [
     description: 'Une plaque ronde blanche, sobre et prête à être configurée pour vos avis Google.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'blanche'],
     features: ['S\'intègre à toute décoration', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222309294423'
   },
   { 
     id: 'plaque-ronde-black', 
@@ -74,7 +74,7 @@ const PRODUCTS = [
     description: 'Une finition noire premium pour inviter vos clients à laisser un avis en quelques secondes.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'noire'],
     features: ['Finition noire matte premium', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222325383511'
   },
   { 
     id: 'carte-visite', 
@@ -99,7 +99,7 @@ const PRODUCTS = [
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
     features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222332428631'
   },
   { 
     id: 'presentoir-google-white', 
@@ -111,7 +111,7 @@ const PRODUCTS = [
     description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
     tags: ['google', 'avis', 'présentoir', 'nfc'],
     features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222343864663'
   },
   { 
     id: 'tshirt-streetwear-1', 
