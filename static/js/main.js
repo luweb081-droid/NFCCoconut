@@ -378,6 +378,23 @@ function setupSearch() {
 
 let cart = [];
 
+// Infos commerce du client (nom + adresse), saisies dans le tiroir panier
+// et envoyées à Shopify comme attributs de commande
+let shopInfo = { name: '', address: '' };
+try {
+  shopInfo = { ...shopInfo, ...JSON.parse(localStorage.getItem('nfcCoconutShopInfo') || '{}') };
+} catch (_) {
+  /* Le site fonctionne aussi ouvert directement depuis un fichier. */
+}
+
+function saveShopInfo() {
+  try {
+    localStorage.setItem('nfcCoconutShopInfo', JSON.stringify(shopInfo));
+  } catch (_) {
+    /* Stockage indisponible : infos conservées pour la page en cours. */
+  }
+}
+
 // ================= SHOPIFY =================
 // Une fois tes produits créés dans l'admin Shopify, remplis :
 //   1. SHOPIFY_DOMAIN (déjà fait)
@@ -428,6 +445,7 @@ async function createShopifyCheckout(cartItems, customerAttributes = {}) {
     return;
   }
 
+  // Transforme { 'Nom du commerce': 'Le Petit Café', ... } en tableau d'attributs Shopify
   const attributes = Object.entries(customerAttributes)
     .filter(([, value]) => value && value.trim() !== '')
     .map(([key, value]) => ({ key, value: value.trim() }));
@@ -495,6 +513,13 @@ function updateCart() {
   }
   
   if (empty) empty.style.display = cart.length ? 'none' : 'block';
+
+  // Réinjecte les infos commerce sauvegardées dans les champs, sans écraser
+  // ce que le client est en train de taper
+  const shopNameInput = document.getElementById('shopName');
+  const shopAddressInput = document.getElementById('shopAddress');
+  if (shopNameInput && document.activeElement !== shopNameInput) shopNameInput.value = shopInfo.name;
+  if (shopAddressInput && document.activeElement !== shopAddressInput) shopAddressInput.value = shopInfo.address;
   
   document.querySelectorAll('.btn-checkout').forEach(button => { 
     button.textContent = `Commander (${euro(cart.reduce((sum, item) => sum + item.price * item.quantity, 0))})`; 
@@ -510,6 +535,22 @@ function setupCartAndDrawer() {
     container.className = 'cart-items-container';
     drawer.querySelector('.drawer-empty-msg')?.before(container);
   }
+
+  // Crée les champs "Nom du commerce" / "Adresse de la boutique" dans le drawer
+  // s'ils n'existent pas déjà dans le HTML (voir note plus bas si tu préfères
+  // les coder toi-même directement dans le HTML)
+  if (drawer && !drawer.querySelector('.cart-shop-info')) {
+    const shopInfoBlock = document.createElement('div');
+    shopInfoBlock.className = 'cart-shop-info';
+    shopInfoBlock.innerHTML = `
+      <label for="shopName">Nom de votre commerce</label>
+      <input type="text" id="shopName" placeholder="Ex : Le Petit Café">
+      <label for="shopAddress">Adresse de votre boutique</label>
+      <input type="text" id="shopAddress" placeholder="Ex : 12 rue des Fleurs, 81000 Albi">
+    `;
+    const checkoutBtn = drawer.querySelector('.btn-checkout');
+    (checkoutBtn ? checkoutBtn.before(shopInfoBlock) : drawer.appendChild(shopInfoBlock));
+  }
   
   const close = () => { overlay?.classList.remove('active'); drawer?.classList.remove('active'); };
   const open = () => { overlay?.classList.add('active'); drawer?.classList.add('active'); };
@@ -518,6 +559,12 @@ function setupCartAndDrawer() {
   document.getElementById('menuBtn')?.addEventListener('click', open); 
   document.getElementById('closeDrawerBtn')?.addEventListener('click', close); 
   overlay?.addEventListener('click', close);
+
+  // Sauvegarde en direct les infos commerce à chaque frappe
+  document.addEventListener('input', event => {
+    if (event.target.id === 'shopName') { shopInfo.name = event.target.value; saveShopInfo(); }
+    if (event.target.id === 'shopAddress') { shopInfo.address = event.target.value; saveShopInfo(); }
+  });
   
   document.addEventListener('click', event => { 
     const add = event.target.closest('[data-add]'); 
@@ -550,10 +597,28 @@ function setupCartAndDrawer() {
 
     if (checkout) {
       if (!cart.length) return;
+
+      const shopNameInput = document.getElementById('shopName');
+      const shopAddressInput = document.getElementById('shopAddress');
+      const name = (shopNameInput?.value || shopInfo.name || '').trim();
+      const address = (shopAddressInput?.value || shopInfo.address || '').trim();
+
+      if (!name || !address) {
+        alert("Merci de renseigner le nom de votre commerce et l'adresse de votre boutique avant de commander.");
+        (name ? shopAddressInput : shopNameInput)?.focus();
+        return;
+      }
+
+      shopInfo = { name, address };
+      saveShopInfo();
+
       checkout.disabled = true;
       const originalText = checkout.textContent;
       checkout.textContent = 'Redirection en cours...';
-      createShopifyCheckout(cart).finally(() => {
+      createShopifyCheckout(cart, {
+        'Nom du commerce': name,
+        'Adresse de la boutique': address
+      }).finally(() => {
         checkout.disabled = false;
         checkout.textContent = originalText;
       });

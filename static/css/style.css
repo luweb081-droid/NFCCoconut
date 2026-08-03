@@ -1275,3 +1275,41 @@ footer {
   cursor: not-allowed !important;
   opacity: 0.7;
 }
+.cart-shop-info {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    margin: 20px 0;
+}
+
+.cart-shop-info label {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #111111;
+    margin-bottom: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.cart-shop-info input {
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid #cccccc;
+    padding: 10px 0;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    background: transparent;
+    transition: border-color 0.3s;
+}
+
+.cart-shop-info input:focus {
+    border-color: #111111;
+}
+
+.cart-shop-info input::placeholder {
+    color: #aaaaaa;
+    font-weight: 300;
+}
