@@ -196,7 +196,18 @@ const PRODUCTS = [
     tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
     features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
     shopifyVariantId: null
-  }
+  },
+  {
+    id: 'guide-premium',
+    shopifyVariant: '', // ← tu mettras l'ID Shopify
+    category: 'digital',
+    name: '🎁 Guide Premium NFC Coconut',
+    price: 0,
+    images: ['static/images/guide.png'], // ou une image de ton choix
+    description: 'Guide offert avec chaque commande.',
+    tags: ['guide'],
+    features: ['Offert']
+},
 ];
 
 // Ajout de la propriété `showInDesktop` (true par défaut, false pour masquer de la barre principale)
@@ -624,22 +635,57 @@ function setupCartAndDrawer() {
       const product = PRODUCTS.find(p => p.id === add.dataset.add); 
       if (!product || product.soldOut) return; 
       
-      const line = cart.find(item => item.id === product.id); 
-      line ? line.quantity++ : cart.push({ 
-        id: product.id, 
-        name: product.name, 
-        price: product.price, 
-        image: product.images[0], 
-        quantity: 1,
-        shopifyVariantId: product.shopifyVariantId
-      }); 
+      const line = cart.find(item => item.id === product.id);
+
+if (line) {
+
+    line.quantity++;
+
+} else {
+
+    cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0],
+        quantity: 1
+    });
+
+}
+
+// ---------- Cadeau automatique ----------
+
+const gift = PRODUCTS.find(p => p.id === "guide-premium");
+
+if (gift && !cart.find(item => item.id === gift.id)) {
+
+    cart.push({
+        id: gift.id,
+        name: gift.name,
+        price: 0,
+        image: gift.images[0],
+        quantity: 1
+    });
+
+}
       saveCart(); 
       updateCart(); 
       open(); 
     } 
     
     if (remove) { 
-      cart.splice(Number(remove.dataset.remove), 1); 
+      const index = Number(remove.dataset.remove);
+
+      if (cart[index].id === "guide-premium") {
+          return;
+      }
+
+      cart.splice(index, 1);
+      const hasRealProduct = cart.some(item => item.id !== "guide-premium");
+
+if (!hasRealProduct) {
+    cart = [];
+}
       saveCart(); 
       updateCart(); 
     }
