@@ -631,6 +631,63 @@ function updateCart() {
   });
 }
 
+// ===== Autocomplétion d'adresse (API Adresse — gouvernement français) =====
+// Gratuite, sans clé API. Utilisée pour fiabiliser la saisie de l'adresse
+// du commerce dans le tiroir panier (champ #shopAddress).
+function setupAddressAutocomplete() {
+  let debounceTimer;
+  let currentResults = [];
+
+  const closeSuggestions = () => {
+    const box = document.getElementById('shopAddressSuggestions');
+    if (box) box.innerHTML = '';
+  };
+
+  document.addEventListener('input', event => {
+    if (event.target.id !== 'shopAddress') return;
+
+    const input = event.target;
+    const box = document.getElementById('shopAddressSuggestions');
+    if (!box) return;
+
+    clearTimeout(debounceTimer);
+    const query = input.value.trim();
+
+    if (query.length < 3) { closeSuggestions(); return; }
+
+    debounceTimer = setTimeout(async () => {
+      try {
+        const response = await fetch(`https://api-adresse.data.gouv.fr/search/?q=${encodeURIComponent(query)}&limit=5`);
+        const data = await response.json();
+        currentResults = data.features || [];
+
+        box.innerHTML = currentResults.map((feature, index) =>
+          `<div class="address-suggestion-item" data-index="${index}">${escapeHtml(feature.properties.label)}</div>`
+        ).join('');
+      } catch (error) {
+        console.error('Erreur autocomplétion adresse :', error);
+      }
+    }, 300); // attend 300ms après la dernière frappe avant d'interroger l'API
+  });
+
+  document.addEventListener('click', event => {
+    const item = event.target.closest('.address-suggestion-item');
+    if (item) {
+      const feature = currentResults[Number(item.dataset.index)];
+      if (feature) {
+        const input = document.getElementById('shopAddress');
+        input.value = feature.properties.label;
+        shopInfo.address = feature.properties.label;
+        saveShopInfo();
+      }
+      closeSuggestions();
+      return;
+    }
+    // Ferme la liste si on clique ailleurs sur la page
+    if (!event.target.closest('.address-autocomplete-wrapper')) closeSuggestions();
+  });
+}
+
 // ===== Tiroir PANIER (séparé du menu mobile) =====
 function setupCartAndDrawer() {
   const overlay = document.getElementById('drawerOverlay'); 
@@ -644,7 +701,9 @@ function setupCartAndDrawer() {
 
   // Crée les champs "Nom du commerce" / "Adresse de la boutique" dans le drawer
   // s'ils n'existent pas déjà dans le HTML (voir note plus bas si tu préfères
-  // les coder toi-même directement dans le HTML)
+  // les coder toi-même directement dans le HTML). L'adresse est associée à un
+  // conteneur "wrapper" positionné en relatif afin d'y ancrer la liste de
+  // suggestions d'autocomplétion.
   if (drawer && !drawer.querySelector('.cart-shop-info')) {
     const shopInfoBlock = document.createElement('div');
     shopInfoBlock.className = 'cart-shop-info';
@@ -652,7 +711,10 @@ function setupCartAndDrawer() {
       <label for="shopName">Nom de votre commerce</label>
       <input type="text" id="shopName" placeholder="Ex : Le Petit Café">
       <label for="shopAddress">Adresse de votre boutique</label>
-      <input type="text" id="shopAddress" placeholder="Ex : 12 rue des Fleurs, 81000 Albi">
+      <div class="address-autocomplete-wrapper" style="position: relative;">
+        <input type="text" id="shopAddress" placeholder="Ex : 12 rue des Fleurs, 81000 Albi" autocomplete="off">
+        <div id="shopAddressSuggestions" class="address-suggestions"></div>
+      </div>
     `;
     const checkoutBtn = drawer.querySelector('.btn-checkout');
     (checkoutBtn ? checkoutBtn.before(shopInfoBlock) : drawer.appendChild(shopInfoBlock));
@@ -865,5 +927,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupMobileMenu();
   setupGallery(); 
   startLaunchCountdown();
+  setupAddressAutocomplete(); // Autocomplétion d'adresse (API Adresse gouv.fr)
   syncStockFromShopify(); // Met à jour le statut "Épuisé" avec le vrai stock Shopify
 });
