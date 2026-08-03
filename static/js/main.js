@@ -413,7 +413,7 @@ async function shopifyFetch(query, variables = {}) {
   return json.data;
 }
 
-async function createShopifyCheckout(cartItems) {
+async function createShopifyCheckout(cartItems, customerAttributes = {}) {
   const lines = cartItems
     .filter(item => item.shopifyVariantId)
     .map(item => ({ merchandiseId: item.shopifyVariantId, quantity: item.quantity }));
@@ -428,9 +428,13 @@ async function createShopifyCheckout(cartItems) {
     return;
   }
 
+  const attributes = Object.entries(customerAttributes)
+    .filter(([, value]) => value && value.trim() !== '')
+    .map(([key, value]) => ({ key, value: value.trim() }));
+
   const mutation = `
-    mutation cartCreate($lines: [CartLineInput!]) {
-      cartCreate(input: { lines: $lines }) {
+    mutation cartCreate($lines: [CartLineInput!], $attributes: [AttributeInput!]) {
+      cartCreate(input: { lines: $lines, attributes: $attributes }) {
         cart {
           id
           checkoutUrl
@@ -443,7 +447,7 @@ async function createShopifyCheckout(cartItems) {
     }`;
 
   try {
-    const data = await shopifyFetch(mutation, { lines });
+    const data = await shopifyFetch(mutation, { lines, attributes });
     const result = data?.cartCreate;
 
     if (result?.userErrors?.length) {
