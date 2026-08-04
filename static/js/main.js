@@ -117,7 +117,7 @@ const PRODUCTS = [
     description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
     tags: ['google', 'avis', 'présentoir', 'nfc'],
     features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
-    shopifyVariantId: 'gid://shopify/ProductVariant/54222332428631'
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222343864663'
   },
   { 
     id: 'tshirt-streetwear-1', 
