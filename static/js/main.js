@@ -105,7 +105,7 @@ const PRODUCTS = [
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
     features: ['Configuration par nos soins', 'Boost vos avis de +40%', 'Plaque en acrylique'],
-    shopifyVariantId: 'gid://shopify/ProductVariant/54222343864663'
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222332428631'
   },
   { 
     id: 'presentoir-google-white', 
@@ -117,7 +117,7 @@ const PRODUCTS = [
     description: 'Présentoir NFC compact pour recueillir davantage d’avis dans votre établissement.', 
     tags: ['google', 'avis', 'présentoir', 'nfc'],
     features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222332428631'
   },
   { 
     id: 'tshirt-streetwear-1', 
