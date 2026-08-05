@@ -29,7 +29,7 @@ const PRODUCTS = [
     images: ['static/images/Article1.png', 'static/images/Article1bisbis.png'], 
     description: 'Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste.', 
     tags: ['google', 'avis', 'plaque', 'nfc', 'business'],
-    features: ['Configuration en 2 minutes', 'Boost vos avis de +40%', 'Plaque en acrylique premium'],
+    features: ['Rien a configurer', 'Boost vos avis', 'Plaque robuste'],
     shopifyVariantId: 'gid://shopify/ProductVariant/54222107246935'
   },
   { 
