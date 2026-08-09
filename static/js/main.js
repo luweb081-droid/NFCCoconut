@@ -67,7 +67,7 @@ const PRODUCTS = [
     description: 'Une plaque ronde blanche, sobre et prête à être configurée pour vos avis Google.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'blanche'],
     features: ['S\'intègre à toute décoration', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222309294423'
   },
   { 
     id: 'plaque-ronde-black', 
@@ -80,7 +80,7 @@ const PRODUCTS = [
     description: 'Une finition noire premium pour inviter vos clients à laisser un avis en quelques secondes.', 
     tags: ['google', 'avis', 'plaque', 'ronde', 'noire'],
     features: ['Finition noire matte premium', 'Adhésif double face inclus', 'Fonctionne à vie sans batterie'],
-    shopifyVariantId: null
+    shopifyVariantId: 'gid://shopify/ProductVariant/54222325383511'
   },
   { 
     id: 'carte-visite', 
