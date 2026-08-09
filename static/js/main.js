@@ -189,7 +189,7 @@ const PRODUCTS = [
     description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
     features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
-    shopifyVariantId: null
+    shopifyVariantId: "gid://shopify/ProductVariant/54297815089495"
   },
   { 
     id: 'poster-drop-00-N°3', 
@@ -201,7 +201,7 @@ const PRODUCTS = [
     description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
     features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
-    shopifyVariantId: null
+    shopifyVariantId: "gid://shopify/ProductVariant/54297815548247"
   },
   {
     id: 'guide-premium',
