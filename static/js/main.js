@@ -177,7 +177,7 @@ const PRODUCTS = [
     description: 'Affiche exclusive Drop 00 imprimée sur un papier mat haute densité.', 
     tags: ['poster', 'affiche', 'art', 'streetwear', 'decoration'],
     features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
-    shopifyVariantId: null
+    shopifyVariantId: "gid://shopify/ProductVariant/54296700584279"
   },
   { 
     id: 'poster-drop-00-N°2', 
@@ -254,7 +254,7 @@ function productActionButton(product) {
 function productCard(product) {
   const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null;
   const isSoldOut = product.soldOut === true;
-  const hasLowStock = !isSoldOut && product.category !== 'streetwear' && Number.isInteger(product.stockQty) && product.stockQty <= 5;
+  const hasLowStock = !isSoldOut && Number.isInteger(product.stockQty) && product.stockQty <= 10;
   const lowStockBadge = hasLowStock ? `<span class="badge-low-stock">Plus que ${product.stockQty} en stock</span>` : '';
 
   return `<article class="product-item product-item--${product.category}${isSoldOut ? ' is-sold-out' : ''}" data-product-id="${product.id}">
@@ -351,7 +351,7 @@ function renderProductPage() {
   const featuresHtml = productFeatures.map(feature => `<li>${escapeHtml(feature)}</li>`).join('');
   const isSoldOut = product.soldOut === true;
 
-  const hasStockInfo = !isSoldOut && product.category !== 'streetwear' && Number.isInteger(product.stockQty);
+  const hasStockInfo = !isSoldOut && Number.isInteger(product.stockQty);
   const isLowStock = hasStockInfo && product.stockQty <= 5;
   const stockText = hasStockInfo
     ? (product.stockQty > 5 ? 'En stock' : (product.stockQty > 0 ? `Plus que ${product.stockQty} en stock` : ''))
@@ -559,14 +559,15 @@ async function syncStockFromShopify() {
       if (product.shopifyVariantId && product.shopifyVariantId in stockMap) {
         const info = stockMap[product.shopifyVariantId];
         const nowSoldOut = !info.availableForSale;
-        if (product.soldOut !== nowSoldOut) changed = true;
+        const nowStockQty = typeof info.quantityAvailable === 'number' ? info.quantityAvailable : null;
+        if (product.soldOut !== nowSoldOut || product.stockQty !== nowStockQty) changed = true;
         product.soldOut = nowSoldOut;
-        product.stockQty = typeof info.quantityAvailable === 'number' ? info.quantityAvailable : null;
+        product.stockQty = nowStockQty;
       }
     });
 
-    // Réaffiche uniquement si un statut a changé, pour ne pas perdre inutilement
-    // le focus/scroll de l'utilisateur
+    // Réaffiche dès qu'un statut OU une quantité a changé (y compris au tout
+    // premier chargement, où stockQty passe de "inconnu" à sa vraie valeur)
     if (changed) {
       renderProductGrids();
       renderProductPage();
