@@ -209,7 +209,7 @@ const PRODUCTS = [
     category: 'digital',
     name: '🎁 Guide Premium NFC Coconut',
     price: 0,
-    images: ['static/images/guide.png'], // ou une image de ton choix
+    images: ['static/images/pdf.png'], // ou une image de ton choix
     description: 'Guide offert avec chaque commande de produits NFC.',
     tags: ['guide'],
     features: ['Offert']
