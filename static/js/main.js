@@ -89,11 +89,11 @@ const PRODUCTS = [
     price: 29.90, 
     oldPrice: 39.90, 
     soldOut: true,
-    images: ['static/images/Article9.png', 'static/images/Article8.png'], 
+    images: ['static/images/carte.png'], 
     description: 'Partagez vos coordonnées, réseaux et liens essentiels avec une carte NFC personnalisée.', 
     tags: ['carte', 'visite', 'personnalisée', 'nfc'],
     features: ['Remplace vos cartes papier', 'Partage de profil ultra rapide', 'Format carte de crédit pratique'],
-    shopifyVariantId: null
+    shopifyVariantId: "gid://shopify/ProductVariant/54297861456215"
   },
   { 
     id: 'plaque-google-white', 
