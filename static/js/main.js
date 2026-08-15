@@ -750,16 +750,17 @@ function setupCartAndDrawer() {
       const line = cart.find(item => item.id === product.id);
 
       if (line) {
-        line.quantity++;
-      } else {
-        cart.push({
-          id: product.id,
-          name: product.name,
-          price: product.price,
-          image: product.images[0],
-          quantity: 1
-        });
-      }
+      line.quantity++;
+    } else {
+      cart.push({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        image: product.images[0],
+        quantity: 1,
+        shopifyVariantId: product.shopifyVariantId   // ← ligne à ajouter
+      });
+    }
 
       // ---------- Cadeau automatique (uniquement pour les produits NFC/business) ----------
       // Le guide premium n'est offert qu'à l'achat d'un produit NFC. Il ne doit
@@ -772,11 +773,11 @@ function setupCartAndDrawer() {
             name: gift.name,
             price: 0,
             image: gift.images[0],
-            quantity: 1
+            quantity: 1,
+            shopifyVariantId: gift.shopifyVariantId   // ← ligne à ajouter
           });
         }
       }
-
       saveCart(); 
       updateCart(); 
       open(); 
