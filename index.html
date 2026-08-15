@@ -188,6 +188,26 @@
       50%{ transform:translateX(260%); }
     }
 
+    /* --- Flip 3D entre deux plaques --- */
+    .plaque-flip{
+      position:absolute; inset:0;
+      transform-style:preserve-3d;
+      animation:h3dFlip 9s ease-in-out infinite;
+      will-change:transform;
+    }
+    .plaque-flip .plaque-face{
+      backface-visibility:hidden;
+      -webkit-backface-visibility:hidden;
+    }
+    .plaque-flip .plaque-face--back{
+      transform:rotateY(180deg);
+    }
+    @keyframes h3dFlip{
+      0%, 42%   { transform:rotateY(0deg); }
+      50%, 92%  { transform:rotateY(180deg); }
+      100%      { transform:rotateY(360deg); }
+    }
+
     /* --- Téléphone (iPhone) qui vient "tapper" la plaque --- */
     .hero-3d-caption{
       font-family:'Montserrat', sans-serif;
@@ -208,7 +228,7 @@
     }
 
     @media (prefers-reduced-motion: reduce){
-      .hero-3d-card, .plaque-face::after{
+      .hero-3d-card, .plaque-face::after, .plaque-flip{
         animation:none !important;
       }
     }
@@ -235,7 +255,7 @@
 
         <div class="hero-cta-group">
           <!-- ⚠️ Remplacez l'ID par celui de votre produit "plaque avis Google" dans PRODUCTS -->
-          <a href="produit.html?id=plaque-google-black" class="hero-cta-buy">
+          <a href="produit.html?id=plaque-nfc-avis-google" class="hero-cta-buy">
             <span>Acheter la plaque</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -245,8 +265,15 @@
 
       <div class="hero-3d-stage" id="hero3dStage">
         <div class="hero-3d-card" id="hero3dCard">
-          <div class="plaque-face">
-            <img src="static/images/plaque-avis-google.jpg" alt="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code" class="plaque-photo">
+          <div class="plaque-flip">
+            <div class="plaque-face plaque-face--front">
+              <!-- ⚠️ Plaque 1 -->
+              <img src="static/images/plaque-avis-google.jpg" alt="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code" class="plaque-photo">
+            </div>
+            <div class="plaque-face plaque-face--back">
+              <!-- ⚠️ Plaque 2 : remplacez ce src par la 2ᵉ photo de plaque -->
+              <img src="static/images/plaque-avis-google-2.png" alt="Deuxième modèle de plaque NFC" class="plaque-photo">
+            </div>
           </div>
         </div>
       </div>
