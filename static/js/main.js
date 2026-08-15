@@ -212,7 +212,10 @@ const PRODUCTS = [
     images: ['static/images/pdf.png'], // ou une image de ton choix
     description: 'Guide offert avec chaque commande de produits NFC.',
     tags: ['guide'],
-    features: ['Offert']
+    features: ['Offert'],
+    shopifyVariantId: "gid://shopify/ProductVariant/54349178765655"
+
+
 },
 ];
 

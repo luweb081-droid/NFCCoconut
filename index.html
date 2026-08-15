@@ -21,29 +21,249 @@
       "url": "https://nfc-coconut.vercel.app/"
     }
   </script>
+
+  <!-- ===== Styles du hero 3D (à terme, peut être déplacé dans static/css/style.css) ===== -->
+  <style>
+    :root{
+      --h3d-ink:#0d0d0d;
+      --h3d-panel:#161616;
+      --h3d-panel-2:#1f1f1f;
+      --h3d-cream:#EAD9B4;
+      --h3d-cream-dim:rgba(234,217,180,0.35);
+      --h3d-white:#f5f5f2;
+    }
+
+    .hero-banner--3d{
+      position:relative;
+      min-height:640px;
+      background:radial-gradient(120% 100% at 80% 20%, #1a1a1a 0%, #0d0d0d 55%, #000 100%);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      padding:90px 6vw 60px;
+      box-sizing:border-box;
+    }
+    .hero-banner--3d::before{
+      /* grain de fond très léger pour éviter le plat "gradient AI" */
+      content:"";
+      position:absolute; inset:0;
+      background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size:3px 3px;
+      pointer-events:none;
+    }
+
+    .hero-grid{
+      position:relative;
+      width:100%;
+      max-width:1240px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:1.05fr 0.95fr;
+      gap:40px;
+      align-items:center;
+    }
+
+    .hero-content{ color:var(--h3d-white); }
+    .hero-banner--3d .hero-title{
+      color:var(--h3d-white);
+      text-align:left;
+      font-size:clamp(2rem, 4vw, 3.1rem);
+      line-height:1.1;
+      margin-bottom:16px;
+    }
+    .hero-banner--3d .hero-subtitle{
+      color:#b9b9b3;
+      text-align:left;
+      max-width:460px;
+      margin-bottom:28px;
+    }
+
+    /* Bandeau de confiance : "déjà adopté par des commerces" */
+    .hero-trust{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:34px;
+    }
+    .hero-trust-stars{
+      color:var(--h3d-cream);
+      font-size:.95rem;
+      letter-spacing:2px;
+    }
+    .hero-trust-divider{
+      width:1px; height:16px;
+      background:rgba(255,255,255,.2);
+    }
+    .hero-trust-text{
+      font-family:'Montserrat', sans-serif;
+      font-size:.85rem;
+      color:#c8c8c2;
+      margin:0;
+    }
+    .hero-trust-text strong{ color:var(--h3d-white); font-weight:600; }
+
+    .hero-cta-group{
+      display:flex;
+      align-items:center;
+      gap:26px;
+      flex-wrap:wrap;
+    }
+    .hero-cta-buy{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      background:var(--h3d-white);
+      color:#111;
+      font-family:'Montserrat', sans-serif;
+      font-weight:600;
+      font-size:.85rem;
+      letter-spacing:.5px;
+      text-transform:uppercase;
+      text-decoration:none;
+      padding:16px 30px;
+      border-radius:2px;
+      transition:transform .25s ease, background .25s ease;
+    }
+    .hero-cta-buy:hover{ background:var(--h3d-cream); transform:translateY(-2px); }
+    .hero-cta-buy i{ font-size:.75rem; transition:transform .25s ease; }
+    .hero-cta-buy:hover i{ transform:translateX(3px); }
+
+    .hero-banner--3d .hero-link{
+      color:#d8d8d2;
+      font-size:.85rem;
+      text-decoration:underline;
+      text-underline-offset:4px;
+      opacity:.8;
+    }
+    .hero-banner--3d .hero-link:hover{ opacity:1; }
+
+    /* ===== Scène 3D de la plaque ===== */
+    .hero-3d-stage{
+      position:relative;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:420px;
+      perspective:1400px;
+    }
+    .hero-3d-card{
+      position:relative;
+      width:340px;
+      height:340px;
+      transform-style:preserve-3d;
+      transform:rotateX(12deg) rotateY(-20deg);
+      animation:h3dFloat 7s ease-in-out infinite;
+      will-change:transform;
+    }
+    @keyframes h3dFloat{
+      0%,100%{ transform:rotateX(12deg) rotateY(-20deg) translateY(0px); }
+      50%{ transform:rotateX(9deg) rotateY(-15deg) translateY(-10px); }
+    }
+
+    .plaque-face{
+      position:absolute; inset:0;
+      border-radius:30px;
+      overflow:hidden;
+      box-shadow:0 40px 60px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .plaque-face .plaque-photo{
+      position:absolute; inset:0;
+      width:100%; height:100%;
+      object-fit:cover;
+      object-position:center;
+      display:block;
+    }
+    .plaque-face::after{
+      /* reflet balayant, par-dessus la photo pour un effet vitré */
+      content:"";
+      position:absolute;
+      top:-50%; left:-30%;
+      width:60%; height:200%;
+      background:linear-gradient(75deg, transparent 20%, rgba(255,255,255,.16) 45%, transparent 70%);
+      animation:h3dSheen 6s ease-in-out infinite;
+      pointer-events:none;
+    }
+    @keyframes h3dSheen{
+      0%,100%{ transform:translateX(0); }
+      50%{ transform:translateX(260%); }
+    }
+
+    /* --- Téléphone (iPhone) qui vient "tapper" la plaque --- */
+    .hero-3d-caption{
+      font-family:'Montserrat', sans-serif;
+      font-size:.68rem;
+      letter-spacing:1.5px;
+      text-transform:uppercase;
+      color:#8a8a84;
+      text-align:center;
+      margin-top:18px;
+    }
+
+    @media (max-width: 900px){
+      .hero-grid{ grid-template-columns:1fr; text-align:center; }
+      .hero-banner--3d .hero-title, .hero-banner--3d .hero-subtitle{ text-align:center; margin-left:auto; margin-right:auto; }
+      .hero-trust, .hero-cta-group{ justify-content:center; }
+      .hero-3d-stage{ height:360px; margin-top:20px; }
+      .hero-3d-card{ transform:rotateX(9deg) rotateY(-12deg) scale(.85); }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .hero-3d-card, .plaque-face::after{
+        animation:none !important;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="search-overlay" id="searchOverlay"><input type="search" class="search-input" placeholder="Rechercher un produit" id="searchInput" autocomplete="off"><button class="close-search" id="closeSearchBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div>
   <div class="drawer-overlay" id="drawerOverlay"></div>
   <aside class="drawer" id="cartDrawer"><div><div class="drawer-header"><h3>Menu & panier</h3><button class="drawer-close" id="closeDrawerBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div><nav class="mobile-nav"></nav><div class="drawer-divider"></div><div class="drawer-empty-msg">Votre panier est actuellement vide.</div><div class="cart-items-container"></div></div><button class="btn-checkout" type="button">Commander (0,00 €)</button></aside>
   <header class="top-header"></header>
-  <section class="hero-banner">
-    <img class="hero-video" src="static/images/bg.png" alt="Vue aérienne de l’océan">
-    <div class="hero-overlay"></div>
-    <div class="hero-content"><h1 class="hero-title">Découvrez toute la puissance du NFC</h1><p class="hero-subtitle">Technologie invisible & expérience utilisateur unique</p></div>
-    <div class="hero-control-bar"><a href="#collection" class="hero-link">Découvrir l’expérience</a></div>
+
+  <!-- ===== HERO : visualisation 3D de la plaque NFC ===== -->
+  <section class="hero-banner hero-banner--3d">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <h1 class="hero-title">Découvrez toute la puissance du NFC</h1>
+        <p class="hero-subtitle">Technologie invisible & expérience utilisateur unique</p>
+
+        <div class="hero-trust" aria-label="Confiance client">
+          <span class="hero-trust-stars">★★★★★</span>
+          <span class="hero-trust-divider"></span>
+          <p class="hero-trust-text">Déjà adopté par <strong>+500 commerces</strong> en France</p>
+        </div>
+
+        <div class="hero-cta-group">
+          <!-- ⚠️ Remplacez l'ID par celui de votre produit "plaque avis Google" dans PRODUCTS -->
+          <a href="produit.html?id=plaque-google-black" class="hero-cta-buy">
+            <span>Acheter la plaque</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+          <a href="#collection" class="hero-link">Découvrir l'expérience</a>
+        </div>
+      </div>
+
+      <div class="hero-3d-stage" id="hero3dStage">
+        <div class="hero-3d-card" id="hero3dCard">
+          <div class="plaque-face">
+            <img src="static/images/plaque-avis-google.jpg" alt="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code" class="plaque-photo">
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
+
   <main class="main-container" id="collection">
     <div class="section-headline"><h2>Explorez notre Sélection</h2><p>Prêt à l'emploi, commandez on s'occupe de tout</p></div>
     <div class="products-grid" aria-label="Sélection de produits"></div>
-    
+
     <!-- SECTION FUSIONNÉE : Clé en main & Technologie NFC -->
     <section class="nfc-complete-section" style="margin:60px 0;padding:50px 30px;background:#f9f9f9;border:1px solid #eee;border-radius:12px;text-align:center;">
       <div class="section-headline" style="margin-bottom:40px;">
         <h2>La puissance du NFC 100 % clé en main</h2>
         <p>Une innovation simple, programmée par nos soins, sans aucune configuration de votre part</p>
       </div>
-      
+
       <!-- Sous-partie : Comment ça marche -->
       <h3 style="font-size:1.2rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;color:#111;">Comment ça fonctionne ?</h3>
       <div class="nfc-explanation" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:20px;text-align:left;margin-bottom:40px;">
@@ -57,7 +277,7 @@
         </div>
         <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
           <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;">3. Profitez</h3>
-          <p style="color:#565656;font-size:0.95rem;">Votre support est prêt à l’emploi dès réception. Récoltez vos premiers avis !</p>
+          <p style="color:#565656;font-size:0.95rem;">Votre support est prêt à l'emploi dès réception. Récoltez vos premiers avis !</p>
         </div>
       </div>
 
@@ -66,7 +286,7 @@
       <div class="nfc-explanation" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:20px;text-align:left;">
         <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
           <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;"> Sans application</h3>
-          <p style="color:#565656;font-size:0.95rem;">Aucun téléchargement ni application spécifique n’est requis. La lecture est totalement native sur smartphones récents.</p>
+          <p style="color:#565656;font-size:0.95rem;">Aucun téléchargement ni application spécifique n'est requis. La lecture est totalement native sur smartphones récents.</p>
         </div>
         <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
           <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;"> Ultra-rapide</h3>
@@ -82,25 +302,47 @@
     <section class="streetwear-teaser" style="margin:60px 0;padding:50px 20px;background:#181818;color:#fff;text-align:center;border-radius:12px;"><p style="letter-spacing:2px;text-transform:uppercase;font-size:.75rem;">Drop 00</p><h2 style="font-size:2rem;margin:15px 0 10px;color:#fff;">NFC COCONUT STREETWEAR</h2><p style="max-width:600px;margin:0 auto 25px;color:#ddd;">Une collection de vêtements conçue pour connecter style et technologie.</p><a href="streetwear.html" class="btn-details" style="background:#fff;color:#111;">Découvrir notre gamme Streetwear</a></section>
   </main>
 
-    
-    
-  
-  
   <section class="drop-vip-section" style="max-width: 1100px; margin: 60px auto 40px; text-align: center; padding: 0 20px;">
-  <div class="section-headline">
-    <h2>REJOIGNEZ LA COMMUNAUTÉ</h2>
-    <p>Édition limitée & accès anticipé aux prochains Drops sur Instagram</p>
-  </div>
-  
-  <div style="margin-top: 30px;">
-    <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="btn-catalog" style="display: inline-flex; align-items: center; gap: 10px; background: #111111; color: #ffffff; padding: 16px 32px; border: 1px solid #111111;">
-      <i class="fa-brands fa-instagram" style="font-size: 1.2rem;"></i>
-      <span>Nous Suivre sur Instagram</span>
-    </a>
-  </div>
-</section>
-  </main>
+    <div class="section-headline">
+      <h2>REJOIGNEZ LA COMMUNAUTÉ</h2>
+      <p>Édition limitée & accès anticipé aux prochains Drops sur Instagram</p>
+    </div>
+
+    <div style="margin-top: 30px;">
+      <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="btn-catalog" style="display: inline-flex; align-items: center; gap: 10px; background: #111111; color: #ffffff; padding: 16px 32px; border: 1px solid #111111;">
+        <i class="fa-brands fa-instagram" style="font-size: 1.2rem;"></i>
+        <span>Nous Suivre sur Instagram</span>
+      </a>
+    </div>
+  </section>
+
   <footer>&copy; 2026 NFC COCONUT — TOUS DROITS RÉSERVÉS</footer>
   <script src="static/js/main.js"></script>
+
+  <!-- ===== Interaction 3D au survol (desktop uniquement, respecte prefers-reduced-motion) ===== -->
+  <script>
+    (function(){
+      var stage = document.getElementById('hero3dStage');
+      var card = document.getElementById('hero3dCard');
+      if(!stage || !card) return;
+
+      var isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(isCoarsePointer || reduceMotion) return;
+
+      stage.addEventListener('mousemove', function(e){
+        var rect = stage.getBoundingClientRect();
+        var x = (e.clientX - rect.left) / rect.width - 0.5;
+        var y = (e.clientY - rect.top) / rect.height - 0.5;
+        card.style.animationPlayState = 'paused';
+        card.style.transform = 'rotateX(' + (14 - y * 20) + 'deg) rotateY(' + (-22 + x * 30) + 'deg)';
+      });
+
+      stage.addEventListener('mouseleave', function(){
+        card.style.animationPlayState = 'running';
+        card.style.transform = '';
+      });
+    })();
+  </script>
 </body>
 </html>
