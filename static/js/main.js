@@ -946,7 +946,7 @@ function setupGallery() {
 // la classe .js-launch-timer (barre de navigation + boutons "verrouillés"
 // des produits streetwear), en une seule boucle, à chaque seconde.
 function startLaunchCountdown() {
-  const targetDate = new Date('2026-10-01T00:00:00').getTime();
+  const targetDate = new Date('2026-10-11T00:00:00').getTime();
 
   const tick = () => {
     const timerEls = document.querySelectorAll('.js-launch-timer');
