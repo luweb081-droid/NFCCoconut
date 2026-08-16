@@ -3,22 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NFC COCONUT — Plaques et Présentoirs Connectés</title>
-  <meta name="description" content="Découvrez nos plaques et présentoirs NFC clés en main pour collecter facilement vos avis Google ou booster vos réseaux sociaux. Commandez votre support connecté.">
+  <title>Plaque NFC Avis Google & Présentoirs Connectés | NFC Coconut</title>
+  <meta name="description" content="Boostez vos avis Google en un tap : plaques et présentoirs NFC prêts à l'emploi, sans configuration, dès 39,90 €. Livraison rapide en France.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#0d0d0d">
+  <link rel="canonical" href="https://nfc-coconut.vercel.app/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="NFC COCONUT">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:url" content="https://nfc-coconut.vercel.app/">
+  <meta property="og:title" content="Plaque NFC Avis Google & Présentoirs Connectés | NFC Coconut">
+  <meta property="og:description" content="Boostez vos avis Google en un tap : plaques et présentoirs NFC prêts à l'emploi, sans configuration, dès 39,90 €.">
+  <meta property="og:image" content="https://nfc-coconut.vercel.app/static/images/plaque-avis-google.jpg">
+  <meta property="og:image:width" content="900">
+  <meta property="og:image:height" content="900">
+  <meta property="og:image:alt" content="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Plaque NFC Avis Google & Présentoirs Connectés | NFC Coconut">
+  <meta name="twitter:description" content="Boostez vos avis Google en un tap : plaques et présentoirs NFC prêts à l'emploi, sans configuration, dès 39,90 €.">
+  <meta name="twitter:image" content="https://nfc-coconut.vercel.app/static/images/plaque-avis-google.jpg">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="static/css/style.css">
   <link rel="icon" type="image/x-icon" href="static/images/ico.png">
-  <meta property="og:site_name" content="NFC COCONUT">
-  <meta name="application-name" content="NFC COCONUT">
+
+  <!-- Préchargement de l'image du hero (LCP) -->
+  <link rel="preload" as="image" href="static/images/plaque-avis-google.jpg" fetchpriority="high">
+
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "NFC COCONUT",
-      "url": "https://nfc-coconut.vercel.app/"
+      "url": "https://nfc-coconut.vercel.app/",
+      "inLanguage": "fr-FR"
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NFC Coconut",
+      "url": "https://nfc-coconut.vercel.app/",
+      "logo": "https://nfc-coconut.vercel.app/static/images/nfccoconut.png",
+      "sameAs": [
+        "https://www.instagram.com/nfc_coconut/"
+      ]
+    }
+  </script>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "Plaque NFC avis Google",
+      "image": "https://nfc-coconut.vercel.app/static/images/plaque-avis-google.jpg",
+      "description": "Une plaque élégante qui permet à vos clients de laisser un avis Google en un simple geste, sans application à télécharger.",
+      "brand": {
+        "@type": "Brand",
+        "name": "NFC Coconut"
+      },
+      "offers": {
+        "@type": "Offer",
+        "url": "https://nfc-coconut.vercel.app/produit.html?id=plaque-google-black",
+        "priceCurrency": "EUR",
+        "price": "39.90",
+        "availability": "https://schema.org/InStock"
+      }
     }
   </script>
 
@@ -313,8 +371,7 @@
         </div>
 
         <div class="hero-cta-group">
-          <!-- ⚠️ Remplacez l'ID par celui de votre produit "plaque avis Google" dans PRODUCTS -->
-          <a href="produit.html?id=plaque-nfc-avis-google" class="hero-cta-buy">
+          <a href="produit.html?id=plaque-google-black" class="hero-cta-buy">
             <span>Acheter la plaque</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
@@ -327,11 +384,11 @@
           <div class="plaque-flip">
             <div class="plaque-face plaque-face--front">
               <!-- ⚠️ Plaque 1 -->
-              <img src="static/images/plaque-avis-google.jpg" alt="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code" class="plaque-photo">
+              <img src="static/images/plaque-avis-google.jpg" alt="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code" class="plaque-photo" fetchpriority="high">
             </div>
             <div class="plaque-face plaque-face--back">
               <!-- ⚠️ Plaque 2 : remplacez ce src par la 2ᵉ photo de plaque -->
-              <img src="static/images/plaque-avis-google.jpg" alt="Deuxième modèle de plaque NFC" class="plaque-photo">
+              <img src="static/images/plaque-avis-google.jpg" alt="Deuxième modèle de plaque NFC" class="plaque-photo" loading="lazy">
             </div>
           </div>
         </div>
