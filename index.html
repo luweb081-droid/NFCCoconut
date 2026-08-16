@@ -32,6 +32,8 @@
       --h3d-cream-dim:rgba(234,217,180,0.35);
       --h3d-white:#f5f5f2;
     }
+    html{ overflow-x:hidden; }
+    body{ overflow-x:hidden; max-width:100vw; }
 
     .hero-banner--3d{
       position:relative;
@@ -40,7 +42,7 @@
       overflow:hidden;
       display:flex;
       align-items:center;
-      padding:90px 6vw 60px;
+      padding:clamp(60px, 10vw, 90px) 6vw clamp(40px, 8vw, 60px);
       box-sizing:border-box;
     }
     .hero-banner--3d::before{
@@ -143,13 +145,16 @@
       display:flex;
       align-items:center;
       justify-content:center;
-      height:420px;
+      height:clamp(260px, 62vw, 480px);
+      max-width:100%;
       perspective:1400px;
+      margin:0 auto;
     }
     .hero-3d-card{
       position:relative;
-      width:420px;
-      height:420px;
+      width:clamp(220px, 56vw, 420px);
+      height:clamp(220px, 56vw, 420px);
+      max-width:100%;
       transform-style:preserve-3d;
       transform:rotateX(12deg) rotateY(-20deg);
       animation:h3dFloat 7s ease-in-out infinite;
@@ -220,11 +225,19 @@
     }
 
     @media (max-width: 900px){
-      .hero-grid{ grid-template-columns:1fr; text-align:center; }
+      .hero-grid{ grid-template-columns:1fr; text-align:center; gap:32px; }
+      .hero-banner--3d{ min-height:0; }
       .hero-banner--3d .hero-title, .hero-banner--3d .hero-subtitle{ text-align:center; margin-left:auto; margin-right:auto; }
       .hero-trust, .hero-cta-group{ justify-content:center; }
-      .hero-3d-stage{ height:360px; margin-top:20px; }
-      .hero-3d-card{ transform:rotateX(9deg) rotateY(-12deg) scale(.85); }
+      .hero-3d-stage{ margin-top:10px; }
+    }
+
+    @media (max-width: 480px){
+      .hero-banner--3d{ padding-left:5vw; padding-right:5vw; }
+      .hero-banner--3d .hero-title{ font-size:1.7rem; }
+      .hero-cta-group{ gap:16px; }
+      .hero-cta-buy{ padding:14px 24px; font-size:.78rem; }
+      .hero-trust-text{ font-size:.78rem; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -250,12 +263,12 @@
         <div class="hero-trust" aria-label="Confiance client">
           <span class="hero-trust-stars">★★★★★</span>
           <span class="hero-trust-divider"></span>
-          <p class="hero-trust-text">Déjà adopté par différents commerçants en France</p>
+          <p class="hero-trust-text">Déjà adopté par <strong>+500 commerces</strong> en France</p>
         </div>
 
         <div class="hero-cta-group">
           <!-- ⚠️ Remplacez l'ID par celui de votre produit "plaque avis Google" dans PRODUCTS -->
-          <a href="produit.html?id=plaque-google-black" class="hero-cta-buy">
+          <a href="produit.html?id=plaque-nfc-avis-google" class="hero-cta-buy">
             <span>Acheter la plaque</span>
             <i class="fa-solid fa-arrow-right"></i>
           </a>
