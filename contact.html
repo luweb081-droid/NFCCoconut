@@ -15,6 +15,61 @@
     <link rel="stylesheet" href="static/css/style.css">
     
     <link rel="icon" type="image/x-icon" href="static/images/ico.png">
+
+    <style>
+      /* ===== Bloc "réponse rapide / Instagram" (à terme, à déplacer dans static/css/style.css) ===== */
+      .contact-quick{
+        display:flex;
+        flex-direction:column;
+        gap:22px;
+      }
+      .contact-quick-card{
+        background:#0d0d0d;
+        color:#f5f5f2;
+        border-radius:12px;
+        padding:32px 28px;
+        text-align:center;
+      }
+      .contact-quick-card h2{
+        margin:0 0 8px;
+        font-size:1.3rem;
+      }
+      .contact-quick-card p{
+        margin:0 0 22px;
+        color:#c8c8c2;
+        font-size:.92rem;
+        line-height:1.5;
+      }
+      .contact-quick-card .btn-catalog{
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:10px;
+        background:#ffffff;
+        color:#111111;
+        padding:14px 28px;
+        border-radius:2px;
+        text-decoration:none;
+        font-weight:600;
+        font-size:.85rem;
+        letter-spacing:.4px;
+        text-transform:uppercase;
+        transition:transform .2s ease, background .2s ease;
+      }
+      .contact-quick-card .btn-catalog:hover{
+        background:#EAD9B4;
+        transform:translateY(-2px);
+      }
+      .contact-quick-card .btn-catalog i{ font-size:1.05rem; }
+
+      .contact-quick .info-block + .info-block{
+        margin-top:18px;
+      }
+
+      @media (max-width: 900px){
+        .contact-quick-card{ padding:26px 22px; }
+      }
+    </style>
 </head>
 <body>
 
@@ -51,7 +106,54 @@
         </div>
 
         <div class="contact-grid">
-            <div class="contact-info">
+
+            <!-- GAUCHE : demande de devis / commande sur-mesure -->
+            <div class="contact-form-col">
+                <div class="info-block">
+                    <h3>Commandes Sur-Mesure</h3>
+                    <p>Pour vos projets professionnels, gravures personnalisées et commandes de volume, décrivez-nous votre besoin ci-dessous.</p>
+                </div>
+
+                <form class="contact-form" action="https://formspree.io/f/mnjekzez" method="POST">
+                    <div class="form-group">
+                        <label for="firstname">Prénom</label>
+                        <input type="text" id="firstname" name="firstname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Nom</label>
+                        <input type="text" id="lastname" name="lastname" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Numéro de téléphone</label>
+                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="06 XX XX XX XX">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Adresse e-mail</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Demande de devis..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Envoyer le message</button>
+                </form>
+            </div>
+
+            <!-- DROITE : question rapide / réponses rapides -->
+            <div class="contact-quick">
+                <div class="contact-quick-card">
+                    <h2>Une question rapide ?</h2>
+                    <p>Pas besoin de formulaire — écrivez-nous directement sur Instagram, on vous répond vite.</p>
+                    <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="btn-catalog">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Contactez-nous sur Instagram</span>
+                    </a>
+                </div>
+
                 <div class="info-block">
                     <h3>Service Client</h3>
                     <p>Du lundi au vendredi<br>09h00 – 18h00</p>
@@ -60,41 +162,8 @@
                     <h3>Email</h3>
                     <p><a href="mailto:nfc.coconut@gmail.com">nfc.coconut@gmail.com</a></p>
                 </div>
-                <div class="info-block">
-                    <h3>Commandes Sur-Mesure</h3>
-                    <p>Pour vos projets professionnels, gravures personnalisées et commandes de volume.</p>
-                </div>
             </div>
 
-            <form class="contact-form" action="https://formspree.io/f/mnjekzez" method="POST">
-    
-
-    <div class="form-group">
-        <label for="firstname">Prénom</label>
-        <input type="text" id="firstname" name="firstname" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="lastname">Nom</label>
-        <input type="text" id="lastname" name="lastname" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="phone">Numéro de téléphone</label>
-        <input type="tel" id="phone" name="phone" class="form-control" placeholder="06 XX XX XX XX">
-    </div>
-    <div class="form-group">
-        <label for="email">Adresse e-mail</label>
-        <input type="email" id="email" name="email" class="form-control" required>
-    </div>
-    <div class="form-group">
-        <label for="subject">Sujet</label>
-        <input type="text" id="subject" name="subject" class="form-control" placeholder="Demande de renseignements..." required>
-    </div>
-    <div class="form-group">
-        <label for="message">Message</label>
-        <textarea id="message" name="message" class="form-control" required></textarea>
-    </div>
-    <button type="submit" class="btn-submit">Envoyer le message</button>
-</form>
         </div>
     </main>
 
