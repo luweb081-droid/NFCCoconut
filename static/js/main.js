@@ -9,9 +9,13 @@
  * sera pas envoyé au checkout Shopify.
  *
  * Le champ `soldOut` défini ici sert de valeur de secours (affichage immédiat
- * au chargement). Pour les produits qui ont un `shopifyVariantId`, ce statut
- * est ensuite automatiquement écrasé par le vrai stock Shopify via
- * syncStockFromShopify() une fois la page chargée.
+ * au chargement), tout comme `price`, `oldPrice`, `description` et `images`.
+ * Pour les produits qui ont un `shopifyVariantId`, TOUTES ces valeurs sont
+ * ensuite automatiquement écrasées par les vraies données Shopify (stock,
+ * prix, prix barré, description, photos) via syncProductDataFromShopify()
+ * une fois la page chargée. `name`, `tags` et `features` restent en revanche
+ * gérés uniquement ici : ce sont des textes marketing propres au site, pas
+ * des données Shopify.
  *
  * Tous les produits de catégorie 'streetwear' sont considérés comme faisant
  * partie du "Drop" à venir : ils affichent un bouton verrouillé avec un
@@ -205,7 +209,6 @@ const PRODUCTS = [
   },
   {
     id: 'guide-premium',
-    shopifyVariant: '', // ← tu mettras l'ID Shopify
     category: 'digital',
     name: '🎁 Guide Premium NFC Coconut',
     price: 0,
@@ -532,52 +535,99 @@ async function createShopifyCheckout(cartItems, customerAttributes = {}) {
   }
 }
 
-// Synchronise le statut "Épuisé" des produits avec le vrai stock Shopify.
-// Ne concerne que les produits qui ont un shopifyVariantId renseigné :
-// les autres gardent leur valeur `soldOut` codée en dur dans PRODUCTS.
-async function syncStockFromShopify() {
+// Synchronise chaque produit ayant un shopifyVariantId avec les VRAIES données
+// Shopify : statut "Épuisé" / quantité en stock (comme avant), mais aussi
+// désormais le prix, le prix barré (compareAtPrice), la description et les
+// photos du produit. Les produits sans shopifyVariantId gardent leurs valeurs
+// codées en dur dans PRODUCTS. `name`, `tags` et `features` restent toujours
+// gérés localement (ce ne sont pas des données Shopify).
+async function syncProductDataFromShopify() {
   const idsToCheck = [...new Set(PRODUCTS.filter(p => p.shopifyVariantId).map(p => p.shopifyVariantId))];
   if (!idsToCheck.length) return;
 
   const query = `
-    query getVariantsStock($ids: [ID!]!) {
+    query getVariantsData($ids: [ID!]!) {
       nodes(ids: $ids) {
         ... on ProductVariant {
           id
           availableForSale
           quantityAvailable
+          price {
+            amount
+          }
+          compareAtPrice {
+            amount
+          }
+          product {
+            description
+            images(first: 6) {
+              edges {
+                node {
+                  url
+                  altText
+                }
+              }
+            }
+          }
         }
       }
     }`;
 
   try {
     const data = await shopifyFetch(query, { ids: idsToCheck });
-    const stockMap = {};
+    const dataMap = {};
     (data?.nodes || []).forEach(node => {
-      if (node) stockMap[node.id] = node;
+      if (node) dataMap[node.id] = node;
     });
 
     let changed = false;
     PRODUCTS.forEach(product => {
-      if (product.shopifyVariantId && product.shopifyVariantId in stockMap) {
-        const info = stockMap[product.shopifyVariantId];
-        const nowSoldOut = !info.availableForSale;
-        const nowStockQty = typeof info.quantityAvailable === 'number' ? info.quantityAvailable : null;
-        if (product.soldOut !== nowSoldOut || product.stockQty !== nowStockQty) changed = true;
-        product.soldOut = nowSoldOut;
-        product.stockQty = nowStockQty;
+      if (!product.shopifyVariantId || !(product.shopifyVariantId in dataMap)) return;
+      const info = dataMap[product.shopifyVariantId];
+
+      // --- Stock ---
+      const nowSoldOut = !info.availableForSale;
+      const nowStockQty = typeof info.quantityAvailable === 'number' ? info.quantityAvailable : null;
+      if (product.soldOut !== nowSoldOut || product.stockQty !== nowStockQty) changed = true;
+      product.soldOut = nowSoldOut;
+      product.stockQty = nowStockQty;
+
+      // --- Prix ---
+      if (info.price?.amount != null) {
+        const nowPrice = parseFloat(info.price.amount);
+        if (product.price !== nowPrice) changed = true;
+        product.price = nowPrice;
+      }
+
+      // --- Prix barré (compareAtPrice) : peut disparaître si la promo Shopify est retirée ---
+      const nowOldPrice = info.compareAtPrice?.amount != null ? parseFloat(info.compareAtPrice.amount) : null;
+      if (product.oldPrice !== nowOldPrice) changed = true;
+      product.oldPrice = nowOldPrice;
+
+      // --- Description ---
+      if (info.product?.description && product.description !== info.product.description) {
+        product.description = info.product.description;
+        changed = true;
+      }
+
+      // --- Photos (remplacent les images locales une fois synchronisées) ---
+      const shopifyImages = (info.product?.images?.edges || []).map(edge => edge.node.url);
+      if (shopifyImages.length && shopifyImages.join('|') !== (product.images || []).join('|')) {
+        product.images = shopifyImages;
+        changed = true;
       }
     });
 
-    // Réaffiche dès qu'un statut OU une quantité a changé (y compris au tout
-    // premier chargement, où stockQty passe de "inconnu" à sa vraie valeur)
+    // Réaffiche dès qu'une valeur a changé (y compris au tout premier
+    // chargement, où chaque champ passe de sa valeur codée en dur à sa
+    // vraie valeur Shopify)
     if (changed) {
       renderProductGrids();
       renderProductPage();
     }
   } catch (error) {
-    console.error('syncStockFromShopify error:', error);
-    // En cas d'échec réseau/API, on garde les valeurs soldOut définies en dur
+    console.error('syncProductDataFromShopify error:', error);
+    // En cas d'échec réseau/API, on garde les valeurs codées en dur dans PRODUCTS
   }
 }
 
@@ -933,5 +983,5 @@ document.addEventListener('DOMContentLoaded', () => {
   setupGallery(); 
   startLaunchCountdown();
   setupAddressAutocomplete(); // Autocomplétion d'adresse (API Adresse gouv.fr)
-  syncStockFromShopify(); // Met à jour le statut "Épuisé" avec le vrai stock Shopify
+  syncProductDataFromShopify(); // Met à jour stock, prix, prix barré, description et photos depuis Shopify
 });
