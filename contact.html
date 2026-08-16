@@ -17,18 +17,31 @@
     <link rel="icon" type="image/x-icon" href="static/images/ico.png">
 
     <style>
-      /* ===== Bloc "réponse rapide / Instagram" (à terme, à déplacer dans static/css/style.css) ===== */
-      .contact-quick{
-        display:flex;
-        flex-direction:column;
-        gap:22px;
+      /* ===== Ajustements de la page contact (à terme, à déplacer dans static/css/style.css) =====
+         On garde volontairement les classes d'origine .contact-info / .contact-form comme
+         enfants directs de .contact-grid, pour que les règles de largeur déjà définies dans
+         style.css continuent de s'appliquer normalement (colonnes symétriques). */
+
+      /* Intro "Commandes Sur-Mesure" centrée, au-dessus du formulaire */
+      .contact-form-intro{
+        text-align:center;
+        margin-bottom:28px;
       }
+      .contact-form-intro p{
+        color:#565656;
+        font-size:.92rem;
+        line-height:1.5;
+        margin-top:8px;
+      }
+
+      /* Bloc "réponse rapide / Instagram" */
       .contact-quick-card{
         background:#0d0d0d;
         color:#f5f5f2;
         border-radius:12px;
         padding:32px 28px;
         text-align:center;
+        margin-bottom:28px;
       }
       .contact-quick-card h2{
         margin:0 0 8px;
@@ -62,9 +75,9 @@
       }
       .contact-quick-card .btn-catalog i{ font-size:1.05rem; }
 
-      .contact-quick .info-block + .info-block{
-        margin-top:18px;
-      }
+      /* Les infos pratiques (Service Client / Email) centrées, comme la carte Instagram au-dessus */
+      .contact-info{ text-align:center; }
+      .contact-info .info-block + .info-block{ margin-top:18px; }
 
       @media (max-width: 900px){
         .contact-quick-card{ padding:26px 22px; }
@@ -107,44 +120,43 @@
 
         <div class="contact-grid">
 
-            <!-- GAUCHE : demande de devis / commande sur-mesure -->
-            <div class="contact-form-col">
-                <div class="info-block">
+            <!-- GAUCHE : demande de devis / commande sur-mesure (mêmes classes d'origine, ordre inversé) -->
+            <form class="contact-form" action="https://formspree.io/f/mnjekzez" method="POST">
+
+                <div class="contact-form-intro">
                     <h3>Commandes Sur-Mesure</h3>
                     <p>Pour vos projets professionnels, gravures personnalisées et commandes de volume, décrivez-nous votre besoin ci-dessous.</p>
                 </div>
 
-                <form class="contact-form" action="https://formspree.io/f/mnjekzez" method="POST">
-                    <div class="form-group">
-                        <label for="firstname">Prénom</label>
-                        <input type="text" id="firstname" name="firstname" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname">Nom</label>
-                        <input type="text" id="lastname" name="lastname" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="phone">Numéro de téléphone</label>
-                        <input type="tel" id="phone" name="phone" class="form-control" placeholder="06 XX XX XX XX">
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Adresse e-mail</label>
-                        <input type="email" id="email" name="email" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject">Sujet</label>
-                        <input type="text" id="subject" name="subject" class="form-control" placeholder="Demande de devis..." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" class="form-control" required></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Envoyer le message</button>
-                </form>
-            </div>
+                <div class="form-group">
+                    <label for="firstname">Prénom</label>
+                    <input type="text" id="firstname" name="firstname" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Nom</label>
+                    <input type="text" id="lastname" name="lastname" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Numéro de téléphone</label>
+                    <input type="tel" id="phone" name="phone" class="form-control" placeholder="06 XX XX XX XX">
+                </div>
+                <div class="form-group">
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" id="email" name="email" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Sujet</label>
+                    <input type="text" id="subject" name="subject" class="form-control" placeholder="Demande de devis..." required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" class="form-control" required></textarea>
+                </div>
+                <button type="submit" class="btn-submit">Envoyer le message</button>
+            </form>
 
-            <!-- DROITE : question rapide / réponses rapides -->
-            <div class="contact-quick">
+            <!-- DROITE : question rapide / réponses rapides (classe d'origine .contact-info) -->
+            <div class="contact-info">
                 <div class="contact-quick-card">
                     <h2>Une question rapide ?</h2>
                     <p>Pas besoin de formulaire — écrivez-nous directement sur Instagram, on vous répond vite.</p>
