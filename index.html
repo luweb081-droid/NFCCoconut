@@ -72,6 +72,52 @@
       font-size:clamp(2rem, 4vw, 3.1rem);
       line-height:1.1;
       margin-bottom:16px;
+      position:relative;
+    }
+
+    /* ===== Effet glitch périodique sur le titre ===== */
+    .hero-title.glitch{
+      position:relative;
+    }
+    .hero-title.glitch::before,
+    .hero-title.glitch::after{
+      content:attr(data-text);
+      position:absolute;
+      left:0; top:0;
+      width:100%;
+      color:var(--h3d-white);
+      background:transparent;
+      overflow:hidden;
+      opacity:0;
+    }
+    .hero-title.glitch::before{
+      color:#ff2d55;
+      mix-blend-mode:screen;
+      animation:h3dGlitchBefore 3s ease-in-out infinite;
+    }
+    .hero-title.glitch::after{
+      color:#00e5ff;
+      mix-blend-mode:screen;
+      animation:h3dGlitchAfter 3s ease-in-out infinite;
+    }
+    @keyframes h3dGlitchBefore{
+      0%, 92%, 100%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
+      93%{ opacity:.9; transform:translate(-3px,-1px); clip-path:inset(10% 0 60% 0); }
+      94%{ opacity:.9; transform:translate(3px,1px); clip-path:inset(55% 0 15% 0); }
+      95%{ opacity:.9; transform:translate(-2px,0); clip-path:inset(30% 0 40% 0); }
+      96%{ opacity:.9; transform:translate(2px,1px); clip-path:inset(70% 0 5% 0); }
+      97%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
+    }
+    @keyframes h3dGlitchAfter{
+      0%, 92%, 100%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
+      93%{ opacity:.9; transform:translate(3px,1px); clip-path:inset(60% 0 10% 0); }
+      94%{ opacity:.9; transform:translate(-3px,-1px); clip-path:inset(15% 0 55% 0); }
+      95%{ opacity:.9; transform:translate(2px,0); clip-path:inset(40% 0 30% 0); }
+      96%{ opacity:.9; transform:translate(-2px,-1px); clip-path:inset(5% 0 70% 0); }
+      97%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .hero-title.glitch::before, .hero-title.glitch::after{ animation:none !important; opacity:0 !important; }
     }
     .hero-banner--3d .hero-subtitle{
       color:#b9b9b3;
@@ -257,7 +303,7 @@
   <section class="hero-banner hero-banner--3d">
     <div class="hero-grid">
       <div class="hero-content">
-        <h1 class="hero-title">Découvrez toute la puissance du NFC</h1>
+        <h1 class="hero-title glitch" data-text="Découvrez toute la puissance du NFC">Découvrez toute la puissance du NFC</h1>
         <p class="hero-subtitle">Technologie invisible & expérience utilisateur unique</p>
 
         <div class="hero-trust" aria-label="Confiance client">
@@ -285,7 +331,7 @@
             </div>
             <div class="plaque-face plaque-face--back">
               <!-- ⚠️ Plaque 2 : remplacez ce src par la 2ᵉ photo de plaque -->
-              <img src="static/images/plaque-avis-google-2.png" alt="Deuxième modèle de plaque NFC" class="plaque-photo">
+              <img src="static/images/plaque-avis-google.jpg" alt="Deuxième modèle de plaque NFC" class="plaque-photo">
             </div>
           </div>
         </div>
