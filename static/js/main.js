@@ -260,29 +260,107 @@ function productActionButton(product) {
 }
 
 function productCard(product) {
-  const discount = product.oldPrice ? Math.round((1 - product.price / product.oldPrice) * 100) : null;
-  const isSoldOut = product.soldOut === true;
-  const hasLowStock = !isSoldOut && Number.isInteger(product.stockQty) && product.stockQty <= 10;
-  const lowStockBadge = hasLowStock ? `<span class="badge-low-stock">Plus que ${product.stockQty} en stock</span>` : '';
+  const discount = product.oldPrice
+    ? Math.round((1 - product.price / product.oldPrice) * 100)
+    : null;
 
-  return `<article class="product-item product-item--${product.category}${isSoldOut ? ' is-sold-out' : ''}" data-product-id="${product.id}">
-    <a class="product-link" href="${productUrl(product)}" aria-label="Voir ${escapeHtml(product.name)}">
-      <div class="product-img-wrapper">
-        <img src="${product.images[0]}" alt="${escapeHtml(product.name)}">
-        ${isSoldOut ? '<span class="badge-sold-out">Sold Out</span>' : ''}
+  const isSoldOut = product.soldOut === true;
+
+  const hasLowStock =
+    !isSoldOut &&
+    Number.isInteger(product.stockQty) &&
+    product.stockQty <= 10;
+
+  const lowStockBadge = hasLowStock
+    ? `<span class="badge-low-stock">Plus que ${product.stockQty} en stock</span>`
+    : '';
+
+  // Deuxième image uniquement si elle existe
+  const hasSecondImage =
+    Array.isArray(product.images) &&
+    product.images.length > 1;
+
+  return `
+    <article
+      class="product-item product-item--${product.category}${isSoldOut ? ' is-sold-out' : ''}"
+      data-product-id="${product.id}"
+    >
+
+      <a
+        class="product-link"
+        href="${productUrl(product)}"
+        aria-label="Voir ${escapeHtml(product.name)}"
+      >
+
+        <div class="product-img-wrapper ${hasSecondImage ? 'has-hover-image' : ''}">
+
+          <img
+            class="product-image product-image-main"
+            src="${product.images[0]}"
+            alt="${escapeHtml(product.name)}"
+          >
+
+          ${
+            hasSecondImage
+              ? `
+                <img
+                  class="product-image product-image-hover"
+                  src="${product.images[1]}"
+                  alt="${escapeHtml(product.name)} - vue alternative"
+                >
+              `
+              : ''
+          }
+
+          ${
+            isSoldOut
+              ? '<span class="badge-sold-out">Sold Out</span>'
+              : ''
+          }
+
+        </div>
+
+        <h3 class="product-title">
+          ${escapeHtml(product.name)}
+        </h3>
+
+      </a>
+
+      <div class="product-price-container">
+        <span class="product-price">
+          ${euro(product.price)}
+        </span>
+
+        ${
+          product.oldPrice
+            ? `
+              <span class="product-price-old">
+                ${euro(product.oldPrice)}
+              </span>
+
+              <span class="badge-discount">
+                -${discount}%
+              </span>
+            `
+            : ''
+        }
+
+        ${lowStockBadge}
       </div>
-      <h3 class="product-title">${escapeHtml(product.name)}</h3>
-    </a>
-    <div class="product-price-container">
-      <span class="product-price">${euro(product.price)}</span>
-      ${product.oldPrice ? `<span class="product-price-old">${euro(product.oldPrice)}</span><span class="badge-discount">-${discount}%</span>` : ''}
-      ${lowStockBadge}
-    </div>
-    <div class="product-actions">
-      <a class="btn-details" href="${productUrl(product)}">Voir le produit</a>
-      ${productActionButton(product)}
-    </div>
-  </article>`;
+
+      <div class="product-actions">
+        <a
+          class="btn-details"
+          href="${productUrl(product)}"
+        >
+          Voir le produit
+        </a>
+
+        ${productActionButton(product)}
+      </div>
+
+    </article>
+  `;
 }
 
 function currentFile() {
