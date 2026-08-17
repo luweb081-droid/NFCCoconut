@@ -231,6 +231,8 @@ const NAV_LINKS = [
   { label: 'Développement Web', href: 'devweb.html', showInDesktop: false },
 
   { label: 'Contact', href: 'contact.html', showInDesktop: true },
+  { label: 'Mentions légales', href: 'mentions-legales.html', showInDesktop: false },
+  { label: 'Politique de confidentialitée', href: 'poconf.html', showInDesktop: false },
   // Exemple de page visible uniquement dans le menu déroulant mobile :
   
 ];
