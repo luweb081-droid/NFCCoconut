@@ -306,10 +306,34 @@ function renderNavigation() {
       </div>
       <a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfccoconut.png" alt="NFC Coconut"></a>
       <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-        <div id="launchCountdown" class="mobile-countdown-wrapper" style="font-size: 0.85rem; font-weight: 600; white-space: nowrap; color: #555;">DROP 00 dans : <span id="timerValue" class="js-launch-timer" style="font-weight: 700;">--j --h --m --s</span></div>
-        <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" aria-label="Notre page Instagram" class="header-icon-link" style="color: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 1.2rem;">
-          <i class="fa-brands fa-instagram"></i>
+    <div id="launchCountdown" class="mobile-countdown-wrapper" style="font-size: 0.85rem; font-weight: 600; white-space: nowrap; color: #555;">
+        DROP 00 dans : <span id="timerValue" class="js-launch-timer" style="font-weight: 700;">--j --h --m --s</span>
+    </div>
+
+    <!-- Réseaux sociaux -->
+    <div style="display: flex; align-items: center; gap: 0;">
+        <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet"
+           target="_blank"
+           aria-label="Notre page Instagram"
+           class="header-icon-link"
+           style="color: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 1.2rem;">
+            <i class="fa-brands fa-instagram"></i>
         </a>
+
+        <a href="https://www.tiktok.com/@nfc_coconut_official?is_from_webapp=1&sender_device=pc"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Notre page TikTok"
+           class="header-icon-link"
+           style="color: inherit; text-decoration: none; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; font-size: 1.2rem;">
+            <i class="fa-brands fa-tiktok"></i>
+        </a>
+    </div>
+
+    <button id="cartBtn">
+        <i class="fa-solid fa-bag-shopping"></i><span>(0)</span>
+    </button>
+</div>
         <button id="cartBtn"><i class="fa-solid fa-bag-shopping"></i><span>(0)</span></button>
       </div>`;
   });
