@@ -330,10 +330,7 @@ function renderNavigation() {
         </a>
     </div>
 
-    <button id="cartBtn">
-        <i class="fa-solid fa-bag-shopping"></i><span>(0)</span>
-    </button>
-</div>
+    
         <button id="cartBtn"><i class="fa-solid fa-bag-shopping"></i><span>(0)</span></button>
       </div>`;
   });
