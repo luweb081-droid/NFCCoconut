@@ -691,8 +691,35 @@ function updateCart() {
   const empty = document.querySelector('.drawer-empty-msg');
   
   if (container) {
-    container.innerHTML = cart.map((item, index) => `<div class="cart-item"><img src="${item.image}" alt=""><div class="cart-item-details"><div class="cart-item-title">${escapeHtml(item.name)}</div><div class="cart-item-price">${item.quantity} × ${euro(item.price)}</div></div><button class="cart-item-remove" data-remove="${index}" aria-label="Retirer"><i class="fa-solid fa-xmark"></i></button></div>`).join('');
-  }
+  container.innerHTML = cart.map((item, index) => `
+    <div class="cart-item">
+      <img src="${item.image}" alt="">
+
+      <div class="cart-item-details">
+        <div class="cart-item-title">${escapeHtml(item.name)}</div>
+
+        <div class="cart-item-price">
+          ${euro(item.price)}
+        </div>
+
+        <div class="cart-quantity">
+          <button class="cart-quantity-btn" data-decrease="${index}" aria-label="Retirer un article">
+            −
+          </button>
+
+          <span>${item.quantity}</span>
+
+          <button class="cart-quantity-btn" data-increase="${index}" aria-label="Ajouter un article">
+            +
+          </button>
+        </div>
+      </div>
+
+      <button class="cart-item-remove" data-remove="${index}" aria-label="Supprimer le produit">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+  `).join('');  }
   
   if (empty) empty.style.display = cart.length ? 'none' : 'block';
 
@@ -812,8 +839,10 @@ function setupCartAndDrawer() {
   });
   
   document.addEventListener('click', event => { 
-    const add = event.target.closest('[data-add]'); 
-    const remove = event.target.closest('[data-remove]'); 
+    const add = event.target.closest('[data-add]');
+    const remove = event.target.closest('[data-remove]');
+    const decrease = event.target.closest('[data-decrease]');
+    const increase = event.target.closest('[data-increase]');
     const checkout = event.target.closest('.btn-checkout');
     
     if (add) { 
@@ -855,7 +884,52 @@ function setupCartAndDrawer() {
       updateCart(); 
       open(); 
     } 
-    
+    // Diminuer la quantité de 1
+if (decrease) {
+  const index = Number(decrease.dataset.decrease);
+  const item = cart[index];
+
+  if (!item) return;
+
+  // Le guide offert ne peut pas être modifié
+  if (item.id === "guide-premium") return;
+
+  item.quantity--;
+
+  // Si quantité = 0, on supprime complètement le produit
+  if (item.quantity <= 0) {
+    cart.splice(index, 1);
+
+    // Retire aussi le guide si aucun produit business ne reste
+    const hasBusinessProduct = cart.some(item => {
+      const p = PRODUCTS.find(pr => pr.id === item.id);
+      return p && p.category === 'business';
+    });
+
+    if (!hasBusinessProduct) {
+      cart = cart.filter(item => item.id !== 'guide-premium');
+    }
+  }
+
+  saveCart();
+  updateCart();
+  return;
+}
+
+// Augmenter la quantité de 1
+if (increase) {
+  const index = Number(increase.dataset.increase);
+  const item = cart[index];
+
+  if (!item) return;
+  if (item.id === "guide-premium") return;
+
+  item.quantity++;
+
+  saveCart();
+  updateCart();
+  return;
+}
     if (remove) { 
       const index = Number(remove.dataset.remove);
 
