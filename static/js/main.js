@@ -1122,27 +1122,100 @@ function setupMobileMenu() {
 function setupGallery() {
   document.addEventListener('click', event => {
     const thumbBtn = event.target.closest('[data-image]');
+    
     if (thumbBtn) {
-      document.getElementById('mainProductImage').src = thumbBtn.dataset.image;
-      document.querySelectorAll('.product-thumbnail').forEach(item => item.classList.toggle('active', item === thumbBtn));
+      changeGalleryImage(thumbBtn.dataset.image);
+      document.querySelectorAll('.product-thumbnail').forEach(item => {
+        item.classList.toggle('active', item === thumbBtn);
+      });
       return;
     }
 
     const arrow = event.target.closest('.gallery-arrow');
+
     if (arrow) {
       const thumbnails = [...document.querySelectorAll('.product-thumbnail')];
       if (!thumbnails.length) return;
 
-      const currentIndex = thumbnails.findIndex(t => t.classList.contains('active'));
+      const currentIndex = thumbnails.findIndex(
+        t => t.classList.contains('active')
+      );
+
       const direction = arrow.classList.contains('gallery-arrow-next') ? 1 : -1;
+
       const safeCurrentIndex = currentIndex === -1 ? 0 : currentIndex;
-      const nextIndex = (safeCurrentIndex + direction + thumbnails.length) % thumbnails.length;
+
+      const nextIndex =
+        (safeCurrentIndex + direction + thumbnails.length) %
+        thumbnails.length;
+
       const nextThumb = thumbnails[nextIndex];
 
-      document.getElementById('mainProductImage').src = nextThumb.dataset.image;
-      thumbnails.forEach(item => item.classList.toggle('active', item === nextThumb));
+      changeGalleryImage(
+        nextThumb.dataset.image,
+        direction
+      );
+
+      thumbnails.forEach(item => {
+        item.classList.toggle('active', item === nextThumb);
+      });
     }
   });
+}
+
+
+function changeGalleryImage(newImage, direction = 1) {
+  const mainImage = document.getElementById('mainProductImage');
+
+  if (!mainImage) return;
+
+  // Évite une animation inutile si on clique sur la même image
+  if (mainImage.src.includes(newImage)) return;
+
+  // Départ de l'ancienne image
+  mainImage.classList.remove(
+    'gallery-slide-in-left',
+    'gallery-slide-in-right'
+  );
+
+  mainImage.classList.add(
+    direction === 1
+      ? 'gallery-slide-out-left'
+      : 'gallery-slide-out-right'
+  );
+
+  setTimeout(() => {
+    mainImage.src = newImage;
+
+    // On place temporairement la nouvelle image de l'autre côté
+    mainImage.classList.remove(
+      'gallery-slide-out-left',
+      'gallery-slide-out-right'
+    );
+
+    mainImage.classList.add(
+      direction === 1
+        ? 'gallery-slide-in-right'
+        : 'gallery-slide-in-left'
+    );
+
+    // Force le navigateur à prendre en compte l'état initial
+    void mainImage.offsetWidth;
+
+    requestAnimationFrame(() => {
+      mainImage.classList.remove(
+        'gallery-slide-in-right',
+        'gallery-slide-in-left'
+      );
+
+      mainImage.classList.add('gallery-slide-center');
+    });
+
+    setTimeout(() => {
+      mainImage.classList.remove('gallery-slide-center');
+    }, 400);
+
+  }, 200);
 }
 
 // Compte à rebours du lancement/Drop : met à jour TOUS les éléments portant

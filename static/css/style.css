@@ -1479,3 +1479,35 @@ footer {
 .gallery-arrow:hover { background: #fff; }
 .gallery-arrow-prev { left: 10px; }
 .gallery-arrow-next { right: 10px; }
+
+#mainProductImage {
+  transition: transform 0.35s ease, opacity 0.35s ease;
+  will-change: transform, opacity;
+}
+
+/* Ancienne image */
+.gallery-slide-out-left {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
+.gallery-slide-out-right {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+/* Nouvelle image */
+.gallery-slide-in-right {
+  transform: translateX(40px);
+  opacity: 0;
+}
+
+.gallery-slide-in-left {
+  transform: translateX(-40px);
+  opacity: 0;
+}
+
+.gallery-slide-center {
+  transform: translateX(0);
+  opacity: 1;
+}
