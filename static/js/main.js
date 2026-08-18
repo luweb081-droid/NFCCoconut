@@ -465,10 +465,18 @@ function renderProductPage() {
     : '';
   const stockInfoHtml = (hasStockInfo && stockText) ? `<p class="stock-info${isLowStock ? ' low' : ''}">${stockText}</p>` : '';
 
+  // Flèches gauche/droite affichées uniquement si le produit a plusieurs photos.
+  // Le clic est géré par setupGallery() via la classe .gallery-arrow.
+  const hasMultipleImages = product.images.length > 1;
+
   root.innerHTML = `<a class="back-link" href="${product.category === 'streetwear' ? 'streetwear.html' : 'catalogue.html'}"><i class="fa-solid fa-arrow-left"></i> Retour</a>
   <section class="product-detail">
     <div class="product-gallery">
       <div class="product-img-wrapper" style="position: relative;">
+        ${hasMultipleImages ? `
+          <button type="button" class="gallery-arrow gallery-arrow-prev" aria-label="Photo précédente"><i class="fa-solid fa-chevron-left"></i></button>
+          <button type="button" class="gallery-arrow gallery-arrow-next" aria-label="Photo suivante"><i class="fa-solid fa-chevron-right"></i></button>
+        ` : ''}
         <img id="mainProductImage" src="${product.images[0]}" alt="${escapeHtml(product.name)}">
         ${isSoldOut ? '<span class="badge-sold-out">Sold Out</span>' : ''}
       </div>
@@ -1108,13 +1116,33 @@ function setupMobileMenu() {
   });
 }
 
-function setupGallery() { 
-  document.addEventListener('click', event => { 
-    const button = event.target.closest('[data-image]'); 
-    if (!button) return; 
-    document.getElementById('mainProductImage').src = button.dataset.image; 
-    document.querySelectorAll('.product-thumbnail').forEach(item => item.classList.toggle('active', item === button)); 
-  }); 
+// Galerie de la fiche produit : gère à la fois les clics sur les miniatures
+// ET les clics sur les flèches gauche/droite (qui font défiler en boucle
+// à travers `product.images`).
+function setupGallery() {
+  document.addEventListener('click', event => {
+    const thumbBtn = event.target.closest('[data-image]');
+    if (thumbBtn) {
+      document.getElementById('mainProductImage').src = thumbBtn.dataset.image;
+      document.querySelectorAll('.product-thumbnail').forEach(item => item.classList.toggle('active', item === thumbBtn));
+      return;
+    }
+
+    const arrow = event.target.closest('.gallery-arrow');
+    if (arrow) {
+      const thumbnails = [...document.querySelectorAll('.product-thumbnail')];
+      if (!thumbnails.length) return;
+
+      const currentIndex = thumbnails.findIndex(t => t.classList.contains('active'));
+      const direction = arrow.classList.contains('gallery-arrow-next') ? 1 : -1;
+      const safeCurrentIndex = currentIndex === -1 ? 0 : currentIndex;
+      const nextIndex = (safeCurrentIndex + direction + thumbnails.length) % thumbnails.length;
+      const nextThumb = thumbnails[nextIndex];
+
+      document.getElementById('mainProductImage').src = nextThumb.dataset.image;
+      thumbnails.forEach(item => item.classList.toggle('active', item === nextThumb));
+    }
+  });
 }
 
 // Compte à rebours du lancement/Drop : met à jour TOUS les éléments portant

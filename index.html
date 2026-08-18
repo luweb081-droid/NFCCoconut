@@ -350,6 +350,111 @@
         animation:none !important;
       }
     }
+
+    /* ===== Section "clé en main" — même identité que le hero (noir/doré/Cinzel) ===== */
+    .nfc-complete-section{
+      position:relative;
+      margin:70px 0;
+      padding:64px 6vw;
+      background:radial-gradient(120% 100% at 20% 0%, #1a1a1a 0%, var(--h3d-ink) 60%, #000 100%);
+      border:1px solid rgba(234,217,180,.12);
+      border-radius:18px;
+      text-align:center;
+      overflow:hidden;
+    }
+    .nfc-complete-section::before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
+      background-size:3px 3px;
+      pointer-events:none;
+    }
+    .nfc-complete-section > *{ position:relative; z-index:1; }
+
+    .nfc-complete-section .section-headline h2{
+      color:var(--h3d-white);
+    }
+    .nfc-complete-section .section-headline p{
+      color:#b9b9b3;
+    }
+
+    .nfc-subheading{
+      font-family:'Cinzel', serif;
+      font-weight:500;
+      font-size:.95rem;
+      letter-spacing:2.5px;
+      text-transform:uppercase;
+      color:var(--h3d-cream);
+      margin:50px 0 28px;
+    }
+    .nfc-subheading::after{
+      content:"";
+      display:block;
+      width:40px;
+      height:1px;
+      background:var(--h3d-cream-dim);
+      margin:14px auto 0;
+    }
+
+    .nfc-steps, .nfc-advantages{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
+      gap:22px;
+      text-align:left;
+    }
+
+    .nfc-card{
+      padding:30px 26px;
+      background:var(--h3d-panel);
+      border:1px solid rgba(234,217,180,.14);
+      border-radius:12px;
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .nfc-card:hover{
+      transform:translateY(-4px);
+      border-color:rgba(234,217,180,.45);
+      background:var(--h3d-panel-2);
+    }
+
+    .nfc-card-badge{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:38px; height:38px;
+      border-radius:50%;
+      margin-bottom:18px;
+      font-family:'Cinzel', serif;
+      font-size:.85rem;
+      color:var(--h3d-cream);
+    }
+    .nfc-card-badge--number{
+      border:1px solid var(--h3d-cream);
+    }
+    .nfc-card-badge--icon{
+      background:rgba(234,217,180,.12);
+      font-size:.95rem;
+    }
+
+    .nfc-card h4{
+      font-family:'Cinzel', serif;
+      font-weight:500;
+      font-size:1.05rem;
+      letter-spacing:.4px;
+      color:var(--h3d-white);
+      margin-bottom:10px;
+    }
+    .nfc-card p{
+      font-family:'Montserrat', sans-serif;
+      color:#b9b9b3;
+      font-size:.92rem;
+      line-height:1.6;
+      margin:0;
+    }
+
+    @media (max-width:600px){
+      .nfc-complete-section{ padding:50px 5vw; }
+      .nfc-subheading{ margin-top:40px; }
+    }
   </style>
 </head>
 <body>
@@ -402,43 +507,49 @@
     <div class="products-grid" aria-label="Sélection de produits"></div>
 
     <!-- SECTION FUSIONNÉE : Clé en main & Technologie NFC -->
-    <section class="nfc-complete-section" style="margin:60px 0;padding:50px 30px;background:#f9f9f9;border:1px solid #eee;border-radius:12px;text-align:center;">
-      <div class="section-headline" style="margin-bottom:40px;">
+    <section class="nfc-complete-section">
+      <div class="section-headline">
         <h2>La puissance du NFC 100 % clé en main</h2>
         <p>Une innovation simple, programmée par nos soins, sans aucune configuration de votre part</p>
       </div>
 
       <!-- Sous-partie : Comment ça marche -->
-      <h3 style="font-size:1.2rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;color:#111;">Comment ça fonctionne ?</h3>
-      <div class="nfc-explanation" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:20px;text-align:left;margin-bottom:40px;">
-        <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
-          <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;">1. Commandez</h3>
-          <p style="color:#565656;font-size:0.95rem;">Indiquez simplement l'adresse de votre commerce, votre page Instagram ou site web.</p>
+      <h3 class="nfc-subheading">Comment ça fonctionne ?</h3>
+      <div class="nfc-steps">
+        <div class="nfc-card">
+          <span class="nfc-card-badge nfc-card-badge--number">01</span>
+          <h4>Commandez</h4>
+          <p>Indiquez simplement l'adresse de votre commerce, votre page Instagram ou site web.</p>
         </div>
-        <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
-          <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;">2. Nous programmons</h3>
-          <p style="color:#565656;font-size:0.95rem;">Nous encodons et testons votre support en atelier avant de vous l'expédier.</p>
+        <div class="nfc-card">
+          <span class="nfc-card-badge nfc-card-badge--number">02</span>
+          <h4>Nous programmons</h4>
+          <p>Nous encodons et testons votre support en atelier avant de vous l'expédier.</p>
         </div>
-        <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
-          <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;">3. Profitez</h3>
-          <p style="color:#565656;font-size:0.95rem;">Votre support est prêt à l'emploi dès réception. Récoltez vos premiers avis !</p>
+        <div class="nfc-card">
+          <span class="nfc-card-badge nfc-card-badge--number">03</span>
+          <h4>Profitez</h4>
+          <p>Votre support est prêt à l'emploi dès réception. Récoltez vos premiers avis !</p>
         </div>
       </div>
 
       <!-- Sous-partie : Les points forts du NFC -->
-      <h3 style="font-size:1.2rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;color:#111;">Les avantages pour vos clients</h3>
-      <div class="nfc-explanation" style="display:grid;grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));gap:20px;text-align:left;">
-        <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
-          <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;"> Sans application</h3>
-          <p style="color:#565656;font-size:0.95rem;">Aucun téléchargement ni application spécifique n'est requis. La lecture est totalement native sur smartphones récents.</p>
+      <h3 class="nfc-subheading">Les avantages pour vos clients</h3>
+      <div class="nfc-advantages">
+        <div class="nfc-card">
+          <span class="nfc-card-badge nfc-card-badge--icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+          <h4>Sans application</h4>
+          <p>Aucun téléchargement ni application spécifique n'est requis. La lecture est totalement native sur smartphones récents.</p>
         </div>
-        <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
-          <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;"> Ultra-rapide</h3>
-          <p style="color:#565656;font-size:0.95rem;">Un simple effleurement du téléphone sur la plaque suffit pour ouvrir instantanément votre page Google Avis.</p>
+        <div class="nfc-card">
+          <span class="nfc-card-badge nfc-card-badge--icon"><i class="fa-solid fa-bolt"></i></span>
+          <h4>Ultra-rapide</h4>
+          <p>Un simple effleurement du téléphone sur la plaque suffit pour ouvrir instantanément votre page Google Avis.</p>
         </div>
-        <div class="info-card" style="padding:20px;background:#ffffff;border-radius:8px;border:1px solid #eee;">
-          <h3 style="font-size:1.1rem;margin-bottom:10px;color:#111;"> Double sécurité</h3>
-          <p style="color:#565656;font-size:0.95rem;">Chaque plaque intègre une puce NFC et un QR Code de secours pour garantir une compatibilité de 100 %.</p>
+        <div class="nfc-card">
+          <span class="nfc-card-badge nfc-card-badge--icon"><i class="fa-solid fa-shield-halved"></i></span>
+          <h4>Double sécurité</h4>
+          <p>Chaque plaque intègre une puce NFC et un QR Code de secours pour garantir une compatibilité de 100 %.</p>
         </div>
       </div>
     </section>
