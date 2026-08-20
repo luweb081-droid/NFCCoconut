@@ -406,16 +406,16 @@ h1, h2, h3, .brand-logo {
 /* ==========================================================================
    4. HERO BANNER VIDÉO
    ========================================================================== */
-.hero-banner {
-    position: relative;
-    width: 100%;
-    height: 80vh;
-    margin-top: 75px;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.hero-banner--3d{
+  position:relative;
+  min-height:640px;
+  margin-top: 75px;              /* ⬅️ AJOUT : compense le header fixe */
+  background:radial-gradient(120% 100% at 80% 20%, #1a1a1a 0%, #0d0d0d 55%, #000 100%);
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  padding:clamp(60px, 10vw, 90px) 6vw clamp(40px, 8vw, 60px);
+  box-sizing:border-box;
 }
 
 .hero-video {
