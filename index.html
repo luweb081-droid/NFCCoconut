@@ -580,6 +580,91 @@
     @media (prefers-reduced-motion: reduce){
       .nfc-bar{ transition:none; }
     }
+
+    /* ===== Chemin en pointillés : timeline "Comment ça fonctionne" ===== */
+    .nfc-path{
+      position:relative;
+      max-width:640px;
+      margin:0 auto;
+      text-align:left;
+    }
+    .nfc-path-track,
+    .nfc-path-track-fill{
+      position:absolute;
+      left:27px;
+      top:28px;
+      bottom:28px;
+      width:2px;
+      background-image:linear-gradient(to bottom, currentColor 0 8px, transparent 8px 18px);
+      background-size:2px 18px;
+      background-repeat:repeat-y;
+    }
+    .nfc-path-track{ color:rgba(234,217,180,.25); }
+    .nfc-path-track-fill{
+      color:var(--h3d-cream);
+      transform:scaleY(0);
+      transform-origin:top;
+      will-change:transform;
+    }
+    .nfc-path-step{
+      position:relative;
+      display:flex;
+      align-items:flex-start;
+      gap:24px;
+      padding-bottom:44px;
+    }
+    .nfc-path-step:last-child{ padding-bottom:0; }
+    .nfc-path-dot{
+      position:relative;
+      z-index:2;
+      flex:0 0 56px;
+      width:56px; height:56px;
+      border-radius:50%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-family:'Cinzel', serif;
+      font-size:1rem;
+      color:#7a7a72;
+      background:var(--h3d-ink);
+      border:1px solid rgba(234,217,180,.25);
+      transition:color .35s ease, border-color .35s ease, box-shadow .35s ease, background .35s ease;
+    }
+    .nfc-path-content{ padding-top:12px; }
+    .nfc-path-content h4{
+      font-family:'Cinzel', serif;
+      font-weight:500;
+      font-size:1.05rem;
+      color:var(--h3d-white);
+      margin-bottom:8px;
+      opacity:.5;
+      transition:opacity .35s ease;
+    }
+    .nfc-path-content p{
+      font-family:'Montserrat', sans-serif;
+      color:#8f8f89;
+      font-size:.9rem;
+      line-height:1.6;
+      margin:0;
+      transition:color .35s ease;
+    }
+    .nfc-path-step.is-active .nfc-path-dot{
+      color:var(--h3d-ink);
+      background:var(--h3d-cream);
+      border-color:var(--h3d-cream);
+      box-shadow:0 0 0 6px rgba(234,217,180,.12);
+    }
+    .nfc-path-step.is-active .nfc-path-content h4{ opacity:1; }
+    .nfc-path-step.is-active .nfc-path-content p{ color:#c7c7c1; }
+
+    @media (max-width:600px){
+      .nfc-path-dot{ flex-basis:46px; width:46px; height:46px; font-size:.85rem; }
+      .nfc-path-track, .nfc-path-track-fill{ left:22px; }
+      .nfc-path-step{ gap:16px; }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .nfc-path-track-fill{ transform:scaleY(1) !important; }
+    }
   </style>
 </head>
 <body>
@@ -680,23 +765,34 @@
         </div>
       </div>
 
-      <!-- Sous-partie : Comment ça marche -->
+      <!-- Sous-partie : Comment ça marche (timeline en pointillés, animée au scroll) -->
       <h3 class="nfc-subheading">Comment ça fonctionne ?</h3>
-      <div class="nfc-steps">
-        <div class="nfc-card">
-          <span class="nfc-card-badge nfc-card-badge--number">01</span>
-          <h4>Commandez</h4>
-          <p>Indiquez simplement l'adresse de votre commerce, votre page Instagram ou site web.</p>
+      <div class="nfc-path" id="nfcPath">
+        <div class="nfc-path-track"></div>
+        <div class="nfc-path-track-fill" id="nfcPathFill"></div>
+
+        <div class="nfc-path-step">
+          <span class="nfc-path-dot">01</span>
+          <div class="nfc-path-content">
+            <h4>Commandez</h4>
+            <p>Indiquez simplement l'adresse de votre commerce, votre page Instagram ou site web.</p>
+          </div>
         </div>
-        <div class="nfc-card">
-          <span class="nfc-card-badge nfc-card-badge--number">02</span>
-          <h4>Nous programmons</h4>
-          <p>Nous encodons et testons votre support en atelier avant de vous l'expédier.</p>
+
+        <div class="nfc-path-step">
+          <span class="nfc-path-dot">02</span>
+          <div class="nfc-path-content">
+            <h4>Nous programmons</h4>
+            <p>Nous encodons et testons votre support en atelier avant de vous l'expédier.</p>
+          </div>
         </div>
-        <div class="nfc-card">
-          <span class="nfc-card-badge nfc-card-badge--number">03</span>
-          <h4>Profitez</h4>
-          <p>Votre support est prêt à l'emploi dès réception. Récoltez vos premiers avis !</p>
+
+        <div class="nfc-path-step">
+          <span class="nfc-path-dot">03</span>
+          <div class="nfc-path-content">
+            <h4>Profitez</h4>
+            <p>Votre support est prêt à l'emploi dès réception. Récoltez vos premiers avis !</p>
+          </div>
         </div>
       </div>
 
@@ -817,6 +913,60 @@
       } else {
         runAnimation();
       }
+    })();
+  </script>
+
+  <!-- ===== Chemin en pointillés : se dessine progressivement pendant le scroll ===== -->
+  <script>
+    (function(){
+      var path = document.getElementById('nfcPath');
+      var fill = document.getElementById('nfcPathFill');
+      if(!path || !fill) return;
+
+      var steps = Array.prototype.slice.call(path.querySelectorAll('.nfc-path-step'));
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      if(reduceMotion){
+        fill.style.transform = 'scaleY(1)';
+        steps.forEach(function(step){ step.classList.add('is-active'); });
+        return;
+      }
+
+      var ticking = false;
+
+      function update(){
+        ticking = false;
+        var rect = path.getBoundingClientRect();
+        var viewH = window.innerHeight;
+
+        // Le chemin commence à se dessiner quand son haut entre dans le bas
+        // de l'écran, et finit d'être tracé quand son bas approche le haut
+        // de l'écran : ça donne l'effet "on avance dans le chemin en scrollant".
+        var start = viewH * 0.85;
+        var end = viewH * 0.35;
+        var total = rect.height + (start - end);
+        var traveled = start - rect.top;
+        var progress = traveled / total;
+        progress = Math.max(0, Math.min(1, progress));
+
+        fill.style.transform = 'scaleY(' + progress + ')';
+
+        steps.forEach(function(step, i){
+          var threshold = (i + 0.5) / steps.length;
+          step.classList.toggle('is-active', progress >= threshold);
+        });
+      }
+
+      function onScroll(){
+        if(!ticking){
+          ticking = true;
+          requestAnimationFrame(update);
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      update();
     })();
   </script>
 </body>
