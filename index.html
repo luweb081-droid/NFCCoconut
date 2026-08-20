@@ -455,6 +455,131 @@
       .nfc-complete-section{ padding:50px 5vw; }
       .nfc-subheading{ margin-top:40px; }
     }
+
+    /* ===== Graphique d'impact : avis -> clients -> CA ===== */
+    .nfc-impact{
+      display:grid;
+      grid-template-columns:0.9fr 1.1fr;
+      gap:50px;
+      align-items:center;
+      margin:44px 0 12px;
+      text-align:left;
+    }
+    .nfc-impact-chart{
+      display:flex;
+      justify-content:center;
+    }
+    .nfc-bar-group{
+      display:flex;
+      align-items:flex-end;
+      gap:36px;
+      height:220px;
+    }
+    .nfc-bar-col{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-end;
+      height:100%;
+    }
+    .nfc-bar{
+      width:64px;
+      border-radius:8px 8px 0 0;
+      background:rgba(234,217,180,.16);
+      border:1px solid rgba(234,217,180,.28);
+      position:relative;
+      height:18%;
+      transition:height 1.2s cubic-bezier(.16,1,.3,1);
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+    }
+    .nfc-bar--highlight{
+      background:linear-gradient(180deg, var(--h3d-cream) 0%, #c9a063 100%);
+      border-color:var(--h3d-cream);
+      box-shadow:0 10px 30px -8px rgba(234,217,180,.5);
+    }
+    .nfc-bar-value{
+      position:absolute;
+      top:-32px;
+      font-family:'Cinzel', serif;
+      font-size:1rem;
+      font-weight:600;
+      color:var(--h3d-white);
+      white-space:nowrap;
+    }
+    .nfc-bar--highlight .nfc-bar-value{
+      color:var(--h3d-cream);
+      font-size:1.35rem;
+    }
+    .nfc-bar-label{
+      margin-top:14px;
+      font-family:'Montserrat', sans-serif;
+      font-size:.75rem;
+      color:#b9b9b3;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      text-align:center;
+      max-width:110px;
+    }
+
+    .nfc-impact-flow{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+    }
+    .nfc-flow-step{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:10px;
+      padding:18px 14px;
+      background:var(--h3d-panel);
+      border:1px solid rgba(234,217,180,.14);
+      border-radius:12px;
+      min-width:110px;
+      text-align:center;
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .nfc-flow-step i{
+      font-size:1.15rem;
+      color:var(--h3d-cream);
+    }
+    .nfc-flow-step span{
+      font-family:'Montserrat', sans-serif;
+      font-size:.75rem;
+      color:#dedede;
+      line-height:1.3;
+    }
+    .nfc-flow-step:hover{
+      transform:translateY(-4px);
+      border-color:rgba(234,217,180,.5);
+      background:var(--h3d-panel-2);
+    }
+    .nfc-flow-step--final{
+      background:linear-gradient(180deg, rgba(234,217,180,.16), rgba(234,217,180,.04));
+      border-color:rgba(234,217,180,.4);
+    }
+    .nfc-flow-step--final i{ color:var(--h3d-white); }
+    .nfc-flow-arrow{
+      color:rgba(234,217,180,.4);
+      font-size:.85rem;
+    }
+
+    @media (max-width:900px){
+      .nfc-impact{ grid-template-columns:1fr; gap:34px; text-align:center; }
+      .nfc-impact-chart{ order:1; }
+      .nfc-impact-flow{ order:2; }
+    }
+    @media (max-width:480px){
+      .nfc-impact-flow{ flex-direction:column; }
+      .nfc-flow-arrow{ transform:rotate(90deg); }
+    }
+    @media (prefers-reduced-motion: reduce){
+      .nfc-bar{ transition:none; }
+    }
   </style>
 </head>
 <body>
@@ -506,11 +631,53 @@
     <div class="section-headline"><h2>Explorez notre Sélection</h2><p>Prêt à l'emploi, commandez on s'occupe de tout</p></div>
     <div class="products-grid" aria-label="Sélection de produits"></div>
 
-    <!-- SECTION FUSIONNÉE : Clé en main & Technologie NFC -->
+    <!-- SECTION FUSIONNÉE : Impact (avis -> clients -> CA) & Comment ça marche -->
     <section class="nfc-complete-section">
       <div class="section-headline">
-        <h2>La puissance du NFC 100 % clé en main</h2>
-        <p>Une innovation simple, programmée par nos soins, sans aucune configuration de votre part</p>
+        <h2>Plus d'avis, plus de clients, plus de chiffre d'affaires</h2>
+        <p>Le cercle vertueux enclenché par une simple plaque NFC</p>
+      </div>
+
+      <!-- Sous-partie : Graphique d'impact animé -->
+      <div class="nfc-impact" id="nfcImpact">
+        <div class="nfc-impact-chart">
+          <div class="nfc-bar-group">
+            <div class="nfc-bar-col">
+              <div class="nfc-bar" id="barBase">
+                <span class="nfc-bar-value">Sans NFC</span>
+              </div>
+              <p class="nfc-bar-label">Avis Google actuels</p>
+            </div>
+            <div class="nfc-bar-col">
+              <div class="nfc-bar nfc-bar--highlight" id="barBoost">
+                <span class="nfc-bar-value" id="boostCounter">+0%</span>
+              </div>
+              <p class="nfc-bar-label">Avec plaque NFC Coconut</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="nfc-impact-flow">
+          <div class="nfc-flow-step">
+            <i class="fa-solid fa-star"></i>
+            <span>Plus d'avis Google</span>
+          </div>
+          <i class="fa-solid fa-arrow-right nfc-flow-arrow" aria-hidden="true"></i>
+          <div class="nfc-flow-step">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Meilleure visibilité</span>
+          </div>
+          <i class="fa-solid fa-arrow-right nfc-flow-arrow" aria-hidden="true"></i>
+          <div class="nfc-flow-step">
+            <i class="fa-solid fa-users"></i>
+            <span>Plus de clients</span>
+          </div>
+          <i class="fa-solid fa-arrow-right nfc-flow-arrow" aria-hidden="true"></i>
+          <div class="nfc-flow-step nfc-flow-step--final">
+            <i class="fa-solid fa-euro-sign"></i>
+            <span>Plus de chiffre d'affaires</span>
+          </div>
+        </div>
       </div>
 
       <!-- Sous-partie : Comment ça marche -->
@@ -597,6 +764,59 @@
         card.style.animationPlayState = 'running';
         card.style.transform = '';
       });
+    })();
+  </script>
+
+  <!-- ===== Animation du graphique d'impact (avis -> clients -> CA) ===== -->
+  <script>
+    (function(){
+      var impact = document.getElementById('nfcImpact');
+      var barBase = document.getElementById('barBase');
+      var barBoost = document.getElementById('barBoost');
+      var counter = document.getElementById('boostCounter');
+      if(!impact || !barBase || !barBoost || !counter) return;
+
+      var animated = false;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      function animateCounter(el, to, duration){
+        var start = null;
+        function step(ts){
+          if(!start) start = ts;
+          var progress = Math.min((ts - start) / duration, 1);
+          var value = Math.floor(progress * to);
+          el.textContent = '+' + value + '%';
+          if(progress < 1){
+            requestAnimationFrame(step);
+          } else {
+            el.textContent = '+' + to + '%';
+          }
+        }
+        requestAnimationFrame(step);
+      }
+
+      function runAnimation(){
+        if(animated) return;
+        animated = true;
+        barBase.style.height = '55%';
+        barBoost.style.height = '100%';
+        animateCounter(counter, 40, 1400);
+      }
+
+      if(reduceMotion){
+        barBase.style.height = '55%';
+        barBoost.style.height = '100%';
+        counter.textContent = '+40%';
+      } else if('IntersectionObserver' in window){
+        var observer = new IntersectionObserver(function(entries){
+          entries.forEach(function(entry){
+            if(entry.isIntersecting) runAnimation();
+          });
+        }, { threshold: 0.35 });
+        observer.observe(impact);
+      } else {
+        runAnimation();
+      }
     })();
   </script>
 </body>
