@@ -454,6 +454,31 @@ function renderProductPage() {
   
   document.title = `${product.name} — NFC COCONUT`;
 
+    // Injecte dynamiquement les meta tags SEO pour cette fiche produit
+  function setMetaTag(selector, attribute, content) {
+    let tag = document.querySelector(selector);
+    if (!tag) {
+      tag = document.createElement('meta');
+      const [attrName, attrValue] = selector.match(/\[(\w+)="([^"]+)"\]/).slice(1, 3);
+      tag.setAttribute(attrName, attrValue);
+      document.head.appendChild(tag);
+    }
+    tag.setAttribute(attribute, content);
+  }
+
+  const productImageUrl = new URL(product.images[0], window.location.origin).href;
+  const productPageUrl = window.location.href;
+
+  setMetaTag('meta[name="description"]', 'content', product.description);
+  setMetaTag('meta[property="og:title"]', 'content', `${product.name} — NFC COCONUT`);
+  setMetaTag('meta[property="og:description"]', 'content', product.description);
+  setMetaTag('meta[property="og:image"]', 'content', productImageUrl);
+  setMetaTag('meta[property="og:url"]', 'content', productPageUrl);
+  setMetaTag('meta[property="og:type"]', 'content', 'product');
+  setMetaTag('meta[name="twitter:card"]', 'content', 'summary_large_image');
+  setMetaTag('meta[name="twitter:title"]', 'content', `${product.name} — NFC COCONUT`);
+  setMetaTag('meta[name="twitter:description"]', 'content', product.description);
+  setMetaTag('meta[name="twitter:image"]', 'content', productImageUrl);
   const productFeatures = product.features || ['Prêt à l’emploi', 'Technologie NFC intégrée', 'Livraison suivie'];
   const featuresHtml = productFeatures.map(feature => `<li>${escapeHtml(feature)}</li>`).join('');
   const isSoldOut = product.soldOut === true;
