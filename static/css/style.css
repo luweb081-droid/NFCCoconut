@@ -1511,3 +1511,9 @@ footer {
   transform: translateX(0);
   opacity: 1;
 }
+.hero-banner {
+  position: relative;
+  min-height: 640px;
+  margin-top: 75px;
+  overflow: hidden;
+}
