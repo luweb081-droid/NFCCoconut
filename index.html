@@ -6,7 +6,7 @@
   <title>Plaque NFC Avis Google & Présentoirs Connectés | NFC Coconut</title>
   <meta name="description" content="Boostez vos avis Google en un tap : plaques et présentoirs NFC prêts à l'emploi, sans configuration, dès 39,90 €. Livraison rapide en France.">
   <meta name="robots" content="index, follow, max-image-preview:large">
-  <meta name="theme-color" content="#0d0d0d">
+  <meta name="theme-color" content="#0b0b0a">
   <link rel="canonical" href="https://nfc-coconut.vercel.app/">
 
   <!-- Open Graph -->
@@ -56,7 +56,7 @@
       "url": "https://nfc-coconut.vercel.app/",
       "logo": "https://nfc-coconut.vercel.app/static/images/nfccoconut.png",
       "sameAs": [
-        "https://www.instagram.com/nfc_coconut_official/"
+        "https://www.instagram.com/nfc_coconut/"
       ]
     }
   </script>
@@ -81,37 +81,71 @@
     }
   </script>
 
-  <!-- ===== Styles du hero 3D (à terme, peut être déplacé dans static/css/style.css) ===== -->
+  <!-- =========================================================
+       SYSTÈME DE DESIGN DE LA PAGE D'ACCUEIL
+       Palette : noir chaud / laiton (identité "plaque gravée")
+       Display : Cinzel — Corps : Montserrat
+       ========================================================= -->
   <style>
     :root{
-      --h3d-ink:#0d0d0d;
-      --h3d-panel:#161616;
-      --h3d-panel-2:#1f1f1f;
-      --h3d-cream:#EAD9B4;
-      --h3d-cream-dim:rgba(234,217,180,0.35);
-      --h3d-white:#f5f5f2;
+      --ink:#0b0b0a;
+      --ink-2:#161512;
+      --ink-3:#201e19;
+      --cream:#EAD9B4;
+      --cream-soft:#f1e6c8;
+      --cream-dim:rgba(234,217,180,.35);
+      --line:rgba(234,217,180,.14);
+      --line-strong:rgba(234,217,180,.28);
+      --white:#f6f4ef;
+      --muted:#9a978d;
+      --muted-2:#6f6c62;
+      --font-display:'Cinzel', serif;
+      --font-body:'Montserrat', sans-serif;
     }
     html{ overflow-x:hidden; }
     body{ overflow-x:hidden; max-width:100vw; }
 
-    .hero-banner--3d{
-      position:relative;
-      min-height:640px;
-      background:radial-gradient(120% 100% at 80% 20%, #1a1a1a 0%, #0d0d0d 55%, #000 100%);
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      padding:clamp(60px, 10vw, 90px) 6vw clamp(40px, 8vw, 60px);
-      box-sizing:border-box;
+    /* ---------- Utilitaires partagés ---------- */
+    .section-eyebrow{
+      margin:0 0 14px;
+      font-family:var(--font-body);
+      font-size:.62rem;
+      font-weight:600;
+      letter-spacing:2.5px;
+      text-transform:uppercase;
+      color:var(--muted-2);
     }
-    .hero-banner--3d::before{
-      /* grain de fond très léger pour éviter le plat "gradient AI" */
+    .section-title{
+      margin:0;
+      font-family:var(--font-display);
+      font-weight:500;
+      font-size:clamp(1.7rem, 3vw, 2.3rem);
+      line-height:1.25;
+      color:var(--white);
+    }
+    .grain{
       content:"";
       position:absolute; inset:0;
       background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
       background-size:3px 3px;
       pointer-events:none;
     }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+    .hero-banner--3d{
+      position:relative;
+      min-height:640px;
+      background:radial-gradient(120% 100% at 80% 20%, #1a1a1a 0%, var(--ink) 55%, #000 100%);
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      padding:clamp(60px, 10vw, 90px) 6vw clamp(40px, 8vw, 60px);
+      box-sizing:border-box;
+    }
+    .hero-banner--3d::before{ z-index:0; }
+    .hero-banner--3d::before{ content:""; position:absolute; inset:0; background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px); background-size:3px 3px; pointer-events:none; }
 
     .hero-grid{
       position:relative;
@@ -124,104 +158,65 @@
       align-items:center;
     }
 
-    .hero-content{ color:var(--h3d-white); }
-    .hero-banner--3d .hero-title{
-      color:var(--h3d-white);
-      text-align:left;
-      font-size:clamp(2rem, 4vw, 3.1rem);
-      line-height:1.1;
-      margin-bottom:16px;
-      position:relative;
-    }
-
-    /* ===== Effet glitch périodique sur le titre ===== */
-    .hero-title.glitch{
-      position:relative;
-    }
-    .hero-title.glitch::before,
-    .hero-title.glitch::after{
-      content:attr(data-text);
-      position:absolute;
-      left:0; top:0;
-      width:100%;
-      color:var(--h3d-white);
-      background:transparent;
-      overflow:hidden;
+    .hero-content{ color:var(--white); }
+    .hero-content > *{
       opacity:0;
+      transform:translateY(14px);
+      animation:heroReveal .8s ease forwards;
     }
-    .hero-title.glitch::before{
-      color:#ff2d55;
-      mix-blend-mode:screen;
-      animation:h3dGlitchBefore 3s ease-in-out infinite;
+    .hero-eyebrow{ animation-delay:.05s; }
+    .hero-title{ animation-delay:.16s; }
+    .hero-subtitle{ animation-delay:.30s; }
+    .hero-trust{ animation-delay:.44s; }
+    .hero-cta-group{ animation-delay:.58s; }
+    @keyframes heroReveal{ to{ opacity:1; transform:translateY(0); } }
+
+    .hero-eyebrow{
+      font-family:var(--font-body);
+      font-size:.7rem;
+      font-weight:600;
+      letter-spacing:3px;
+      text-transform:uppercase;
+      color:var(--cream);
     }
-    .hero-title.glitch::after{
-      color:#00e5ff;
-      mix-blend-mode:screen;
-      animation:h3dGlitchAfter 3s ease-in-out infinite;
-    }
-    @keyframes h3dGlitchBefore{
-      0%, 92%, 100%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
-      93%{ opacity:.9; transform:translate(-3px,-1px); clip-path:inset(10% 0 60% 0); }
-      94%{ opacity:.9; transform:translate(3px,1px); clip-path:inset(55% 0 15% 0); }
-      95%{ opacity:.9; transform:translate(-2px,0); clip-path:inset(30% 0 40% 0); }
-      96%{ opacity:.9; transform:translate(2px,1px); clip-path:inset(70% 0 5% 0); }
-      97%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
-    }
-    @keyframes h3dGlitchAfter{
-      0%, 92%, 100%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
-      93%{ opacity:.9; transform:translate(3px,1px); clip-path:inset(60% 0 10% 0); }
-      94%{ opacity:.9; transform:translate(-3px,-1px); clip-path:inset(15% 0 55% 0); }
-      95%{ opacity:.9; transform:translate(2px,0); clip-path:inset(40% 0 30% 0); }
-      96%{ opacity:.9; transform:translate(-2px,-1px); clip-path:inset(5% 0 70% 0); }
-      97%{ opacity:0; transform:translate(0,0); clip-path:inset(0 0 0 0); }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .hero-title.glitch::before, .hero-title.glitch::after{ animation:none !important; opacity:0 !important; }
+    .hero-banner--3d .hero-title{
+      color:var(--white);
+      text-align:left;
+      font-family:var(--font-display);
+      font-weight:500;
+      font-size:clamp(2rem, 4vw, 3.1rem);
+      line-height:1.12;
+      margin:14px 0 16px;
     }
     .hero-banner--3d .hero-subtitle{
       color:#b9b9b3;
       text-align:left;
       max-width:460px;
+      font-family:var(--font-body);
+      font-size:.92rem;
+      line-height:1.75;
       margin-bottom:28px;
     }
 
-    /* Bandeau de confiance : "déjà adopté par des commerces" */
     .hero-trust{
       display:flex;
       align-items:center;
       gap:12px;
       margin-bottom:34px;
     }
-    .hero-trust-stars{
-      color:var(--h3d-cream);
-      font-size:.95rem;
-      letter-spacing:2px;
-    }
-    .hero-trust-divider{
-      width:1px; height:16px;
-      background:rgba(255,255,255,.2);
-    }
-    .hero-trust-text{
-      font-family:'Montserrat', sans-serif;
-      font-size:.85rem;
-      color:#c8c8c2;
-      margin:0;
-    }
-    .hero-trust-text strong{ color:var(--h3d-white); font-weight:600; }
+    .hero-trust-stars{ color:var(--cream); font-size:.95rem; letter-spacing:2px; }
+    .hero-trust-divider{ width:1px; height:16px; background:rgba(255,255,255,.2); }
+    .hero-trust-text{ font-family:var(--font-body); font-size:.85rem; color:#c8c8c2; margin:0; }
+    .hero-trust-text strong{ color:var(--white); font-weight:600; }
 
-    .hero-cta-group{
-      display:flex;
-      align-items:center;
-      gap:26px;
-      flex-wrap:wrap;
-    }
+    .hero-cta-group{ display:flex; align-items:center; gap:26px; flex-wrap:wrap; }
     .hero-cta-buy{
       display:inline-flex;
       align-items:center;
       gap:10px;
-      background:var(--h3d-white);
+      background:var(--white);
       color:#111;
-      font-family:'Montserrat', sans-serif;
+      font-family:var(--font-body);
       font-weight:600;
       font-size:.85rem;
       letter-spacing:.5px;
@@ -231,20 +226,13 @@
       border-radius:2px;
       transition:transform .25s ease, background .25s ease;
     }
-    .hero-cta-buy:hover{ background:var(--h3d-cream); transform:translateY(-2px); }
+    .hero-cta-buy:hover{ background:var(--cream); transform:translateY(-2px); }
     .hero-cta-buy i{ font-size:.75rem; transition:transform .25s ease; }
     .hero-cta-buy:hover i{ transform:translateX(3px); }
-
-    .hero-banner--3d .hero-link{
-      color:#d8d8d2;
-      font-size:.85rem;
-      text-decoration:underline;
-      text-underline-offset:4px;
-      opacity:.8;
-    }
+    .hero-banner--3d .hero-link{ color:#d8d8d2; font-size:.85rem; text-decoration:underline; text-underline-offset:4px; opacity:.8; }
     .hero-banner--3d .hero-link:hover{ opacity:1; }
 
-    /* ===== Scène 3D de la plaque ===== */
+    /* ---------- Scène 3D de la plaque ---------- */
     .hero-3d-stage{
       position:relative;
       display:flex;
@@ -269,64 +257,91 @@
       0%,100%{ transform:rotateX(12deg) rotateY(-20deg) translateY(0px); }
       50%{ transform:rotateX(9deg) rotateY(-15deg) translateY(-10px); }
     }
-
     .plaque-face{
       position:absolute; inset:0;
       border-radius:30px;
       overflow:hidden;
       box-shadow:0 40px 60px -20px rgba(0,0,0,.7), inset 0 1px 0 rgba(255,255,255,.06);
     }
-    .plaque-face .plaque-photo{
-      position:absolute; inset:0;
-      width:100%; height:100%;
-      object-fit:cover;
-      object-position:center;
-      display:block;
-    }
+    .plaque-face .plaque-photo{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block; }
     .plaque-face::after{
-      /* reflet balayant, par-dessus la photo pour un effet vitré */
       content:"";
-      position:absolute;
-      top:-50%; left:-30%;
+      position:absolute; top:-50%; left:-30%;
       width:60%; height:200%;
       background:linear-gradient(75deg, transparent 20%, rgba(255,255,255,.16) 45%, transparent 70%);
       animation:h3dSheen 6s ease-in-out infinite;
       pointer-events:none;
     }
-    @keyframes h3dSheen{
-      0%,100%{ transform:translateX(0); }
-      50%{ transform:translateX(260%); }
-    }
+    @keyframes h3dSheen{ 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(260%); } }
 
-    /* --- Flip 3D entre deux plaques --- */
-    .plaque-flip{
-      position:absolute; inset:0;
-      transform-style:preserve-3d;
-      animation:h3dFlip 9s ease-in-out infinite;
-      will-change:transform;
-    }
-    .plaque-flip .plaque-face{
-      backface-visibility:hidden;
-      -webkit-backface-visibility:hidden;
-    }
-    .plaque-flip .plaque-face--back{
-      transform:rotateY(180deg);
-    }
+    .plaque-flip{ position:absolute; inset:0; transform-style:preserve-3d; animation:h3dFlip 9s ease-in-out infinite; will-change:transform; }
+    .plaque-flip .plaque-face{ backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+    .plaque-flip .plaque-face--back{ transform:rotateY(180deg); }
     @keyframes h3dFlip{
       0%, 42%   { transform:rotateY(0deg); }
       50%, 92%  { transform:rotateY(180deg); }
       100%      { transform:rotateY(360deg); }
     }
 
-    /* --- Téléphone (iPhone) qui vient "tapper" la plaque --- */
-    .hero-3d-caption{
-      font-family:'Montserrat', sans-serif;
+    /* ---------- Signature : simulation du tap téléphone -> plaque -> avis envoyé ---------- */
+    .hero-tap{ position:absolute; inset:0; pointer-events:none; z-index:3; }
+    .hero-tap-phone{
+      position:absolute;
+      right:6%; bottom:4%;
+      width:15%; max-width:58px; aspect-ratio:9/17.5;
+      border-radius:16%;
+      background:linear-gradient(160deg,#2c2b26,#0e0d0b);
+      border:2px solid rgba(234,217,180,.4);
+      box-shadow:0 20px 40px -14px rgba(0,0,0,.7);
+      animation:tapMove 6.5s ease-in-out infinite;
+    }
+    .hero-tap-phone::after{ content:""; position:absolute; inset:12%; border-radius:10%; background:rgba(234,217,180,.08); }
+    @keyframes tapMove{
+      0%, 10%{ transform:translate(90px,110px) rotate(10deg); opacity:0; }
+      17%{ opacity:1; }
+      24%, 42%{ transform:translate(10px,14px) rotate(-4deg); opacity:1; }
+      54%{ transform:translate(90px,110px) rotate(10deg); opacity:0; }
+      100%{ opacity:0; }
+    }
+    .hero-tap-ripple{
+      position:absolute; right:16%; bottom:14%;
+      width:16px; height:16px; border-radius:50%;
+      border:1px solid var(--cream);
+      opacity:0;
+      animation:tapRipple 6.5s ease-in-out infinite;
+    }
+    @keyframes tapRipple{
+      0%,23%{ opacity:0; transform:scale(.4); }
+      27%{ opacity:.9; transform:scale(1); }
+      40%{ opacity:0; transform:scale(2.8); }
+      100%{ opacity:0; }
+    }
+    .hero-tap-toast{
+      position:absolute; right:4%; bottom:32%;
+      display:flex; align-items:center; gap:6px;
+      padding:8px 13px;
+      border-radius:20px;
+      background:var(--cream);
+      color:#171512;
+      font-family:var(--font-body);
       font-size:.68rem;
-      letter-spacing:1.5px;
-      text-transform:uppercase;
-      color:#8a8a84;
-      text-align:center;
-      margin-top:18px;
+      font-weight:600;
+      white-space:nowrap;
+      opacity:0;
+      transform:translateY(6px);
+      box-shadow:0 12px 24px -10px rgba(0,0,0,.5);
+      animation:tapToast 6.5s ease-in-out infinite;
+    }
+    .hero-tap-toast i{ color:#171512; font-size:.6rem; }
+    @keyframes tapToast{
+      0%,27%{ opacity:0; transform:translateY(6px); }
+      33%,47%{ opacity:1; transform:translateY(0); }
+      55%{ opacity:0; transform:translateY(-6px); }
+      100%{ opacity:0; }
+    }
+    @media (max-width:700px){ .hero-tap{ display:none; } }
+    @media (prefers-reduced-motion: reduce){
+      .hero-tap-phone, .hero-tap-ripple, .hero-tap-toast{ animation:none; opacity:0; }
     }
 
     @media (max-width: 900px){
@@ -336,7 +351,6 @@
       .hero-trust, .hero-cta-group{ justify-content:center; }
       .hero-3d-stage{ margin-top:10px; }
     }
-
     @media (max-width: 480px){
       .hero-banner--3d{ padding-left:5vw; padding-right:5vw; }
       .hero-banner--3d .hero-title{ font-size:1.7rem; }
@@ -344,134 +358,113 @@
       .hero-cta-buy{ padding:14px 24px; font-size:.78rem; }
       .hero-trust-text{ font-size:.78rem; }
     }
-
     @media (prefers-reduced-motion: reduce){
-      .hero-3d-card, .plaque-face::after, .plaque-flip{
-        animation:none !important;
-      }
+      .hero-3d-card, .plaque-face::after, .plaque-flip{ animation:none !important; }
+      .hero-content > *{ animation:none; opacity:1; transform:none; }
     }
 
-    /* ===== Section "clé en main" — même identité que le hero (noir/doré/Cinzel) ===== */
-    .nfc-complete-section{
+    /* =========================================================
+       SECTION NARRATIVE UNIQUE : "Comment ça marche"
+       (fusionne présentation + process + impact + avantages)
+       ========================================================= */
+    .how-section{
       position:relative;
-      margin:70px 0;
-      padding:64px 6vw;
-      background:radial-gradient(120% 100% at 20% 0%, #1a1a1a 0%, var(--h3d-ink) 60%, #000 100%);
-      border:1px solid rgba(234,217,180,.12);
-      border-radius:18px;
-      text-align:center;
+      max-width:1100px;
+      margin:80px auto;
+      padding:70px 6vw;
+      background:radial-gradient(120% 100% at 20% 0%, var(--ink-2) 0%, var(--ink) 60%, #000 100%);
+      border:1px solid var(--line);
+      border-radius:20px;
       overflow:hidden;
     }
-    .nfc-complete-section::before{
-      content:"";
-      position:absolute; inset:0;
-      background-image:radial-gradient(rgba(255,255,255,.035) 1px, transparent 1px);
-      background-size:3px 3px;
-      pointer-events:none;
-    }
-    .nfc-complete-section > *{ position:relative; z-index:1; }
+    .how-section > *{ position:relative; z-index:1; }
 
-    .nfc-complete-section .section-headline h2{
-      color:var(--h3d-white);
-    }
-    .nfc-complete-section .section-headline p{
-      color:#b9b9b3;
-    }
-
-    .nfc-subheading{
-      font-family:'Cinzel', serif;
-      font-weight:500;
-      font-size:.95rem;
+    .how-divider{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      margin:56px 0 34px;
+      color:var(--cream);
+      font-family:var(--font-body);
+      font-size:.66rem;
+      font-weight:600;
       letter-spacing:2.5px;
       text-transform:uppercase;
-      color:var(--h3d-cream);
-      margin:50px 0 28px;
     }
-    .nfc-subheading::after{
-      content:"";
-      display:block;
-      width:40px;
-      height:1px;
-      background:var(--h3d-cream-dim);
-      margin:14px auto 0;
+    .how-divider::before, .how-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
+
+    /* --- Intro --- */
+    .how-intro{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
+    .how-intro-body p{ font-family:var(--font-body); font-size:.85rem; line-height:1.85; color:var(--muted); margin:0 0 18px; }
+    .how-tag{
+      display:inline-flex; align-items:center; gap:9px;
+      padding:10px 16px;
+      border:1px solid var(--line);
+      border-radius:30px;
+      font-family:var(--font-body);
+      font-size:.68rem;
+      color:var(--cream);
     }
 
-    .nfc-steps, .nfc-advantages{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(240px, 1fr));
-      gap:22px;
-      text-align:left;
-    }
-
-    .nfc-card{
-      padding:30px 26px;
-      background:var(--h3d-panel);
-      border:1px solid rgba(234,217,180,.14);
-      border-radius:12px;
-      transition:transform .25s ease, border-color .25s ease, background .25s ease;
-    }
-    .nfc-card:hover{
-      transform:translateY(-4px);
-      border-color:rgba(234,217,180,.45);
-      background:var(--h3d-panel-2);
-    }
-
-    .nfc-card-badge{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:38px; height:38px;
-      border-radius:50%;
-      margin-bottom:18px;
-      font-family:'Cinzel', serif;
+    .how-impact-lede{
+      max-width:520px;
+      margin:0 auto 40px;
+      text-align:center;
+      font-family:var(--font-body);
       font-size:.85rem;
-      color:var(--h3d-cream);
-    }
-    .nfc-card-badge--number{
-      border:1px solid var(--h3d-cream);
-    }
-    .nfc-card-badge--icon{
-      background:rgba(234,217,180,.12);
-      font-size:.95rem;
+      line-height:1.8;
+      color:var(--muted);
     }
 
-    .nfc-card h4{
-      font-family:'Cinzel', serif;
-      font-weight:500;
-      font-size:1.05rem;
-      letter-spacing:.4px;
-      color:var(--h3d-white);
-      margin-bottom:10px;
+    /* --- Timeline en pointillés (partagée par les deux séquences réelles) --- */
+    .path{ position:relative; max-width:640px; margin:0 auto; text-align:left; }
+    .path-track, .path-track-fill{
+      position:absolute; left:27px; top:28px; bottom:28px; width:2px;
+      background-image:linear-gradient(to bottom, currentColor 0 8px, transparent 8px 18px);
+      background-size:2px 18px;
+      background-repeat:repeat-y;
     }
-    .nfc-card p{
-      font-family:'Montserrat', sans-serif;
-      color:#b9b9b3;
-      font-size:.92rem;
-      line-height:1.6;
-      margin:0;
+    .path-track{ color:rgba(234,217,180,.25); }
+    .path-track-fill{ color:var(--cream); transform:scaleY(0); transform-origin:top; will-change:transform; }
+    .path--static .path-track{ color:rgba(234,217,180,.4); }
+    .path--static .path-track-fill{ display:none; }
+
+    .path-step{ position:relative; display:flex; align-items:flex-start; gap:24px; padding-bottom:44px; list-style:none; }
+    .path-step:last-child{ padding-bottom:0; }
+    .path-dot{
+      position:relative; z-index:2;
+      flex:0 0 56px; width:56px; height:56px;
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-family:var(--font-display); font-size:1rem;
+      color:#7a7a72;
+      background:var(--ink);
+      border:1px solid rgba(234,217,180,.25);
+      transition:color .35s ease, border-color .35s ease, box-shadow .35s ease, background .35s ease;
     }
+    .path-content{ padding-top:12px; }
+    .path-content h4{ font-family:var(--font-display); font-weight:500; font-size:1.05rem; color:var(--white); margin:0 0 8px; opacity:.5; transition:opacity .35s ease; }
+    .path-content p{ font-family:var(--font-body); color:#8f8f89; font-size:.9rem; line-height:1.6; margin:0; transition:color .35s ease; }
+
+    .path-step.is-active .path-dot{ color:var(--ink); background:var(--cream); border-color:var(--cream); box-shadow:0 0 0 6px rgba(234,217,180,.12); }
+    .path-step.is-active .path-content h4{ opacity:1; }
+    .path-step.is-active .path-content p{ color:#c7c7c1; }
+
+    .path--static .path-dot{ color:var(--ink); background:var(--cream); border-color:var(--cream); }
+    .path--static .path-content h4{ opacity:1; }
+    .path--static .path-content p{ color:#c7c7c1; }
 
     @media (max-width:600px){
-      .nfc-complete-section{ padding:50px 5vw; }
-      .nfc-subheading{ margin-top:40px; }
+      .path-dot{ flex-basis:46px; width:46px; height:46px; font-size:.85rem; }
+      .path-track, .path-track-fill{ left:22px; }
+      .path-step{ gap:16px; }
     }
+    @media (prefers-reduced-motion: reduce){ .path-track-fill{ transform:scaleY(1) !important; } }
 
-    /* ===== Graphique d'impact fusionné : avant/après + barres + cercle vertueux ===== */
-    .nfc-impact{
-      display:flex;
-      flex-direction:column;
-      gap:54px;
-      margin:44px 0 12px;
-    }
+    /* --- Graphique d'impact fusionné : avant/après + barres + cercle vertueux --- */
+    .nfc-impact{ display:flex; flex-direction:column; gap:54px; }
 
-    /* --- Comparatif avant / après (cartes verre + stat centrale) --- */
-    .nfc-compare{
-      display:grid;
-      grid-template-columns:1fr auto 1fr;
-      gap:0 34px;
-      align-items:stretch;
-      text-align:left;
-    }
+    .nfc-compare{ display:grid; grid-template-columns:1fr auto 1fr; gap:0 34px; align-items:stretch; text-align:left; }
 
     .nfc-glass-card{
       position:relative;
@@ -482,26 +475,20 @@
       -webkit-backdrop-filter:blur(16px);
       border:1px solid rgba(234,217,180,.14);
       overflow:hidden;
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
+      display:flex; flex-direction:column; justify-content:center;
       transition:transform .4s cubic-bezier(.16,1,.3,1), border-color .4s ease, background .4s ease, box-shadow .4s ease;
     }
     .nfc-glass-card::before{
-      /* halo qui suit le curseur (position via variables JS --mx / --my) */
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background:radial-gradient(220px circle at var(--mx, 50%) var(--my, 30%), rgba(234,217,180,.24), transparent 62%);
       opacity:0;
       transition:opacity .5s ease;
       pointer-events:none;
     }
     .nfc-glass-card::after{
-      /* voile flou qui balaie la carte au survol */
       content:"";
-      position:absolute;
-      top:0; left:-60%;
+      position:absolute; top:0; left:-60%;
       width:45%; height:100%;
       background:linear-gradient(100deg, transparent, rgba(255,255,255,.10), transparent);
       filter:blur(6px);
@@ -509,221 +496,80 @@
       transition:left .8s ease;
       pointer-events:none;
     }
-    .nfc-glass-card:hover{
-      transform:translateY(-6px);
-      border-color:rgba(234,217,180,.45);
-      background:rgba(255,255,255,.05);
-      box-shadow:0 24px 45px -20px rgba(0,0,0,.55);
-    }
+    .nfc-glass-card:hover{ transform:translateY(-6px); border-color:rgba(234,217,180,.45); background:rgba(255,255,255,.05); box-shadow:0 24px 45px -20px rgba(0,0,0,.55); }
     .nfc-glass-card:hover::before{ opacity:1; }
     .nfc-glass-card:hover::after{ left:130%; }
 
-    .nfc-glass-card--active{
-      background:linear-gradient(165deg, rgba(234,217,180,.14), rgba(234,217,180,.02));
-      border-color:rgba(234,217,180,.3);
-    }
-    .nfc-glass-card--active:hover{
-      background:linear-gradient(165deg, rgba(234,217,180,.2), rgba(234,217,180,.03));
-    }
+    .nfc-glass-card--active{ background:linear-gradient(165deg, rgba(234,217,180,.14), rgba(234,217,180,.02)); border-color:rgba(234,217,180,.3); }
+    .nfc-glass-card--active:hover{ background:linear-gradient(165deg, rgba(234,217,180,.2), rgba(234,217,180,.03)); }
 
-    .nfc-glass-label{
-      display:inline-block;
-      margin-bottom:16px;
-      font-family:'Montserrat', sans-serif;
-      font-size:.62rem;
-      font-weight:600;
-      letter-spacing:2.5px;
-      color:#7a7a72;
-    }
-    .nfc-glass-card--active .nfc-glass-label{ color:var(--h3d-cream); }
+    .nfc-glass-label{ display:inline-block; margin-bottom:16px; font-family:var(--font-body); font-size:.62rem; font-weight:600; letter-spacing:2.5px; color:#7a7a72; }
+    .nfc-glass-card--active .nfc-glass-label{ color:var(--cream); }
 
-    .nfc-glass-dots{
-      display:flex;
-      align-items:center;
-      gap:6px;
-      height:26px;
-      margin-bottom:6px;
-    }
-    .nfc-glass-dots span{
-      width:7px; height:7px;
-      border-radius:50%;
-      background:#5a5a55;
-    }
+    .nfc-glass-dots{ display:flex; align-items:center; gap:6px; height:26px; margin-bottom:6px; }
+    .nfc-glass-dots span{ width:7px; height:7px; border-radius:50%; background:#5a5a55; }
     .nfc-glass-dots span:nth-child(2){ opacity:.7; }
     .nfc-glass-dots span:nth-child(3){ opacity:.4; }
 
-    .nfc-glass-stars{
-      height:26px;
-      margin-bottom:6px;
-      font-size:1.05rem;
-      letter-spacing:4px;
-      color:var(--h3d-cream);
-    }
+    .nfc-glass-stars{ height:26px; margin-bottom:6px; font-size:1.05rem; letter-spacing:4px; color:var(--cream); }
 
-    .nfc-glass-card p{
-      position:relative;
-      z-index:1;
-      margin:0;
-      font-family:'Montserrat', sans-serif;
-      font-size:.82rem;
-      line-height:1.65;
-      color:#a9a9a2;
-    }
+    .nfc-glass-card p{ position:relative; z-index:1; margin:0; font-family:var(--font-body); font-size:.82rem; line-height:1.65; color:#a9a9a2; }
 
-    .nfc-compare-center{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:14px;
-      padding:0 6px;
-    }
-    .nfc-compare-arrow{
-      font-size:1.1rem;
-      color:rgba(234,217,180,.55);
-    }
+    .nfc-compare-center{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:0 6px; }
+    .nfc-compare-arrow{ font-size:1.1rem; color:rgba(234,217,180,.55); }
 
-    .nfc-bar-group{
-      display:flex;
-      align-items:flex-end;
-      gap:28px;
-      height:190px;
-    }
-    .nfc-bar-col{
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-end;
-      height:100%;
-    }
+    .nfc-bar-group{ display:flex; align-items:flex-end; gap:28px; height:190px; }
+    .nfc-bar-col{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
     .nfc-bar{
-      width:64px;
-      border-radius:8px 8px 0 0;
+      width:56px; border-radius:8px 8px 0 0;
       background:rgba(234,217,180,.16);
       border:1px solid rgba(234,217,180,.28);
-      position:relative;
-      height:18%;
+      position:relative; height:18%;
       transition:height 1.2s cubic-bezier(.16,1,.3,1);
-      display:flex;
-      align-items:flex-start;
-      justify-content:center;
+      display:flex; align-items:flex-start; justify-content:center;
     }
-    .nfc-bar--highlight{
-      background:linear-gradient(180deg, var(--h3d-cream) 0%, #c9a063 100%);
-      border-color:var(--h3d-cream);
-      box-shadow:0 10px 30px -8px rgba(234,217,180,.5);
-    }
-    .nfc-bar-value{
-      position:absolute;
-      top:-32px;
-      font-family:'Cinzel', serif;
-      font-size:1rem;
-      font-weight:600;
-      color:var(--h3d-white);
-      white-space:nowrap;
-    }
-    .nfc-bar--highlight .nfc-bar-value{
-      color:var(--h3d-cream);
-      font-size:1.35rem;
-    }
-    .nfc-bar-label{
-      margin-top:14px;
-      font-family:'Montserrat', sans-serif;
-      font-size:.75rem;
-      color:#b9b9b3;
-      text-transform:uppercase;
-      letter-spacing:.5px;
-      text-align:center;
-      max-width:110px;
-    }
+    .nfc-bar--highlight{ background:linear-gradient(180deg, var(--cream) 0%, #c9a063 100%); border-color:var(--cream); box-shadow:0 10px 30px -8px rgba(234,217,180,.5); }
+    .nfc-bar-value{ position:absolute; top:-32px; font-family:var(--font-display); font-size:.95rem; font-weight:600; color:var(--white); white-space:nowrap; }
+    .nfc-bar--highlight .nfc-bar-value{ color:var(--cream); font-size:1.3rem; }
+    .nfc-bar-label{ margin-top:14px; font-family:var(--font-body); font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; text-align:center; max-width:100px; }
 
-    .nfc-impact-flow{
-      display:grid;
-      grid-template-columns:repeat(4, 1fr);
-      gap:22px 10px;
-      align-items:stretch;
-    }
+    .nfc-impact-flow{ display:grid; grid-template-columns:repeat(4, 1fr); gap:22px 10px; align-items:stretch; }
     .nfc-flow-step{
       position:relative;
-      display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
       padding:18px 10px;
-      background:var(--h3d-panel);
+      background:var(--ink-2);
       border:1px solid rgba(234,217,180,.14);
       border-radius:12px;
       text-align:center;
       overflow:hidden;
-      transition:transform .25s ease, border-color .25s ease, background .25s ease;
-    }
-    /* Flèche entre chaque étape (pointe vers la droite en grille 4 colonnes) */
-    .nfc-flow-step:not(:last-child)::after{
-      content:"\f061"; /* fa-arrow-right */
-      font-family:"Font Awesome 6 Free";
-      font-weight:900;
-      position:absolute;
-      top:50%;
-      right:-17px;
-      transform:translateY(-50%);
-      font-size:.7rem;
-      color:rgba(234,217,180,.45);
-      z-index:2;
-    }
-    .nfc-flow-step i{
-      font-size:1.15rem;
-      color:var(--h3d-cream);
-    }
-    .nfc-flow-step span{
-      font-family:'Montserrat', sans-serif;
-      font-size:.72rem;
-      color:#dedede;
-      line-height:1.3;
+      transition:transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
     }
     .nfc-flow-step::before{
       content:"";
-      position:absolute;
-      inset:0;
+      position:absolute; inset:0;
       background:radial-gradient(180px circle at 50% 0%, rgba(234,217,180,.16), transparent 65%);
       opacity:0;
       transition:opacity .4s ease;
       pointer-events:none;
     }
-    .nfc-flow-step:hover{
-      transform:translateY(-4px);
-      border-color:rgba(234,217,180,.5);
-      background:var(--h3d-panel-2);
-      box-shadow:0 18px 32px -16px rgba(0,0,0,.5);
+    .nfc-flow-step:not(:last-child)::after{
+      content:"\f061";
+      font-family:"Font Awesome 6 Free"; font-weight:900;
+      position:absolute; top:50%; right:-17px; transform:translateY(-50%);
+      font-size:.7rem; color:rgba(234,217,180,.45); z-index:2;
     }
+    .nfc-flow-step i{ font-size:1.15rem; color:var(--cream); }
+    .nfc-flow-step span{ font-family:var(--font-body); font-size:.72rem; color:#dedede; line-height:1.3; }
+    .nfc-flow-step:hover{ transform:translateY(-4px); border-color:rgba(234,217,180,.5); background:var(--ink-3); box-shadow:0 18px 32px -16px rgba(0,0,0,.5); }
     .nfc-flow-step:hover::before{ opacity:1; }
-    .nfc-flow-step--final{
-      background:linear-gradient(180deg, rgba(234,217,180,.18), rgba(234,217,180,.05));
-      border-color:rgba(234,217,180,.45);
-      animation:nfcGlowPulse 2.6s ease-in-out infinite;
-    }
-    .nfc-flow-step--final i{ color:var(--h3d-white); position:relative; z-index:2; }
+    .nfc-flow-step--final{ background:linear-gradient(180deg, rgba(234,217,180,.18), rgba(234,217,180,.05)); border-color:rgba(234,217,180,.45); animation:nfcGlowPulse 2.6s ease-in-out infinite; }
+    .nfc-flow-step--final i{ color:var(--white); position:relative; z-index:2; }
     .nfc-flow-step--final span{ position:relative; z-index:2; font-weight:500; }
-    @keyframes nfcGlowPulse{
-      0%, 100%{ box-shadow:0 0 0 rgba(234,217,180,0); }
-      50%{ box-shadow:0 0 26px rgba(234,217,180,.35); }
-    }
+    @keyframes nfcGlowPulse{ 0%,100%{ box-shadow:0 0 0 rgba(234,217,180,0); } 50%{ box-shadow:0 0 26px rgba(234,217,180,.35); } }
 
-    /* Billets qui tombent sur la carte "Plus de chiffre d'affaires" */
-    .nfc-bills{
-      position:absolute;
-      inset:0;
-      pointer-events:none;
-      overflow:hidden;
-      z-index:1;
-    }
-    .nfc-bills span{
-      position:absolute;
-      top:-18px;
-      font-size:1rem;
-      opacity:0;
-      animation:nfcBillFall 3.4s linear infinite;
-    }
+    .nfc-bills{ position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:1; }
+    .nfc-bills span{ position:absolute; top:-18px; font-size:1rem; opacity:0; animation:nfcBillFall 3.4s linear infinite; }
     .nfc-bills span:nth-child(1){ left:10%; animation-delay:0s; font-size:.95rem; }
     .nfc-bills span:nth-child(2){ left:32%; animation-delay:.85s; font-size:.8rem; }
     .nfc-bills span:nth-child(3){ left:58%; animation-delay:1.7s; font-size:1rem; }
@@ -735,20 +581,39 @@
       100%{ transform:translateY(95px) rotate(14deg); opacity:0; }
     }
 
+    /* --- Avantages --- */
+    .how-advantages{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:22px; text-align:left; }
+    .nfc-card{
+      padding:30px 26px;
+      background:var(--ink-2);
+      border:1px solid rgba(234,217,180,.14);
+      border-radius:12px;
+      transition:transform .25s ease, border-color .25s ease, background .25s ease;
+    }
+    .nfc-card:hover{ transform:translateY(-4px); border-color:rgba(234,217,180,.45); background:var(--ink-3); }
+    .nfc-card-badge{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:38px; height:38px; border-radius:50%;
+      margin-bottom:18px;
+      background:rgba(234,217,180,.12);
+      color:var(--cream);
+      font-size:.95rem;
+    }
+    .nfc-card h4{ font-family:var(--font-display); font-weight:500; font-size:1.05rem; letter-spacing:.4px; color:var(--white); margin:0 0 10px; }
+    .nfc-card p{ font-family:var(--font-body); color:var(--muted); font-size:.92rem; line-height:1.6; margin:0; }
+
     @media (max-width:900px){
+      .how-intro{ grid-template-columns:1fr; gap:30px; text-align:center; }
+      .how-intro-body{ margin:0 auto; }
       .nfc-compare{ grid-template-columns:1fr; gap:26px; text-align:center; }
       .nfc-glass-card{ text-align:center; align-items:center; }
       .nfc-compare-arrow{ transform:rotate(90deg); }
     }
     @media (max-width:640px){
+      .how-section{ padding:50px 6vw; }
       .nfc-impact-flow{ grid-template-columns:1fr; gap:26px; }
       .nfc-flow-step:not(:last-child)::after{
-        content:"\f063"; /* fa-arrow-down */
-        top:auto;
-        bottom:-19px;
-        right:auto;
-        left:50%;
-        transform:translateX(-50%);
+        content:"\f063"; top:auto; bottom:-19px; right:auto; left:50%; transform:translateX(-50%);
       }
     }
     @media (prefers-reduced-motion: reduce){
@@ -759,90 +624,52 @@
       .nfc-glass-card::before, .nfc-glass-card::after{ display:none; }
     }
 
-    /* ===== Chemin en pointillés : timeline "Comment ça fonctionne" ===== */
-    .nfc-path{
+    /* =========================================================
+       DROP STREETWEAR
+       ========================================================= */
+    .drop-section{
       position:relative;
-      max-width:640px;
-      margin:0 auto;
-      text-align:left;
+      max-width:1100px;
+      margin:70px auto;
+      padding:70px 6vw;
+      text-align:center;
+      background:var(--ink-2);
+      border:1px solid var(--line);
+      border-radius:20px;
+      overflow:hidden;
     }
-    .nfc-path-track,
-    .nfc-path-track-fill{
-      position:absolute;
-      left:27px;
-      top:28px;
-      bottom:28px;
-      width:2px;
-      background-image:linear-gradient(to bottom, currentColor 0 8px, transparent 8px 18px);
-      background-size:2px 18px;
-      background-repeat:repeat-y;
+    .drop-section > *{ position:relative; z-index:1; }
+    .drop-title{ font-family:var(--font-display); font-weight:500; color:var(--white); font-size:clamp(1.8rem,3vw,2.4rem); margin:14px 0 16px; }
+    .drop-text{ max-width:520px; margin:0 auto 30px; font-family:var(--font-body); font-size:.85rem; line-height:1.8; color:var(--muted); }
+    .drop-cta{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:14px 28px;
+      background:var(--white); color:#111;
+      font-family:var(--font-body); font-weight:600; font-size:.8rem; letter-spacing:.5px; text-transform:uppercase;
+      text-decoration:none; border-radius:2px;
+      transition:transform .25s ease, background .25s ease;
     }
-    .nfc-path-track{ color:rgba(234,217,180,.25); }
-    .nfc-path-track-fill{
-      color:var(--h3d-cream);
-      transform:scaleY(0);
-      transform-origin:top;
-      will-change:transform;
-    }
-    .nfc-path-step{
-      position:relative;
-      display:flex;
-      align-items:flex-start;
-      gap:24px;
-      padding-bottom:44px;
-    }
-    .nfc-path-step:last-child{ padding-bottom:0; }
-    .nfc-path-dot{
-      position:relative;
-      z-index:2;
-      flex:0 0 56px;
-      width:56px; height:56px;
-      border-radius:50%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-family:'Cinzel', serif;
-      font-size:1rem;
-      color:#7a7a72;
-      background:var(--h3d-ink);
-      border:1px solid rgba(234,217,180,.25);
-      transition:color .35s ease, border-color .35s ease, box-shadow .35s ease, background .35s ease;
-    }
-    .nfc-path-content{ padding-top:12px; }
-    .nfc-path-content h4{
-      font-family:'Cinzel', serif;
-      font-weight:500;
-      font-size:1.05rem;
-      color:var(--h3d-white);
-      margin-bottom:8px;
-      opacity:.5;
-      transition:opacity .35s ease;
-    }
-    .nfc-path-content p{
-      font-family:'Montserrat', sans-serif;
-      color:#8f8f89;
-      font-size:.9rem;
-      line-height:1.6;
-      margin:0;
-      transition:color .35s ease;
-    }
-    .nfc-path-step.is-active .nfc-path-dot{
-      color:var(--h3d-ink);
-      background:var(--h3d-cream);
-      border-color:var(--h3d-cream);
-      box-shadow:0 0 0 6px rgba(234,217,180,.12);
-    }
-    .nfc-path-step.is-active .nfc-path-content h4{ opacity:1; }
-    .nfc-path-step.is-active .nfc-path-content p{ color:#c7c7c1; }
+    .drop-cta:hover{ background:var(--cream); transform:translateY(-2px); }
+    @media (max-width:600px){ .drop-section{ padding:50px 5vw; margin:55px 5vw; } }
 
-    @media (max-width:600px){
-      .nfc-path-dot{ flex-basis:46px; width:46px; height:46px; font-size:.85rem; }
-      .nfc-path-track, .nfc-path-track-fill{ left:22px; }
-      .nfc-path-step{ gap:16px; }
+    /* =========================================================
+       COMMUNAUTÉ / INSTAGRAM
+       ========================================================= */
+    .community-section{ max-width:1100px; margin:10px auto 60px; text-align:center; padding:0 20px; }
+    .community-section .section-title{ color:#161512; }
+    .community-section .section-eyebrow{ color:var(--muted-2); }
+    .community-cta{
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:30px;
+      padding:16px 32px;
+      background:#111111; color:#ffffff;
+      border:1px solid #111111;
+      font-family:var(--font-body); font-weight:600; font-size:.8rem; letter-spacing:.5px; text-transform:uppercase;
+      text-decoration:none; border-radius:2px;
+      transition:transform .25s ease, background .25s ease;
     }
-    @media (prefers-reduced-motion: reduce){
-      .nfc-path-track-fill{ transform:scaleY(1) !important; }
-    }
+    .community-cta:hover{ background:#000; transform:translateY(-2px); }
+    .community-cta i{ font-size:1.2rem; }
   </style>
 </head>
 <body>
@@ -851,12 +678,13 @@
   <aside class="drawer" id="cartDrawer"><div><div class="drawer-header"><h3>Menu & panier</h3><button class="drawer-close" id="closeDrawerBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div><nav class="mobile-nav"></nav><div class="drawer-divider"></div><div class="drawer-empty-msg">Votre panier est actuellement vide.</div><div class="cart-items-container"></div></div><button class="btn-checkout" type="button">Commander (0,00 €)</button></aside>
   <header class="top-header"></header>
 
-  <!-- ===== HERO : visualisation 3D de la plaque NFC ===== -->
+  <!-- ===== HERO ===== -->
   <section class="hero-banner hero-banner--3d">
     <div class="hero-grid">
       <div class="hero-content">
-        <h1 class="hero-title glitch" data-text="Découvrez toute la puissance du NFC">Découvrez toute la puissance du NFC</h1>
-        <p class="hero-subtitle">Technologie invisible & expérience utilisateur unique</p>
+        <p class="hero-eyebrow">Plaques & présentoirs NFC</p>
+        <h1 class="hero-title">Un tap. Un avis Google de plus.</h1>
+        <p class="hero-subtitle">Posez la plaque à votre accueil. Vos clients laissent un avis Google en 5 secondes, sans chercher votre fiche, sans application à télécharger.</p>
 
         <div class="hero-trust" aria-label="Confiance client">
           <span class="hero-trust-stars">★★★★★</span>
@@ -877,14 +705,19 @@
         <div class="hero-3d-card" id="hero3dCard">
           <div class="plaque-flip">
             <div class="plaque-face plaque-face--front">
-              <!-- ⚠️ Plaque 1 -->
               <img src="static/images/plaque-avis-google.jpg" alt="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code" class="plaque-photo" fetchpriority="high">
             </div>
             <div class="plaque-face plaque-face--back">
-              <!-- ⚠️ Plaque 2 : remplacez ce src par la 2ᵉ photo de plaque -->
               <img src="static/images/plaque-avis-google-2.png" alt="Deuxième modèle de plaque NFC" class="plaque-photo" loading="lazy">
             </div>
           </div>
+        </div>
+
+        <!-- Signature : simulation du tap qui déclenche l'envoi d'un avis -->
+        <div class="hero-tap" aria-hidden="true">
+          <div class="hero-tap-phone"></div>
+          <div class="hero-tap-ripple"></div>
+          <div class="hero-tap-toast"><i class="fa-solid fa-star"></i> Avis envoyé</div>
         </div>
       </div>
     </div>
@@ -893,399 +726,51 @@
   <main class="main-container" id="collection">
     <div class="section-headline"><h2>Explorez notre Sélection</h2><p>Prêt à l'emploi, commandez on s'occupe de tout</p></div>
     <div class="products-grid" aria-label="Sélection de produits"></div>
-    <!-- =========================================================
-     PRÉSENTATION PLAQUE AVIS GOOGLE + GRAPHIQUE
-     ========================================================= -->
 
-<style>
-
-/* =========================================================
-   BLOC PRINCIPAL
-   ========================================================= */
-
-.google-review-block{
-  max-width:1100px;
-  margin:75px auto;
-  padding:70px 65px;
-  background:#111;
-  border:1px solid #1e1e1e;
-  border-radius:12px;
-}
-
-
-/* =========================================================
-   INTRODUCTION
-   ========================================================= */
-
-.google-review-intro{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:75px;
-  align-items:center;
-  padding-bottom:65px;
-  border-bottom:1px solid #202020;
-}
-
-.google-review-title > span,
-.google-review-process-title > span,
-.google-review-impact-title > span{
-  display:block;
-  margin-bottom:15px;
-
-  font-family:'Montserrat',sans-serif;
-  font-size:.62rem;
-  font-weight:500;
-  letter-spacing:2px;
-
-  color:#666;
-}
-
-.google-review-title h2{
-  margin:0 0 20px;
-
-  font-family:'Cinzel',serif;
-  font-size:clamp(1.8rem,3vw,2.5rem);
-  line-height:1.25;
-  font-weight:500;
-
-  color:#fff;
-}
-
-.google-review-title p{
-  max-width:460px;
-  margin:0;
-
-  font-family:'Montserrat',sans-serif;
-  font-size:.82rem;
-  line-height:1.8;
-
-  color:#888;
-}
-
-.google-review-description{
-  padding-left:10px;
-}
-
-.google-review-description p{
-  margin:0 0 16px;
-
-  font-family:'Montserrat',sans-serif;
-  font-size:.78rem;
-  line-height:1.85;
-
-  color:#858585;
-}
-
-.google-review-note{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-
-  margin-top:8px;
-  padding:10px 14px;
-
-  border:1px solid #252525;
-  border-radius:4px;
-
-  font-family:'Montserrat',sans-serif;
-  font-size:.63rem;
-
-  color:#999;
-}
-
-.google-review-note i{
-  color:#999;
-}
-
-
-/* =========================================================
-   COMMENT ÇA MARCHE
-   ========================================================= */
-
-.google-review-process{
-  padding:55px 0;
-  border-bottom:1px solid #202020;
-}
-
-.google-review-process-title{
-  text-align:center;
-  margin-bottom:38px;
-}
-
-.google-review-steps{
-  max-width:900px;
-  margin:auto;
-
-  display:grid;
-  grid-template-columns:1fr 45px 1fr 45px 1fr;
-  align-items:center;
-}
-
-.google-review-step{
-  display:flex;
-  align-items:flex-start;
-  gap:15px;
-}
-
-.google-review-step-number{
-  flex:0 0 38px;
-
-  width:38px;
-  height:38px;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  border:1px solid #292929;
-  border-radius:50%;
-
-  font-family:'Montserrat',sans-serif;
-  font-size:.6rem;
-
-  color:#888;
-}
-
-.google-review-step-content strong{
-  display:block;
-
-  margin:1px 0 6px;
-
-  font-family:'Montserrat',sans-serif;
-  font-size:.73rem;
-  font-weight:600;
-
-  color:#ddd;
-}
-
-.google-review-step-content p{
-  margin:0;
-
-  font-family:'Montserrat',sans-serif;
-  font-size:.65rem;
-  line-height:1.55;
-
-  color:#696969;
-}
-
-.google-review-separator{
-  height:1px;
-  background:#282828;
-}
-
-
-/* =========================================================
-   MOBILE
-   ========================================================= */
-
-@media(max-width:800px){
-
-  .google-review-block{
-    margin:55px 5vw;
-    padding:50px 25px;
-  }
-
-
-  /* intro */
-
-  .google-review-intro{
-    grid-template-columns:1fr;
-    gap:35px;
-
-    padding-bottom:50px;
-  }
-
-  .google-review-title{
-    text-align:center;
-  }
-
-  .google-review-title p{
-    margin:auto;
-  }
-
-  .google-review-description{
-    padding-left:0;
-    text-align:center;
-  }
-
-  .google-review-note{
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-
-  /* étapes */
-
-  .google-review-process{
-    padding:45px 0;
-  }
-
-  .google-review-steps{
-    grid-template-columns:1fr;
-    gap:0;
-  }
-
-  .google-review-step{
-    padding:16px 0;
-  }
-
-  .google-review-separator{
-    width:1px;
-    height:18px;
-
-    margin-left:19px;
-  }
-
-
-}
-
-</style>
-
-
-<section class="google-review-block">
-
-  <!-- =====================================================
-       1 — PRÉSENTATION
-       ===================================================== -->
-
-  <div class="google-review-intro">
-
-    <div class="google-review-title">
-
-      <span>LA PLAQUE AVIS GOOGLE</span>
-
-      <h2>
-        C'est quoi<br>
-        une plaque Avis Google ?
-      </h2>
-
-      <p>
-        Une façon simple de permettre à vos clients de laisser
-        un avis Google directement depuis leur téléphone.
-      </p>
-
-    </div>
-
-
-    <div class="google-review-description">
-
-      <p>
-        Votre client approche simplement son téléphone de la plaque.
-        Une notification s'affiche et l'emmène directement sur
-        votre fiche Google.
-      </p>
-
-      <p>
-        Il peut alors laisser son avis en quelques secondes,
-        sans avoir à rechercher votre établissement.
-      </p>
-
-      <div class="google-review-note">
-        <i class="fa-solid fa-bolt"></i>
-        <span>Sans application à télécharger</span>
+    <!-- ===== SECTION NARRATIVE UNIQUE : présentation, process, impact, avantages ===== -->
+    <section class="how-section">
+
+      <div class="how-intro">
+        <div class="how-intro-head">
+          <p class="section-eyebrow">La plaque avis Google</p>
+          <h2 class="section-title">Chaque visite peut devenir un avis.</h2>
+        </div>
+        <div class="how-intro-body">
+          <p>Votre client approche simplement son téléphone de la plaque. Une notification s'affiche et l'emmène directement sur votre fiche Google, sans avoir à la rechercher.</p>
+          <span class="how-tag"><i class="fa-solid fa-bolt"></i> Sans application à télécharger</span>
+        </div>
       </div>
 
-    </div>
+      <div class="how-divider"><span>Comment ça marche</span></div>
 
-  </div>
+      <ol class="path path--static">
+        <li class="path-step">
+          <span class="path-dot">01</span>
+          <div class="path-content">
+            <h4>Il approche son téléphone</h4>
+            <p>Il suffit de le rapprocher de la plaque, aucune application requise.</p>
+          </div>
+        </li>
+        <li class="path-step">
+          <span class="path-dot">02</span>
+          <div class="path-content">
+            <h4>Sa fiche Google s'ouvre</h4>
+            <p>Il arrive directement au bon endroit, sans recherche.</p>
+          </div>
+        </li>
+        <li class="path-step">
+          <span class="path-dot">03</span>
+          <div class="path-content">
+            <h4>Il laisse son avis</h4>
+            <p>Quelques secondes suffisent.</p>
+          </div>
+        </li>
+      </ol>
 
+      <div class="how-divider"><span>L'impact</span></div>
 
-  <!-- =====================================================
-       2 — COMMENT ÇA MARCHE
-       ===================================================== -->
+      <p class="how-impact-lede">Plus d'avis, plus de visibilité, plus de clients — et plus de chiffre d'affaires.</p>
 
-  <div class="google-review-process">
-
-    <div class="google-review-process-title">
-      <span>COMMENT ÇA MARCHE ?</span>
-    </div>
-
-
-    <div class="google-review-steps">
-
-      <div class="google-review-step">
-
-        <div class="google-review-step-number">
-          01
-        </div>
-
-        <div class="google-review-step-content">
-
-          <strong>
-            Le client approche son téléphone
-          </strong>
-
-          <p>
-            Il suffit de le rapprocher de la plaque.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="google-review-separator"></div>
-
-
-      <div class="google-review-step">
-
-        <div class="google-review-step-number">
-          02
-        </div>
-
-        <div class="google-review-step-content">
-
-          <strong>
-            Votre fiche Google s'ouvre
-          </strong>
-
-          <p>
-            Il arrive directement au bon endroit.
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="google-review-separator"></div>
-
-
-      <div class="google-review-step">
-
-        <div class="google-review-step-number">
-          03
-        </div>
-
-        <div class="google-review-step-content">
-
-          <strong>
-            Il laisse son avis
-          </strong>
-
-          <p>
-            Quelques secondes suffisent.
-          </p>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-</section>
-
-    <!-- SECTION FUSIONNÉE : Impact (avis -> clients -> CA) & Comment ça marche -->
-    <section class="nfc-complete-section">
-      <div class="section-headline">
-        <h2>Plus d'avis, plus de clients, plus de chiffre d'affaires</h2>
-        <p>Le cercle vertueux enclenché par une simple plaque NFC</p>
-      </div>
-
-      <!-- Sous-partie : Graphique d'impact fusionné (avant/après + barres + cercle vertueux) -->
       <div class="nfc-impact" id="nfcImpact">
 
         <div class="nfc-compare" id="nfcCompare">
@@ -1345,73 +830,81 @@
         </div>
       </div>
 
-      <!-- Sous-partie : Comment ça marche (timeline en pointillés, animée au scroll) -->
-      <h3 class="nfc-subheading">Comment ça fonctionne ?</h3>
-      <div class="nfc-path" id="nfcPath">
-        <div class="nfc-path-track"></div>
-        <div class="nfc-path-track-fill" id="nfcPathFill"></div>
+      <div class="how-divider"><span>Comment ça fonctionne</span></div>
 
-        <div class="nfc-path-step">
-          <span class="nfc-path-dot">01</span>
-          <div class="nfc-path-content">
+      <div class="path" id="nfcPath">
+        <div class="path-track"></div>
+        <div class="path-track-fill" id="nfcPathFill"></div>
+
+        <div class="path-step">
+          <span class="path-dot">01</span>
+          <div class="path-content">
             <h4>Commandez</h4>
             <p>Indiquez simplement l'adresse de votre commerce, votre page Instagram ou site web.</p>
           </div>
         </div>
 
-        <div class="nfc-path-step">
-          <span class="nfc-path-dot">02</span>
-          <div class="nfc-path-content">
+        <div class="path-step">
+          <span class="path-dot">02</span>
+          <div class="path-content">
             <h4>Nous programmons</h4>
             <p>Nous encodons et testons votre support en atelier avant de vous l'expédier.</p>
           </div>
         </div>
 
-        <div class="nfc-path-step">
-          <span class="nfc-path-dot">03</span>
-          <div class="nfc-path-content">
+        <div class="path-step">
+          <span class="path-dot">03</span>
+          <div class="path-content">
             <h4>Profitez</h4>
             <p>Votre support est prêt à l'emploi dès réception. Récoltez vos premiers avis !</p>
           </div>
         </div>
       </div>
 
-      <!-- Sous-partie : Les points forts du NFC -->
-      <h3 class="nfc-subheading">Les avantages pour vos clients</h3>
-      <div class="nfc-advantages">
+      <div class="how-divider"><span>Pour vos clients</span></div>
+
+      <div class="how-advantages">
         <div class="nfc-card">
-          <span class="nfc-card-badge nfc-card-badge--icon"><i class="fa-solid fa-mobile-screen-button"></i></span>
+          <span class="nfc-card-badge"><i class="fa-solid fa-mobile-screen-button"></i></span>
           <h4>Sans application</h4>
           <p>Aucun téléchargement ni application spécifique n'est requis. La lecture est totalement native sur smartphones récents.</p>
         </div>
         <div class="nfc-card">
-          <span class="nfc-card-badge nfc-card-badge--icon"><i class="fa-solid fa-bolt"></i></span>
+          <span class="nfc-card-badge"><i class="fa-solid fa-bolt"></i></span>
           <h4>Ultra-rapide</h4>
           <p>Un simple effleurement du téléphone sur la plaque suffit pour ouvrir instantanément votre page Google Avis.</p>
         </div>
         <div class="nfc-card">
-          <span class="nfc-card-badge nfc-card-badge--icon"><i class="fa-solid fa-shield-halved"></i></span>
+          <span class="nfc-card-badge"><i class="fa-solid fa-shield-halved"></i></span>
           <h4>Double sécurité</h4>
           <p>Chaque plaque intègre une puce NFC et un QR Code de secours pour garantir une compatibilité de 100 %.</p>
         </div>
       </div>
     </section>
 
-    <section class="streetwear-teaser" style="margin:60px 0;padding:50px 20px;background:#181818;color:#fff;text-align:center;border-radius:12px;"><p style="letter-spacing:2px;text-transform:uppercase;font-size:.75rem;">Drop 00</p><h2 style="font-size:2rem;margin:15px 0 10px;color:#fff;">NFC COCONUT STREETWEAR</h2><p style="max-width:600px;margin:0 auto 25px;color:#ddd;">Une collection de vêtements conçue pour connecter style et technologie.</p><a href="streetwear.html" class="btn-details" style="background:#fff;color:#111;">Découvrir notre gamme Streetwear</a></section>
+    <!-- ===== DROP STREETWEAR ===== -->
+    <section class="drop-section">
+      <p class="section-eyebrow" style="color:var(--muted-2);">Drop 00</p>
+      <h2 class="drop-title">NFC Coconut Streetwear</h2>
+      <p class="drop-text">Une petite collection pensée pour connecter style et technologie — puce NFC intégrée, série limitée.</p>
+      <a href="streetwear.html" class="drop-cta">
+        <span>Découvrir la collection</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+    </section>
   </main>
 
-  <section class="drop-vip-section" style="max-width: 1100px; margin: 10px auto 40px; text-align: center; padding: 0 20px;">
+  <!-- ===== COMMUNAUTÉ / INSTAGRAM ===== -->
+  <section class="community-section">
     <div class="section-headline">
-      <h2>REJOIGNEZ LA COMMUNAUTÉ</h2>
+      <h2>Rejoignez la communauté</h2>
       <p>Édition limitée & accès anticipé aux prochains Drops sur Instagram</p>
     </div>
 
-    <div style="margin-top: 30px;">
-      <a href="https://www.instagram.com/nfc_coconut_official/" target="_blank" rel="noopener noreferrer" class="btn-catalog" style="display: inline-flex; align-items: center; gap: 10px; background: #111111; color: #ffffff; padding: 16px 32px; border: 1px solid #111111;">
-        <i class="fa-brands fa-instagram" style="font-size: 1.2rem;"></i>
-        <span>Nous Suivre sur Instagram</span>
-      </a>
-    </div>
+    <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="community-cta">
+      <i class="fa-brands fa-instagram"></i>
+      <span>Nous Suivre sur Instagram</span>
+    </a>
   </section>
 
   <footer>&copy; 2026 NFC COCONUT — TOUS DROITS RÉSERVÉS</footer>
@@ -1518,14 +1011,14 @@
     })();
   </script>
 
-  <!-- ===== Chemin en pointillés : se dessine progressivement pendant le scroll ===== -->
+  <!-- ===== Chemin en pointillés : se dessine progressivement pendant le scroll (process de commande) ===== -->
   <script>
     (function(){
       var path = document.getElementById('nfcPath');
       var fill = document.getElementById('nfcPathFill');
       if(!path || !fill) return;
 
-      var steps = Array.prototype.slice.call(path.querySelectorAll('.nfc-path-step'));
+      var steps = Array.prototype.slice.call(path.querySelectorAll('.path-step'));
       var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
       if(reduceMotion){
@@ -1541,9 +1034,6 @@
         var rect = path.getBoundingClientRect();
         var viewH = window.innerHeight;
 
-        // Le chemin commence à se dessiner quand son haut entre dans le bas
-        // de l'écran, et finit d'être tracé quand son bas approche le haut
-        // de l'écran : ça donne l'effet "on avance dans le chemin en scrollant".
         var start = viewH * 0.85;
         var end = viewH * 0.35;
         var total = rect.height + (start - end);
