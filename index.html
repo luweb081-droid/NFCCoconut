@@ -56,7 +56,7 @@
       "url": "https://nfc-coconut.vercel.app/",
       "logo": "https://nfc-coconut.vercel.app/static/images/nfccoconut.png",
       "sameAs": [
-        "https://www.instagram.com/nfc_coconut/"
+        "https://www.instagram.com/nfc_coconut_official/"
       ]
     }
   </script>
@@ -456,24 +456,138 @@
       .nfc-subheading{ margin-top:40px; }
     }
 
-    /* ===== Graphique d'impact : avis -> clients -> CA ===== */
+    /* ===== Graphique d'impact fusionné : avant/après + barres + cercle vertueux ===== */
     .nfc-impact{
-      display:grid;
-      grid-template-columns:0.9fr 1.1fr;
-      gap:50px;
-      align-items:center;
+      display:flex;
+      flex-direction:column;
+      gap:54px;
       margin:44px 0 12px;
+    }
+
+    /* --- Comparatif avant / après (cartes verre + stat centrale) --- */
+    .nfc-compare{
+      display:grid;
+      grid-template-columns:1fr auto 1fr;
+      gap:0 34px;
+      align-items:stretch;
       text-align:left;
     }
-    .nfc-impact-chart{
+
+    .nfc-glass-card{
+      position:relative;
+      padding:32px 28px;
+      border-radius:16px;
+      background:rgba(255,255,255,.03);
+      backdrop-filter:blur(16px);
+      -webkit-backdrop-filter:blur(16px);
+      border:1px solid rgba(234,217,180,.14);
+      overflow:hidden;
       display:flex;
+      flex-direction:column;
       justify-content:center;
+      transition:transform .4s cubic-bezier(.16,1,.3,1), border-color .4s ease, background .4s ease, box-shadow .4s ease;
     }
+    .nfc-glass-card::before{
+      /* halo qui suit le curseur (position via variables JS --mx / --my) */
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(220px circle at var(--mx, 50%) var(--my, 30%), rgba(234,217,180,.24), transparent 62%);
+      opacity:0;
+      transition:opacity .5s ease;
+      pointer-events:none;
+    }
+    .nfc-glass-card::after{
+      /* voile flou qui balaie la carte au survol */
+      content:"";
+      position:absolute;
+      top:0; left:-60%;
+      width:45%; height:100%;
+      background:linear-gradient(100deg, transparent, rgba(255,255,255,.10), transparent);
+      filter:blur(6px);
+      transform:skewX(-15deg);
+      transition:left .8s ease;
+      pointer-events:none;
+    }
+    .nfc-glass-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(234,217,180,.45);
+      background:rgba(255,255,255,.05);
+      box-shadow:0 24px 45px -20px rgba(0,0,0,.55);
+    }
+    .nfc-glass-card:hover::before{ opacity:1; }
+    .nfc-glass-card:hover::after{ left:130%; }
+
+    .nfc-glass-card--active{
+      background:linear-gradient(165deg, rgba(234,217,180,.14), rgba(234,217,180,.02));
+      border-color:rgba(234,217,180,.3);
+    }
+    .nfc-glass-card--active:hover{
+      background:linear-gradient(165deg, rgba(234,217,180,.2), rgba(234,217,180,.03));
+    }
+
+    .nfc-glass-label{
+      display:inline-block;
+      margin-bottom:16px;
+      font-family:'Montserrat', sans-serif;
+      font-size:.62rem;
+      font-weight:600;
+      letter-spacing:2.5px;
+      color:#7a7a72;
+    }
+    .nfc-glass-card--active .nfc-glass-label{ color:var(--h3d-cream); }
+
+    .nfc-glass-dots{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      height:26px;
+      margin-bottom:6px;
+    }
+    .nfc-glass-dots span{
+      width:7px; height:7px;
+      border-radius:50%;
+      background:#5a5a55;
+    }
+    .nfc-glass-dots span:nth-child(2){ opacity:.7; }
+    .nfc-glass-dots span:nth-child(3){ opacity:.4; }
+
+    .nfc-glass-stars{
+      height:26px;
+      margin-bottom:6px;
+      font-size:1.05rem;
+      letter-spacing:4px;
+      color:var(--h3d-cream);
+    }
+
+    .nfc-glass-card p{
+      position:relative;
+      z-index:1;
+      margin:0;
+      font-family:'Montserrat', sans-serif;
+      font-size:.82rem;
+      line-height:1.65;
+      color:#a9a9a2;
+    }
+
+    .nfc-compare-center{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:14px;
+      padding:0 6px;
+    }
+    .nfc-compare-arrow{
+      font-size:1.1rem;
+      color:rgba(234,217,180,.55);
+    }
+
     .nfc-bar-group{
       display:flex;
       align-items:flex-end;
-      gap:36px;
-      height:220px;
+      gap:28px;
+      height:190px;
     }
     .nfc-bar-col{
       display:flex;
@@ -567,11 +681,22 @@
       color:#dedede;
       line-height:1.3;
     }
+    .nfc-flow-step::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:radial-gradient(180px circle at 50% 0%, rgba(234,217,180,.16), transparent 65%);
+      opacity:0;
+      transition:opacity .4s ease;
+      pointer-events:none;
+    }
     .nfc-flow-step:hover{
       transform:translateY(-4px);
       border-color:rgba(234,217,180,.5);
       background:var(--h3d-panel-2);
+      box-shadow:0 18px 32px -16px rgba(0,0,0,.5);
     }
+    .nfc-flow-step:hover::before{ opacity:1; }
     .nfc-flow-step--final{
       background:linear-gradient(180deg, rgba(234,217,180,.18), rgba(234,217,180,.05));
       border-color:rgba(234,217,180,.45);
@@ -611,9 +736,9 @@
     }
 
     @media (max-width:900px){
-      .nfc-impact{ grid-template-columns:1fr; gap:34px; text-align:center; }
-      .nfc-impact-chart{ order:1; }
-      .nfc-impact-flow{ order:2; }
+      .nfc-compare{ grid-template-columns:1fr; gap:26px; text-align:center; }
+      .nfc-glass-card{ text-align:center; align-items:center; }
+      .nfc-compare-arrow{ transform:rotate(90deg); }
     }
     @media (max-width:640px){
       .nfc-impact-flow{ grid-template-columns:1fr; gap:26px; }
@@ -630,6 +755,8 @@
       .nfc-bar{ transition:none; }
       .nfc-flow-step--final{ animation:none; }
       .nfc-bills span{ animation:none; opacity:0; }
+      .nfc-glass-card{ transition:none; }
+      .nfc-glass-card::before, .nfc-glass-card::after{ display:none; }
     }
 
     /* ===== Chemin en pointillés : timeline "Comment ça fonctionne" ===== */
@@ -766,6 +893,390 @@
   <main class="main-container" id="collection">
     <div class="section-headline"><h2>Explorez notre Sélection</h2><p>Prêt à l'emploi, commandez on s'occupe de tout</p></div>
     <div class="products-grid" aria-label="Sélection de produits"></div>
+    <!-- =========================================================
+     PRÉSENTATION PLAQUE AVIS GOOGLE + GRAPHIQUE
+     ========================================================= -->
+
+<style>
+
+/* =========================================================
+   BLOC PRINCIPAL
+   ========================================================= */
+
+.google-review-block{
+  max-width:1100px;
+  margin:75px auto;
+  padding:70px 65px;
+  background:#111;
+  border:1px solid #1e1e1e;
+  border-radius:12px;
+}
+
+
+/* =========================================================
+   INTRODUCTION
+   ========================================================= */
+
+.google-review-intro{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:75px;
+  align-items:center;
+  padding-bottom:65px;
+  border-bottom:1px solid #202020;
+}
+
+.google-review-title > span,
+.google-review-process-title > span,
+.google-review-impact-title > span{
+  display:block;
+  margin-bottom:15px;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:.62rem;
+  font-weight:500;
+  letter-spacing:2px;
+
+  color:#666;
+}
+
+.google-review-title h2{
+  margin:0 0 20px;
+
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,3vw,2.5rem);
+  line-height:1.25;
+  font-weight:500;
+
+  color:#fff;
+}
+
+.google-review-title p{
+  max-width:460px;
+  margin:0;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:.82rem;
+  line-height:1.8;
+
+  color:#888;
+}
+
+.google-review-description{
+  padding-left:10px;
+}
+
+.google-review-description p{
+  margin:0 0 16px;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:.78rem;
+  line-height:1.85;
+
+  color:#858585;
+}
+
+.google-review-note{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+
+  margin-top:8px;
+  padding:10px 14px;
+
+  border:1px solid #252525;
+  border-radius:4px;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:.63rem;
+
+  color:#999;
+}
+
+.google-review-note i{
+  color:#999;
+}
+
+
+/* =========================================================
+   COMMENT ÇA MARCHE
+   ========================================================= */
+
+.google-review-process{
+  padding:55px 0;
+  border-bottom:1px solid #202020;
+}
+
+.google-review-process-title{
+  text-align:center;
+  margin-bottom:38px;
+}
+
+.google-review-steps{
+  max-width:900px;
+  margin:auto;
+
+  display:grid;
+  grid-template-columns:1fr 45px 1fr 45px 1fr;
+  align-items:center;
+}
+
+.google-review-step{
+  display:flex;
+  align-items:flex-start;
+  gap:15px;
+}
+
+.google-review-step-number{
+  flex:0 0 38px;
+
+  width:38px;
+  height:38px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  border:1px solid #292929;
+  border-radius:50%;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:.6rem;
+
+  color:#888;
+}
+
+.google-review-step-content strong{
+  display:block;
+
+  margin:1px 0 6px;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:.73rem;
+  font-weight:600;
+
+  color:#ddd;
+}
+
+.google-review-step-content p{
+  margin:0;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:.65rem;
+  line-height:1.55;
+
+  color:#696969;
+}
+
+.google-review-separator{
+  height:1px;
+  background:#282828;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .google-review-block{
+    margin:55px 5vw;
+    padding:50px 25px;
+  }
+
+
+  /* intro */
+
+  .google-review-intro{
+    grid-template-columns:1fr;
+    gap:35px;
+
+    padding-bottom:50px;
+  }
+
+  .google-review-title{
+    text-align:center;
+  }
+
+  .google-review-title p{
+    margin:auto;
+  }
+
+  .google-review-description{
+    padding-left:0;
+    text-align:center;
+  }
+
+  .google-review-note{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+
+  /* étapes */
+
+  .google-review-process{
+    padding:45px 0;
+  }
+
+  .google-review-steps{
+    grid-template-columns:1fr;
+    gap:0;
+  }
+
+  .google-review-step{
+    padding:16px 0;
+  }
+
+  .google-review-separator{
+    width:1px;
+    height:18px;
+
+    margin-left:19px;
+  }
+
+
+}
+
+</style>
+
+
+<section class="google-review-block">
+
+  <!-- =====================================================
+       1 — PRÉSENTATION
+       ===================================================== -->
+
+  <div class="google-review-intro">
+
+    <div class="google-review-title">
+
+      <span>LA PLAQUE AVIS GOOGLE</span>
+
+      <h2>
+        C'est quoi<br>
+        une plaque Avis Google ?
+      </h2>
+
+      <p>
+        Une façon simple de permettre à vos clients de laisser
+        un avis Google directement depuis leur téléphone.
+      </p>
+
+    </div>
+
+
+    <div class="google-review-description">
+
+      <p>
+        Votre client approche simplement son téléphone de la plaque.
+        Une notification s'affiche et l'emmène directement sur
+        votre fiche Google.
+      </p>
+
+      <p>
+        Il peut alors laisser son avis en quelques secondes,
+        sans avoir à rechercher votre établissement.
+      </p>
+
+      <div class="google-review-note">
+        <i class="fa-solid fa-bolt"></i>
+        <span>Sans application à télécharger</span>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       2 — COMMENT ÇA MARCHE
+       ===================================================== -->
+
+  <div class="google-review-process">
+
+    <div class="google-review-process-title">
+      <span>COMMENT ÇA MARCHE ?</span>
+    </div>
+
+
+    <div class="google-review-steps">
+
+      <div class="google-review-step">
+
+        <div class="google-review-step-number">
+          01
+        </div>
+
+        <div class="google-review-step-content">
+
+          <strong>
+            Le client approche son téléphone
+          </strong>
+
+          <p>
+            Il suffit de le rapprocher de la plaque.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="google-review-separator"></div>
+
+
+      <div class="google-review-step">
+
+        <div class="google-review-step-number">
+          02
+        </div>
+
+        <div class="google-review-step-content">
+
+          <strong>
+            Votre fiche Google s'ouvre
+          </strong>
+
+          <p>
+            Il arrive directement au bon endroit.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="google-review-separator"></div>
+
+
+      <div class="google-review-step">
+
+        <div class="google-review-step-number">
+          03
+        </div>
+
+        <div class="google-review-step-content">
+
+          <strong>
+            Il laisse son avis
+          </strong>
+
+          <p>
+            Quelques secondes suffisent.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+</section>
 
     <!-- SECTION FUSIONNÉE : Impact (avis -> clients -> CA) & Comment ça marche -->
     <section class="nfc-complete-section">
@@ -774,23 +1285,41 @@
         <p>Le cercle vertueux enclenché par une simple plaque NFC</p>
       </div>
 
-      <!-- Sous-partie : Graphique d'impact animé -->
+      <!-- Sous-partie : Graphique d'impact fusionné (avant/après + barres + cercle vertueux) -->
       <div class="nfc-impact" id="nfcImpact">
-        <div class="nfc-impact-chart">
-          <div class="nfc-bar-group">
-            <div class="nfc-bar-col">
-              <div class="nfc-bar" id="barBase">
-                <span class="nfc-bar-value">Sans NFC</span>
-              </div>
-              <p class="nfc-bar-label">Avis Google actuels</p>
-            </div>
-            <div class="nfc-bar-col">
-              <div class="nfc-bar nfc-bar--highlight" id="barBoost">
-                <span class="nfc-bar-value" id="boostCounter">+0%</span>
-              </div>
-              <p class="nfc-bar-label">Avec plaque NFC Coconut</p>
-            </div>
+
+        <div class="nfc-compare" id="nfcCompare">
+
+          <div class="nfc-glass-card" data-glass>
+            <span class="nfc-glass-label">AVANT</span>
+            <div class="nfc-glass-dots"><span></span><span></span><span></span></div>
+            <p>Le client doit chercher votre établissement sur Google avant de pouvoir laisser un avis.</p>
           </div>
+
+          <div class="nfc-compare-center">
+            <div class="nfc-bar-group">
+              <div class="nfc-bar-col">
+                <div class="nfc-bar" id="barBase">
+                  <span class="nfc-bar-value">Sans NFC</span>
+                </div>
+                <p class="nfc-bar-label">Avis récoltés</p>
+              </div>
+              <div class="nfc-bar-col">
+                <div class="nfc-bar nfc-bar--highlight" id="barBoost">
+                  <span class="nfc-bar-value" id="boostCounter">+0%</span>
+                </div>
+                <p class="nfc-bar-label">Avec NFC Coconut</p>
+              </div>
+            </div>
+            <i class="fa-solid fa-arrow-right-long nfc-compare-arrow"></i>
+          </div>
+
+          <div class="nfc-glass-card nfc-glass-card--active" data-glass>
+            <span class="nfc-glass-label">AVEC NFC</span>
+            <div class="nfc-glass-stars">★★★★★</div>
+            <p>Il approche son téléphone : sa fiche Google s'ouvre, l'avis part en quelques secondes.</p>
+          </div>
+
         </div>
 
         <div class="nfc-impact-flow">
@@ -878,7 +1407,7 @@
     </div>
 
     <div style="margin-top: 30px;">
-      <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" class="btn-catalog" style="display: inline-flex; align-items: center; gap: 10px; background: #111111; color: #ffffff; padding: 16px 32px; border: 1px solid #111111;">
+      <a href="https://www.instagram.com/nfc_coconut_official/" target="_blank" rel="noopener noreferrer" class="btn-catalog" style="display: inline-flex; align-items: center; gap: 10px; background: #111111; color: #ffffff; padding: 16px 32px; border: 1px solid #111111;">
         <i class="fa-brands fa-instagram" style="font-size: 1.2rem;"></i>
         <span>Nous Suivre sur Instagram</span>
       </a>
@@ -964,6 +1493,28 @@
       } else {
         runAnimation();
       }
+    })();
+  </script>
+
+  <!-- ===== Halo qui suit le curseur sur les cartes Avant / Avec NFC ===== -->
+  <script>
+    (function(){
+      var cards = document.querySelectorAll('[data-glass]');
+      if(!cards.length) return;
+
+      var isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if(isCoarsePointer || reduceMotion) return;
+
+      cards.forEach(function(card){
+        card.addEventListener('mousemove', function(e){
+          var rect = card.getBoundingClientRect();
+          var x = ((e.clientX - rect.left) / rect.width) * 100;
+          var y = ((e.clientY - rect.top) / rect.height) * 100;
+          card.style.setProperty('--mx', x + '%');
+          card.style.setProperty('--my', y + '%');
+        });
+      });
     })();
   </script>
 

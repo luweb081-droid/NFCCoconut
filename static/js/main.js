@@ -392,7 +392,7 @@ function renderNavigation() {
 
     <!-- Réseaux sociaux -->
     <div style="display: flex; align-items: center; gap: 0;">
-        <a href="https://www.instagram.com/nfc_coconut/?utm_source=ig_web_button_share_sheet"
+        <a href="https://www.instagram.com/nfc_coconut_official"
            target="_blank"
            aria-label="Notre page Instagram"
            class="header-icon-link"

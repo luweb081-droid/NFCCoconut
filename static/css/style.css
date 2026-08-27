@@ -1523,3 +1523,327 @@ position:relative;
   padding:clamp(60px, 10vw, 90px) 6vw clamp(40px, 8vw, 60px);
   box-sizing:border-box;
 }
+/* =========================================================
+   PRÉSENTATION PLAQUE AVIS GOOGLE
+   ========================================================= */
+
+.google-review-section{
+  margin:70px 0 0;
+  padding:70px 6vw;
+  background:#0d0d0d;
+  border-top:1px solid #1c1c1c;
+  border-bottom:1px solid #1c1c1c;
+}
+
+.google-review-heading{
+  max-width:680px;
+  margin:0 auto 50px;
+  text-align:center;
+}
+
+.google-review-heading > span,
+.review-impact-heading > span{
+  display:block;
+  margin-bottom:14px;
+  font-family:'Montserrat',sans-serif;
+  font-size:.62rem;
+  font-weight:500;
+  letter-spacing:2px;
+  color:#777;
+}
+
+.google-review-heading h2,
+.review-impact-heading h2{
+  margin:0 0 15px;
+  font-family:'Cinzel',serif;
+  font-size:clamp(1.8rem,3.5vw,2.6rem);
+  font-weight:500;
+  line-height:1.25;
+  color:#fff;
+}
+
+.google-review-heading p,
+.review-impact-heading p{
+  max-width:570px;
+  margin:0 auto;
+  font-family:'Montserrat',sans-serif;
+  font-size:.84rem;
+  line-height:1.8;
+  color:#888;
+}
+
+
+/* CONTENU */
+
+.google-review-content{
+  max-width:1050px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+  align-items:center;
+}
+
+.google-review-text{
+  padding-right:10px;
+}
+
+.google-review-text h3{
+  margin:0 0 18px;
+  font-family:'Cinzel',serif;
+  font-size:1.25rem;
+  font-weight:500;
+  color:#fff;
+}
+
+.google-review-text p{
+  margin:0 0 15px;
+  font-family:'Montserrat',sans-serif;
+  font-size:.82rem;
+  line-height:1.8;
+  color:#888;
+}
+
+.google-review-note{
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  margin-top:16px;
+  padding:10px 14px;
+  border:1px solid #252525;
+  border-radius:4px;
+  font-family:'Montserrat',sans-serif;
+  font-size:.65rem;
+  color:#aaa;
+}
+
+.google-review-note i{
+  color:#aaa;
+}
+
+
+/* ÉTAPES */
+
+.google-review-steps{
+  position:relative;
+}
+
+.google-review-step{
+  display:flex;
+  align-items:center;
+  gap:18px;
+  padding:17px 0;
+}
+
+.google-review-step > span{
+  flex:0 0 40px;
+  width:40px;
+  height:40px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid #292929;
+  border-radius:50%;
+  font-family:'Montserrat',sans-serif;
+  font-size:.62rem;
+  color:#999;
+}
+
+.google-review-step strong{
+  display:block;
+  margin-bottom:5px;
+  font-family:'Montserrat',sans-serif;
+  font-size:.75rem;
+  font-weight:600;
+  color:#ddd;
+}
+
+.google-review-step p{
+  margin:0;
+  font-family:'Montserrat',sans-serif;
+  font-size:.68rem;
+  line-height:1.5;
+  color:#707070;
+}
+
+.google-review-line{
+  width:1px;
+  height:22px;
+  margin-left:20px;
+  background:#252525;
+}
+
+
+/* =========================================================
+   IMPACT
+   ========================================================= */
+
+.review-impact-section{
+  max-width:1050px;
+  margin:65px auto;
+  padding:65px 6vw;
+  background:#111;
+  border:1px solid #1e1e1e;
+  border-radius:12px;
+  text-align:center;
+}
+
+.review-impact-heading{
+  max-width:650px;
+  margin:0 auto 50px;
+}
+
+.review-impact-visual{
+  display:grid;
+  grid-template-columns:1fr 90px 1fr;
+  align-items:center;
+  max-width:850px;
+  margin:auto;
+}
+
+.impact-side{
+  min-height:175px;
+  padding:30px 25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+
+  background:#151515;
+  border:1px solid #222;
+  border-radius:8px;
+}
+
+.impact-side small{
+  margin-bottom:20px;
+  font-family:'Montserrat',sans-serif;
+  font-size:.58rem;
+  letter-spacing:2px;
+  color:#666;
+}
+
+.impact-number{
+  height:36px;
+  font-family:'Cinzel',serif;
+  font-size:1.35rem;
+  letter-spacing:6px;
+  color:#555;
+}
+
+.impact-stars{
+  height:36px;
+  font-size:1.15rem;
+  letter-spacing:4px;
+  color:#ccc;
+}
+
+.impact-side p{
+  max-width:250px;
+  margin:14px 0 0;
+  font-family:'Montserrat',sans-serif;
+  font-size:.69rem;
+  line-height:1.6;
+  color:#777;
+}
+
+.impact-side--active{
+  background:#171717;
+  border-color:#292929;
+}
+
+.impact-side--active small{
+  color:#999;
+}
+
+.impact-side--active p{
+  color:#888;
+}
+
+.impact-arrow{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#777;
+}
+
+.impact-arrow span{
+  width:18px;
+  height:1px;
+  background:#292929;
+}
+
+.impact-arrow i{
+  margin:0 8px;
+  font-size:.65rem;
+  color:#777;
+}
+
+.impact-bottom{
+  margin-top:35px;
+  padding-top:23px;
+  border-top:1px solid #202020;
+  font-family:'Montserrat',sans-serif;
+  font-size:.69rem;
+}
+
+.impact-bottom strong{
+  color:#ccc;
+  font-weight:600;
+}
+
+.impact-bottom span{
+  margin-left:7px;
+  color:#666;
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+  .google-review-section{
+    padding:55px 5vw;
+    margin-top:50px;
+  }
+
+  .google-review-content{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+
+  .google-review-text{
+    padding-right:0;
+    text-align:center;
+  }
+
+  .google-review-note{
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .review-impact-section{
+    margin:50px 5vw;
+    padding:50px 5vw;
+  }
+
+  .review-impact-visual{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+
+  .impact-arrow{
+    transform:rotate(90deg);
+    height:30px;
+  }
+
+  .impact-bottom{
+    line-height:1.8;
+  }
+
+  .impact-bottom span{
+    display:block;
+    margin-left:0;
+  }
+}
