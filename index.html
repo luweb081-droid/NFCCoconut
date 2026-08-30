@@ -941,6 +941,82 @@
   }
 
 }
+/* =========================================================
+   HIGHLIGHT "MONDE RÉEL"
+========================================================= */
+
+.hero-highlight{
+  position:relative;
+  display:inline-block;
+
+  color:var(--white);
+
+  transition:
+    color .8s ease,
+    text-shadow .8s ease;
+}
+
+/* Le trait */
+.hero-highlight::after{
+  content:"";
+
+  position:absolute;
+  left:0;
+  bottom:-7px;
+
+  width:100%;
+  height:2px;
+
+  background:var(--cream);
+
+  transform:scaleX(0);
+  transform-origin:left center;
+
+  opacity:0;
+
+  animation:highlightUnderline 1s var(--ease) forwards;
+  animation-delay:1s;
+}
+
+/* Changement de couleur */
+.hero-highlight{
+  animation:highlightColor 1s ease forwards;
+  animation-delay:.8s;
+}
+
+
+@keyframes highlightColor{
+
+  0%{
+    color:var(--white);
+    text-shadow:none;
+  }
+
+  100%{
+    color:var(--cream);
+    text-shadow:0 0 25px rgba(234,217,180,.10);
+  }
+
+}
+
+
+@keyframes highlightUnderline{
+
+  0%{
+    transform:scaleX(0);
+    opacity:0;
+  }
+
+  30%{
+    opacity:1;
+  }
+
+  100%{
+    transform:scaleX(1);
+    opacity:1;
+  }
+
+}
   </style>
 </head>
 
@@ -1017,7 +1093,7 @@
       </p>
 
       <h1 class="hero-title">
-        Connectez votre activité au monde réel
+        Connectez votre activité au <span class="hero-highlight">monde réel</span>
       </h1>
 
       <p class="hero-subtitle">
