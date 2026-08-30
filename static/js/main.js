@@ -225,14 +225,15 @@ const PRODUCTS = [
 // Ajout de la propriété `showInDesktop` (true par défaut, false pour masquer de la barre principale)
 const NAV_LINKS = [
   { label: 'Accueil', href: 'index.html', showInDesktop: true },
-  { label: 'Catalogue', href: 'catalogue.html', showInDesktop: true },
+  { label: 'NFC', href: 'avis-google.html', showInDesktop: true },
   { label: 'Streetwear', href: 'streetwear.html', showInDesktop: true },  
-  { label: 'FAQ', href: 'faq.html', showInDesktop: true }, 
-  { label: 'Développement Web', href: 'devweb.html', showInDesktop: false },
-
-  { label: 'Contact', href: 'contact.html', showInDesktop: true },
+  
+  { label: 'Développement Web', href: 'devweb.html', showInDesktop: true },
+  { label: 'FAQ', href: 'faq.html', showInDesktop: false }, 
+  { label: 'Contact', href: 'contact.html', showInDesktop: false },
   { label: 'Mentions légales', href: 'mentions-legales.html', showInDesktop: false },
   { label: 'Politique de confidentialitée', href: 'poconf.html', showInDesktop: false },
+
   // Exemple de page visible uniquement dans le menu déroulant mobile :
   
 ];

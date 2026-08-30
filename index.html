@@ -364,268 +364,7 @@
     }
 
     /* =========================================================
-       SECTION NARRATIVE UNIQUE : "Comment ça marche"
-       (fusionne présentation + process + impact + avantages)
-       ========================================================= */
-    .how-section{
-      position:relative;
-      max-width:1100px;
-      margin:80px auto;
-      padding:70px 6vw;
-      background:radial-gradient(120% 100% at 20% 0%, var(--ink-2) 0%, var(--ink) 60%, #000 100%);
-      border:1px solid var(--line);
-      border-radius:20px;
-      overflow:hidden;
-    }
-    .how-section > *{ position:relative; z-index:1; }
-
-    .how-divider{
-      display:flex;
-      align-items:center;
-      gap:18px;
-      margin:56px 0 34px;
-      color:var(--cream);
-      font-family:var(--font-body);
-      font-size:.66rem;
-      font-weight:600;
-      letter-spacing:2.5px;
-      text-transform:uppercase;
-    }
-    .how-divider::before, .how-divider::after{ content:""; flex:1; height:1px; background:var(--line); }
-
-    /* --- Intro --- */
-    .how-intro{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center; }
-    .how-intro-body p{ font-family:var(--font-body); font-size:.85rem; line-height:1.85; color:var(--muted); margin:0 0 18px; }
-    .how-tag{
-      display:inline-flex; align-items:center; gap:9px;
-      padding:10px 16px;
-      border:1px solid var(--line);
-      border-radius:30px;
-      font-family:var(--font-body);
-      font-size:.68rem;
-      color:var(--cream);
-    }
-
-    .how-impact-lede{
-      max-width:520px;
-      margin:0 auto 40px;
-      text-align:center;
-      font-family:var(--font-body);
-      font-size:.85rem;
-      line-height:1.8;
-      color:var(--muted);
-    }
-
-    /* --- Timeline en pointillés (partagée par les deux séquences réelles) --- */
-    .path{ position:relative; max-width:640px; margin:0 auto; text-align:left; }
-    .path-track, .path-track-fill{
-      position:absolute; left:27px; top:28px; bottom:28px; width:2px;
-      background-image:linear-gradient(to bottom, currentColor 0 8px, transparent 8px 18px);
-      background-size:2px 18px;
-      background-repeat:repeat-y;
-    }
-    .path-track{ color:rgba(234,217,180,.25); }
-    .path-track-fill{ color:var(--cream); transform:scaleY(0); transform-origin:top; will-change:transform; }
-    .path--static .path-track{ color:rgba(234,217,180,.4); }
-    .path--static .path-track-fill{ display:none; }
-
-    .path-step{ position:relative; display:flex; align-items:flex-start; gap:24px; padding-bottom:44px; list-style:none; }
-    .path-step:last-child{ padding-bottom:0; }
-    .path-dot{
-      position:relative; z-index:2;
-      flex:0 0 56px; width:56px; height:56px;
-      border-radius:50%;
-      display:flex; align-items:center; justify-content:center;
-      font-family:var(--font-display); font-size:1rem;
-      color:#7a7a72;
-      background:var(--ink);
-      border:1px solid rgba(234,217,180,.25);
-      transition:color .35s ease, border-color .35s ease, box-shadow .35s ease, background .35s ease;
-    }
-    .path-content{ padding-top:12px; }
-    .path-content h4{ font-family:var(--font-display); font-weight:500; font-size:1.05rem; color:var(--white); margin:0 0 8px; opacity:.5; transition:opacity .35s ease; }
-    .path-content p{ font-family:var(--font-body); color:#8f8f89; font-size:.9rem; line-height:1.6; margin:0; transition:color .35s ease; }
-
-    .path-step.is-active .path-dot{ color:var(--ink); background:var(--cream); border-color:var(--cream); box-shadow:0 0 0 6px rgba(234,217,180,.12); }
-    .path-step.is-active .path-content h4{ opacity:1; }
-    .path-step.is-active .path-content p{ color:#c7c7c1; }
-
-    .path--static .path-dot{ color:var(--ink); background:var(--cream); border-color:var(--cream); }
-    .path--static .path-content h4{ opacity:1; }
-    .path--static .path-content p{ color:#c7c7c1; }
-
-    @media (max-width:600px){
-      .path-dot{ flex-basis:46px; width:46px; height:46px; font-size:.85rem; }
-      .path-track, .path-track-fill{ left:22px; }
-      .path-step{ gap:16px; }
-    }
-    @media (prefers-reduced-motion: reduce){ .path-track-fill{ transform:scaleY(1) !important; } }
-
-    /* --- Graphique d'impact fusionné : avant/après + barres + cercle vertueux --- */
-    .nfc-impact{ display:flex; flex-direction:column; gap:54px; }
-
-    .nfc-compare{ display:grid; grid-template-columns:1fr auto 1fr; gap:0 34px; align-items:stretch; text-align:left; }
-
-    .nfc-glass-card{
-      position:relative;
-      padding:32px 28px;
-      border-radius:16px;
-      background:rgba(255,255,255,.03);
-      backdrop-filter:blur(16px);
-      -webkit-backdrop-filter:blur(16px);
-      border:1px solid rgba(234,217,180,.14);
-      overflow:hidden;
-      display:flex; flex-direction:column; justify-content:center;
-      transition:transform .4s cubic-bezier(.16,1,.3,1), border-color .4s ease, background .4s ease, box-shadow .4s ease;
-    }
-    .nfc-glass-card::before{
-      content:"";
-      position:absolute; inset:0;
-      background:radial-gradient(220px circle at var(--mx, 50%) var(--my, 30%), rgba(234,217,180,.24), transparent 62%);
-      opacity:0;
-      transition:opacity .5s ease;
-      pointer-events:none;
-    }
-    .nfc-glass-card::after{
-      content:"";
-      position:absolute; top:0; left:-60%;
-      width:45%; height:100%;
-      background:linear-gradient(100deg, transparent, rgba(255,255,255,.10), transparent);
-      filter:blur(6px);
-      transform:skewX(-15deg);
-      transition:left .8s ease;
-      pointer-events:none;
-    }
-    .nfc-glass-card:hover{ transform:translateY(-6px); border-color:rgba(234,217,180,.45); background:rgba(255,255,255,.05); box-shadow:0 24px 45px -20px rgba(0,0,0,.55); }
-    .nfc-glass-card:hover::before{ opacity:1; }
-    .nfc-glass-card:hover::after{ left:130%; }
-
-    .nfc-glass-card--active{ background:linear-gradient(165deg, rgba(234,217,180,.14), rgba(234,217,180,.02)); border-color:rgba(234,217,180,.3); }
-    .nfc-glass-card--active:hover{ background:linear-gradient(165deg, rgba(234,217,180,.2), rgba(234,217,180,.03)); }
-
-    .nfc-glass-label{ display:inline-block; margin-bottom:16px; font-family:var(--font-body); font-size:.62rem; font-weight:600; letter-spacing:2.5px; color:#7a7a72; }
-    .nfc-glass-card--active .nfc-glass-label{ color:var(--cream); }
-
-    .nfc-glass-dots{ display:flex; align-items:center; gap:6px; height:26px; margin-bottom:6px; }
-    .nfc-glass-dots span{ width:7px; height:7px; border-radius:50%; background:#5a5a55; }
-    .nfc-glass-dots span:nth-child(2){ opacity:.7; }
-    .nfc-glass-dots span:nth-child(3){ opacity:.4; }
-
-    .nfc-glass-stars{ height:26px; margin-bottom:6px; font-size:1.05rem; letter-spacing:4px; color:var(--cream); }
-
-    .nfc-glass-card p{ position:relative; z-index:1; margin:0; font-family:var(--font-body); font-size:.82rem; line-height:1.65; color:#a9a9a2; }
-
-    .nfc-compare-center{ display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:0 6px; }
-    .nfc-compare-arrow{ font-size:1.1rem; color:rgba(234,217,180,.55); }
-
-    .nfc-bar-group{ display:flex; align-items:flex-end; gap:28px; height:190px; }
-    .nfc-bar-col{ display:flex; flex-direction:column; align-items:center; justify-content:flex-end; height:100%; }
-    .nfc-bar{
-      width:56px; border-radius:8px 8px 0 0;
-      background:rgba(234,217,180,.16);
-      border:1px solid rgba(234,217,180,.28);
-      position:relative; height:18%;
-      transition:height 1.2s cubic-bezier(.16,1,.3,1);
-      display:flex; align-items:flex-start; justify-content:center;
-    }
-    .nfc-bar--highlight{ background:linear-gradient(180deg, var(--cream) 0%, #c9a063 100%); border-color:var(--cream); box-shadow:0 10px 30px -8px rgba(234,217,180,.5); }
-    .nfc-bar-value{ position:absolute; top:-32px; font-family:var(--font-display); font-size:.95rem; font-weight:600; color:var(--white); white-space:nowrap; }
-    .nfc-bar--highlight .nfc-bar-value{ color:var(--cream); font-size:1.3rem; }
-    .nfc-bar-label{ margin-top:14px; font-family:var(--font-body); font-size:.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; text-align:center; max-width:100px; }
-
-    .nfc-impact-flow{ display:grid; grid-template-columns:repeat(4, 1fr); gap:22px 10px; align-items:stretch; }
-    .nfc-flow-step{
-      position:relative;
-      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
-      padding:18px 10px;
-      background:var(--ink-2);
-      border:1px solid rgba(234,217,180,.14);
-      border-radius:12px;
-      text-align:center;
-      overflow:hidden;
-      transition:transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
-    }
-    .nfc-flow-step::before{
-      content:"";
-      position:absolute; inset:0;
-      background:radial-gradient(180px circle at 50% 0%, rgba(234,217,180,.16), transparent 65%);
-      opacity:0;
-      transition:opacity .4s ease;
-      pointer-events:none;
-    }
-    .nfc-flow-step:not(:last-child)::after{
-      content:"\f061";
-      font-family:"Font Awesome 6 Free"; font-weight:900;
-      position:absolute; top:50%; right:-17px; transform:translateY(-50%);
-      font-size:.7rem; color:rgba(234,217,180,.45); z-index:2;
-    }
-    .nfc-flow-step i{ font-size:1.15rem; color:var(--cream); }
-    .nfc-flow-step span{ font-family:var(--font-body); font-size:.72rem; color:#dedede; line-height:1.3; }
-    .nfc-flow-step:hover{ transform:translateY(-4px); border-color:rgba(234,217,180,.5); background:var(--ink-3); box-shadow:0 18px 32px -16px rgba(0,0,0,.5); }
-    .nfc-flow-step:hover::before{ opacity:1; }
-    .nfc-flow-step--final{ background:linear-gradient(180deg, rgba(234,217,180,.18), rgba(234,217,180,.05)); border-color:rgba(234,217,180,.45); animation:nfcGlowPulse 2.6s ease-in-out infinite; }
-    .nfc-flow-step--final i{ color:var(--white); position:relative; z-index:2; }
-    .nfc-flow-step--final span{ position:relative; z-index:2; font-weight:500; }
-    @keyframes nfcGlowPulse{ 0%,100%{ box-shadow:0 0 0 rgba(234,217,180,0); } 50%{ box-shadow:0 0 26px rgba(234,217,180,.35); } }
-
-    .nfc-bills{ position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:1; }
-    .nfc-bills span{ position:absolute; top:-18px; font-size:1rem; opacity:0; animation:nfcBillFall 3.4s linear infinite; }
-    .nfc-bills span:nth-child(1){ left:10%; animation-delay:0s; font-size:.95rem; }
-    .nfc-bills span:nth-child(2){ left:32%; animation-delay:.85s; font-size:.8rem; }
-    .nfc-bills span:nth-child(3){ left:58%; animation-delay:1.7s; font-size:1rem; }
-    .nfc-bills span:nth-child(4){ left:80%; animation-delay:2.5s; font-size:.85rem; }
-    @keyframes nfcBillFall{
-      0%{ transform:translateY(-10px) rotate(-10deg); opacity:0; }
-      12%{ opacity:1; }
-      88%{ opacity:1; }
-      100%{ transform:translateY(95px) rotate(14deg); opacity:0; }
-    }
-
-    /* --- Avantages --- */
-    .how-advantages{ display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:22px; text-align:left; }
-    .nfc-card{
-      padding:30px 26px;
-      background:var(--ink-2);
-      border:1px solid rgba(234,217,180,.14);
-      border-radius:12px;
-      transition:transform .25s ease, border-color .25s ease, background .25s ease;
-    }
-    .nfc-card:hover{ transform:translateY(-4px); border-color:rgba(234,217,180,.45); background:var(--ink-3); }
-    .nfc-card-badge{
-      display:inline-flex; align-items:center; justify-content:center;
-      width:38px; height:38px; border-radius:50%;
-      margin-bottom:18px;
-      background:rgba(234,217,180,.12);
-      color:var(--cream);
-      font-size:.95rem;
-    }
-    .nfc-card h4{ font-family:var(--font-display); font-weight:500; font-size:1.05rem; letter-spacing:.4px; color:var(--white); margin:0 0 10px; }
-    .nfc-card p{ font-family:var(--font-body); color:var(--muted); font-size:.92rem; line-height:1.6; margin:0; }
-
-    @media (max-width:900px){
-      .how-intro{ grid-template-columns:1fr; gap:30px; text-align:center; }
-      .how-intro-body{ margin:0 auto; }
-      .nfc-compare{ grid-template-columns:1fr; gap:26px; text-align:center; }
-      .nfc-glass-card{ text-align:center; align-items:center; }
-      .nfc-compare-arrow{ transform:rotate(90deg); }
-    }
-    @media (max-width:640px){
-      .how-section{ padding:50px 6vw; }
-      .nfc-impact-flow{ grid-template-columns:1fr; gap:26px; }
-      .nfc-flow-step:not(:last-child)::after{
-        content:"\f063"; top:auto; bottom:-19px; right:auto; left:50%; transform:translateX(-50%);
-      }
-    }
-    @media (prefers-reduced-motion: reduce){
-      .nfc-bar{ transition:none; }
-      .nfc-flow-step--final{ animation:none; }
-      .nfc-bills span{ animation:none; opacity:0; }
-      .nfc-glass-card{ transition:none; }
-      .nfc-glass-card::before, .nfc-glass-card::after{ display:none; }
-    }
-
-    /* =========================================================
-       DROP STREETWEAR
+       DROP STREETWEAR & PRESTATIONS SITE WEB
        ========================================================= */
     .drop-section{
       position:relative;
@@ -651,6 +390,23 @@
     }
     .drop-cta:hover{ background:var(--cream); transform:translateY(-2px); }
     @media (max-width:600px){ .drop-section{ padding:50px 5vw; margin:55px 5vw; } }
+
+    /* Grille de deux offres côte à côte (Streetwear / Sites Vitrines) */
+    .offers-grid{
+      max-width:1100px;
+      margin:70px auto;
+      padding:0 6vw;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:30px;
+    }
+    .offers-grid .drop-section{ margin:0; }
+    @media (max-width:980px){
+      .offers-grid{ grid-template-columns:1fr 1fr !important; gap:24px; padding:0 5vw; }
+    }
+    @media (max-width:640px){
+      .offers-grid{ grid-template-columns:1fr !important; gap:20px; padding:0 5vw; }
+    }
 
     /* =========================================================
        COMMUNAUTÉ / INSTAGRAM
@@ -679,219 +435,50 @@
   <header class="top-header"></header>
 
   <!-- ===== HERO ===== -->
-  <section class="hero-banner hero-banner--3d">
-    <div class="hero-grid">
-      <div class="hero-content">
-        <p class="hero-eyebrow">Plaques & présentoirs NFC</p>
-        <h1 class="hero-title">Un tap. Un avis Google de plus.</h1>
-        <p class="hero-subtitle">Posez la plaque à votre accueil. Vos clients laissent un avis Google en 5 secondes, sans chercher votre fiche, sans application à télécharger.</p>
-
-        <div class="hero-trust" aria-label="Confiance client">
-          <span class="hero-trust-stars">★★★★★</span>
-          <span class="hero-trust-divider"></span>
-          <p class="hero-trust-text">Déjà adopté par <strong>+500 commerces</strong> en France</p>
-        </div>
-
-        <div class="hero-cta-group">
-          <a href="produit.html?id=plaque-google-black" class="hero-cta-buy">
-            <span>Acheter la plaque</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-          <a href="#collection" class="hero-link">Découvrir l'expérience</a>
-        </div>
-      </div>
-
-      <div class="hero-3d-stage" id="hero3dStage">
-        <div class="hero-3d-card" id="hero3dCard">
-          <div class="plaque-flip">
-            <div class="plaque-face plaque-face--front">
-              <img src="static/images/plaque-avis-google.jpg" alt="Plaque NFC Notez-nous sur Google, avec logo Google, 5 étoiles, pictogramme NFC et QR code" class="plaque-photo" fetchpriority="high">
-            </div>
-            <div class="plaque-face plaque-face--back">
-              <img src="static/images/plaque-avis-google-2.png" alt="Deuxième modèle de plaque NFC" class="plaque-photo" loading="lazy">
-            </div>
-          </div>
-        </div>
-
-        <!-- Signature : simulation du tap qui déclenche l'envoi d'un avis -->
-        <div class="hero-tap" aria-hidden="true">
-          <div class="hero-tap-phone"></div>
-          <div class="hero-tap-ripple"></div>
-          <div class="hero-tap-toast"><i class="fa-solid fa-star"></i> Avis envoyé</div>
-        </div>
-      </div>
+  <section class="hero-banner" style="min-height:52vh; background:radial-gradient(120% 100% at 50% 20%, #1a1a1a 0%, var(--ink) 55%, #000 100%); display:flex; align-items:center; padding:80px 6vw; text-align:center;">
+    <div style="max-width:680px; margin:0 auto; position:relative; z-index:1;">
+      <p class="hero-eyebrow" style="color:var(--cream);">NFC COCONUT</p>
+      <h1 class="hero-title" style="color:var(--white); font-family:var(--font-display); font-weight:500; font-size:clamp(2rem, 4vw, 3rem); margin:14px 0 16px; text-align:center;">Plaques connectées, streetwear & sites web</h1>
+      <p class="hero-subtitle" style="color:#b9b9b3; max-width:520px; margin:0 auto; font-family:var(--font-body); font-size:.92rem; line-height:1.75; text-align:center;">Choisissez ci-dessous l'univers qui vous intéresse.</p>
     </div>
   </section>
 
   <main class="main-container" id="collection">
-    <div class="section-headline"><h2>Explorez notre Sélection</h2><p>Prêt à l'emploi, commandez on s'occupe de tout</p></div>
-    <div class="products-grid" aria-label="Sélection de produits"></div>
+    
 
-    <!-- ===== SECTION NARRATIVE UNIQUE : présentation, process, impact, avantages ===== -->
-    <section class="how-section">
+    <!-- ===== NOS 3 ACTIVITÉS : PLAQUES NFC / STREETWEAR / SITES VITRINES ===== -->
+    <div class="section-headline"><h2>Nos trois univers</h2><p>Choisissez ce qui vous intéresse</p></div>
+    <div class="offers-grid" style="grid-template-columns:repeat(3, 1fr);">
+      <section class="drop-section">
+        <p class="section-eyebrow" style="color:var(--muted-2);">Best-seller</p>
+        <h2 class="drop-title">Plaques Avis Google</h2>
+        <p class="drop-text">Un tap et vos clients laissent un avis Google en quelques secondes, sans application à télécharger.</p>
+        <a href="avis-google.html" class="drop-cta">
+          <span>Comment ça marche</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </section>
 
-      <div class="how-intro">
-        <div class="how-intro-head">
-          <p class="section-eyebrow">La plaque avis Google</p>
-          <h2 class="section-title">Chaque visite peut devenir un avis.</h2>
-        </div>
-        <div class="how-intro-body">
-          <p>Votre client approche simplement son téléphone de la plaque. Une notification s'affiche et l'emmène directement sur votre fiche Google, sans avoir à la rechercher.</p>
-          <span class="how-tag"><i class="fa-solid fa-bolt"></i> Sans application à télécharger</span>
-        </div>
-      </div>
+      <section class="drop-section">
+        <p class="section-eyebrow" style="color:var(--muted-2);">Drop 00</p>
+        <h2 class="drop-title">NFC Coconut Streetwear</h2>
+        <p class="drop-text">Une petite collection pensée pour connecter style et technologie — puce NFC intégrée, série limitée.</p>
+        <a href="streetwear.html" class="drop-cta">
+          <span>Découvrir la collection</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </section>
 
-      <div class="how-divider"><span>Comment ça marche</span></div>
-
-      <ol class="path path--static">
-        <li class="path-step">
-          <span class="path-dot">01</span>
-          <div class="path-content">
-            <h4>Il approche son téléphone</h4>
-            <p>Il suffit de le rapprocher de la plaque, aucune application requise.</p>
-          </div>
-        </li>
-        <li class="path-step">
-          <span class="path-dot">02</span>
-          <div class="path-content">
-            <h4>Sa fiche Google s'ouvre</h4>
-            <p>Il arrive directement au bon endroit, sans recherche.</p>
-          </div>
-        </li>
-        <li class="path-step">
-          <span class="path-dot">03</span>
-          <div class="path-content">
-            <h4>Il laisse son avis</h4>
-            <p>Quelques secondes suffisent.</p>
-          </div>
-        </li>
-      </ol>
-
-      <div class="how-divider"><span>L'impact</span></div>
-
-      <p class="how-impact-lede">Plus d'avis, plus de visibilité, plus de clients — et plus de chiffre d'affaires.</p>
-
-      <div class="nfc-impact" id="nfcImpact">
-
-        <div class="nfc-compare" id="nfcCompare">
-
-          <div class="nfc-glass-card" data-glass>
-            <span class="nfc-glass-label">AVANT</span>
-            <div class="nfc-glass-dots"><span></span><span></span><span></span></div>
-            <p>Le client doit chercher votre établissement sur Google avant de pouvoir laisser un avis.</p>
-          </div>
-
-          <div class="nfc-compare-center">
-            <div class="nfc-bar-group">
-              <div class="nfc-bar-col">
-                <div class="nfc-bar" id="barBase">
-                  <span class="nfc-bar-value">Sans NFC</span>
-                </div>
-                <p class="nfc-bar-label">Avis récoltés</p>
-              </div>
-              <div class="nfc-bar-col">
-                <div class="nfc-bar nfc-bar--highlight" id="barBoost">
-                  <span class="nfc-bar-value" id="boostCounter">+0%</span>
-                </div>
-                <p class="nfc-bar-label">Avec NFC Coconut</p>
-              </div>
-            </div>
-            <i class="fa-solid fa-arrow-right-long nfc-compare-arrow"></i>
-          </div>
-
-          <div class="nfc-glass-card nfc-glass-card--active" data-glass>
-            <span class="nfc-glass-label">AVEC NFC</span>
-            <div class="nfc-glass-stars">★★★★★</div>
-            <p>Il approche son téléphone : sa fiche Google s'ouvre, l'avis part en quelques secondes.</p>
-          </div>
-
-        </div>
-
-        <div class="nfc-impact-flow">
-          <div class="nfc-flow-step">
-            <i class="fa-solid fa-star"></i>
-            <span>Plus d'avis Google</span>
-          </div>
-          <div class="nfc-flow-step">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <span>Meilleure visibilité</span>
-          </div>
-          <div class="nfc-flow-step">
-            <i class="fa-solid fa-users"></i>
-            <span>Plus de clients</span>
-          </div>
-          <div class="nfc-flow-step nfc-flow-step--final">
-            <div class="nfc-bills" aria-hidden="true">
-              <span>💶</span><span>💶</span><span>💶</span><span>💶</span>
-            </div>
-            <i class="fa-solid fa-euro-sign"></i>
-            <span>Plus de chiffre d'affaires</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="how-divider"><span>Comment ça fonctionne</span></div>
-
-      <div class="path" id="nfcPath">
-        <div class="path-track"></div>
-        <div class="path-track-fill" id="nfcPathFill"></div>
-
-        <div class="path-step">
-          <span class="path-dot">01</span>
-          <div class="path-content">
-            <h4>Commandez</h4>
-            <p>Indiquez simplement l'adresse de votre commerce, votre page Instagram ou site web.</p>
-          </div>
-        </div>
-
-        <div class="path-step">
-          <span class="path-dot">02</span>
-          <div class="path-content">
-            <h4>Nous programmons</h4>
-            <p>Nous encodons et testons votre support en atelier avant de vous l'expédier.</p>
-          </div>
-        </div>
-
-        <div class="path-step">
-          <span class="path-dot">03</span>
-          <div class="path-content">
-            <h4>Profitez</h4>
-            <p>Votre support est prêt à l'emploi dès réception. Récoltez vos premiers avis !</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="how-divider"><span>Pour vos clients</span></div>
-
-      <div class="how-advantages">
-        <div class="nfc-card">
-          <span class="nfc-card-badge"><i class="fa-solid fa-mobile-screen-button"></i></span>
-          <h4>Sans application</h4>
-          <p>Aucun téléchargement ni application spécifique n'est requis. La lecture est totalement native sur smartphones récents.</p>
-        </div>
-        <div class="nfc-card">
-          <span class="nfc-card-badge"><i class="fa-solid fa-bolt"></i></span>
-          <h4>Ultra-rapide</h4>
-          <p>Un simple effleurement du téléphone sur la plaque suffit pour ouvrir instantanément votre page Google Avis.</p>
-        </div>
-        <div class="nfc-card">
-          <span class="nfc-card-badge"><i class="fa-solid fa-shield-halved"></i></span>
-          <h4>Double sécurité</h4>
-          <p>Chaque plaque intègre une puce NFC et un QR Code de secours pour garantir une compatibilité de 100 %.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== DROP STREETWEAR ===== -->
-    <section class="drop-section">
-      <p class="section-eyebrow" style="color:var(--muted-2);">Drop 00</p>
-      <h2 class="drop-title">NFC Coconut Streetwear</h2>
-      <p class="drop-text">Une petite collection pensée pour connecter style et technologie — puce NFC intégrée, série limitée.</p>
-      <a href="streetwear.html" class="drop-cta">
-        <span>Découvrir la collection</span>
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
-    </section>
+      <section class="drop-section">
+        <p class="section-eyebrow" style="color:var(--muted-2);">Sur mesure</p>
+        <h2 class="drop-title">Création de Sites Vitrines</h2>
+        <p class="drop-text">Un site professionnel conçu, développé et mis en ligne pour vous — pensé pour se connecter parfaitement à vos plaques NFC.</p>
+        <a href="devweb.html" class="drop-cta">
+          <span>Voir nos prestations</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </a>
+      </section>
+    </div>
   </main>
 
   <!-- ===== COMMUNAUTÉ / INSTAGRAM ===== -->
@@ -909,157 +496,5 @@
 
   <footer>&copy; 2026 NFC COCONUT — TOUS DROITS RÉSERVÉS</footer>
   <script src="static/js/main.js"></script>
-
-  <!-- ===== Interaction 3D au survol (desktop uniquement, respecte prefers-reduced-motion) ===== -->
-  <script>
-    (function(){
-      var stage = document.getElementById('hero3dStage');
-      var card = document.getElementById('hero3dCard');
-      if(!stage || !card) return;
-
-      var isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(isCoarsePointer || reduceMotion) return;
-
-      stage.addEventListener('mousemove', function(e){
-        var rect = stage.getBoundingClientRect();
-        var x = (e.clientX - rect.left) / rect.width - 0.5;
-        var y = (e.clientY - rect.top) / rect.height - 0.5;
-        card.style.animationPlayState = 'paused';
-        card.style.transform = 'rotateX(' + (14 - y * 20) + 'deg) rotateY(' + (-22 + x * 30) + 'deg)';
-      });
-
-      stage.addEventListener('mouseleave', function(){
-        card.style.animationPlayState = 'running';
-        card.style.transform = '';
-      });
-    })();
-  </script>
-
-  <!-- ===== Animation du graphique d'impact (avis -> clients -> CA) ===== -->
-  <script>
-    (function(){
-      var impact = document.getElementById('nfcImpact');
-      var barBase = document.getElementById('barBase');
-      var barBoost = document.getElementById('barBoost');
-      var counter = document.getElementById('boostCounter');
-      if(!impact || !barBase || !barBoost || !counter) return;
-
-      var animated = false;
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      function animateCounter(el, to, duration){
-        var start = null;
-        function step(ts){
-          if(!start) start = ts;
-          var progress = Math.min((ts - start) / duration, 1);
-          var value = Math.floor(progress * to);
-          el.textContent = '+' + value + '%';
-          if(progress < 1){
-            requestAnimationFrame(step);
-          } else {
-            el.textContent = '+' + to + '%';
-          }
-        }
-        requestAnimationFrame(step);
-      }
-
-      function runAnimation(){
-        if(animated) return;
-        animated = true;
-        barBase.style.height = '55%';
-        barBoost.style.height = '100%';
-        animateCounter(counter, 40, 1400);
-      }
-
-      if(reduceMotion){
-        barBase.style.height = '55%';
-        barBoost.style.height = '100%';
-        counter.textContent = '+40%';
-      } else if('IntersectionObserver' in window){
-        var observer = new IntersectionObserver(function(entries){
-          entries.forEach(function(entry){
-            if(entry.isIntersecting) runAnimation();
-          });
-        }, { threshold: 0.35 });
-        observer.observe(impact);
-      } else {
-        runAnimation();
-      }
-    })();
-  </script>
-
-  <!-- ===== Halo qui suit le curseur sur les cartes Avant / Avec NFC ===== -->
-  <script>
-    (function(){
-      var cards = document.querySelectorAll('[data-glass]');
-      if(!cards.length) return;
-
-      var isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if(isCoarsePointer || reduceMotion) return;
-
-      cards.forEach(function(card){
-        card.addEventListener('mousemove', function(e){
-          var rect = card.getBoundingClientRect();
-          var x = ((e.clientX - rect.left) / rect.width) * 100;
-          var y = ((e.clientY - rect.top) / rect.height) * 100;
-          card.style.setProperty('--mx', x + '%');
-          card.style.setProperty('--my', y + '%');
-        });
-      });
-    })();
-  </script>
-
-  <!-- ===== Chemin en pointillés : se dessine progressivement pendant le scroll (process de commande) ===== -->
-  <script>
-    (function(){
-      var path = document.getElementById('nfcPath');
-      var fill = document.getElementById('nfcPathFill');
-      if(!path || !fill) return;
-
-      var steps = Array.prototype.slice.call(path.querySelectorAll('.path-step'));
-      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-      if(reduceMotion){
-        fill.style.transform = 'scaleY(1)';
-        steps.forEach(function(step){ step.classList.add('is-active'); });
-        return;
-      }
-
-      var ticking = false;
-
-      function update(){
-        ticking = false;
-        var rect = path.getBoundingClientRect();
-        var viewH = window.innerHeight;
-
-        var start = viewH * 0.85;
-        var end = viewH * 0.35;
-        var total = rect.height + (start - end);
-        var traveled = start - rect.top;
-        var progress = traveled / total;
-        progress = Math.max(0, Math.min(1, progress));
-
-        fill.style.transform = 'scaleY(' + progress + ')';
-
-        steps.forEach(function(step, i){
-          var threshold = (i + 0.5) / steps.length;
-          step.classList.toggle('is-active', progress >= threshold);
-        });
-      }
-
-      function onScroll(){
-        if(!ticking){
-          ticking = true;
-          requestAnimationFrame(update);
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll);
-      update();
-    })();
-  </script>
 </body>
 </html>
