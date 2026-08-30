@@ -776,6 +776,171 @@
         transition:none !important;
       }
     }
+    /* =========================================================
+   CARTES FLOTTANTES DU HERO
+========================================================= */
+
+.hero-floating-cards{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  overflow:hidden;
+}
+
+.floating-card{
+  position:absolute;
+
+  display:flex;
+  align-items:center;
+  gap:10px;
+
+  padding:13px 17px;
+
+  background:rgba(28,26,25,.58);
+  border:1px solid rgba(234,217,180,.13);
+  border-radius:12px;
+
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+
+  box-shadow:
+    0 15px 45px rgba(0,0,0,.22),
+    inset 0 1px 0 rgba(255,255,255,.035);
+
+  color:rgba(248,246,240,.7);
+
+  font-size:.62rem;
+  font-weight:500;
+  letter-spacing:1px;
+
+  opacity:0;
+
+  animation:
+    floatingAppear .9s var(--ease) forwards,
+    floatingMove 6s ease-in-out infinite;
+}
+
+/* icône */
+
+.floating-card i{
+  color:var(--cream);
+  font-size:.8rem;
+  opacity:.85;
+}
+
+
+/* positions */
+
+.card-1{
+  left:9%;
+  top:29%;
+
+  transform:rotate(-8deg) translateY(20px);
+
+  animation-delay:.15s, 1.05s;
+}
+
+.card-2{
+  right:10%;
+  top:25%;
+
+  transform:rotate(7deg) translateY(20px);
+
+  animation-delay:.3s, 1.2s;
+}
+
+.card-3{
+  left:14%;
+  bottom:25%;
+
+  transform:rotate(6deg) translateY(20px);
+
+  animation-delay:.45s, 1.35s;
+}
+
+.card-4{
+  right:13%;
+  bottom:22%;
+
+  transform:rotate(-6deg) translateY(20px);
+
+  animation-delay:.6s, 1.5s;
+}
+
+
+/* apparition */
+
+@keyframes floatingAppear{
+
+  0%{
+    opacity:0;
+    transform:translateY(35px) scale(.92) rotate(0deg);
+  }
+
+  100%{
+    opacity:1;
+  }
+
+}
+
+
+/* mouvement permanent */
+
+@keyframes floatingMove{
+
+  0%,100%{
+    margin-top:0;
+  }
+
+  50%{
+    margin-top:-10px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width:700px){
+
+  .hero-floating-cards{
+    opacity:.65;
+  }
+
+  .floating-card{
+    padding:10px 12px;
+    border-radius:9px;
+    font-size:.52rem;
+  }
+
+  .floating-card i{
+    font-size:.65rem;
+  }
+
+  .card-1{
+    left:3%;
+    top:22%;
+  }
+
+  .card-2{
+    right:3%;
+    top:20%;
+  }
+
+  .card-3{
+    left:4%;
+    bottom:22%;
+  }
+
+  .card-4{
+    right:4%;
+    bottom:20%;
+  }
+
+}
   </style>
 </head>
 
@@ -867,7 +1032,27 @@
       <span></span>
       Découvrir
     </div>
+    <div class="hero-floating-cards" aria-hidden="true">
+  <div class="floating-card card-1">
+    <i class="fa-solid fa-wifi"></i>
+    <span>NFC</span>
+  </div>
 
+  <div class="floating-card card-2">
+    <i class="fa-solid fa-star"></i>
+    <span>+500</span>
+  </div>
+
+  <div class="floating-card card-3">
+    <i class="fa-brands fa-google"></i>
+    <span>Google</span>
+  </div>
+
+  <div class="floating-card card-4">
+    <i class="fa-solid fa-mobile-screen-button"></i>
+    <span>1 Tap</span>
+  </div>
+</div>
   </section>
 
 
@@ -1027,7 +1212,7 @@
 
             <i class="fa-solid fa-arrow-right"></i>
           </a>
-
+        
         </section>
 
       </div>
