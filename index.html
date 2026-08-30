@@ -922,7 +922,188 @@
   }
 
 }
+/* =========================================================
+   ANNOTATIONS DES CATÉGORIES — VERSION PROPRE
+========================================================= */
 
+.category-intros{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:16px;
+
+  height:68px;
+  margin-bottom:-2px;
+
+  pointer-events:none;
+}
+
+.category-intro{
+  position:relative;
+  height:68px;
+
+  color:rgba(234,217,180,.58);
+
+  font-family:var(--font-body);
+  font-size:.60rem;
+  line-height:1.5;
+  font-weight:500;
+  font-style:italic;
+
+  letter-spacing:.2px;
+}
+
+
+/* =========================================================
+   TEXTE
+========================================================= */
+
+.category-intro span{
+  position:absolute;
+
+  opacity:0;
+
+  animation:annotationAppear .8s var(--ease) forwards;
+  animation-delay:1.15s;
+}
+
+
+/* =========================================================
+   FLÈCHES
+========================================================= */
+
+.category-intro svg{
+  position:absolute;
+
+  width:105px;
+  height:48px;
+
+  overflow:visible;
+
+  opacity:0;
+
+  animation:arrowAppear .7s ease forwards;
+  animation-delay:1.35s;
+}
+
+.category-intro path{
+  fill:none;
+
+  stroke:rgba(234,217,180,.43);
+  stroke-width:1.15;
+
+  stroke-linecap:round;
+  stroke-linejoin:round;
+
+  stroke-dasharray:130;
+  stroke-dashoffset:130;
+
+  animation:drawArrow 1s var(--ease) forwards;
+  animation-delay:1.4s;
+}
+
+
+/* =========================================================
+   PREMIÈRE CATÉGORIE
+========================================================= */
+
+.intro-1 span{
+  left:18px;
+  top:4px;
+  text-align:left;
+}
+
+.intro-1 svg{
+  left:175px;
+  top:17px;
+  transform:rotate(-3deg);
+}
+
+
+/* =========================================================
+   DEUXIÈME CATÉGORIE
+========================================================= */
+
+.intro-2{
+  text-align:center;
+}
+
+.intro-2 span{
+  left:50%;
+  top:3px;
+
+  transform:translateX(-50%);
+  text-align:center;
+}
+
+.intro-2 svg{
+  left:50%;
+  top:18px;
+
+  transform:translateX(-50%);
+}
+
+
+/* =========================================================
+   TROISIÈME CATÉGORIE
+========================================================= */
+
+.intro-3 span{
+  right:18px;
+  top:4px;
+  text-align:right;
+}
+
+.intro-3 svg{
+  right:175px;
+  top:17px;
+
+  transform:scaleX(-1) rotate(-3deg);
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes annotationAppear{
+  from{
+    opacity:0;
+    transform:translateY(6px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes arrowAppear{
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+}
+
+@keyframes drawArrow{
+  to{
+    stroke-dashoffset:0;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:1000px){
+  .category-intros{
+    display:none;
+  }
+}
   </style>
 </head>
 
@@ -1068,7 +1249,38 @@
         </p>
 
       </div>
+      <div class="category-intros">
 
+  <div class="category-intro intro-1">
+    <span>Pour obtenir plus de clients<br>& améliorer sa e-réputation</span>
+
+    <svg viewBox="0 0 120 55" preserveAspectRatio="none">
+      <path d="M5 8 C35 5, 70 12, 108 43" />
+      <path d="M98 39 L108 43 L104 33" />
+    </svg>
+  </div>
+
+
+  <div class="category-intro intro-2">
+    <span>Pour s'habiller<br>avec style</span>
+
+    <svg viewBox="0 0 120 55" preserveAspectRatio="none">
+      <path d="M60 5 C65 18, 70 28, 61 45" />
+      <path d="M54 37 L61 45 L68 37" />
+    </svg>
+  </div>
+
+
+  <div class="category-intro intro-3">
+    <span>Pour développer<br>son activité sur le web</span>
+
+    <svg viewBox="0 0 120 55" preserveAspectRatio="none">
+    <path d="M5 8 C35 5, 65 12, 108 43" />
+    <path d="M98 33 L108 43 L98 43" />
+</svg>
+  </div>
+
+</div>
 
       <div class="universe-grid">
 
