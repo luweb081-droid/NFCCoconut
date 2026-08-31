@@ -247,43 +247,69 @@
 
     /* ---------- Cartes d'abonnement ---------- */
     .plans-grid{
-      display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
       gap:26px; max-width:820px; margin:0 auto 60px;
     }
     .plan-card{
       position:relative;
-      padding:36px 30px;
+      padding:38px 32px;
       background:#f9f9f9;
-      border:1px solid #eee; border-radius:16px;
+      border:1px solid #eee;
+      border-radius:16px;
+      overflow:hidden;
       text-align:center;
+      transition:transform .4s var(--dw-ease), border-color .4s ease, box-shadow .4s ease;
     }
-    .plan-card h3{ font-family:var(--dw-font-display); font-size:1.2rem; color:#111; margin:0 0 10px; }
-    .plan-price{ font-family:var(--dw-font-display); font-size:2.1rem; font-weight:600; color:#111; margin-bottom:20px; }
+    .plan-card > *{ position:relative; z-index:1; }
+    /* overlay lumineux */
+    .plan-card::before{
+      content:"";
+      position:absolute;
+      width:260px; height:260px;
+      top:-140px; right:-90px;
+      border-radius:50%;
+      background:rgba(234,217,180,.28);
+      filter:blur(60px);
+      pointer-events:none;
+    }
+    .plan-card:hover{
+      transform:translateY(-6px);
+      border-color:rgba(234,217,180,.6);
+      box-shadow:0 30px 60px -30px rgba(0,0,0,.25);
+    }
+    .plan-card h3{ font-family:var(--dw-font-display); font-size:1.25rem; font-weight:500; color:#111; margin:0 0 8px; }
+    .plan-desc{ font-family:var(--dw-font-body); font-size:.82rem; color:#767676; line-height:1.6; margin:0 0 20px; }
+    .plan-price{ font-family:var(--dw-font-display); font-size:2.2rem; font-weight:600; color:#111; margin-bottom:22px; }
     .plan-price span{ font-family:var(--dw-font-body); font-size:.85rem; font-weight:400; color:#999; }
+    .plan-included-label{
+      font-family:var(--dw-font-body); font-size:.68rem; font-weight:700; letter-spacing:1.4px; text-transform:uppercase;
+      color:#a9862f; text-align:left; margin:0 0 10px;
+    }
     .plan-list{ list-style:none; margin:0 0 26px; padding:0; text-align:left; }
-    .plan-list li{ display:flex; align-items:center; gap:10px; padding:8px 0; font-size:.88rem; color:#444; }
-    .plan-list i{ color:#111; font-size:.78rem; }
+    .plan-list li{ display:flex; align-items:flex-start; gap:10px; padding:9px 0; font-size:.86rem; line-height:1.4; color:#444; border-bottom:1px solid #eee; }
+    .plan-list li:last-child{ border-bottom:none; }
+    .plan-list i{ color:#111; font-size:.75rem; margin-top:3px; flex:0 0 auto; }
+    .plan-list strong{ color:#111; }
     .plan-cta{
       display:inline-block; width:100%;
-      padding:13px 20px;
+      padding:14px 20px;
       background:#fff; color:#111; border:1px solid #111;
       font-family:var(--dw-font-body); font-weight:600; font-size:.78rem; letter-spacing:.4px; text-transform:uppercase;
       text-decoration:none; border-radius:6px;
       transition:background .25s ease, color .25s ease;
     }
     .plan-cta:hover{ background:#111; color:#fff; }
-    .plan-card--highlight{ background:#111; border-color:#111; }
-    .plan-card--highlight h3, .plan-card--highlight .plan-price{ color:#fff; }
-    .plan-card--highlight .plan-list li{ color:#ddd; }
-    .plan-card--highlight .plan-list i{ color:var(--dw-cream); }
+    .plan-card--highlight{ border-color:rgba(234,217,180,.9); }
+    .plan-card--highlight::before{ background:rgba(234,217,180,.4); }
     .plan-badge{
       position:absolute; top:-12px; left:50%; transform:translateX(-50%);
       background:var(--dw-cream); color:#111;
       font-family:var(--dw-font-body); font-size:.62rem; font-weight:700; letter-spacing:.5px; text-transform:uppercase;
       padding:5px 14px; border-radius:20px;
+      z-index:2;
     }
-    .plan-cta--dark{ background:var(--dw-cream); color:#111; border-color:var(--dw-cream); }
-    .plan-cta--dark:hover{ background:#fff; color:#111; }
+    .plan-cta--dark{ background:#111; color:#fff; border-color:#111; }
+    .plan-cta--dark:hover{ background:var(--dw-cream); color:#111; border-color:var(--dw-cream); }
     .plan-cta-select{ cursor:pointer; font-family:var(--dw-font-body); }
 
     /* ---------- Formulaire de devis ---------- */
@@ -335,6 +361,15 @@
       .devis-grid{ grid-template-columns:1fr; }
       .devis-form{ padding:28px 22px; }
     }
+    .plan-price small{
+  display:block;
+  margin-top:6px;
+  font-family:var(--dw-font-body);
+  font-size:.72rem;
+  font-weight:500;
+  color:#999;
+  letter-spacing:.2px;
+}
   </style>
 </head>
 <body>
@@ -427,7 +462,7 @@
         <button type="button" class="pricing-tab" data-price="À partir de 2 490 €" data-note="Paiement unique" data-desc="Boutique en ligne avec catalogue produits, panier et paiement sécurisé." data-formule="Site E-commerce">Site E-commerce</button>
       </div>
       <div class="pricing-display">
-        <div class="pricing-display-price" id="pricingPrice">499 €</div>
+        <div class="pricing-display-price" id="pricingPrice">599 €</div>
         <div class="pricing-display-note" id="pricingNote">Paiement unique</div>
         <p class="pricing-display-desc" id="pricingDesc">Idéal pour présenter votre activité sur une seule page : services, contact, avis clients.</p>
         <button type="button" class="pricing-cta" id="pricingCtaBtn">
@@ -445,31 +480,48 @@
 
     <div class="plans-grid">
       <div class="plan-card">
-        <h3>Basic</h3>
-        <div class="plan-price">29.90 €<span>/mois</span></div>
+        <h3>Essentiel</h3>
+        <p class="plan-desc">Idéal pour démarrer une présence en ligne propre et professionnelle.</p>
+        <div class="plan-price">
+          29,90 €<span>/mois</span>
+          <small>Soit 358,80 € / an</small>
+        </div>
+        <p class="plan-included-label">Ce qui est inclus :</p>
         <ul class="plan-list">
-          <li><i class="fa-solid fa-check"></i> Nom de domaine inclus</li>
-          <li><i class="fa-solid fa-check"></i> SSL</li>
-          <li><i class="fa-solid fa-check"></i> Hébergement inclus</li>
-          <li><i class="fa-solid fa-check"></i> Mise à jour de sécurité</li>
-          <li><i class="fa-solid fa-check"></i> 1 modification par semaine</li>
+  
+          <li><i class="fa-solid fa-check"></i> Nom de domaine & Hébergement inclus</li>
+          <li><i class="fa-solid fa-check"></i> Certificat SSL (HTTPS) ultra-sécurisé</li>
+          <li><i class="fa-solid fa-check"></i> Référencement SEO local de base</li>
+          <li><i class="fa-solid fa-check"></i> Mises à jour de sécurité régulières</li>
+          <li><i class="fa-solid fa-check"></i> 1 modification par semaine incluse</li>
+          <li><i class="fa-solid fa-check"></i> Support téléphone & email classique</li>
+          
         </ul>
-        <button type="button" class="plan-cta plan-cta-select" data-abonnement="Basic (20 €/mois)">Choisir Basic</button>
+        <button type="button" class="plan-cta plan-cta-select" data-abonnement="Essentiel (29.90 €/mois)">Choisir Essentiel</button>
       </div>
 
       <div class="plan-card plan-card--highlight">
-        <span class="plan-badge">Le plus choisi</span>
-        <h3>Premium</h3>
-        <div class="plan-price">39.90 €<span>/mois</span></div>
+        <span class="plan-badge">Le plus populaire</span>
+        <h3>Business Pro</h3>
+        <p class="plan-desc">Pour les entreprises qui veulent convertir et déléguer totalement.</p>
+        <div class="plan-price">
+          39,90 €<span>/mois</span>
+          <small>Soit 478,80 € / an</small>
+        </div>
+        <p class="plan-included-label">Ce qui est inclus :</p>
         <ul class="plan-list">
-          <li><i class="fa-solid fa-check"></i> Nom de domaine inclus</li>
-          <li><i class="fa-solid fa-check"></i> SSL</li>
-          <li><i class="fa-solid fa-check"></i> Hébergement inclus</li>
-          <li><i class="fa-solid fa-check"></i> Mise à jour de sécurité</li>
-          <li><i class="fa-solid fa-check"></i> Modifications illimitées</li>
+         
+          <li><i class="fa-solid fa-check"></i> Nom de domaine & Hébergement inclus</li>
+          <li><i class="fa-solid fa-check"></i> Certificat SSL (HTTPS) ultra-sécurisé</li>
+          <li><i class="fa-solid fa-check"></i> Référencement SEO local de base</li>
+          <li><i class="fa-solid fa-check"></i> <strong>Modifications illimitées</strong></li>
+          
+          <li><i class="fa-solid fa-check"></i> <strong>Support prioritaire par téléphone & email</strong></li>
         </ul>
-        <button type="button" class="plan-cta plan-cta--dark plan-cta-select" data-abonnement="Premium (30 €/mois)">Choisir Premium</button>
+        <button type="button" class="plan-cta plan-cta--dark plan-cta-select" data-abonnement="Business Pro (39.90 €/mois)">Choisir Business Pro</button>
       </div>
+
+      
     </div>
 
     <!-- ===== FORMULAIRE DE DEMANDE DE DEVIS ===== -->
@@ -504,8 +556,8 @@
           <label for="devisAbonnement">Abonnement hébergement</label>
           <select id="devisAbonnement" name="abonnement">
             <option>Aucun pour le moment</option>
-            <option>Basic (20 €/mois)</option>
-            <option>Premium (30 €/mois)</option>
+            <option>Essentiel (29.90 €/mois)</option>
+            <option>Business Pro (39.90 €/mois)</option>
           </select>
         </div>
         <div class="devis-field devis-field--full">
@@ -601,7 +653,7 @@
       function flash(el){
         if(!el) return;
         el.classList.remove('devis-field--flash');
-        void el.offsetWidth; // relance l'animation
+        void el.offsetWidth;
         el.classList.add('devis-field--flash');
       }
 
@@ -610,7 +662,6 @@
         if(target) target.scrollIntoView({ behavior:'smooth', block:'start' });
       }
 
-      // Onglets de tarifs : mise à jour de l'affichage + mémorisation de la formule choisie
       tabs.forEach(function(tab){
         tab.addEventListener('click', function(){
           tabs.forEach(function(t){ t.classList.remove('active'); });
@@ -621,7 +672,6 @@
         });
       });
 
-      // Bouton "Demander mon devis gratuitement" du sélecteur de tarifs
       if(pricingCtaBtn){
         pricingCtaBtn.addEventListener('click', function(){
           var activeTab = document.querySelector('.pricing-tab.active');
@@ -633,7 +683,6 @@
         });
       }
 
-      // Boutons "Choisir Basic / Premium"
       document.querySelectorAll('.plan-cta-select').forEach(function(btn){
         btn.addEventListener('click', function(){
           if(abonnementSelect){
@@ -644,7 +693,6 @@
         });
       });
 
-      // Envoi du formulaire (à connecter à votre service d'envoi / email plus tard)
       if(devisForm){
         devisForm.addEventListener('submit', function(e){
           e.preventDefault();
