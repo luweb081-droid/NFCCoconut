@@ -21,6 +21,177 @@
       "url": "https://nfc-coconut.vercel.app/"
     }
   </script>
+  <style>
+    :root{
+      --dw-ink:#11100f;
+      --dw-ink-2:#1a1817;
+      --dw-cream:#ead9b4;
+      --dw-white:#f8f6f0;
+      --dw-muted:rgba(248,246,240,.5);
+      --dw-line:rgba(234,217,180,.14);
+      --dw-font-display:'Cinzel',serif;
+      --dw-font-body:'Montserrat',sans-serif;
+      --dw-ease:cubic-bezier(.16,1,.3,1);
+    }
+
+    .devweb-hero{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:50px;
+      padding:90px 6vw 80px;
+      text-align:center;
+      overflow:hidden;
+      background:
+        radial-gradient(ellipse 75% 65% at 50% 20%, rgba(45,41,38,.95) 0%, rgba(22,21,20,.8) 45%, rgba(17,16,15,1) 78%);
+    }
+    .devweb-hero-content{ position:relative; max-width:680px; margin:0 auto; z-index:2; }
+    .devweb-eyebrow{
+      display:inline-flex; align-items:center; gap:12px;
+      margin:0 0 22px;
+      font-family:var(--dw-font-body);
+      font-size:.66rem; font-weight:600; letter-spacing:3px; text-transform:uppercase;
+      color:var(--dw-cream);
+    }
+    .devweb-eyebrow::before, .devweb-eyebrow::after{ content:""; width:26px; height:1px; background:rgba(234,217,180,.45); }
+    .devweb-title{
+      margin:0 0 20px;
+      font-family:var(--dw-font-display); font-weight:500;
+      font-size:clamp(1.9rem, 4vw, 2.9rem); line-height:1.18; letter-spacing:-.5px;
+      color:var(--dw-white);
+    }
+    .devweb-highlight{ color:var(--dw-cream); }
+    .devweb-subtitle{
+      margin:0 auto; max-width:520px;
+      font-family:var(--dw-font-body); font-weight:300;
+      color:var(--dw-muted); font-size:.9rem; line-height:1.8;
+    }
+
+    /* ---------- Mockup navigateur animé ---------- */
+    .devweb-mockup{ position:relative; width:min(560px, 90vw); z-index:2; }
+    .devweb-browser{
+      background:var(--dw-ink-2);
+      border:1px solid var(--dw-line);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow:0 40px 70px -30px rgba(0,0,0,.6);
+    }
+    .devweb-browser-bar{
+      display:flex; align-items:center; gap:8px;
+      padding:14px 16px;
+      background:rgba(255,255,255,.02);
+      border-bottom:1px solid var(--dw-line);
+    }
+    .devweb-dot{ width:9px; height:9px; border-radius:50%; flex:0 0 auto; }
+    .devweb-dot--red{ background:#e0605a; }
+    .devweb-dot--yellow{ background:#e0c25a; }
+    .devweb-dot--green{ background:#6bc27a; }
+    .devweb-url{
+      display:flex; align-items:center; gap:8px;
+      margin-left:10px; padding:6px 12px;
+      flex:1;
+      background:rgba(255,255,255,.04);
+      border:1px solid var(--dw-line);
+      border-radius:20px;
+      font-family:var(--dw-font-body);
+      font-size:.72rem;
+      color:var(--dw-white);
+      overflow:hidden;
+    }
+    .devweb-url i{ font-size:.62rem; color:var(--dw-muted); flex:0 0 auto; }
+    .devweb-url-text{
+      display:inline-block; overflow:hidden; white-space:nowrap;
+      width:0;
+      animation:devwebTyping 6s var(--dw-ease) infinite;
+    }
+    .devweb-caret{
+      width:1px; height:12px; background:var(--dw-cream);
+      animation:devwebBlink .8s step-end infinite;
+    }
+    .devweb-browser-body{ position:relative; padding:22px 20px 26px; min-height:170px; }
+    .devweb-loading-track{
+      height:3px; border-radius:3px; background:rgba(255,255,255,.06);
+      overflow:hidden; margin-bottom:18px;
+    }
+    .devweb-loading-fill{
+      height:100%; width:0%; background:var(--dw-cream); border-radius:3px;
+      animation:devwebLoad 6s ease infinite;
+    }
+    .devweb-site-preview{ display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+    .devweb-site-block{
+      height:26px; border-radius:6px;
+      background:rgba(234,217,180,.12);
+      opacity:0; transform:translateY(6px);
+      animation:devwebReveal 6s ease infinite;
+    }
+    .devweb-site-block--wide{ grid-column:1 / -1; height:34px; }
+    .devweb-site-block:nth-child(2){ animation-delay:.05s; }
+    .devweb-site-block:nth-child(3){ animation-delay:.1s; }
+    .devweb-site-block:nth-child(4){ animation-delay:.15s; }
+    .devweb-live-badge{
+      position:absolute; right:20px; bottom:18px;
+      display:inline-flex; align-items:center; gap:7px;
+      padding:7px 13px;
+      background:rgba(234,217,180,.14);
+      border:1px solid rgba(234,217,180,.3);
+      border-radius:20px;
+      font-family:var(--dw-font-body); font-size:.66rem; font-weight:600; color:var(--dw-cream);
+      opacity:0; transform:translateY(6px);
+      animation:devwebBadge 6s ease infinite;
+    }
+    .devweb-live-badge i{ font-size:.7rem; }
+
+    .devweb-cursor{
+      position:absolute;
+      right:14%; bottom:6%;
+      color:var(--dw-white);
+      font-size:1.05rem;
+      filter:drop-shadow(0 6px 10px rgba(0,0,0,.4));
+      opacity:0;
+      animation:devwebCursorMove 6s ease-in-out infinite;
+    }
+
+    @keyframes devwebTyping{
+      0%, 6%{ width:0; }
+      42%, 78%{ width:100%; }
+      92%, 100%{ width:0; }
+    }
+    @keyframes devwebBlink{ 50%{ opacity:0; } }
+    @keyframes devwebLoad{
+      0%, 34%{ width:0%; opacity:1; }
+      52%{ width:100%; opacity:1; }
+      62%, 100%{ width:100%; opacity:0; }
+    }
+    @keyframes devwebReveal{
+      0%, 55%{ opacity:0; transform:translateY(6px); }
+      68%, 88%{ opacity:1; transform:translateY(0); }
+      100%{ opacity:0; transform:translateY(6px); }
+    }
+    @keyframes devwebBadge{
+      0%, 62%{ opacity:0; transform:translateY(6px); }
+      75%, 90%{ opacity:1; transform:translateY(0); }
+      100%{ opacity:0; transform:translateY(6px); }
+    }
+    @keyframes devwebCursorMove{
+      0%, 4%{ opacity:0; transform:translate(70px, 60px) scale(1); }
+      16%{ opacity:1; transform:translate(20px, 6px) scale(1); }
+      24%, 30%{ opacity:1; transform:translate(0px, 0px) scale(.85); }
+      36%, 80%{ opacity:1; transform:translate(0px, 0px) scale(1); }
+      90%, 100%{ opacity:0; transform:translate(70px, 60px) scale(1); }
+    }
+
+    @media (max-width:700px){
+      .devweb-hero{ padding:70px 6vw 60px; gap:36px; }
+    }
+    @media (prefers-reduced-motion:reduce){
+      .devweb-url-text, .devweb-caret, .devweb-loading-fill, .devweb-site-block, .devweb-live-badge, .devweb-cursor{ animation:none !important; }
+      .devweb-url-text{ width:auto; }
+      .devweb-loading-fill{ width:100%; opacity:0; }
+      .devweb-site-block, .devweb-live-badge{ opacity:1; transform:none; }
+      .devweb-cursor{ opacity:0; }
+    }
+  </style>
 </head>
 <body>
   <div class="search-overlay" id="searchOverlay"><input type="search" class="search-input" placeholder="Rechercher un produit" id="searchInput" autocomplete="off"><button class="close-search" id="closeSearchBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button></div>
@@ -29,13 +200,38 @@
 
   <header class="top-header"></header>
 
-  <!-- BANNIÈRE DE LA PAGE -->
-  <section class="hero-banner" style="min-height: 40vh;">
-    <img class="hero-video" src="static/images/bg.png" alt="Fond abstrait tech">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 class="hero-title">Création de Sites Vitrines Clés en Main</h1>
-      <p class="hero-subtitle">Nous concevons votre site web et nous occupons de tout mettre en ligne</p>
+  <!-- BANNIÈRE DE LA PAGE : hero "recherche de site" -->
+  <section class="devweb-hero">
+    <div class="devweb-hero-content">
+      <p class="devweb-eyebrow">Sur mesure & clé en main</p>
+      <h1 class="devweb-title">On trouve votre site. <span class="devweb-highlight">On le construit.</span></h1>
+      <p class="devweb-subtitle">Un site vitrine pensé pour votre activité, développé et mis en ligne sans que vous ayez à toucher au code.</p>
+    </div>
+
+    <div class="devweb-mockup" aria-hidden="true">
+      <div class="devweb-browser">
+        <div class="devweb-browser-bar">
+          <span class="devweb-dot devweb-dot--red"></span>
+          <span class="devweb-dot devweb-dot--yellow"></span>
+          <span class="devweb-dot devweb-dot--green"></span>
+          <div class="devweb-url">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span class="devweb-url-text">votre-site-pro.fr</span>
+            <span class="devweb-caret"></span>
+          </div>
+        </div>
+        <div class="devweb-browser-body">
+          <div class="devweb-loading-track"><div class="devweb-loading-fill"></div></div>
+          <div class="devweb-site-preview">
+            <div class="devweb-site-block devweb-site-block--wide"></div>
+            <div class="devweb-site-block"></div>
+            <div class="devweb-site-block"></div>
+            <div class="devweb-site-block devweb-site-block--wide"></div>
+          </div>
+          <div class="devweb-live-badge"><i class="fa-solid fa-circle-check"></i> Site en ligne</div>
+        </div>
+      </div>
+      <i class="fa-solid fa-arrow-pointer devweb-cursor"></i>
     </div>
   </section>
 
