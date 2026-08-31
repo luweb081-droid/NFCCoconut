@@ -823,7 +823,18 @@
 
 /* icône */
 
+/* =========================================================
+   NAVIGATION — LOGOS SOCIAUX
+========================================================= */
 
+.top-header .fa-instagram,
+.top-header .fa-tiktok,
+.top-header .social-icon i,
+.top-header .socials i {
+    color: #000 !important;
+    -webkit-text-fill-color: #000 !important;
+    opacity: 1 !important;
+}
 
 
 /* apparition */
@@ -1002,7 +1013,32 @@
   animation-delay:1.4s;
 }
 
+/* =========================================================
+   MOBILE — SUPPRESSION DE LA BANDE AU-DESSUS DU HEADER
+========================================================= */
 
+html,
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+@media (max-width: 700px) {
+
+    .top-header {
+        margin-top: 0 !important;
+        top: 0 !important;
+    }
+
+    body {
+        padding-top: 0 !important;
+    }
+
+    .top-header::before,
+    .top-header::after {
+        display: none !important;
+    }
+}
 /* =========================================================
    PREMIÈRE CATÉGORIE
 ========================================================= */
