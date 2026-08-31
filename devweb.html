@@ -67,6 +67,25 @@
       font-family:var(--dw-font-body); font-weight:300;
       color:var(--dw-muted); font-size:.9rem; line-height:1.8;
     }
+    .devweb-cta{
+      display:inline-flex; align-items:center; gap:10px;
+      margin-top:30px;
+      padding:15px 28px;
+      background:var(--dw-cream);
+      color:var(--dw-ink);
+      font-family:var(--dw-font-body); font-weight:600; font-size:.8rem;
+      letter-spacing:.4px; text-transform:uppercase;
+      text-decoration:none;
+      border-radius:6px;
+      transition:transform .3s var(--dw-ease), background .3s ease, box-shadow .3s ease;
+    }
+    .devweb-cta:hover{
+      background:var(--dw-white);
+      transform:translateY(-3px);
+      box-shadow:0 16px 30px -12px rgba(0,0,0,.5);
+    }
+    .devweb-cta i{ font-size:.72rem; transition:transform .3s var(--dw-ease); }
+    .devweb-cta:hover i{ transform:translateX(3px); }
 
     /* ---------- Mockup navigateur animé ---------- */
     .devweb-mockup{ position:relative; width:min(560px, 90vw); z-index:2; }
@@ -206,6 +225,10 @@
       <p class="devweb-eyebrow">Sur mesure & clé en main</p>
       <h1 class="devweb-title">On trouve votre site. <span class="devweb-highlight">On le construit.</span></h1>
       <p class="devweb-subtitle">Un site vitrine pensé pour votre activité, développé et mis en ligne sans que vous ayez à toucher au code.</p>
+      <a href="contact.html" class="devweb-cta">
+        <span>Demander mon devis gratuitement</span>
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
     </div>
 
     <div class="devweb-mockup" aria-hidden="true">
