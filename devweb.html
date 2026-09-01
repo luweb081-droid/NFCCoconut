@@ -951,6 +951,10 @@
       display: block;
     }
 
+    .devis-success.devis-error {
+      color: #c0392b;
+    }
+
     /* =========================================================
        PORTFOLIO
     ========================================================= */
@@ -1871,6 +1875,8 @@
     <form
       class="devis-form"
       id="devisForm"
+      action="https://formspree.io/f/myeywkga"
+      method="POST"
     >
 
       <div class="devis-grid">
@@ -2611,15 +2617,60 @@
 
           e.preventDefault();
 
+          var submitBtn = devisForm.querySelector('.devis-submit');
+          var originalBtnHtml = submitBtn ? submitBtn.innerHTML : null;
 
-          if (devisSuccess) {
-
-            devisSuccess.classList.add('visible');
-
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Envoi en cours...</span>';
           }
 
+          if (devisSuccess) {
+            devisSuccess.classList.remove('visible', 'devis-error');
+          }
 
-          devisForm.reset();
+          fetch(devisForm.action, {
+            method: 'POST',
+            body: new FormData(devisForm),
+            headers: { 'Accept': 'application/json' }
+          })
+            .then(function (response) {
+
+              if (response.ok) {
+
+                if (devisSuccess) {
+                  devisSuccess.textContent = 'Merci ! Votre demande a bien été enregistrée, on vous répond très vite.';
+                  devisSuccess.classList.add('visible');
+                }
+
+                devisForm.reset();
+
+              } else {
+
+                if (devisSuccess) {
+                  devisSuccess.textContent = "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
+                  devisSuccess.classList.add('visible', 'devis-error');
+                }
+
+              }
+
+            })
+            .catch(function () {
+
+              if (devisSuccess) {
+                devisSuccess.textContent = "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
+                devisSuccess.classList.add('visible', 'devis-error');
+              }
+
+            })
+            .finally(function () {
+
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+              }
+
+            });
 
         });
 
