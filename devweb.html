@@ -194,6 +194,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
+
       padding: 14px 16px;
 
       background: rgba(255, 255, 255, .02);
@@ -226,6 +227,7 @@
 
       margin-left: 10px;
       padding: 6px 12px;
+
       flex: 1;
 
       background: rgba(255, 255, 255, .04);
@@ -271,7 +273,9 @@
     .devweb-loading-track {
       height: 3px;
       border-radius: 3px;
+
       background: rgba(255, 255, 255, .06);
+
       overflow: hidden;
       margin-bottom: 18px;
     }
@@ -279,6 +283,7 @@
     .devweb-loading-fill {
       height: 100%;
       width: 0%;
+
       background: var(--dw-cream);
       border-radius: 3px;
 
@@ -294,6 +299,7 @@
     .devweb-site-block {
       height: 26px;
       border-radius: 6px;
+
       background: rgba(234, 217, 180, .12);
 
       opacity: 0;
@@ -360,6 +366,7 @@
       filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .4));
 
       opacity: 0;
+
       animation: devwebCursorMove 6s ease-in-out infinite;
     }
 
@@ -475,6 +482,7 @@
 
       border: 1px solid #eee;
       border-radius: 16px;
+
       overflow: hidden;
     }
 
@@ -489,6 +497,7 @@
       padding: 18px 14px;
 
       background: #f9f9f9;
+
       border: none;
       border-right: 1px solid #eee;
       border-bottom: 1px solid #eee;
@@ -496,6 +505,7 @@
       font-family: var(--dw-font-body);
       font-size: .82rem;
       font-weight: 600;
+
       color: #565656;
 
       transition:
@@ -534,6 +544,7 @@
       font-size: .72rem;
       text-transform: uppercase;
       letter-spacing: 1px;
+
       color: #999;
     }
 
@@ -561,6 +572,7 @@
       font-size: .78rem;
       letter-spacing: .4px;
       text-transform: uppercase;
+
       text-decoration: none;
 
       border-radius: 6px;
@@ -584,24 +596,27 @@
 
     .plans-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
 
-      gap: 26px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
 
-      max-width: 1100px;
+      gap: 22px;
+
+      max-width: 1200px;
       margin: 0 auto 60px;
     }
 
     .plan-card {
       position: relative;
 
-      padding: 38px 32px;
+      padding: 38px 27px;
 
       background: #f9f9f9;
+
       border: 1px solid #eee;
       border-radius: 16px;
 
       overflow: visible;
+
       text-align: center;
 
       transition:
@@ -612,7 +627,9 @@
 
     .plan-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 18px 32px -16px rgba(0, 0, 0, .2);
+
+      box-shadow:
+        0 18px 32px -16px rgba(0, 0, 0, .2);
     }
 
     .plan-card::before {
@@ -629,6 +646,7 @@
       border-radius: 50%;
 
       background: rgba(234, 217, 180, .28);
+
       filter: blur(60px);
 
       pointer-events: none;
@@ -654,19 +672,23 @@
       font-family: var(--dw-font-body);
       font-size: .62rem;
       font-weight: 700;
+
       letter-spacing: .5px;
       text-transform: uppercase;
 
       padding: 5px 14px;
+
       border-radius: 20px;
 
       z-index: 10;
+
       white-space: nowrap;
     }
 
     .plan-card h3 {
       font-family: var(--dw-font-display);
-      font-size: 1.25rem;
+
+      font-size: 1.18rem;
       font-weight: 500;
 
       color: #111;
@@ -676,7 +698,8 @@
 
     .plan-desc {
       font-family: var(--dw-font-body);
-      font-size: .82rem;
+
+      font-size: .8rem;
       color: #767676;
 
       line-height: 1.6;
@@ -686,8 +709,10 @@
 
     .plan-price {
       font-family: var(--dw-font-display);
-      font-size: 2.2rem;
+
+      font-size: 2rem;
       font-weight: 600;
+
       color: #111;
 
       margin-bottom: 22px;
@@ -695,8 +720,10 @@
 
     .plan-price span {
       font-family: var(--dw-font-body);
-      font-size: .85rem;
+
+      font-size: .8rem;
       font-weight: 400;
+
       color: #999;
     }
 
@@ -706,16 +733,21 @@
       margin-top: 6px;
 
       font-family: var(--dw-font-body);
-      font-size: .72rem;
+
+      font-size: .68rem;
       font-weight: 500;
+
       color: #999;
+
       letter-spacing: .2px;
     }
 
     .plan-included-label {
       font-family: var(--dw-font-body);
-      font-size: .68rem;
+
+      font-size: .66rem;
       font-weight: 700;
+
       letter-spacing: 1.4px;
       text-transform: uppercase;
 
@@ -742,8 +774,9 @@
 
       padding: 9px 0;
 
-      font-size: .86rem;
+      font-size: .8rem;
       line-height: 1.4;
+
       color: #444;
 
       border-bottom: 1px solid #eee;
@@ -755,8 +788,11 @@
 
     .plan-list i {
       color: #111;
-      font-size: .75rem;
+
+      font-size: .72rem;
+
       margin-top: 3px;
+
       flex: 0 0 auto;
     }
 
@@ -766,9 +802,10 @@
 
     .plan-cta {
       display: inline-block;
+
       width: 100%;
 
-      padding: 14px 20px;
+      padding: 14px 18px;
 
       background: #fff;
       color: #111;
@@ -777,11 +814,13 @@
 
       font-family: var(--dw-font-body);
       font-weight: 600;
-      font-size: .78rem;
+
+      font-size: .74rem;
       letter-spacing: .4px;
       text-transform: uppercase;
 
       text-decoration: none;
+
       border-radius: 6px;
 
       transition:
@@ -825,17 +864,20 @@
 
     .devis-form {
       max-width: 820px;
+
       margin: 0 auto 60px;
 
       padding: 36px 34px;
 
       background: #f9f9f9;
+
       border: 1px solid #eee;
       border-radius: 16px;
     }
 
     .devis-grid {
       display: grid;
+
       grid-template-columns: 1fr 1fr;
 
       gap: 20px;
@@ -846,6 +888,7 @@
     .devis-field {
       display: flex;
       flex-direction: column;
+
       gap: 7px;
 
       text-align: left;
@@ -857,8 +900,10 @@
 
     .devis-field label {
       font-family: var(--dw-font-body);
+
       font-size: .78rem;
       font-weight: 600;
+
       color: #333;
     }
 
@@ -905,6 +950,127 @@
       }
     }
 
+    /* =========================================================
+       SIMULATEUR INTERVENTIONS
+    ========================================================= */
+
+    .intervention-field {
+      display: none;
+    }
+
+    .intervention-field.visible {
+      display: flex;
+      animation: interventionAppear .35s ease;
+    }
+
+    @keyframes interventionAppear {
+      from {
+        opacity: 0;
+        transform: translateY(-5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .intervention-help {
+      margin: 0;
+
+      font-family: var(--dw-font-body);
+      font-size: .68rem;
+
+      line-height: 1.5;
+
+      color: #999;
+    }
+
+    .devis-estimation {
+      display: none;
+
+      grid-column: 1 / -1;
+
+      padding: 20px 22px;
+
+      background: #111;
+      color: #fff;
+
+      border-radius: 10px;
+
+      text-align: left;
+
+      animation: estimationAppear .35s ease;
+    }
+
+    .devis-estimation.visible {
+      display: block;
+    }
+
+    @keyframes estimationAppear {
+      from {
+        opacity: 0;
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .devis-estimation-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    .devis-estimation-label {
+      font-family: var(--dw-font-body);
+
+      font-size: .72rem;
+      font-weight: 600;
+
+      text-transform: uppercase;
+      letter-spacing: 1px;
+
+      color: rgba(255, 255, 255, .6);
+    }
+
+    .devis-estimation-price {
+      font-family: var(--dw-font-display);
+
+      font-size: 1.65rem;
+      font-weight: 600;
+
+      color: var(--dw-cream);
+
+      white-space: nowrap;
+    }
+
+    .devis-estimation-details {
+      margin: 9px 0 0;
+
+      font-family: var(--dw-font-body);
+
+      font-size: .72rem;
+      line-height: 1.6;
+
+      color: rgba(255, 255, 255, .62);
+    }
+
+    .devis-estimation-note {
+      margin: 8px 0 0;
+
+      font-family: var(--dw-font-body);
+
+      font-size: .68rem;
+
+      color: rgba(255, 255, 255, .42);
+    }
+
     .devis-submit {
       display: inline-flex;
       align-items: center;
@@ -920,6 +1086,7 @@
 
       font-family: var(--dw-font-body);
       font-weight: 600;
+
       font-size: .8rem;
       letter-spacing: .4px;
       text-transform: uppercase;
@@ -936,14 +1103,23 @@
       transform: translateY(-2px);
     }
 
+    .devis-submit:disabled {
+      opacity: .6;
+      cursor: wait;
+      transform: none;
+    }
+
     .devis-success {
       display: none;
 
       margin: 16px 0 0;
 
       font-family: var(--dw-font-body);
+
       font-size: .85rem;
+
       color: #2f7d4a;
+
       font-weight: 600;
     }
 
@@ -967,24 +1143,26 @@
 
     .portfolio-card:hover {
       transform: translateY(-4px);
-      box-shadow: 0 18px 32px -16px rgba(0, 0, 0, .25);
+
+      box-shadow:
+        0 18px 32px -16px rgba(0, 0, 0, .25);
     }
 
     /* =========================================================
        RESPONSIVE
     ========================================================= */
 
+    @media (max-width: 1150px) {
+      .plans-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 820px;
+      }
+    }
+
     @media (max-width: 700px) {
       .devweb-hero {
         padding: 70px 6vw 60px;
         gap: 36px;
-      }
-    }
-
-    @media (max-width: 980px) {
-      .plans-grid {
-        grid-template-columns: repeat(2, 1fr);
-        max-width: 820px;
       }
     }
 
@@ -1026,6 +1204,16 @@
       .devweb-url {
         margin-left: 5px;
       }
+
+      .devis-estimation-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 7px;
+      }
+
+      .devis-estimation-price {
+        font-size: 1.5rem;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1059,7 +1247,6 @@
     }
   </style>
 </head>
-
 
 <body>
 
@@ -1284,6 +1471,8 @@
       "
     >
 
+      <!-- CARTE 1 -->
+
       <div
         class="info-card"
         style="
@@ -1327,6 +1516,8 @@
 
       </div>
 
+
+      <!-- CARTE 2 -->
 
       <div
         class="info-card"
@@ -1372,6 +1563,8 @@
       </div>
 
 
+      <!-- CARTE 3 -->
+
       <div
         class="info-card"
         style="
@@ -1409,12 +1602,14 @@
             line-height: 1.5;
           "
         >
-          Profitez d'un support réactif et de modifications régulières incluses pour faire évoluer votre site au rythme de votre activité.
+          Profitez d'un support réactif et de modifications régulières incluses
+          pour faire évoluer votre site au rythme de votre activité.
         </p>
 
       </div>
 
     </div>
+
 
     <!-- =========================================================
          NOS TARIFS
@@ -1445,9 +1640,13 @@
         <button
           type="button"
           class="pricing-tab active"
+
           data-price="590 €"
+
           data-note="Paiement unique"
+
           data-desc="Idéal pour présenter votre activité sur une seule page : services, contact, avis clients."
+
           data-formule="Site One Page"
         >
           Site One Page
@@ -1459,9 +1658,13 @@
         <button
           type="button"
           class="pricing-tab"
+
           data-price="À partir de 1 490 €"
+
           data-note="Paiement unique"
+
           data-desc="Plusieurs pages (accueil, services, à propos, contact...) pour une présence plus complète."
+
           data-formule="Site Multi-pages"
         >
           Site Multi-pages
@@ -1473,9 +1676,13 @@
         <button
           type="button"
           class="pricing-tab"
+
           data-price="À partir de 2 490 €"
+
           data-note="Paiement unique + abonnement Shopify à part"
+
           data-desc="Boutique en ligne complète : catalogue produits, paiement sécurisé et gestion des commandes. Un abonnement Shopify (environ 30 €/mois) est nécessaire en plus de notre prestation : il est souscrit et géré directement par vous auprès de Shopify, nous ne le gérons pas. Si vous souhaitez que nous gérions votre site (modifications, hébergement, support), un de nos abonnements ci-dessous est requis."
+
           data-formule="Site E-commerce"
         >
           Site E-commerce
@@ -1548,6 +1755,102 @@
 
 
     <div class="plans-grid">
+
+
+      <!-- =======================================================
+           À LA DEMANDE
+      ======================================================= -->
+
+      <div class="plan-card">
+
+        <span class="plan-badge">
+          Tarif minimum
+        </span>
+
+        <h3>
+          À la demande
+        </h3>
+
+        <p class="plan-desc">
+          La solution la plus économique pour garder votre site en ligne
+          et ne payer que lorsque vous demandez une modification.
+        </p>
+
+        <div class="plan-price">
+          19,90 €<span>/mois</span>
+
+          <small>
+            Soit 238,80 € / an
+          </small>
+        </div>
+
+        <p class="plan-included-label">
+          Ce qui est inclus :
+        </p>
+
+        <ul class="plan-list">
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+              Nom de domaine & Hébergement inclus
+            </span>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+              Certificat SSL (HTTPS)
+            </span>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+              Site maintenu en ligne
+            </span>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+              Mises à jour techniques essentielles
+            </span>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+              <strong>
+                20 € par intervention
+              </strong>
+            </span>
+          </li>
+
+          <li>
+            <i class="fa-solid fa-check"></i>
+
+            <span>
+              Aucune modification mensuelle incluse
+            </span>
+          </li>
+
+        </ul>
+
+        <button
+          type="button"
+          class="plan-cta plan-cta-select"
+          data-abonnement="À la demande (19.90 €/mois + 20 €/intervention)"
+        >
+          Choisir À la demande
+        </button>
+
+      </div>
 
 
       <!-- =======================================================
@@ -1698,6 +2001,7 @@
               Référencement SEO local de base
             </span>
           </li>
+
           <li>
             <i class="fa-solid fa-check"></i>
 
@@ -1754,7 +2058,8 @@
         </h3>
 
         <p class="plan-desc">
-          Pour les commerçants qui veulent une présence en ligne 100% pilotée par nos soins, fiche Google incluse.
+          Pour les commerçants qui veulent une présence en ligne 100%
+          pilotée par nos soins, fiche Google incluse.
         </p>
 
         <div class="plan-price">
@@ -1988,21 +2293,117 @@
               Aucun pour le moment
             </option>
 
+            <option value="À la demande (19.90 €/mois + 20 €/intervention)">
+              À la demande — 19,90 €/mois + 20 €/intervention
+            </option>
+
             <option value="Essentiel (29.90 €/mois)">
-              Essentiel (29.90 €/mois)
+              Essentiel — 29,90 €/mois
             </option>
 
             <option value="Business Pro (39.90 €/mois)">
-              Business Pro (39.90 €/mois)
+              Business Pro — 39,90 €/mois
             </option>
 
             <option value="Premium (59.90 €/mois)">
-              Premium (59.90 €/mois)
+              Premium — 59,90 €/mois
             </option>
 
           </select>
 
         </div>
+
+
+        <!-- =====================================================
+             NOMBRE D'INTERVENTIONS
+        ===================================================== -->
+
+        <div
+          class="devis-field intervention-field"
+          id="interventionField"
+        >
+
+          <label for="devisInterventions">
+            Nombre d'interventions souhaitées
+          </label>
+
+          <input
+            type="number"
+            id="devisInterventions"
+            name="interventions"
+            value="0"
+            min="0"
+            max="100"
+            step="1"
+          >
+
+          <p class="intervention-help">
+            Chaque intervention est facturée 20 €. Vous pouvez en demander
+            autant que nécessaire selon vos besoins.
+          </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             ESTIMATION
+        ===================================================== -->
+
+        <div
+          class="devis-estimation"
+          id="devisEstimation"
+        >
+
+          <div class="devis-estimation-top">
+
+            <div>
+
+              <div class="devis-estimation-label">
+                Estimation mensuelle
+              </div>
+
+              <div
+                class="devis-estimation-details"
+                id="devisEstimationDetails"
+              >
+                Abonnement : 19,90 € / mois
+              </div>
+
+            </div>
+
+            <div
+              class="devis-estimation-price"
+              id="devisEstimationPrice"
+            >
+              19,90 € / mois
+            </div>
+
+          </div>
+
+          <p
+            class="devis-estimation-note"
+            id="devisEstimationNote"
+          >
+            Hors création initiale du site.
+          </p>
+
+        </div>
+
+
+        <!-- TOTAL CACHE ENVOYÉ À FORMSPREE -->
+
+        <input
+          type="hidden"
+          name="estimation_mensuelle"
+          id="devisTotalInput"
+          value="19.90 € / mois"
+        >
+
+        <input
+          type="hidden"
+          name="tarif_intervention"
+          value="20 € / intervention"
+        >
 
 
         <!-- MESSAGE -->
@@ -2087,7 +2488,9 @@
         href="#"
         target="_blank"
         rel="noopener noreferrer"
+
         class="portfolio-card"
+
         style="
           display: block;
           text-decoration: none;
@@ -2110,6 +2513,7 @@
           <img
             src="static/images/portfolio-site-1.jpg"
             alt="Aperçu du site N°1"
+
             style="
               width: 100%;
               height: 100%;
@@ -2153,7 +2557,9 @@
         href="#"
         target="_blank"
         rel="noopener noreferrer"
+
         class="portfolio-card"
+
         style="
           display: block;
           text-decoration: none;
@@ -2176,6 +2582,7 @@
           <img
             src="static/images/portfolio-site-2.jpg"
             alt="Aperçu du site N°2"
+
             style="
               width: 100%;
               height: 100%;
@@ -2219,7 +2626,9 @@
         href="#"
         target="_blank"
         rel="noopener noreferrer"
+
         class="portfolio-card"
+
         style="
           display: block;
           text-decoration: none;
@@ -2242,6 +2651,7 @@
           <img
             src="static/images/portfolio-site-3.jpg"
             alt="Aperçu du site N°3"
+
             style="
               width: 100%;
               height: 100%;
@@ -2280,6 +2690,10 @@
 
     </div>
 
+
+    <!-- =========================================================
+         CTA FINAL
+    ========================================================= -->
 
     <section
       style="
@@ -2326,6 +2740,7 @@
         <a
           href="contact.html"
           class="btn-details"
+
           style="
             background: #fff;
             color: #111;
@@ -2350,7 +2765,9 @@
           href="https://www.instagram.com/nfc_coconut_official"
           target="_blank"
           rel="noopener noreferrer"
+
           class="btn-details"
+
           style="
             background: transparent;
             color: #fff;
@@ -2375,6 +2792,11 @@
 
     </section>
 
+
+    <!-- =========================================================
+         FAQ
+    ========================================================= -->
+
     <div
       style="
         text-align: center;
@@ -2382,6 +2804,7 @@
         margin-bottom: 60px;
       "
     >
+
       <p
         style="
           color: #565656;
@@ -2391,8 +2814,10 @@
       >
         Une question sur nos offres ou le fonctionnement ?
       </p>
+
       <a
         href="faq.html"
+
         style="
           color: #111;
           font-weight: 600;
@@ -2403,9 +2828,13 @@
           gap: 6px;
         "
       >
+
         <i class="fa-solid fa-circle-question"></i>
+
         Consultez notre FAQ
+
       </a>
+
     </div>
 
   </main>
@@ -2432,7 +2861,6 @@
   ========================================================= -->
 
   <script>
-
     (function () {
 
       /* ---------------------------------------------------------
@@ -2470,6 +2898,48 @@
 
       var devisSuccess =
         document.getElementById('devisSuccess');
+
+      var interventionField =
+        document.getElementById('interventionField');
+
+      var interventionsInput =
+        document.getElementById('devisInterventions');
+
+      var devisEstimation =
+        document.getElementById('devisEstimation');
+
+      var devisEstimationPrice =
+        document.getElementById('devisEstimationPrice');
+
+      var devisEstimationDetails =
+        document.getElementById('devisEstimationDetails');
+
+      var devisEstimationNote =
+        document.getElementById('devisEstimationNote');
+
+      var devisTotalInput =
+        document.getElementById('devisTotalInput');
+
+
+      /* ---------------------------------------------------------
+         CONSTANTES TARIFAIRES
+      --------------------------------------------------------- */
+
+      var DEMANDE_BASE = 19.90;
+      var PRIX_INTERVENTION = 20;
+
+
+      /* ---------------------------------------------------------
+         FORMATAGE PRIX
+      --------------------------------------------------------- */
+
+      function formatPrice(price) {
+
+        return price
+          .toFixed(2)
+          .replace('.', ',') + ' €';
+
+      }
 
 
       /* ---------------------------------------------------------
@@ -2511,6 +2981,159 @@
 
 
       /* ---------------------------------------------------------
+         SIMULATEUR ABONNEMENT
+      --------------------------------------------------------- */
+
+      function updateSubscriptionSimulator() {
+
+        if (!abonnementSelect) return;
+
+        var selectedValue =
+          abonnementSelect.value || '';
+
+        var isDemand =
+          selectedValue.indexOf('À la demande') === 0;
+
+        if (isDemand) {
+
+          if (interventionField) {
+            interventionField.classList.add('visible');
+          }
+
+          if (devisEstimation) {
+            devisEstimation.classList.add('visible');
+          }
+
+          updateInterventionTotal();
+
+        } else {
+
+          if (interventionField) {
+            interventionField.classList.remove('visible');
+          }
+
+          if (devisEstimation) {
+            devisEstimation.classList.remove('visible');
+          }
+
+          if (interventionsInput) {
+            interventionsInput.value = 0;
+          }
+
+          if (devisTotalInput) {
+            devisTotalInput.value =
+              'Non applicable';
+          }
+
+        }
+
+      }
+
+
+      /* ---------------------------------------------------------
+         CALCUL INTERVENTIONS
+      --------------------------------------------------------- */
+
+      function updateInterventionTotal() {
+
+        if (!interventionsInput) return;
+
+        var interventions =
+          parseInt(interventionsInput.value, 10);
+
+        if (isNaN(interventions) || interventions < 0) {
+          interventions = 0;
+        }
+
+        if (interventions > 100) {
+          interventions = 100;
+          interventionsInput.value = 100;
+        }
+
+        var interventionTotal =
+          interventions * PRIX_INTERVENTION;
+
+        var totalMensuel =
+          DEMANDE_BASE + interventionTotal;
+
+
+        /* PRIX PRINCIPAL */
+
+        if (devisEstimationPrice) {
+
+          devisEstimationPrice.textContent =
+            formatPrice(totalMensuel) + ' / mois';
+
+        }
+
+
+        /* DETAILS */
+
+        if (devisEstimationDetails) {
+
+          if (interventions === 0) {
+
+            devisEstimationDetails.textContent =
+              'Abonnement : 19,90 € / mois • 0 intervention';
+
+          } else if (interventions === 1) {
+
+            devisEstimationDetails.textContent =
+              '19,90 € / mois + 1 intervention × 20 €';
+
+          } else {
+
+            devisEstimationDetails.textContent =
+              '19,90 € / mois + ' +
+              interventions +
+              ' interventions × 20 €';
+
+          }
+
+        }
+
+
+        /* NOTE */
+
+        if (devisEstimationNote) {
+
+          if (interventions === 0) {
+
+            devisEstimationNote.textContent =
+              'Aucune intervention prévue ce mois-ci. Hors création initiale du site.';
+
+          } else {
+
+            devisEstimationNote.textContent =
+              'Estimation basée sur ' +
+              interventions +
+              ' intervention' +
+              (interventions > 1 ? 's' : '') +
+              ' ce mois-ci. Hors création initiale du site.';
+
+          }
+
+        }
+
+
+        /* CHAMP CACHÉ FORMSPREE */
+
+        if (devisTotalInput) {
+
+          devisTotalInput.value =
+            formatPrice(totalMensuel) +
+            ' / mois (' +
+            interventions +
+            ' intervention' +
+            (interventions > 1 ? 's' : '') +
+            ')';
+
+        }
+
+      }
+
+
+      /* ---------------------------------------------------------
          CHANGEMENT DES FORMULES
       --------------------------------------------------------- */
 
@@ -2519,7 +3142,9 @@
         tab.addEventListener('click', function () {
 
           tabs.forEach(function (t) {
+
             t.classList.remove('active');
+
           });
 
           tab.classList.add('active');
@@ -2574,6 +3199,7 @@
 
           }
 
+
           scrollToDevis();
 
         });
@@ -2598,6 +3224,8 @@
 
               flash(abonnementField);
 
+              updateSubscriptionSimulator();
+
             }
 
             scrollToDevis();
@@ -2608,76 +3236,216 @@
 
 
       /* ---------------------------------------------------------
+         CHANGEMENT MANUEL ABONNEMENT
+      --------------------------------------------------------- */
+
+      if (abonnementSelect) {
+
+        abonnementSelect.addEventListener(
+          'change',
+          function () {
+
+            updateSubscriptionSimulator();
+
+          }
+        );
+
+      }
+
+
+      /* ---------------------------------------------------------
+         CHANGEMENT NOMBRE INTERVENTIONS
+      --------------------------------------------------------- */
+
+      if (interventionsInput) {
+
+        interventionsInput.addEventListener(
+          'input',
+          function () {
+
+            updateInterventionTotal();
+
+          }
+        );
+
+        interventionsInput.addEventListener(
+          'change',
+          function () {
+
+            updateInterventionTotal();
+
+          }
+        );
+
+      }
+
+
+      /* ---------------------------------------------------------
          FORMULAIRE
       --------------------------------------------------------- */
 
       if (devisForm) {
 
-        devisForm.addEventListener('submit', function (e) {
+        devisForm.addEventListener(
+          'submit',
+          function (e) {
 
-          e.preventDefault();
+            e.preventDefault();
 
-          var submitBtn = devisForm.querySelector('.devis-submit');
-          var originalBtnHtml = submitBtn ? submitBtn.innerHTML : null;
 
-          if (submitBtn) {
-            submitBtn.disabled = true;
-            submitBtn.innerHTML = '<span>Envoi en cours...</span>';
-          }
+            /* Toujours recalculer avant l'envoi */
 
-          if (devisSuccess) {
-            devisSuccess.classList.remove('visible', 'devis-error');
-          }
+            updateSubscriptionSimulator();
 
-          fetch(devisForm.action, {
-            method: 'POST',
-            body: new FormData(devisForm),
-            headers: { 'Accept': 'application/json' }
-          })
-            .then(function (response) {
 
-              if (response.ok) {
+            var submitBtn =
+              devisForm.querySelector('.devis-submit');
 
-                if (devisSuccess) {
-                  devisSuccess.textContent = 'Merci ! Votre demande a bien été enregistrée, on vous répond très vite.';
-                  devisSuccess.classList.add('visible');
+            var originalBtnHtml =
+              submitBtn
+                ? submitBtn.innerHTML
+                : null;
+
+
+            if (submitBtn) {
+
+              submitBtn.disabled = true;
+
+              submitBtn.innerHTML =
+                '<span>Envoi en cours...</span>';
+
+            }
+
+
+            if (devisSuccess) {
+
+              devisSuccess.classList.remove(
+                'visible',
+                'devis-error'
+              );
+
+            }
+
+
+            fetch(
+              devisForm.action,
+              {
+                method: 'POST',
+
+                body: new FormData(devisForm),
+
+                headers: {
+                  'Accept': 'application/json'
+                }
+              }
+            )
+
+              .then(function (response) {
+
+                if (response.ok) {
+
+                  if (devisSuccess) {
+
+                    devisSuccess.textContent =
+                      'Merci ! Votre demande a bien été enregistrée, on vous répond très vite.';
+
+                    devisSuccess.classList.add(
+                      'visible'
+                    );
+
+                  }
+
+
+                  devisForm.reset();
+
+
+                  /* Reset du simulateur */
+
+                  if (interventionField) {
+
+                    interventionField.classList.remove(
+                      'visible'
+                    );
+
+                  }
+
+
+                  if (devisEstimation) {
+
+                    devisEstimation.classList.remove(
+                      'visible'
+                    );
+
+                  }
+
+
+                  if (devisTotalInput) {
+
+                    devisTotalInput.value =
+                      'Non applicable';
+
+                  }
+
+                } else {
+
+                  if (devisSuccess) {
+
+                    devisSuccess.textContent =
+                      "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
+
+                    devisSuccess.classList.add(
+                      'visible',
+                      'devis-error'
+                    );
+
+                  }
+
                 }
 
-                devisForm.reset();
+              })
 
-              } else {
+              .catch(function () {
 
                 if (devisSuccess) {
-                  devisSuccess.textContent = "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
-                  devisSuccess.classList.add('visible', 'devis-error');
+
+                  devisSuccess.textContent =
+                    "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
+
+                  devisSuccess.classList.add(
+                    'visible',
+                    'devis-error'
+                  );
+
                 }
 
-              }
+              })
 
-            })
-            .catch(function () {
+              .finally(function () {
 
-              if (devisSuccess) {
-                devisSuccess.textContent = "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
-                devisSuccess.classList.add('visible', 'devis-error');
-              }
+                if (submitBtn) {
 
-            })
-            .finally(function () {
+                  submitBtn.disabled = false;
 
-              if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnHtml;
-              }
+                  submitBtn.innerHTML =
+                    originalBtnHtml;
 
-            });
+                }
 
-        });
+              });
+
+          }
+        );
 
       }
 
-    })();
 
+      /* ---------------------------------------------------------
+         INITIALISATION
+      --------------------------------------------------------- */
+
+      updateSubscriptionSimulator();
+
+    })();
   </script>
 
 </body>
