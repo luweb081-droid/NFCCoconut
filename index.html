@@ -18,6 +18,13 @@
   <meta property="og:title" content="Plaque NFC Avis Google & Présentoirs Connectés | NFC Coconut">
   <meta property="og:description" content="Boostez vos avis Google en un tap : plaques et présentoirs NFC prêts à l'emploi, sans configuration, dès 39,90 €.">
   <meta property="og:image" content="https://nfccoconut.fr/static/images/plaque-avis-google.jpg">
+  <meta property="og:image:alt" content="Plaque NFC pour avis Google posée sur un comptoir">
+
+  <!-- Twitter / X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Plaque NFC Avis Google & Présentoirs Connectés | NFC Coconut">
+  <meta name="twitter:description" content="Boostez vos avis Google en un tap : plaques et présentoirs NFC prêts à l'emploi, dès 39,90 €.">
+  <meta name="twitter:image" content="https://nfccoconut.fr/static/images/plaque-avis-google.jpg">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -657,6 +664,73 @@
     }
 
     /* =========================================================
+       SEO CONTENT BLOCK
+    ========================================================= */
+
+    .seo-text-block{
+      max-width:900px;
+      margin:110px auto 0;
+      padding:0 30px;
+    }
+
+    .seo-text-block h2{
+      margin:0 0 22px;
+      text-align:center;
+
+      font-family:var(--font-display);
+      font-size:clamp(1.6rem,2.6vw,2.2rem);
+      font-weight:500;
+    }
+
+    .seo-text-block p{
+      color:rgba(248,246,240,.5);
+      font-size:.82rem;
+      line-height:1.95;
+      font-weight:300;
+      margin:0 0 18px;
+    }
+
+    .seo-faq{
+      margin-top:40px;
+      border-top:1px solid var(--line);
+    }
+
+    .seo-faq details{
+      padding:20px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .seo-faq summary{
+      cursor:pointer;
+      font-family:var(--font-display);
+      font-size:.95rem;
+      font-weight:500;
+      color:var(--cream-light);
+      list-style:none;
+    }
+
+    .seo-faq summary::-webkit-details-marker{
+      display:none;
+    }
+
+    .seo-faq summary::before{
+      content:"+ ";
+      color:var(--cream);
+    }
+
+    .seo-faq details[open] summary::before{
+      content:"– ";
+    }
+
+    .seo-faq p{
+      margin:14px 0 0;
+      color:rgba(248,246,240,.48);
+      font-size:.78rem;
+      line-height:1.85;
+      font-weight:300;
+    }
+
+    /* =========================================================
        FOOTER
     ========================================================= */
 
@@ -669,6 +743,10 @@
 
       font-size:.63rem !important;
       letter-spacing:.5px;
+    }
+
+    footer a{
+      color:rgba(248,246,240,.42) !important;
     }
 
     /* =========================================================
@@ -763,6 +841,10 @@
       .community-section{
         margin:110px 18px 80px;
         padding:60px 25px;
+      }
+
+      .seo-text-block{
+        margin-top:80px;
       }
     }
 
@@ -1141,6 +1223,81 @@ body {
   }
 }
   </style>
+
+  <!-- ============================================================
+       DONNÉES STRUCTURÉES (Schema.org / JSON-LD)
+       — Organization : identité de la marque pour Google
+       — WebSite : active la barre de recherche dans les résultats
+       — FAQPage : active les rich snippets FAQ (accordéon plus bas)
+  ============================================================ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "NFC Coconut",
+    "url": "https://nfccoconut.fr",
+    "logo": "https://nfccoconut.fr/static/images/ico.png",
+    "description": "Plaques et présentoirs NFC pour avis Google, cartes de visite connectées et collection streetwear NFC. Conception et envoi depuis la France.",
+    "sameAs": [
+      "https://www.instagram.com/nfc_coconut_official"
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "NFC Coconut",
+    "url": "https://nfccoconut.fr",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://nfccoconut.fr/recherche?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Comment fonctionne une plaque NFC pour avis Google ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Le client approche son smartphone de la plaque NFC : la page d'avis Google de votre établissement s'ouvre automatiquement, sans application ni scan de QR code. Il peut alors laisser son avis en quelques secondes."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Faut-il une application pour utiliser une plaque NFC ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Non. La technologie NFC est intégrée nativement à la quasi-totalité des smartphones récents (Android et iPhone depuis iOS 14). Aucun téléchargement n'est nécessaire côté client."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Combien coûte une plaque NFC avis Google ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les plaques NFC Coconut démarrent à 39,90 €, livrées prêtes à l'emploi et déjà configurées avec le lien de votre fiche Google."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "En combien de temps la plaque est-elle livrée ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Les plaques sont conçues et expédiées depuis la France, avec une livraison rapide sur l'ensemble du territoire."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -1216,7 +1373,7 @@ body {
       </p>
 
       <h1 class="hero-title">
-        Connectez votre activité au <span class="hero-highlight">monde réel</span>
+        Plaques NFC Avis Google & présentoirs connectés pour <span class="hero-highlight">booster votre e-réputation</span>
       </h1>
 
       <p class="hero-subtitle">
@@ -1514,6 +1671,73 @@ body {
           </p>
 
         </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- =======================================================
+         BLOC TEXTE SEO + FAQ
+         Contenu indexable additionnel : Google a besoin de texte
+         contextuel pour comprendre le sujet de la page et se
+         positionner sur les requêtes longue traîne.
+    ======================================================== -->
+
+    <div class="seo-text-block">
+
+      <h2>La plaque NFC avis Google, expliquée</h2>
+
+      <p>
+        NFC Coconut conçoit des plaques et présentoirs NFC qui permettent à vos clients de laisser
+        un avis Google en un seul geste, sans télécharger d'application ni scanner de QR code.
+        Posée sur votre comptoir, votre table ou votre vitrine, la plaque redirige automatiquement
+        le smartphone du client vers votre fiche d'établissement Google, à l'endroit exact où il
+        peut rédiger son avis.
+      </p>
+
+      <p>
+        Nos plaques et présentoirs sont conçus et programmés en France, livrés déjà configurés
+        avec le lien de votre établissement : aucune installation technique n'est nécessaire de
+        votre côté. Plus de 500 commerces, restaurants, salons de coiffure, cabinets et boutiques
+        utilisent déjà nos produits pour développer leur nombre d'avis et améliorer leur visibilité
+        locale sur Google.
+      </p>
+
+      <div class="seo-faq">
+
+        <details>
+          <summary>Comment fonctionne une plaque NFC pour avis Google ?</summary>
+          <p>
+            Le client approche son smartphone de la plaque : sa fiche d'avis Google s'ouvre
+            automatiquement, sans application ni QR code. Il peut laisser son avis en quelques
+            secondes.
+          </p>
+        </details>
+
+        <details>
+          <summary>Faut-il une application pour utiliser une plaque NFC ?</summary>
+          <p>
+            Non. La technologie NFC est intégrée nativement à la quasi-totalité des smartphones
+            récents, Android comme iPhone (depuis iOS 14). Aucun téléchargement n'est nécessaire.
+          </p>
+        </details>
+
+        <details>
+          <summary>Combien coûte une plaque NFC avis Google ?</summary>
+          <p>
+            Les plaques NFC Coconut démarrent à 39,90 €, livrées prêtes à l'emploi et déjà
+            configurées avec le lien de votre fiche Google.
+          </p>
+        </details>
+
+        <details>
+          <summary>En combien de temps la plaque est-elle livrée ?</summary>
+          <p>
+            Les plaques sont conçues et expédiées depuis la France, avec une livraison rapide sur
+            l'ensemble du territoire.
+          </p>
+        </details>
 
       </div>
 

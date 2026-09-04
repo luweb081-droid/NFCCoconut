@@ -182,7 +182,7 @@
         "url": "https://nfccoconut.fr",
         "logo": "https://nfccoconut.fr/static/images/nfccoconut.png",
         "sameAs": [
-            "https://www.instagram.com/nfc_coconut/"
+            "https://www.instagram.com/nfc_coconut_official"
         ]
     }
     </script>
@@ -210,6 +210,52 @@
             "price": "39.90",
             "availability": "https://schema.org/InStock"
         }
+    }
+    </script>
+
+
+    <!-- =========================================================
+         SCHEMA FAQ
+         ========================================================= -->
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Faut-il installer une application pour utiliser la plaque NFC ?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Non, aucune application n'est nécessaire. La technologie NFC est lue nativement par la quasi-totalité des smartphones récents, Android comme iPhone (depuis iOS 14)."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Que se passe-t-il si le téléphone d'un client n'est pas compatible NFC ?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Chaque plaque intègre aussi un QR code de secours : le client peut simplement le scanner avec l'appareil photo pour accéder directement à la page d'avis Google."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Comment la plaque est-elle configurée pour mon commerce ?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Après votre commande, nous programmons et testons la plaque en atelier avec le lien direct vers votre fiche Google, avant de vous l'expédier prête à l'emploi."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Combien coûte une plaque NFC avis Google ?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Le tarif démarre à 39,90 €, plaque déjà configurée et livraison comprise en France."
+                }
+            }
+        ]
     }
     </script>
 
@@ -2321,6 +2367,77 @@
 
 
         /* =====================================================
+           FAQ
+           ===================================================== */
+
+        .faq-list {
+
+            max-width: 780px;
+
+            margin: 0 auto;
+        }
+
+
+        .faq-item {
+
+            border-bottom:
+                1px solid rgba(234,217,180,.14);
+
+            padding: 22px 0;
+        }
+
+
+        .faq-item summary {
+
+            cursor: pointer;
+
+            list-style: none;
+
+            font-family: var(--font-display);
+
+            font-size: .98rem;
+
+            font-weight: 500;
+
+            color: var(--white);
+        }
+
+
+        .faq-item summary::-webkit-details-marker {
+
+            display: none;
+        }
+
+
+        .faq-item summary::before {
+
+            content: "+ ";
+
+            color: var(--cream);
+        }
+
+
+        .faq-item[open] summary::before {
+
+            content: "– ";
+        }
+
+
+        .faq-item p {
+
+            margin: 14px 0 0;
+
+            font-family: var(--font-body);
+
+            font-size: .85rem;
+
+            line-height: 1.75;
+
+            color: #9a978d;
+        }
+
+
+        /* =====================================================
            CTA FINAL
            ===================================================== */
 
@@ -3579,6 +3696,44 @@
 
                 </div>
 
+
+            </div>
+
+
+            <!-- =================================================
+                 FAQ (correspond au schema FAQPage du <head>)
+                 ================================================= -->
+
+            <div class="how-divider">
+
+                <span>
+                    Questions fréquentes
+                </span>
+
+            </div>
+
+
+            <div class="faq-list">
+
+                <details class="faq-item">
+                    <summary>Faut-il installer une application pour utiliser la plaque NFC ?</summary>
+                    <p>Non, aucune application n'est nécessaire. La technologie NFC est lue nativement par la quasi-totalité des smartphones récents, Android comme iPhone (depuis iOS 14).</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Que se passe-t-il si le téléphone d'un client n'est pas compatible NFC ?</summary>
+                    <p>Chaque plaque intègre aussi un QR code de secours : le client peut simplement le scanner avec l'appareil photo pour accéder directement à la page d'avis Google.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Comment la plaque est-elle configurée pour mon commerce ?</summary>
+                    <p>Après votre commande, nous programmons et testons la plaque en atelier avec le lien direct vers votre fiche Google, avant de vous l'expédier prête à l'emploi.</p>
+                </details>
+
+                <details class="faq-item">
+                    <summary>Combien coûte une plaque NFC avis Google ?</summary>
+                    <p>Le tarif démarre à 39,90 €, plaque déjà configurée et livraison comprise en France.</p>
+                </details>
 
             </div>
 
