@@ -17,11 +17,9 @@
  * gérés uniquement ici : ce sont des textes marketing propres au site, pas
  * des données Shopify.
  *
- * Tous les produits de catégorie 'streetwear' sont considérés comme faisant
- * partie du "Drop" à venir : ils affichent un bouton verrouillé avec un
- * compte à rebours (identique à celui de la barre de navigation) au lieu du
- * bouton "Ajouter au panier", tant que la date de lancement (voir
- * startLaunchCountdown) n'est pas atteinte.
+ * Ce catalogue ne contient plus que les produits "business" (plaques NFC) :
+ * la collection streetwear vit désormais sur son propre site
+ * (https://streetwear.nfccoconut.fr), avec son propre main.js.
  */
 const PRODUCTS = [
   { 
@@ -123,90 +121,6 @@ const PRODUCTS = [
     features: ['Format compact de comptoir', 'Technologie NFC & QR Code', 'Paiement unique sans abonnement'],
     shopifyVariantId: 'gid://shopify/ProductVariant/54222343864663'
   },
-  { 
-    id: 'tshirt-streetwear-1', 
-    category: 'streetwear', 
-    name: 'T-shirt style Streetwear N°1', 
-    price: 39.90, 
-    oldPrice: 59.90, 
-    images: ['static/images/tshirt2.png', 'static/images/tshirt2bis.png'], 
-    description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
-    tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
-    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Imprimé localement en France'],
-    shopifyVariantId: "gid://shopify/ProductVariant/54297832096087"
-  },
-  { 
-    id: 'tshirt-streetwear-2', 
-    category: 'streetwear', 
-    name: 'T-Shirt style Streetwear N°2', 
-    price: 39.90, 
-    oldPrice: 59.90, 
-    images: ['static/images/tshirt1.png', 'static/images/tshirt1bis.png','static/images/tshirt2bis2.png','static/images/tshirt2bis3.png'], 
-    description: 'Coupe boxy streetwear avec un patch NFC discret intégré au bas du vêtement.', 
-    tags: ['t-shirt', 'oversized', 'streetwear', 'nfc', 'vêtement'],
-    features: ['Coupe Oversized Boxy', 'Patch NFC lavable intégré', 'Imprimé localement en France'],
-    shopifyVariantId: "gid://shopify/ProductVariant/54297833242967"
-  }, 
-  { 
-    id: 'tshirt-streetwear-3', 
-    category: 'streetwear', 
-    name: 'T-shirt style Streetwear N°3', 
-    price: 39.90, 
-    oldPrice: 59.90, 
-    images: ['static/images/t-shirt3.png', 'static/images/tshirt3bis.png'], 
-    description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
-    tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
-    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Série limitée exclusive'],
-    shopifyVariantId: "gid://shopify/ProductVariant/54297836552535"
-  },
-  { 
-    id: 'tshirt-streetwear-4', 
-    category: 'streetwear', 
-    name: 'T-shirt style Streetwear N°4', 
-    price: 39.90, 
-    oldPrice: 59.90, 
-    images: ['static/images/tshirt4.png', 'static/images/tshirt4bis.png'], 
-    description: 'T-shirt en coton lourd bio, pensé pour une coupe streetwear confortable et durable.', 
-    tags: ['t-shirt', 'streetwear', 'coton', 'vêtement'],
-    features: ['Coupe Oversized Boxy', '100% Coton lourd bio (300g/m²)', 'Imprimé localement en France'],
-    shopifyVariantId: "gid://shopify/ProductVariant/54297837306199"
-  },
-  { 
-    id: 'poster-drop-00-N°1', 
-    category: 'streetwear', 
-    name: 'Affiche — Drop 00 (Art Print)', 
-    price: 24.90, 
-    oldPrice: 39.00, 
-    images: ['static/images/Vraiposter1.png'], 
-    description: 'Affiche exclusive Drop 00 imprimée sur un papier mat haute densité.', 
-    tags: ['poster', 'affiche', 'art', 'streetwear', 'decoration'],
-    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
-    shopifyVariantId: "gid://shopify/ProductVariant/54296700584279"
-  },
-  { 
-    id: 'poster-drop-00-N°2', 
-    category: 'streetwear', 
-    name: 'Affiche — Drop 00 (Art Print)', 
-    price: 24.90, 
-    oldPrice: 39.00, 
-    images: ['static/images/poster2.png'], 
-    description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
-    tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
-    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
-    shopifyVariantId: "gid://shopify/ProductVariant/54297815089495"
-  },
-  { 
-    id: 'poster-drop-00-N°3', 
-    category: 'streetwear', 
-    name: 'Affiche — Drop 00 (Art Print)', 
-    price: 24.90, 
-    oldPrice: 39.00, 
-    images: ['static/images/poster3.png'], 
-    description: 'Plongez dans l’univers visuel de NFC Coconut avec cette affiche collector.', 
-    tags: ['poster', 'affiche', 'art', 'streetwear', 'soundwave'],
-    features: ['Format A3 (29.7 x 42 cm)', 'Papier mat haute densité', 'Édition limitée exclusive'],
-    shopifyVariantId: "gid://shopify/ProductVariant/54297815548247"
-  },
   {
     id: 'guide-premium',
     category: 'digital',
@@ -223,12 +137,13 @@ const PRODUCTS = [
 ];
 
 // Ajout de la propriété `showInDesktop` (true par défaut, false pour masquer de la barre principale)
+// `external: true` ouvre le lien dans un nouvel onglet (utilisé pour renvoyer
+// vers le site streetwear, qui est désormais un site à part entière).
 const NAV_LINKS = [
-  { label: 'Accueil', href: 'index.html', showInDesktop: true },
+  { label: 'Accueil', href: 'b2b.html', showInDesktop: true },
   { label: 'NFC', href: 'avis-google.html', showInDesktop: true },
-  { label: 'Streetwear', href: 'streetwear.html', showInDesktop: true },  
-  
   { label: 'Développement Web', href: 'devweb.html', showInDesktop: true },
+  { label: 'Streetwear', href: 'https://streetwear.nfccoconut.fr', showInDesktop: true, external: true },
   { label: 'FAQ', href: 'faq.html', showInDesktop: false }, 
   { label: 'Contact', href: 'contact.html', showInDesktop: false },
   { label: 'Mentions légales', href: 'mentions-legales.html', showInDesktop: false },
@@ -242,18 +157,9 @@ const euro = value => `${value.toFixed(2).replace('.', ',')} €`;
 const escapeHtml = text => String(text).replace(/[&<>'"]/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[char]);
 const productUrl = product => `produit.html?id=${encodeURIComponent(product.id)}`;
 
-// Bouton d'action d'une carte/fiche produit : pour le streetwear (Drop pas
-// encore lancé), un bouton verrouillé avec le compte à rebours remplace
-// systématiquement "Ajouter au panier" / "Épuisé".
+// Bouton d'action d'une carte/fiche produit.
 function productActionButton(product) {
   const isSoldOut = product.soldOut === true;
-
-  if (product.category === 'streetwear') {
-    return `<button class="btn-add-cart btn-locked" type="button" disabled aria-label="Disponible au lancement du Drop">
-      <i class="fa-solid fa-lock"></i>
-      <span class="js-launch-timer">--j --h --m --s</span>
-    </button>`;
-  }
 
   return isSoldOut
     ? `<button class="btn-add-cart disabled" type="button" disabled>Épuisé</button>`
@@ -375,7 +281,7 @@ function renderNavigation() {
   // Génère les liens de la barre de bureau (uniquement ceux avec showInDesktop: true)
   const desktopLinks = NAV_LINKS
     .filter(link => link.showInDesktop)
-    .map(({ label, href }) => `<a href="${href}"${href === file ? ' class="active" aria-current="page"' : ''}>${label}</a>`)
+    .map(({ label, href, external }) => `<a href="${href}"${href === file ? ' class="active" aria-current="page"' : ''}${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${label}</a>`)
     .join('');
   
   document.querySelectorAll('.top-header').forEach(header => {
@@ -387,10 +293,6 @@ function renderNavigation() {
       </div>
       <a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfccoconut.png" alt="NFC Coconut"></a>
       <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
-    <div id="launchCountdown" class="mobile-countdown-wrapper" style="font-size: 0.85rem; font-weight: 600; white-space: nowrap; color: #555;">
-        DROP 00 dans : <span id="timerValue" class="js-launch-timer" style="font-weight: 700;">--j --h --m --s</span>
-    </div>
-
     <!-- Réseaux sociaux -->
     <div style="display: flex; align-items: center; gap: 0;">
         <a href="https://www.instagram.com/nfc_coconut_official"
@@ -418,27 +320,20 @@ function renderNavigation() {
   
   // Génère tous les liens pour le menu déroulant mobile (hamburger)
   document.querySelectorAll('.mobile-nav').forEach(nav => { 
-    nav.innerHTML = `<ul>${NAV_LINKS.map(({ label, href }) => `<li><a href="${href}"${href === file ? ' class="active"' : ''}>${label}</a></li>`).join('')}</ul>`; 
+    nav.innerHTML = `<ul>${NAV_LINKS.map(({ label, href, external }) => `<li><a href="${href}"${href === file ? ' class="active"' : ''}${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${label}</a></li>`).join('')}</ul>`; 
   });
 }
 
 function renderProductGrids() {
   const file = currentFile();
-  const pageCategory = file === 'streetwear.html' ? 'streetwear' : 'business';
   const grids = [...document.querySelectorAll('.products-grid')];
-  
+
   if (!grids.length || file === 'produit.html') return;
-  
+
   const target = grids[0];
-  const products = file === 'index.html' ? PRODUCTS.filter(p => p.category === 'business').slice(0, 6) : PRODUCTS.filter(p => p.category === pageCategory);
-  const catalogLinkCard = file === 'index.html' ? `<article class="product-item view-catalog-card" aria-label="Voir le catalogue complet">
-    <div class="catalog-link-icon"><i class="fa-solid fa-grid-2"></i></div>
-    <h3>Toute la collection</h3>
-    <p>Découvrez l'intégralité de nos solutions et supports connectés.</p>
-    <a href="catalogue.html" class="btn-add-cart">Voir le catalogue complet <i class="fa-solid fa-arrow-right"></i></a>
-  </article>` : '';
-  
-  target.innerHTML = products.map(productCard).join('') + catalogLinkCard;
+  const products = PRODUCTS.filter(p => p.category === 'business');
+
+  target.innerHTML = products.map(productCard).join('');
   target.dataset.catalogGrid = 'true';
 }
 
@@ -495,7 +390,7 @@ function renderProductPage() {
   // Le clic est géré par setupGallery() via la classe .gallery-arrow.
   const hasMultipleImages = product.images.length > 1;
 
-  root.innerHTML = `<a class="back-link" href="${product.category === 'streetwear' ? 'streetwear.html' : 'catalogue.html'}"><i class="fa-solid fa-arrow-left"></i> Retour</a>
+  root.innerHTML = `<a class="back-link" href="catalogue.html"><i class="fa-solid fa-arrow-left"></i> Retour</a>
   <section class="product-detail">
     <div class="product-gallery">
       <div class="product-img-wrapper" style="position: relative;">
@@ -511,7 +406,7 @@ function renderProductPage() {
       </div>
     </div>
     <div class="product-info">
-      <p class="product-category">${product.category === 'streetwear' ? 'Streetwear' : 'NFC Business'}</p>
+      <p class="product-category">NFC Business</p>
       <h1>${escapeHtml(product.name)}</h1>
       <div class="detail-price">${euro(product.price)}${product.oldPrice ? `<del>${euro(product.oldPrice)}</del>` : ''}</div>
       ${stockInfoHtml}
@@ -1244,37 +1139,6 @@ function changeGalleryImage(newImage, direction = 1) {
   }, 200);
 }
 
-// Compte à rebours du lancement/Drop : met à jour TOUS les éléments portant
-// la classe .js-launch-timer (barre de navigation + boutons "verrouillés"
-// des produits streetwear), en une seule boucle, à chaque seconde.
-function startLaunchCountdown() {
-  const targetDate = new Date('2026-10-11T00:00:00').getTime();
-
-  const tick = () => {
-    const timerEls = document.querySelectorAll('.js-launch-timer');
-    if (!timerEls.length) return;
-
-    const now = new Date().getTime();
-    const distance = targetDate - now;
-
-    let text;
-    if (distance < 0) {
-      text = "C'est ouvert !";
-    } else {
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      text = `${days}j ${hours}h ${minutes}m ${seconds}s`;
-    }
-
-    timerEls.forEach(el => { el.textContent = text; });
-  };
-
-  tick();
-  setInterval(tick, 1000);
-}
-
 document.addEventListener('DOMContentLoaded', () => { 
   renderNavigation(); 
   renderProductGrids(); 
@@ -1283,7 +1147,6 @@ document.addEventListener('DOMContentLoaded', () => {
   setupCartAndDrawer(); 
   setupMobileMenu();
   setupGallery(); 
-  startLaunchCountdown();
   setupAddressAutocomplete(); // Autocomplétion d'adresse (API Adresse gouv.fr)
   syncProductDataFromShopify(); // Met à jour stock, prix, prix barré, description et photos depuis Shopify
 });

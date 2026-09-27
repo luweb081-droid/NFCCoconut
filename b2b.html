@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>NFC Coconut Pro — Plaques NFC avis Google & création de sites web</title>
+
+  <meta
+    name="description"
+    content="NFC Coconut Pro équipe les commerces de plaques NFC avis Google et crée des sites vitrines professionnels clé en main."
+  >
+
+  <link rel="icon" type="image/png" href="/static/images/ico.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  >
+
+  <!-- Feuille de style commune du site : c'est elle qui gère le header,
+       la recherche, le tiroir panier/menu et le footer simple -->
+  <link rel="stylesheet" href="static/css/style.css">
+
+  <style>
+    /* =====================================================
+       STYLES PROPRES À LA PAGE D'ACCUEIL
+       (hero, univers, pourquoi nous, à propos, communauté,
+       et personnalisation du grand footer)
+    ===================================================== */
+    :root {
+      --ink: #11100f;
+      --ink-2: #151312;
+      --ink-card: #1a1817;
+      --ink-card-2: #211e1c;
+      --cream: #ead9b4;
+      --cream-light: #f3e7cc;
+      --white: #f8f6f0;
+      --muted: #aaa59a;
+      --line: rgba(234, 217, 180, .11);
+      --line-hover: rgba(234, 217, 180, .28);
+      --font-display: "Cinzel", serif;
+      --font-body: "Montserrat", sans-serif;
+      --ease: cubic-bezier(.16, 1, .3, 1);
+    }
+
+    /* Le body reste sombre pour le contenu de la home (univers...),
+       le header et le footer sont gérés séparément et restent clairs */
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(234, 217, 180, .075),
+          transparent 34%
+        ),
+        var(--ink);
+      color: var(--white);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a { color: inherit; }
+    button { font: inherit; }
+
+    /* =====================================================
+       HERO — fond clair, logo NFC Coconut centré avec zoom-in
+    ===================================================== */
+
+    .hero-banner {
+      position: relative;
+      min-height: 680px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 90px 30px;
+      overflow: hidden;
+      isolation: isolate;
+      background-image:
+        linear-gradient(
+          rgba(17, 16, 15, .80),
+          rgba(17, 16, 15, .80)
+        ),
+        url("static/images/bcnfc7.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    /* zone de mise en scène du hero : logo (zoom-in) puis apparition
+       du bouton juste en dessous */
+    .hero-stage {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .hero-logo-wrap {
+      opacity: 0;
+      transform: scale(.78);
+      animation: heroLogoIntro 1s var(--ease) .15s forwards;
+    }
+
+    .hero-logo-wrap img {
+      width: min(720px, 80vw);
+      height: auto;
+      display: block;
+      /* logo passé en blanc + léger relief pour rester lisible
+         quelle que soit la photo de fond utilisée */
+      filter: brightness(0) invert(1) drop-shadow(0 10px 30px rgba(0, 0, 0, .35));
+    }
+
+    @keyframes heroLogoIntro {
+      0% {
+        opacity: 0;
+        transform: scale(.78);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 15px 22px;
+      border-radius: 7px;
+      color: var(--ink);
+      background: var(--white);
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      opacity: 0;
+      transform: translateY(14px);
+      animation: heroCtaIntro .8s var(--ease) 1.05s forwards;
+      transition: transform .35s var(--ease), background .3s ease;
+    }
+
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      background: var(--cream-light);
+    }
+
+    @keyframes heroCtaIntro {
+      0% {
+        opacity: 0;
+        transform: translateY(14px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .hero-logo-wrap {
+        opacity: 1;
+        transform: scale(1);
+        animation: none;
+      }
+
+      .hero-cta {
+        opacity: 1;
+        transform: translateY(0);
+        animation: none;
+      }
+    }
+
+    @media (max-width: 780px) {
+      .hero-banner { min-height: auto; padding: 70px 25px 60px; }
+
+      .hero-logo-wrap img { width: min(300px, 68vw); }
+    }
+
+    /* =====================================================
+       TRUST
+    ===================================================== */
+
+    .trust-strip {
+      position: relative;
+      max-width: 1120px;
+      margin: -1px auto 0;
+      padding: 0 30px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .trust-strip > div {
+      position: relative;
+      padding: 32px 20px;
+      text-align: center;
+    }
+
+    .trust-strip > div:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 50%;
+      width: 1px;
+      height: 32px;
+      transform: translateY(-50%);
+      background: var(--line);
+    }
+
+    .trust-strip-value {
+      margin-bottom: 7px;
+      color: var(--cream);
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 500;
+    }
+
+    .trust-strip-label {
+      color: rgba(248, 246, 240, .42);
+      font-size: .61rem;
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+
+    /* =====================================================
+       SECTIONS GÉNÉRIQUES
+    ===================================================== */
+
+    .main-container { position: relative; }
+
+    .universe-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 130px 30px 0;
+    }
+
+    .section-header { margin-bottom: 55px; text-align: center; }
+
+    .section-header h2 {
+      margin: 0 0 13px;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      line-height: 1.2;
+      font-weight: 500;
+      letter-spacing: -.3px;
+    }
+
+    .section-header p {
+      margin: 0;
+      color: rgba(248, 246, 240, .42);
+      font-size: .78rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    /* =====================================================
+       UNIVERS
+    ===================================================== */
+
+    .universe-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .universe-card {
+      position: relative;
+      min-height: 430px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 38px 34px;
+      overflow: hidden;
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .008)),
+        var(--ink-card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      transition: transform .6s var(--ease), border-color .4s ease, background .5s ease, box-shadow .6s var(--ease);
+    }
+
+    .universe-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      top: -130px;
+      right: -100px;
+      border-radius: 50%;
+      background: rgba(234, 217, 180, .055);
+      filter: blur(50px);
+      opacity: 0;
+      transition: opacity .5s ease;
+    }
+
+    .universe-card::after {
+      content: "";
+      position: absolute;
+      left: 34px;
+      right: 34px;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(234, 217, 180, .3), transparent);
+      transform: scaleX(0);
+      transition: transform .6s var(--ease);
+    }
+
+    .universe-card:hover {
+      transform: translateY(-8px);
+      border-color: var(--line-hover);
+      background:
+        linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .012)),
+        var(--ink-card-2);
+      box-shadow: 0 30px 70px rgba(0, 0, 0, .28);
+    }
+
+    .universe-card:hover::before { opacity: 1; }
+    .universe-card:hover::after { transform: scaleX(1); }
+
+    .universe-badge {
+      display: inline-block;
+      margin-bottom: 22px;
+      color: var(--cream);
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      opacity: .75;
+    }
+
+    .universe-card h3 {
+      max-width: 280px;
+      margin: 0 0 16px;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      line-height: 1.4;
+      font-weight: 500;
+    }
+
+    .universe-card p {
+      max-width: 330px;
+      margin: 0;
+      color: rgba(248, 246, 240, .48);
+      font-size: .78rem;
+      line-height: 1.85;
+      font-weight: 300;
+    }
+
+    .universe-btn {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      margin-top: 40px;
+      padding: 15px 18px;
+      color: var(--white);
+      background: rgba(248, 246, 240, .055);
+      border: 1px solid rgba(248, 246, 240, .09);
+      border-radius: 8px;
+      font-size: .65rem;
+      font-weight: 600;
+      letter-spacing: 1.3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: background .35s ease, border-color .35s ease, padding .4s var(--ease);
+    }
+
+    .universe-btn i {
+      color: var(--cream);
+      font-size: .65rem;
+      transition: transform .4s var(--ease);
+    }
+
+    .universe-btn:hover {
+      padding-left: 21px;
+      padding-right: 15px;
+      background: rgba(234, 217, 180, .09);
+      border-color: rgba(234, 217, 180, .22);
+    }
+
+    .universe-btn:hover i { transform: translateX(4px); }
+
+    /* =====================================================
+       WHY
+    ===================================================== */
+
+    .why-section {
+      max-width: 1180px;
+      margin: 155px auto 0;
+      padding: 0 30px;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      margin-top: 50px;
+      overflow: hidden;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+    }
+
+    .why-card {
+      min-height: 220px;
+      padding: 32px 27px;
+      background: var(--ink-card);
+      transition: background .4s ease, transform .4s var(--ease);
+    }
+
+    .why-card:hover {
+      background: var(--ink-card-2);
+      transform: translateY(-3px);
+      z-index: 2;
+    }
+
+    .why-card i {
+      display: block;
+      margin-bottom: 25px;
+      color: var(--cream);
+      font-size: 1rem;
+      opacity: .75;
+      transition: transform .4s var(--ease);
+    }
+
+    .why-card:hover i { transform: translateY(-3px); }
+
+    .why-card h4 {
+      margin: 0 0 10px;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: .92rem;
+      font-weight: 500;
+    }
+
+    .why-card p {
+      margin: 0;
+      color: rgba(248, 246, 240, .43);
+      font-size: .72rem;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    /* =====================================================
+       ABOUT
+    ===================================================== */
+
+    .about-section {
+      position: relative;
+      max-width: 1000px;
+      margin: 155px auto 0;
+      padding: 0 30px;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .about-label {
+      display: block;
+      margin-bottom: 20px;
+      color: var(--cream);
+      font-size: .58rem;
+      font-weight: 600;
+      letter-spacing: 2.8px;
+      text-transform: uppercase;
+      opacity: .75;
+    }
+
+    .about-content h2 {
+      margin: 0 0 25px;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      line-height: 1.3;
+      font-weight: 500;
+    }
+
+    .about-content p {
+      margin: 0 0 18px;
+      color: rgba(248, 246, 240, .48);
+      font-size: .8rem;
+      line-height: 1.95;
+      font-weight: 300;
+    }
+
+    .about-content p:last-child { margin-bottom: 0; }
+
+    .about-visual {
+      position: relative;
+      min-height: 330px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(ellipse at 50% 40%, rgba(234, 217, 180, .09), transparent 65%),
+        var(--ink-card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+    }
+
+    .about-visual::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      background: rgba(234, 217, 180, .06);
+      filter: blur(45px);
+    }
+
+    .about-visual-content { position: relative; z-index: 1; text-align: center; }
+
+    .about-visual-logo {
+      margin-bottom: 20px;
+      color: var(--cream);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 3rem);
+      font-weight: 500;
+      letter-spacing: 3px;
+    }
+
+    .about-visual-line {
+      width: 45px;
+      height: 1px;
+      margin: 0 auto 18px;
+      background: rgba(234, 217, 180, .4);
+    }
+
+    .about-visual-text {
+      color: rgba(248, 246, 240, .4);
+      font-size: .58rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* =====================================================
+       COMMUNITY
+    ===================================================== */
+
+    .community-section {
+      position: relative;
+      max-width: 900px;
+      margin: 155px auto 120px;
+      padding: 75px 45px;
+      overflow: hidden;
+      text-align: center;
+      background:
+        radial-gradient(ellipse at 50% 0%, rgba(234, 217, 180, .07), transparent 60%),
+        linear-gradient(145deg, #1c1918, #141312);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+    }
+
+    .community-section::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 180px;
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(234, 217, 180, .6), transparent);
+    }
+
+    .community-section .section-header { margin-bottom: 0; }
+
+    .community-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      margin-top: 32px;
+      padding: 14px 22px;
+      color: var(--ink);
+      background: var(--white);
+      border-radius: 7px;
+      font-size: .63rem;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: transform .4s var(--ease), background .3s ease;
+    }
+
+    .community-cta:hover {
+      transform: translateY(-4px);
+      background: var(--cream-light);
+    }
+
+    /* =====================================================
+       FOOTER — thème clair, même structure qu'avant
+    ===================================================== */
+
+    .site-footer {
+      position: relative;
+      padding: 75px 30px 25px;
+      background: #ffffff;
+      border-top: 1px solid #f0f0f0;
+    }
+
+    .footer-container { max-width: 1180px; margin: 0 auto; }
+
+    .footer-main {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 45px;
+      padding-bottom: 60px;
+    }
+
+    .footer-logo {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 7px;
+      color: #111111;
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .footer-logo span {
+      color: #a9862f;
+      font-size: .68em;
+      letter-spacing: 2.5px;
+    }
+
+    .footer-brand p {
+      margin: 25px 0;
+      color: #767676;
+      font-size: .75rem;
+      line-height: 1.9;
+      font-weight: 300;
+    }
+
+    .footer-instagram {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #444444;
+      font-size: .65rem;
+      text-decoration: none;
+      transition: color .3s ease;
+    }
+
+    .footer-instagram:hover { color: #a9862f; }
+    .footer-instagram i { font-size: .9rem; }
+
+    .footer-column {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 15px;
+    }
+
+    .footer-column h4 {
+      margin: 0 0 10px;
+      color: #a9862f;
+      font-size: .62rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .footer-column a {
+      color: #767676;
+      font-size: .68rem;
+      font-weight: 300;
+      line-height: 1.5;
+      text-decoration: none;
+      transition: color .3s ease;
+    }
+
+    .footer-column a:hover { color: #111111; }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding-top: 25px;
+      border-top: 1px solid #f0f0f0;
+      color: #999999;
+      font-size: .6rem;
+      letter-spacing: .5px;
+    }
+
+    .footer-bottom-right { color: #999999; }
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
+    @media (max-width: 1000px) {
+      .universe-grid { grid-template-columns: 1fr; max-width: 650px; margin: auto; }
+      .universe-card { min-height: 360px; }
+      .why-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 45px; max-width: 650px; margin: auto; }
+      .about-visual { min-height: 280px; }
+      .footer-main { grid-template-columns: 1.5fr 1fr 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .hero-banner {
+        min-height: 460px;
+        padding: 70px 25px;
+      }
+
+      .hero-logo-wrap img { width: min(260px, 68vw); }
+
+      .trust-strip { grid-template-columns: 1fr; padding: 0; }
+      .trust-strip > div { padding: 23px 15px; }
+      .trust-strip > div:not(:last-child)::after {
+        top: auto; right: 15%; bottom: 0; width: 70%; height: 1px; transform: none;
+      }
+
+      .universe-container { padding: 100px 18px 0; }
+      .why-section { margin-top: 110px; padding: 0 18px; }
+      .why-grid { grid-template-columns: 1fr; }
+      .why-card { min-height: auto; }
+
+      .about-section { margin-top: 110px; padding: 0 18px; }
+      .about-grid { gap: 35px; }
+      .about-content h2 { font-size: 1.8rem; }
+      .about-visual { min-height: 240px; }
+
+      .community-section { margin: 110px 18px 80px; padding: 60px 25px; }
+
+      .site-footer { padding: 60px 22px 25px; }
+      .footer-main { grid-template-columns: 1fr 1fr; gap: 40px 25px; padding-bottom: 45px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .footer-bottom { align-items: flex-start; flex-direction: column; gap: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- SEARCH OVERLAY -->
+  <div class="search-overlay" id="searchOverlay">
+    <input type="search" class="search-input" placeholder="Rechercher un produit" id="searchInput" autocomplete="off">
+    <button class="close-search" id="closeSearchBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+
+  <!-- DRAWER PANIER / MENU MOBILE -->
+  <div class="drawer-overlay" id="drawerOverlay"></div>
+  <aside class="drawer" id="cartDrawer">
+    <div>
+      <div class="drawer-header">
+        <h3>Menu & panier</h3>
+        <button class="drawer-close" id="closeDrawerBtn" aria-label="Fermer"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <nav class="mobile-nav"></nav>
+      <div class="drawer-divider"></div>
+      <div class="drawer-empty-msg">Votre panier est actuellement vide.</div>
+      <div class="cart-items-container"></div>
+    </div>
+    <button class="btn-checkout" type="button">Commander (0,00 €)</button>
+  </aside>
+
+  <!-- HEADER (généré dynamiquement par main.js, comme sur devweb.html) -->
+  <header class="top-header"></header>
+
+  <!-- HERO — le logo apparaît centré (zoom-in) puis le bouton
+       "Découvrir nos univers" apparaît juste en dessous -->
+  <section class="hero-banner">
+    <div class="hero-stage">
+
+      <div class="hero-logo-wrap">
+        <img src="static/images/nfccoconut.png" alt="NFC Coconut">
+      </div>
+
+      <a href="#collection" class="hero-cta">
+        Découvrir nos univers
+        <i class="fa-solid fa-arrow-right"></i>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- PASSERELLE VERS LE SITE STREETWEAR -->
+  <div style="max-width: 1120px; margin: 0 auto; padding: 18px 30px; text-align: center; font-size: .72rem; letter-spacing: .3px; color: rgba(248, 246, 240, .55);">
+    Vous cherchez la collection streetwear ?
+    <a href="https://streetwear.nfccoconut.fr" target="_blank" rel="noopener noreferrer" style="color: var(--cream); text-decoration: underline;">Visitez le site dédié</a>
+    — ou <a href="index.html" style="color: var(--cream); text-decoration: underline;">retourner au choix d'univers</a>.
+  </div>
+
+  <!-- TRUST -->
+  <div class="trust-strip">
+    <div>
+      <div class="trust-strip-value">+500</div>
+      <div class="trust-strip-label">Commerces équipés</div>
+    </div>
+    <div>
+      <div class="trust-strip-value">100%</div>
+      <div class="trust-strip-label">Conçu & envoyé en France</div>
+    </div>
+    <div>
+      <div class="trust-strip-value">★★★★★</div>
+      <div class="trust-strip-label">Satisfaction client</div>
+    </div>
+  </div>
+
+  <main class="main-container">
+
+    <!-- LES 3 UNIVERS -->
+    <section class="universe-container" id="collection">
+      <div class="section-header">
+        <h2>Nos solutions professionnelles</h2>
+        <p>Des produits et services pensés pour connecter vos idées au monde digital.</p>
+      </div>
+
+      <div class="universe-grid">
+
+        <article class="universe-card">
+          <div>
+            <span class="universe-badge">Professionnels</span>
+            <h3>Plaques NFC Avis Google</h3>
+            <p>
+              Permettez à vos clients de déposer un avis en un simple geste,
+              sans application ni configuration complexe.
+            </p>
+          </div>
+          <a href="avis-google.html" class="universe-btn">
+            <span>Découvrir les plaques</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </article>
+
+        <article class="universe-card">
+          <div>
+            <span class="universe-badge">Sur mesure</span>
+            <h3>Création de Sites Vitrines</h3>
+            <p>
+              Un site web professionnel, clé en main et ultra-rapide,
+              pensé pour se synchroniser avec vos outils connectés.
+            </p>
+          </div>
+          <a href="devweb.html" class="universe-btn">
+            <span>Voir nos prestations</span>
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- POURQUOI NOUS -->
+    <section class="why-section">
+      <div class="section-header">
+        <h2>Pourquoi nous choisir</h2>
+        <p>Ce qui fait la force de NFC Coconut</p>
+      </div>
+
+      <div class="why-grid">
+        <article class="why-card">
+          <i class="fa-solid fa-bolt"></i>
+          <h4>Prêt à l'emploi</h4>
+          <p>Matériel et solutions livrés entièrement configurés, prêts à l'utilisation dès la réception.</p>
+        </article>
+
+        <article class="why-card">
+          <i class="fa-solid fa-location-dot"></i>
+          <h4>Conception française</h4>
+          <p>Programmation et assemblage réalisés localement pour garantir une qualité irréprochable.</p>
+        </article>
+
+        <article class="why-card">
+          <i class="fa-solid fa-mobile-screen-button"></i>
+          <h4>Sans application</h4>
+          <p>Compatibilité avec les smartphones récents, sans téléchargement requis.</p>
+        </article>
+
+        <article class="why-card">
+          <i class="fa-solid fa-headset"></i>
+          <h4>Suivi personnalisé</h4>
+          <p>Une équipe réactive disponible pour vous accompagner et répondre à vos questions.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section class="about-section" id="about">
+      <div class="about-grid">
+
+        <div class="about-content">
+          <span class="about-label">Notre vision</span>
+          <h2>
+            NFC Coconut,
+            bien plus qu'une
+            marque connectée.
+          </h2>
+          <p>
+            NFC Coconut est une marque qui imagine de nouvelles façons
+            de connecter les objets, les personnes et le digital.
+          </p>
+          <p>
+            Nous créons des produits utiles, des expériences originales
+            et des solutions pensées pour s'intégrer naturellement
+            dans votre quotidien.
+          </p>
+          <p>
+            De nos plaques NFC pour les professionnels à la création de
+            sites vitrines, chaque service repose sur la même idée :
+            rendre la technologie plus simple, plus accessible et plus
+            intéressante. (Notre collection streetwear vit désormais sur
+            son propre site, <a href="https://streetwear.nfccoconut.fr" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">à découvrir ici</a>.)
+          </p>
+        </div>
+
+        <div class="about-visual">
+          <div class="about-visual-content">
+            <div class="about-visual-logo">NFC COCONUT</div>
+            <div class="about-visual-line"></div>
+            <div class="about-visual-text">Connecter le réel au digital</div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- COMMUNAUTÉ -->
+    <section class="community-section">
+      <div class="section-header">
+        <h2>Rejoignez la communauté</h2>
+        <p>Accédez en avant-première aux nouveautés et aux prochains drops sur Instagram.</p>
+      </div>
+
+      <a
+        href="https://www.instagram.com/nfc_coconut_official"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="community-cta"
+      >
+        <i class="fa-brands fa-instagram"></i>
+        <span>Suivre @nfc_coconut_official</span>
+      </a>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-container">
+
+      <div class="footer-main">
+
+        <div class="footer-brand">
+          <a href="index.html" class="footer-logo">NFC <span>COCONUT</span></a>
+
+          <p>
+            Des objets qui connectent<br>
+            le réel au digital.
+          </p>
+
+          <a
+            href="https://www.instagram.com/nfc_coconut_official"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer-instagram"
+          >
+            <i class="fa-brands fa-instagram"></i>
+            @nfc_coconut_official
+          </a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Nos univers</h4>
+          <a href="avis-google.html">Plaques NFC professionnelles</a>
+          <a href="devweb.html">Création de sites vitrines</a>
+          <a href="https://streetwear.nfccoconut.fr" target="_blank" rel="noopener noreferrer">Streetwear (site dédié)</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>La marque</h4>
+          <a href="#about">Notre vision</a>
+          <a href="contact.html">Nous contacter</a>
+          <a href="faq.html">Questions fréquentes</a>
+        </div>
+
+        <div class="footer-column">
+          <h4>Informations</h4>
+          <a href="mentions-legales.html">Mentions légales</a>
+          <a href="politique-confidentialite.html">Politique de confidentialité</a>
+          <a href="cgv.html">Conditions générales de vente</a>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 NFC COCONUT — Tous droits réservés</span>
+        <span class="footer-bottom-right">Conçu avec soin en France</span>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- MAIN JS : header, recherche, tiroir panier/menu (identique aux autres pages) -->
+  <script src="static/js/main.js"></script>
+
+</body>
+</html>
