@@ -26,44 +26,32 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
   >
 
-  <!-- Feuille de style commune du site : c'est elle qui gère le header,
-       la recherche, le tiroir panier/menu et le footer simple -->
+  <!-- Feuille de style commune du site : header, recherche, tiroir panier/menu -->
   <link rel="stylesheet" href="static/css/style.css">
 
   <style>
     /* =====================================================
-       STYLES PROPRES À LA PAGE D'ACCUEIL
-       (hero, univers, pourquoi nous, à propos, communauté,
-       et personnalisation du grand footer)
+       STYLES PROPRES À LA PAGE PRO
+       Structure : split (2 offres) > chiffres > pourquoi >
+       vision > communauté > footer
     ===================================================== */
     :root {
       --ink: #11100f;
-      --ink-2: #151312;
-      --ink-card: #1a1817;
-      --ink-card-2: #211e1c;
+      --ink-2: #181615;
       --cream: #ead9b4;
       --cream-light: #f3e7cc;
       --white: #f8f6f0;
-      --muted: #aaa59a;
-      --line: rgba(234, 217, 180, .11);
-      --line-hover: rgba(234, 217, 180, .28);
+      --muted: rgba(248, 246, 240, .55);
+      --line: rgba(234, 217, 180, .14);
       --font-display: "Cinzel", serif;
       --font-body: "Montserrat", sans-serif;
       --ease: cubic-bezier(.16, 1, .3, 1);
     }
 
-    /* Le body reste sombre pour le contenu de la home (univers...),
-       le header et le footer sont gérés séparément et restent clairs */
     body {
       margin: 0;
       overflow-x: hidden;
-      background:
-        radial-gradient(
-          circle at 50% -10%,
-          rgba(234, 217, 180, .075),
-          transparent 34%
-        ),
-        var(--ink);
+      background: var(--ink);
       color: var(--white);
       font-family: var(--font-body);
       -webkit-font-smoothing: antialiased;
@@ -72,130 +60,194 @@
     a { color: inherit; }
     button { font: inherit; }
 
+    :focus-visible {
+      outline: 2px solid var(--cream);
+      outline-offset: 3px;
+    }
+
     /* =====================================================
-       HERO — fond clair, logo NFC Coconut centré avec zoom-in
+       SPLIT — les deux offres, même principe que la page d'accueil
     ===================================================== */
 
-    .hero-banner {
+    .duo {
       position: relative;
-      min-height: 680px;
+      display: flex;
+      width: 100%;
+      height: 88vh;
+      min-height: 620px;
+      background: #0b0b0b;
+    }
+
+    .duo-panel {
+      position: relative;
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(145deg, #1d1a17, #0e0d0c);
+      transition: flex .6s var(--ease);
+    }
+
+    .duo-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      transition: transform 1.2s var(--ease);
+    }
+
+    .duo-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(to top, rgba(0,0,0,.84) 0%, rgba(0,0,0,.44) 45%, rgba(0,0,0,.56) 100%);
+      transition: background .6s ease;
+    }
+
+    .duo-center {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      width: 100%;
+      max-width: 440px;
+      margin: 0 auto;
+      padding: 0 30px;
+      text-align: center;
+      transform: translateY(-50%);
+    }
+
+    .duo-tag {
+      display: inline-block;
+      margin-bottom: 16px;
+      color: var(--cream);
+      font-size: .66rem;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: .9;
+    }
+
+    .duo-center h2 {
+      margin: 0 0 18px;
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(1.7rem, 3.4vw, 2.5rem);
+      line-height: 1.2;
+    }
+
+    .duo-center p {
+      margin: 0 0 26px;
+      color: rgba(255, 255, 255, .78);
+      font-size: .82rem;
+      line-height: 1.75;
+      font-weight: 300;
+    }
+
+    .duo-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 24px;
+      border: 1px solid rgba(255, 255, 255, .38);
+      border-radius: 40px;
+      font-size: .66rem;
+      font-weight: 600;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      transition: background .3s ease, color .3s ease, border-color .3s ease, transform .3s var(--ease);
+    }
+
+    .duo-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      z-index: 3;
+      width: 1px;
+      background: rgba(255, 255, 255, .18);
+      pointer-events: none;
+    }
+
+    .duo-plus {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      z-index: 4;
+      width: 54px;
+      height: 54px;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 90px 30px;
-      overflow: hidden;
-      isolation: isolate;
-      background-image:
-        linear-gradient(
-          rgba(17, 16, 15, .80),
-          rgba(17, 16, 15, .80)
-        ),
-        url("static/images/bcnfc7.png");
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, .08);
+      border: 1px solid rgba(255, 255, 255, .25);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
     }
 
-    /* zone de mise en scène du hero : logo (zoom-in) puis apparition
-       du bouton juste en dessous */
-    .hero-stage {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 34px;
-    }
-
-    .hero-logo-wrap {
-      opacity: 0;
-      transform: scale(.78);
-      animation: heroLogoIntro 1s var(--ease) .15s forwards;
-    }
-
-    .hero-logo-wrap img {
-      width: min(720px, 80vw);
-      height: auto;
-      display: block;
-      /* logo passé en blanc + léger relief pour rester lisible
-         quelle que soit la photo de fond utilisée */
-      filter: brightness(0) invert(1) drop-shadow(0 10px 30px rgba(0, 0, 0, .35));
-    }
-
-    @keyframes heroLogoIntro {
-      0% {
-        opacity: 0;
-        transform: scale(.78);
-      }
-      100% {
-        opacity: 1;
-        transform: scale(1);
+    /* Le survol n'a de sens qu'avec une souris */
+    @media (hover: hover) {
+      .duo:hover .duo-panel:not(:hover) { flex: .72; }
+      .duo:hover .duo-panel:not(:hover)::before { background: rgba(0, 0, 0, .74); }
+      .duo-panel:hover .duo-bg { transform: scale(1); }
+      .duo-panel:hover .duo-cta {
+        background: #fff;
+        color: #111;
+        border-color: #fff;
+        transform: translateY(-3px);
       }
     }
 
-    .hero-cta {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 15px 22px;
-      border-radius: 7px;
-      color: var(--ink);
-      background: var(--white);
-      font-size: .62rem;
-      font-weight: 600;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      text-decoration: none;
-      opacity: 0;
-      transform: translateY(14px);
-      animation: heroCtaIntro .8s var(--ease) 1.05s forwards;
-      transition: transform .35s var(--ease), background .3s ease;
-    }
-
-    .hero-cta:hover {
-      transform: translateY(-3px);
-      background: var(--cream-light);
-    }
-
-    @keyframes heroCtaIntro {
-      0% {
-        opacity: 0;
-        transform: translateY(14px);
-      }
-      100% {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .hero-logo-wrap {
-        opacity: 1;
-        transform: scale(1);
-        animation: none;
-      }
-
-      .hero-cta {
-        opacity: 1;
-        transform: translateY(0);
-        animation: none;
-      }
+    .duo-panel:focus-visible .duo-cta {
+      background: #fff;
+      color: #111;
+      border-color: #fff;
     }
 
     @media (max-width: 780px) {
-      .hero-banner { min-height: auto; padding: 70px 25px 60px; }
-
-      .hero-logo-wrap img { width: min(300px, 68vw); }
+      .duo { flex-direction: column; height: auto; min-height: 0; }
+      .duo-panel { min-height: 62vh; }
+      .duo-divider { display: none; }
+      .duo-plus { display: none; }
     }
 
     /* =====================================================
-       TRUST
+       PASSERELLE STREETWEAR — discrète
     ===================================================== */
 
-    .trust-strip {
-      position: relative;
+    .bridge {
       max-width: 1120px;
-      margin: -1px auto 0;
+      margin: 0 auto;
+      padding: 20px 30px;
+      text-align: center;
+      color: var(--muted);
+      font-size: .72rem;
+      line-height: 1.7;
+    }
+
+    .bridge a {
+      color: var(--cream);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    /* =====================================================
+       CHIFFRES — une seule ligne, sans cartes
+    ===================================================== */
+
+    .figures {
+      max-width: 1120px;
+      margin: 0 auto;
       padding: 0 30px;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -203,417 +255,203 @@
       border-bottom: 1px solid var(--line);
     }
 
-    .trust-strip > div {
-      position: relative;
-      padding: 32px 20px;
-      text-align: center;
-    }
-
-    .trust-strip > div:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 50%;
-      width: 1px;
-      height: 32px;
-      transform: translateY(-50%);
-      background: var(--line);
-    }
-
-    .trust-strip-value {
-      margin-bottom: 7px;
-      color: var(--cream);
-      font-family: var(--font-display);
-      font-size: 1.45rem;
-      font-weight: 500;
-    }
-
-    .trust-strip-label {
-      color: rgba(248, 246, 240, .42);
-      font-size: .61rem;
-      letter-spacing: 1.7px;
-      text-transform: uppercase;
-      font-weight: 500;
-    }
-
-    /* =====================================================
-       SECTIONS GÉNÉRIQUES
-    ===================================================== */
-
-    .main-container { position: relative; }
-
-    .universe-container {
-      max-width: 1180px;
-      margin: 0 auto;
-      padding: 130px 30px 0;
-    }
-
-    .section-header { margin-bottom: 55px; text-align: center; }
-
-    .section-header h2 {
-      margin: 0 0 13px;
-      color: var(--white);
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      line-height: 1.2;
-      font-weight: 500;
-      letter-spacing: -.3px;
-    }
-
-    .section-header p {
-      margin: 0;
-      color: rgba(248, 246, 240, .42);
-      font-size: .78rem;
-      line-height: 1.7;
-      font-weight: 300;
-    }
-
-    /* =====================================================
-       UNIVERS
-    ===================================================== */
-
-    .universe-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    .universe-card {
-      position: relative;
-      min-height: 430px;
+    .figures > div {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 38px 34px;
-      overflow: hidden;
-      background:
-        linear-gradient(145deg, rgba(255, 255, 255, .035), rgba(255, 255, 255, .008)),
-        var(--ink-card);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      transition: transform .6s var(--ease), border-color .4s ease, background .5s ease, box-shadow .6s var(--ease);
+      align-items: baseline;
+      justify-content: center;
+      gap: 14px;
+      padding: 30px 16px;
     }
 
-    .universe-card::before {
-      content: "";
-      position: absolute;
-      width: 260px;
-      height: 260px;
-      top: -130px;
-      right: -100px;
-      border-radius: 50%;
-      background: rgba(234, 217, 180, .055);
-      filter: blur(50px);
-      opacity: 0;
-      transition: opacity .5s ease;
-    }
+    .figures > div + div { border-left: 1px solid var(--line); }
 
-    .universe-card::after {
-      content: "";
-      position: absolute;
-      left: 34px;
-      right: 34px;
-      bottom: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(234, 217, 180, .3), transparent);
-      transform: scaleX(0);
-      transition: transform .6s var(--ease);
-    }
-
-    .universe-card:hover {
-      transform: translateY(-8px);
-      border-color: var(--line-hover);
-      background:
-        linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .012)),
-        var(--ink-card-2);
-      box-shadow: 0 30px 70px rgba(0, 0, 0, .28);
-    }
-
-    .universe-card:hover::before { opacity: 1; }
-    .universe-card:hover::after { transform: scaleX(1); }
-
-    .universe-badge {
-      display: inline-block;
-      margin-bottom: 22px;
+    .figures strong {
       color: var(--cream);
-      font-size: .58rem;
-      font-weight: 600;
-      letter-spacing: 2.8px;
-      text-transform: uppercase;
-      opacity: .75;
-    }
-
-    .universe-card h3 {
-      max-width: 280px;
-      margin: 0 0 16px;
-      color: var(--white);
       font-family: var(--font-display);
-      font-size: 1.35rem;
-      line-height: 1.4;
+      font-size: 1.5rem;
       font-weight: 500;
+      white-space: nowrap;
     }
 
-    .universe-card p {
-      max-width: 330px;
+    .figures span {
+      color: var(--muted);
+      font-size: .74rem;
+      font-weight: 400;
+      line-height: 1.4;
+    }
+
+    /* =====================================================
+       POURQUOI NOUS — titre à gauche, liste à droite
+    ===================================================== */
+
+    .why {
+      max-width: 1120px;
+      margin: 130px auto 0;
+      padding: 0 30px;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .why-intro {
+      position: sticky;
+      top: 110px;
+    }
+
+    .why-intro h2 {
+      margin: 0 0 18px;
+      font-family: var(--font-display);
+      font-size: clamp(1.9rem, 3vw, 2.6rem);
+      font-weight: 500;
+      line-height: 1.25;
+    }
+
+    .why-intro p {
       margin: 0;
-      color: rgba(248, 246, 240, .48);
-      font-size: .78rem;
+      max-width: 340px;
+      color: var(--muted);
+      font-size: .85rem;
       line-height: 1.85;
       font-weight: 300;
     }
 
-    .universe-btn {
-      position: relative;
-      z-index: 2;
+    .why-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .why-list li {
+      display: grid;
+      grid-template-columns: 44px 1fr;
+      gap: 22px;
+      padding: 34px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .why-list i {
+      width: 44px;
+      height: 44px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      margin-top: 40px;
-      padding: 15px 18px;
-      color: var(--white);
-      background: rgba(248, 246, 240, .055);
-      border: 1px solid rgba(248, 246, 240, .09);
-      border-radius: 8px;
-      font-size: .65rem;
-      font-weight: 600;
-      letter-spacing: 1.3px;
-      text-transform: uppercase;
-      text-decoration: none;
-      transition: background .35s ease, border-color .35s ease, padding .4s var(--ease);
-    }
-
-    .universe-btn i {
+      justify-content: center;
       color: var(--cream);
-      font-size: .65rem;
-      transition: transform .4s var(--ease);
-    }
-
-    .universe-btn:hover {
-      padding-left: 21px;
-      padding-right: 15px;
-      background: rgba(234, 217, 180, .09);
-      border-color: rgba(234, 217, 180, .22);
-    }
-
-    .universe-btn:hover i { transform: translateX(4px); }
-
-    /* =====================================================
-       WHY
-    ===================================================== */
-
-    .why-section {
-      max-width: 1180px;
-      margin: 155px auto 0;
-      padding: 0 30px;
-    }
-
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1px;
-      margin-top: 50px;
-      overflow: hidden;
-      background: var(--line);
+      font-size: .95rem;
       border: 1px solid var(--line);
-      border-radius: 16px;
+      border-radius: 50%;
     }
 
-    .why-card {
-      min-height: 220px;
-      padding: 32px 27px;
-      background: var(--ink-card);
-      transition: background .4s ease, transform .4s var(--ease);
-    }
-
-    .why-card:hover {
-      background: var(--ink-card-2);
-      transform: translateY(-3px);
-      z-index: 2;
-    }
-
-    .why-card i {
-      display: block;
-      margin-bottom: 25px;
-      color: var(--cream);
-      font-size: 1rem;
-      opacity: .75;
-      transition: transform .4s var(--ease);
-    }
-
-    .why-card:hover i { transform: translateY(-3px); }
-
-    .why-card h4 {
-      margin: 0 0 10px;
-      color: var(--white);
+    .why-list h3 {
+      margin: 2px 0 8px;
       font-family: var(--font-display);
-      font-size: .92rem;
+      font-size: 1.1rem;
       font-weight: 500;
     }
 
-    .why-card p {
+    .why-list p {
       margin: 0;
-      color: rgba(248, 246, 240, .43);
-      font-size: .72rem;
-      line-height: 1.8;
+      max-width: 460px;
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.85;
       font-weight: 300;
     }
 
     /* =====================================================
-       ABOUT
+       VISION — une déclaration, pas une grille
     ===================================================== */
 
-    .about-section {
-      position: relative;
-      max-width: 1000px;
-      margin: 155px auto 0;
+    .vision {
+      max-width: 860px;
+      margin: 150px auto 0;
       padding: 0 30px;
     }
 
-    .about-grid {
+    .vision h2 {
+      margin: 0 0 40px;
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 3.6vw, 2.8rem);
+      font-weight: 500;
+      line-height: 1.35;
+    }
+
+    .vision-cols {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 70px;
-      align-items: center;
+      gap: 40px;
     }
 
-    .about-label {
-      display: block;
-      margin-bottom: 20px;
-      color: var(--cream);
-      font-size: .58rem;
-      font-weight: 600;
-      letter-spacing: 2.8px;
-      text-transform: uppercase;
-      opacity: .75;
-    }
-
-    .about-content h2 {
-      margin: 0 0 25px;
-      color: var(--white);
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 3vw, 2.5rem);
-      line-height: 1.3;
-      font-weight: 500;
-    }
-
-    .about-content p {
-      margin: 0 0 18px;
-      color: rgba(248, 246, 240, .48);
-      font-size: .8rem;
+    .vision-cols p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .85rem;
       line-height: 1.95;
       font-weight: 300;
     }
 
-    .about-content p:last-child { margin-bottom: 0; }
-
-    .about-visual {
-      position: relative;
-      min-height: 330px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background:
-        radial-gradient(ellipse at 50% 40%, rgba(234, 217, 180, .09), transparent 65%),
-        var(--ink-card);
-      border: 1px solid var(--line);
-      border-radius: 18px;
-    }
-
-    .about-visual::before {
-      content: "";
-      position: absolute;
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      background: rgba(234, 217, 180, .06);
-      filter: blur(45px);
-    }
-
-    .about-visual-content { position: relative; z-index: 1; text-align: center; }
-
-    .about-visual-logo {
-      margin-bottom: 20px;
+    .vision-cols a {
       color: var(--cream);
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 500;
-      letter-spacing: 3px;
-    }
-
-    .about-visual-line {
-      width: 45px;
-      height: 1px;
-      margin: 0 auto 18px;
-      background: rgba(234, 217, 180, .4);
-    }
-
-    .about-visual-text {
-      color: rgba(248, 246, 240, .4);
-      font-size: .58rem;
-      font-weight: 500;
-      letter-spacing: 2px;
-      text-transform: uppercase;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
 
     /* =====================================================
-       COMMUNITY
+       COMMUNAUTÉ — une bande, pas une carte
     ===================================================== */
 
-    .community-section {
-      position: relative;
-      max-width: 900px;
-      margin: 155px auto 120px;
-      padding: 75px 45px;
-      overflow: hidden;
-      text-align: center;
-      background:
-        radial-gradient(ellipse at 50% 0%, rgba(234, 217, 180, .07), transparent 60%),
-        linear-gradient(145deg, #1c1918, #141312);
-      border: 1px solid var(--line);
-      border-radius: 22px;
+    .follow {
+      max-width: 1120px;
+      margin: 150px auto 120px;
+      padding: 44px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
     }
 
-    .community-section::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: 50%;
-      width: 180px;
-      height: 1px;
-      transform: translateX(-50%);
-      background: linear-gradient(90deg, transparent, rgba(234, 217, 180, .6), transparent);
+    .follow h2 {
+      margin: 0 0 8px;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 500;
     }
 
-    .community-section .section-header { margin-bottom: 0; }
+    .follow p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .8rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
 
-    .community-cta {
+    .follow-cta {
+      flex-shrink: 0;
       display: inline-flex;
       align-items: center;
       gap: 11px;
-      margin-top: 32px;
       padding: 14px 22px;
       color: var(--ink);
       background: var(--white);
       border-radius: 7px;
-      font-size: .63rem;
+      font-size: .66rem;
       font-weight: 600;
       letter-spacing: 1.2px;
       text-transform: uppercase;
       text-decoration: none;
-      transition: transform .4s var(--ease), background .3s ease;
+      transition: background .3s ease, transform .4s var(--ease);
     }
 
-    .community-cta:hover {
-      transform: translateY(-4px);
+    .follow-cta:hover {
       background: var(--cream-light);
+      transform: translateY(-3px);
     }
 
     /* =====================================================
-       FOOTER — thème clair, même structure qu'avant
+       FOOTER — thème clair (inchangé)
     ===================================================== */
 
     .site-footer {
@@ -718,39 +556,29 @@
     ===================================================== */
 
     @media (max-width: 1000px) {
-      .universe-grid { grid-template-columns: 1fr; max-width: 650px; margin: auto; }
-      .universe-card { min-height: 360px; }
-      .why-grid { grid-template-columns: repeat(2, 1fr); }
-      .about-grid { grid-template-columns: 1fr; gap: 45px; max-width: 650px; margin: auto; }
-      .about-visual { min-height: 280px; }
+      .why { grid-template-columns: 1fr; gap: 45px; }
+      .why-intro { position: static; }
       .footer-main { grid-template-columns: 1.5fr 1fr 1fr; }
     }
 
     @media (max-width: 700px) {
-      .hero-banner {
-        min-height: 460px;
-        padding: 70px 25px;
+      .figures { grid-template-columns: 1fr; padding: 0 18px; }
+      .figures > div { justify-content: flex-start; padding: 20px 0; }
+      .figures > div + div { border-left: 0; border-top: 1px solid var(--line); }
+
+      .why { margin-top: 100px; padding: 0 18px; }
+      .why-list li { grid-template-columns: 38px 1fr; gap: 16px; padding: 26px 0; }
+      .why-list i { width: 38px; height: 38px; }
+
+      .vision { margin-top: 100px; padding: 0 18px; }
+      .vision-cols { grid-template-columns: 1fr; gap: 22px; }
+
+      .follow {
+        margin: 100px 18px 80px;
+        padding: 36px 0;
+        flex-direction: column;
+        align-items: flex-start;
       }
-
-      .hero-logo-wrap img { width: min(260px, 68vw); }
-
-      .trust-strip { grid-template-columns: 1fr; padding: 0; }
-      .trust-strip > div { padding: 23px 15px; }
-      .trust-strip > div:not(:last-child)::after {
-        top: auto; right: 15%; bottom: 0; width: 70%; height: 1px; transform: none;
-      }
-
-      .universe-container { padding: 100px 18px 0; }
-      .why-section { margin-top: 110px; padding: 0 18px; }
-      .why-grid { grid-template-columns: 1fr; }
-      .why-card { min-height: auto; }
-
-      .about-section { margin-top: 110px; padding: 0 18px; }
-      .about-grid { gap: 35px; }
-      .about-content h2 { font-size: 1.8rem; }
-      .about-visual { min-height: 240px; }
-
-      .community-section { margin: 110px 18px 80px; padding: 60px 25px; }
 
       .site-footer { padding: 60px 22px 25px; }
       .footer-main { grid-template-columns: 1fr 1fr; gap: 40px 25px; padding-bottom: 45px; }
@@ -792,179 +620,123 @@
     <button class="btn-checkout" type="button">Commander (0,00 €)</button>
   </aside>
 
-  <!-- HEADER (généré dynamiquement par main.js, comme sur devweb.html) -->
+  <!-- HEADER (généré dynamiquement par main.js) -->
   <header class="top-header"></header>
 
-  <!-- HERO — le logo apparaît centré (zoom-in) puis le bouton
-       "Découvrir nos univers" apparaît juste en dessous -->
-  <section class="hero-banner">
-    <div class="hero-stage">
+  <!-- SPLIT : les deux offres pro, comme sur l'accueil -->
+  <section class="duo" aria-label="Nos deux offres pour les professionnels">
 
-      <div class="hero-logo-wrap">
-        <img src="static/images/nfccoconut.png" alt="NFC Coconut">
+    <a href="avis-google.html" class="duo-panel" aria-label="Découvrir les plaques NFC avis Google">
+      <img src="static/images/visu3.png" alt="" class="duo-bg">
+      <div class="duo-center">
+        <span class="duo-tag">Plaques NFC</span>
+        <h2>Avis Google</h2>
+        <p>Vos clients laissent un avis en approchant leur téléphone. Sans application, sans configuration.</p>
+        <span class="duo-cta">Découvrir les plaques <i class="fa-solid fa-arrow-right"></i></span>
       </div>
+    </a>
 
-      <a href="#collection" class="hero-cta">
-        Découvrir nos univers
-        <i class="fa-solid fa-arrow-right"></i>
-      </a>
+    <!-- Remplacez l'image ci-dessous par une visuel de vos sites (ex. static/images/devweb.png).
+         Si le fichier n'existe pas, le fond dégradé du panneau prend le relais. -->
+    <a href="devweb.html" class="duo-panel" aria-label="Voir la création de sites vitrines">
+      <img src="static/images/visu2.png" alt="" class="duo-bg" onerror="this.style.display='none'">
+      <div class="duo-center">
+        <span class="duo-tag">Sur mesure</span>
+        <h2>Sites vitrines</h2>
+        <p>Un site professionnel, rapide et livré clé en main, relié à vos outils connectés.</p>
+        <span class="duo-cta">Voir nos prestations <i class="fa-solid fa-arrow-right"></i></span>
+      </div>
+    </a>
 
-    </div>
+    <div class="duo-divider"></div>
+    <div class="duo-plus">+</div>
+
   </section>
 
   <!-- PASSERELLE VERS LE SITE STREETWEAR -->
-  <div style="max-width: 1120px; margin: 0 auto; padding: 18px 30px; text-align: center; font-size: .72rem; letter-spacing: .3px; color: rgba(248, 246, 240, .55);">
+  <p class="bridge">
     Vous cherchez la collection streetwear ?
-    <a href="https://streetwear.nfccoconut.fr" target="_blank" rel="noopener noreferrer" style="color: var(--cream); text-decoration: underline;">Visitez le site dédié</a>
-    — ou <a href="index.html" style="color: var(--cream); text-decoration: underline;">retourner au choix d'univers</a>.
+    <a href="https://streetwear.nfccoconut.fr" target="_blank" rel="noopener noreferrer">Visitez le site dédié</a>
+    ou <a href="index.html">retournez au choix d'univers</a>.
+  </p>
+
+  <!-- CHIFFRES -->
+  <div class="figures">
+    <div><strong>+500</strong><span>commerces équipés</span></div>
+    <div><strong>100 %</strong><span>conçu et envoyé en France</span></div>
+    <div><strong>★★★★★</strong><span>satisfaction client</span></div>
   </div>
 
-  <!-- TRUST -->
-  <div class="trust-strip">
-    <div>
-      <div class="trust-strip-value">+500</div>
-      <div class="trust-strip-label">Commerces équipés</div>
-    </div>
-    <div>
-      <div class="trust-strip-value">100%</div>
-      <div class="trust-strip-label">Conçu & envoyé en France</div>
-    </div>
-    <div>
-      <div class="trust-strip-value">★★★★★</div>
-      <div class="trust-strip-label">Satisfaction client</div>
-    </div>
-  </div>
-
-  <main class="main-container">
-
-    <!-- LES 3 UNIVERS -->
-    <section class="universe-container" id="collection">
-      <div class="section-header">
-        <h2>Nos solutions professionnelles</h2>
-        <p>Des produits et services pensés pour connecter vos idées au monde digital.</p>
-      </div>
-
-      <div class="universe-grid">
-
-        <article class="universe-card">
-          <div>
-            <span class="universe-badge">Professionnels</span>
-            <h3>Plaques NFC Avis Google</h3>
-            <p>
-              Permettez à vos clients de déposer un avis en un simple geste,
-              sans application ni configuration complexe.
-            </p>
-          </div>
-          <a href="avis-google.html" class="universe-btn">
-            <span>Découvrir les plaques</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </article>
-
-        <article class="universe-card">
-          <div>
-            <span class="universe-badge">Sur mesure</span>
-            <h3>Création de Sites Vitrines</h3>
-            <p>
-              Un site web professionnel, clé en main et ultra-rapide,
-              pensé pour se synchroniser avec vos outils connectés.
-            </p>
-          </div>
-          <a href="devweb.html" class="universe-btn">
-            <span>Voir nos prestations</span>
-            <i class="fa-solid fa-arrow-right"></i>
-          </a>
-        </article>
-
-      </div>
-    </section>
+  <main>
 
     <!-- POURQUOI NOUS -->
-    <section class="why-section">
-      <div class="section-header">
-        <h2>Pourquoi nous choisir</h2>
-        <p>Ce qui fait la force de NFC Coconut</p>
+    <section class="why">
+      <div class="why-intro">
+        <h2>Pourquoi choisir NFC Coconut</h2>
+        <p>Des solutions simples à utiliser, fabriquées près de chez vous et suivies par une vraie équipe.</p>
       </div>
 
-      <div class="why-grid">
-        <article class="why-card">
+      <ul class="why-list">
+        <li>
           <i class="fa-solid fa-bolt"></i>
-          <h4>Prêt à l'emploi</h4>
-          <p>Matériel et solutions livrés entièrement configurés, prêts à l'utilisation dès la réception.</p>
-        </article>
-
-        <article class="why-card">
+          <div>
+            <h3>Prêt à l'emploi</h3>
+            <p>Le matériel arrive déjà configuré. Vous le posez, il fonctionne dès la réception.</p>
+          </div>
+        </li>
+        <li>
           <i class="fa-solid fa-location-dot"></i>
-          <h4>Conception française</h4>
-          <p>Programmation et assemblage réalisés localement pour garantir une qualité irréprochable.</p>
-        </article>
-
-        <article class="why-card">
+          <div>
+            <h3>Conception française</h3>
+            <p>Programmation et assemblage sont faits localement, pour une qualité constante.</p>
+          </div>
+        </li>
+        <li>
           <i class="fa-solid fa-mobile-screen-button"></i>
-          <h4>Sans application</h4>
-          <p>Compatibilité avec les smartphones récents, sans téléchargement requis.</p>
-        </article>
-
-        <article class="why-card">
+          <div>
+            <h3>Sans application</h3>
+            <p>Compatible avec les smartphones récents : vos clients n'ont rien à télécharger.</p>
+          </div>
+        </li>
+        <li>
           <i class="fa-solid fa-headset"></i>
-          <h4>Suivi personnalisé</h4>
-          <p>Une équipe réactive disponible pour vous accompagner et répondre à vos questions.</p>
-        </article>
-      </div>
+          <div>
+            <h3>Suivi personnalisé</h3>
+            <p>Une équipe réactive vous accompagne et répond à vos questions.</p>
+          </div>
+        </li>
+      </ul>
     </section>
 
-    <!-- À PROPOS -->
-    <section class="about-section" id="about">
-      <div class="about-grid">
+    <!-- VISION -->
+    <section class="vision" id="about">
+      <h2>NFC Coconut relie les objets, les personnes et le digital.</h2>
 
-        <div class="about-content">
-          <span class="about-label">Notre vision</span>
-          <h2>
-            NFC Coconut,
-            bien plus qu'une
-            marque connectée.
-          </h2>
-          <p>
-            NFC Coconut est une marque qui imagine de nouvelles façons
-            de connecter les objets, les personnes et le digital.
-          </p>
-          <p>
-            Nous créons des produits utiles, des expériences originales
-            et des solutions pensées pour s'intégrer naturellement
-            dans votre quotidien.
-          </p>
-          <p>
-            De nos plaques NFC pour les professionnels à la création de
-            sites vitrines, chaque service repose sur la même idée :
-            rendre la technologie plus simple, plus accessible et plus
-            intéressante. (Notre collection streetwear vit désormais sur
-            son propre site, <a href="https://streetwear.nfccoconut.fr" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">à découvrir ici</a>.)
-          </p>
-        </div>
-
-        <div class="about-visual">
-          <div class="about-visual-content">
-            <div class="about-visual-logo">NFC COCONUT</div>
-            <div class="about-visual-line"></div>
-            <div class="about-visual-text">Connecter le réel au digital</div>
-          </div>
-        </div>
-
+      <div class="vision-cols">
+        <p>
+          Nous créons des produits utiles et des solutions qui s'intègrent naturellement
+          dans votre quotidien, de la plaque NFC pour vos avis Google jusqu'au site vitrine.
+        </p>
+        <p>
+          Chaque service repose sur la même idée : rendre la technologie plus simple et plus accessible.
+          Notre collection streetwear vit désormais sur son propre site,
+          <a href="https://streetwear.nfccoconut.fr" target="_blank" rel="noopener noreferrer">à découvrir ici</a>.
+        </p>
       </div>
     </section>
 
     <!-- COMMUNAUTÉ -->
-    <section class="community-section">
-      <div class="section-header">
+    <section class="follow">
+      <div>
         <h2>Rejoignez la communauté</h2>
-        <p>Accédez en avant-première aux nouveautés et aux prochains drops sur Instagram.</p>
+        <p>Retrouvez les nouveautés et les prochains drops sur Instagram.</p>
       </div>
 
       <a
         href="https://www.instagram.com/nfc_coconut_official"
         target="_blank"
         rel="noopener noreferrer"
-        class="community-cta"
+        class="follow-cta"
       >
         <i class="fa-brands fa-instagram"></i>
         <span>Suivre @nfc_coconut_official</span>
@@ -1029,7 +801,7 @@
     </div>
   </footer>
 
-  <!-- MAIN JS : header, recherche, tiroir panier/menu (identique aux autres pages) -->
+  <!-- MAIN JS : header, recherche, tiroir panier/menu -->
   <script src="static/js/main.js"></script>
 
 </body>

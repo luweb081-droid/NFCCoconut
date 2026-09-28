@@ -1204,6 +1204,15 @@
     ========================================================= */
 
     .portfolio-card {
+      display: block;
+      text-decoration: none;
+      color: inherit;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid #eee;
+      background: #fff;
+      cursor: pointer;
+
       transition:
         transform .25s ease,
         box-shadow .25s ease;
@@ -1214,6 +1223,46 @@
 
       box-shadow:
         0 18px 32px -16px rgba(0, 0, 0, .25);
+    }
+
+    .portfolio-thumb {
+      aspect-ratio: 16/10;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .portfolio-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .5s var(--dw-ease);
+    }
+
+    .portfolio-card:hover .portfolio-thumb img {
+      transform: scale(1.04);
+    }
+
+    .portfolio-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-family: var(--dw-font-body);
+      font-size: .75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .4px;
+      color: #111;
+    }
+
+    .portfolio-link i {
+      font-size: .68rem;
+      transition: transform .3s var(--dw-ease);
+    }
+
+    .portfolio-card:hover .portfolio-link i {
+      transform: translate(3px, -3px);
     }
 
     /* =========================================================
@@ -1313,7 +1362,7 @@
         opacity: 0;
       }
     }
-    
+
   </style>
 </head>
 
@@ -2550,70 +2599,37 @@
       "
     >
 
-
       <!-- PORTFOLIO 1 -->
 
       <a
-        href="#"
+        href="https://motorsevent.netlify.app"
         target="_blank"
         rel="noopener noreferrer"
-
         class="portfolio-card"
-
-        style="
-          display: block;
-          text-decoration: none;
-          color: inherit;
-          border-radius: 12px;
-          overflow: hidden;
-          border: 1px solid #eee;
-          background: #fff;
-        "
+        aria-label="Visiter le site Motors Event (nouvel onglet)"
       >
 
-        <div
-          style="
-            aspect-ratio: 16/10;
-            overflow: hidden;
-            background: #111;
-          "
-        >
-
+        <div class="portfolio-thumb">
           <img
-            src="static/images/portfolio-site-1.jpg"
-            alt="Aperçu du site N°1"
-
-            style="
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              display: block;
-            "
+            src="static/images/motors.png"
+            alt="Aperçu du site Motors Event"
           >
-
         </div>
 
         <div style="padding: 18px 20px;">
 
-          <h3
-            style="
-              font-size: 1.05rem;
-              margin: 0 0 6px;
-              color: #111;
-            "
-          >
-            Nom du client / projet 1
+          <h3 style="font-size: 1.05rem; margin: 0 0 6px; color: #111;">
+            Motors Event
           </h3>
 
-          <p
-            style="
-              color: #767676;
-              font-size: 0.85rem;
-              margin: 0;
-            "
-          >
-            Courte description du secteur d'activité
+          <p style="color: #767676; font-size: 0.85rem; margin: 0;">
+            Recensement Rasso en France
           </p>
+
+          <span class="portfolio-link">
+            Voir le site
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
 
         </div>
 
@@ -2623,66 +2639,34 @@
       <!-- PORTFOLIO 2 -->
 
       <a
-        href="#"
+        href="https://ocochonneriestarnaises.netlify.app"
         target="_blank"
         rel="noopener noreferrer"
-
         class="portfolio-card"
-
-        style="
-          display: block;
-          text-decoration: none;
-          color: inherit;
-          border-radius: 12px;
-          overflow: hidden;
-          border: 1px solid #eee;
-          background: #fff;
-        "
+        aria-label="Visiter le site N°2 (nouvel onglet)"
       >
 
-        <div
-          style="
-            aspect-ratio: 16/10;
-            overflow: hidden;
-            background: #111;
-          "
-        >
-
+        <div class="portfolio-thumb">
           <img
-            src="static/images/portfolio-site-2.jpg"
+            src="static/images/oco.png"
             alt="Aperçu du site N°2"
-
-            style="
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              display: block;
-            "
           >
-
         </div>
 
         <div style="padding: 18px 20px;">
 
-          <h3
-            style="
-              font-size: 1.05rem;
-              margin: 0 0 6px;
-              color: #111;
-            "
-          >
-            Nom du client / projet 2
+          <h3 style="font-size: 1.05rem; margin: 0 0 6px; color: #111;">
+            Ô Cochonneries Tarnaises
           </h3>
 
-          <p
-            style="
-              color: #767676;
-              font-size: 0.85rem;
-              margin: 0;
-            "
-          >
-            Courte description du secteur d'activité
+          <p style="color: #767676; font-size: 0.85rem; margin: 0;">
+            Charcuterie Artisanale 
           </p>
+
+          <span class="portfolio-link">
+            Voir le site
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
 
         </div>
 
@@ -2692,66 +2676,34 @@
       <!-- PORTFOLIO 3 -->
 
       <a
-        href="#"
+        href="https://LIEN-DU-SITE-3.fr"
         target="_blank"
         rel="noopener noreferrer"
-
         class="portfolio-card"
-
-        style="
-          display: block;
-          text-decoration: none;
-          color: inherit;
-          border-radius: 12px;
-          overflow: hidden;
-          border: 1px solid #eee;
-          background: #fff;
-        "
+        aria-label="Visiter le site N°3 (nouvel onglet)"
       >
 
-        <div
-          style="
-            aspect-ratio: 16/10;
-            overflow: hidden;
-            background: #111;
-          "
-        >
-
+        <div class="portfolio-thumb">
           <img
             src="static/images/portfolio-site-3.jpg"
             alt="Aperçu du site N°3"
-
-            style="
-              width: 100%;
-              height: 100%;
-              object-fit: cover;
-              display: block;
-            "
           >
-
         </div>
 
         <div style="padding: 18px 20px;">
 
-          <h3
-            style="
-              font-size: 1.05rem;
-              margin: 0 0 6px;
-              color: #111;
-            "
-          >
+          <h3 style="font-size: 1.05rem; margin: 0 0 6px; color: #111;">
             Nom du client / projet 3
           </h3>
 
-          <p
-            style="
-              color: #767676;
-              font-size: 0.85rem;
-              margin: 0;
-            "
-          >
+          <p style="color: #767676; font-size: 0.85rem; margin: 0;">
             Courte description du secteur d'activité
           </p>
+
+          <span class="portfolio-link">
+            Voir le site
+            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+          </span>
 
         </div>
 
@@ -2938,56 +2890,27 @@
 
       var tabs = document.querySelectorAll('.pricing-tab');
 
-      var priceEl =
-        document.getElementById('pricingPrice');
+      var priceEl = document.getElementById('pricingPrice');
+      var noteEl = document.getElementById('pricingNote');
+      var descEl = document.getElementById('pricingDesc');
+      var pricingCtaBtn = document.getElementById('pricingCtaBtn');
 
-      var noteEl =
-        document.getElementById('pricingNote');
+      var formuleSelect = document.getElementById('devisFormule');
+      var abonnementSelect = document.getElementById('devisAbonnement');
+      var formuleField = document.getElementById('devisFormuleField');
+      var abonnementField = document.getElementById('devisAbonnementField');
 
-      var descEl =
-        document.getElementById('pricingDesc');
+      var devisForm = document.getElementById('devisForm');
+      var devisSuccess = document.getElementById('devisSuccess');
 
-      var pricingCtaBtn =
-        document.getElementById('pricingCtaBtn');
+      var interventionField = document.getElementById('interventionField');
+      var interventionsInput = document.getElementById('devisInterventions');
 
-      var formuleSelect =
-        document.getElementById('devisFormule');
-
-      var abonnementSelect =
-        document.getElementById('devisAbonnement');
-
-      var formuleField =
-        document.getElementById('devisFormuleField');
-
-      var abonnementField =
-        document.getElementById('devisAbonnementField');
-
-      var devisForm =
-        document.getElementById('devisForm');
-
-      var devisSuccess =
-        document.getElementById('devisSuccess');
-
-      var interventionField =
-        document.getElementById('interventionField');
-
-      var interventionsInput =
-        document.getElementById('devisInterventions');
-
-      var devisEstimation =
-        document.getElementById('devisEstimation');
-
-      var devisEstimationPrice =
-        document.getElementById('devisEstimationPrice');
-
-      var devisEstimationDetails =
-        document.getElementById('devisEstimationDetails');
-
-      var devisEstimationNote =
-        document.getElementById('devisEstimationNote');
-
-      var devisTotalInput =
-        document.getElementById('devisTotalInput');
+      var devisEstimation = document.getElementById('devisEstimation');
+      var devisEstimationPrice = document.getElementById('devisEstimationPrice');
+      var devisEstimationDetails = document.getElementById('devisEstimationDetails');
+      var devisEstimationNote = document.getElementById('devisEstimationNote');
+      var devisTotalInput = document.getElementById('devisTotalInput');
 
 
       /* ---------------------------------------------------------
@@ -3003,11 +2926,7 @@
       --------------------------------------------------------- */
 
       function formatPrice(price) {
-
-        return price
-          .toFixed(2)
-          .replace('.', ',') + ' €';
-
+        return price.toFixed(2).replace('.', ',') + ' €';
       }
 
 
@@ -3016,15 +2935,11 @@
       --------------------------------------------------------- */
 
       function flash(el) {
-
         if (!el) return;
 
         el.classList.remove('devis-field--flash');
-
         void el.offsetWidth;
-
         el.classList.add('devis-field--flash');
-
       }
 
 
@@ -3033,19 +2948,14 @@
       --------------------------------------------------------- */
 
       function scrollToDevis() {
-
-        var target =
-          document.getElementById('devis');
+        var target = document.getElementById('devis');
 
         if (target) {
-
           target.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
-
         }
-
       }
 
 
@@ -3057,11 +2967,8 @@
 
         if (!abonnementSelect) return;
 
-        var selectedValue =
-          abonnementSelect.value || '';
-
-        var isDemand =
-          selectedValue.indexOf('À la demande') === 0;
+        var selectedValue = abonnementSelect.value || '';
+        var isDemand = selectedValue.indexOf('À la demande') === 0;
 
         if (isDemand) {
 
@@ -3090,8 +2997,7 @@
           }
 
           if (devisTotalInput) {
-            devisTotalInput.value =
-              'Non applicable';
+            devisTotalInput.value = 'Non applicable';
           }
 
         }
@@ -3107,8 +3013,7 @@
 
         if (!interventionsInput) return;
 
-        var interventions =
-          parseInt(interventionsInput.value, 10);
+        var interventions = parseInt(interventionsInput.value, 10);
 
         if (isNaN(interventions) || interventions < 0) {
           interventions = 0;
@@ -3119,20 +3024,15 @@
           interventionsInput.value = 100;
         }
 
-        var interventionTotal =
-          interventions * PRIX_INTERVENTION;
-
-        var totalMensuel =
-          DEMANDE_BASE + interventionTotal;
+        var interventionTotal = interventions * PRIX_INTERVENTION;
+        var totalMensuel = DEMANDE_BASE + interventionTotal;
 
 
         /* PRIX PRINCIPAL */
 
         if (devisEstimationPrice) {
-
           devisEstimationPrice.textContent =
             formatPrice(totalMensuel) + ' / mois';
-
         }
 
 
@@ -3211,35 +3111,21 @@
         tab.addEventListener('click', function () {
 
           tabs.forEach(function (t) {
-
             t.classList.remove('active');
-
           });
 
           tab.classList.add('active');
 
-
           if (priceEl) {
-
-            priceEl.textContent =
-              tab.getAttribute('data-price');
-
+            priceEl.textContent = tab.getAttribute('data-price');
           }
-
 
           if (noteEl) {
-
-            noteEl.textContent =
-              tab.getAttribute('data-note');
-
+            noteEl.textContent = tab.getAttribute('data-note');
           }
 
-
           if (descEl) {
-
-            descEl.textContent =
-              tab.getAttribute('data-desc');
-
+            descEl.textContent = tab.getAttribute('data-desc');
           }
 
         });
@@ -3255,19 +3141,12 @@
 
         pricingCtaBtn.addEventListener('click', function () {
 
-          var activeTab =
-            document.querySelector('.pricing-tab.active');
-
+          var activeTab = document.querySelector('.pricing-tab.active');
 
           if (activeTab && formuleSelect) {
-
-            formuleSelect.value =
-              activeTab.getAttribute('data-formule');
-
+            formuleSelect.value = activeTab.getAttribute('data-formule');
             flash(formuleField);
-
           }
-
 
           scrollToDevis();
 
@@ -3288,8 +3167,7 @@
 
             if (abonnementSelect) {
 
-              abonnementSelect.value =
-                btn.getAttribute('data-abonnement');
+              abonnementSelect.value = btn.getAttribute('data-abonnement');
 
               flash(abonnementField);
 
@@ -3310,14 +3188,9 @@
 
       if (abonnementSelect) {
 
-        abonnementSelect.addEventListener(
-          'change',
-          function () {
-
-            updateSubscriptionSimulator();
-
-          }
-        );
+        abonnementSelect.addEventListener('change', function () {
+          updateSubscriptionSimulator();
+        });
 
       }
 
@@ -3328,23 +3201,13 @@
 
       if (interventionsInput) {
 
-        interventionsInput.addEventListener(
-          'input',
-          function () {
+        interventionsInput.addEventListener('input', function () {
+          updateInterventionTotal();
+        });
 
-            updateInterventionTotal();
-
-          }
-        );
-
-        interventionsInput.addEventListener(
-          'change',
-          function () {
-
-            updateInterventionTotal();
-
-          }
-        );
+        interventionsInput.addEventListener('change', function () {
+          updateInterventionTotal();
+        });
 
       }
 
@@ -3355,155 +3218,93 @@
 
       if (devisForm) {
 
-        devisForm.addEventListener(
-          'submit',
-          function (e) {
+        devisForm.addEventListener('submit', function (e) {
 
-            e.preventDefault();
+          e.preventDefault();
 
+          /* Toujours recalculer avant l'envoi */
 
-            /* Toujours recalculer avant l'envoi */
+          updateSubscriptionSimulator();
 
-            updateSubscriptionSimulator();
+          var submitBtn = devisForm.querySelector('.devis-submit');
 
+          var originalBtnHtml = submitBtn ? submitBtn.innerHTML : null;
 
-            var submitBtn =
-              devisForm.querySelector('.devis-submit');
+          if (submitBtn) {
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span>Envoi en cours...</span>';
+          }
 
-            var originalBtnHtml =
-              submitBtn
-                ? submitBtn.innerHTML
-                : null;
+          if (devisSuccess) {
+            devisSuccess.classList.remove('visible', 'devis-error');
+          }
 
-
-            if (submitBtn) {
-
-              submitBtn.disabled = true;
-
-              submitBtn.innerHTML =
-                '<span>Envoi en cours...</span>';
-
+          fetch(devisForm.action, {
+            method: 'POST',
+            body: new FormData(devisForm),
+            headers: {
+              'Accept': 'application/json'
             }
+          })
 
+            .then(function (response) {
 
-            if (devisSuccess) {
-
-              devisSuccess.classList.remove(
-                'visible',
-                'devis-error'
-              );
-
-            }
-
-
-            fetch(
-              devisForm.action,
-              {
-                method: 'POST',
-
-                body: new FormData(devisForm),
-
-                headers: {
-                  'Accept': 'application/json'
-                }
-              }
-            )
-
-              .then(function (response) {
-
-                if (response.ok) {
-
-                  if (devisSuccess) {
-
-                    devisSuccess.textContent =
-                      'Merci ! Votre demande a bien été enregistrée, on vous répond très vite.';
-
-                    devisSuccess.classList.add(
-                      'visible'
-                    );
-
-                  }
-
-
-                  devisForm.reset();
-
-
-                  /* Reset du simulateur */
-
-                  if (interventionField) {
-
-                    interventionField.classList.remove(
-                      'visible'
-                    );
-
-                  }
-
-
-                  if (devisEstimation) {
-
-                    devisEstimation.classList.remove(
-                      'visible'
-                    );
-
-                  }
-
-
-                  if (devisTotalInput) {
-
-                    devisTotalInput.value =
-                      'Non applicable';
-
-                  }
-
-                } else {
-
-                  if (devisSuccess) {
-
-                    devisSuccess.textContent =
-                      "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
-
-                    devisSuccess.classList.add(
-                      'visible',
-                      'devis-error'
-                    );
-
-                  }
-
-                }
-
-              })
-
-              .catch(function () {
+              if (response.ok) {
 
                 if (devisSuccess) {
+                  devisSuccess.textContent =
+                    'Merci ! Votre demande a bien été enregistrée, on vous répond très vite.';
+                  devisSuccess.classList.add('visible');
+                }
 
+                devisForm.reset();
+
+                /* Reset du simulateur */
+
+                if (interventionField) {
+                  interventionField.classList.remove('visible');
+                }
+
+                if (devisEstimation) {
+                  devisEstimation.classList.remove('visible');
+                }
+
+                if (devisTotalInput) {
+                  devisTotalInput.value = 'Non applicable';
+                }
+
+              } else {
+
+                if (devisSuccess) {
                   devisSuccess.textContent =
                     "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
-
-                  devisSuccess.classList.add(
-                    'visible',
-                    'devis-error'
-                  );
-
+                  devisSuccess.classList.add('visible', 'devis-error');
                 }
 
-              })
+              }
 
-              .finally(function () {
+            })
 
-                if (submitBtn) {
+            .catch(function () {
 
-                  submitBtn.disabled = false;
+              if (devisSuccess) {
+                devisSuccess.textContent =
+                  "Une erreur est survenue lors de l'envoi. Merci de réessayer ou de nous contacter directement.";
+                devisSuccess.classList.add('visible', 'devis-error');
+              }
 
-                  submitBtn.innerHTML =
-                    originalBtnHtml;
+            })
 
-                }
+            .finally(function () {
 
-              });
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHtml;
+              }
 
-          }
-        );
+            });
+
+        });
 
       }
 

@@ -291,7 +291,7 @@ function renderNavigation() {
         <nav class="desktop-nav">${desktopLinks}</nav>
         <button id="searchBtn"><i class="fa-solid fa-magnifying-glass"></i><span class="desktop-only">Rechercher</span></button>
       </div>
-      <a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfccoconut.png" alt="NFC Coconut"></a>
+      <a href="index.html" class="brand-logo" aria-label="NFC Coconut"><img src="static/images/nfcpro.png" alt="NFC Coconut"></a>
       <div class="header-right" style="display: flex; align-items: center; gap: 15px;">
     <!-- Réseaux sociaux -->
     <div style="display: flex; align-items: center; gap: 0;">
