@@ -33,7 +33,7 @@
   // Tant qu'aucun outil optionnel n'est branché, le bandeau n'est PAS obligatoire
   // légalement (le panier en localStorage est exempté). On l'affiche quand même
   // pour être prêt ; passe à false pour le masquer jusqu'à l'ajout d'un tracker.
-  var SHOW_WITHOUT_TRACKERS = true;
+  var SHOW_WITHOUT_TRACKERS = false;
 
   // ---------------------------------------------------------------------
   function readConsent() {
